@@ -7,6 +7,8 @@ public class PlayerMovement : MonoBehaviour
 
     private InputAction m_moveAction;
     private InputAction m_jumpAction;
+    private InputAction m_fishingAction;
+
     private InputAction m_pauseactionPlayer;
     private InputAction m_pauseActionUI;
 
@@ -17,6 +19,8 @@ public class PlayerMovement : MonoBehaviour
     public float walkSpeed = 5;
     public float rotateSpeed = 5;
     public float jumpSpeed = 5;
+
+    public bool isFishing = false;
 
     public GameObject pauseDisplay;
 
@@ -34,6 +38,7 @@ public class PlayerMovement : MonoBehaviour
     {
         m_moveAction = InputSystem.actions.FindAction("Move");
         m_jumpAction = InputSystem.actions.FindAction("Jump");
+        m_fishingAction = InputSystem.actions.FindAction("Fishing");
 
         m_pauseactionPlayer = InputSystem.actions.FindAction("Player/Pause");
         m_pauseActionUI = InputSystem.actions.FindAction("UI/Pause");
@@ -44,14 +49,36 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
-        m_moveAmt = m_moveAction.ReadValue<Vector2>();
+        StartFishing();
 
-        if(m_jumpAction.WasPressedThisFrame())
+        if(!isFishing)
         {
-            Jump();
+            m_moveAmt = m_moveAction.ReadValue<Vector2>();
+
+            if (m_jumpAction.WasPressedThisFrame())
+            {
+                Jump();
+            }
         }
 
         DisplayPause();
+    }
+
+    private void StartFishing()
+    {
+        if(m_fishingAction.WasPressedThisFrame())
+        {
+            if(!isFishing)
+            {
+                m_animator.SetBool("Fishing", true);
+                isFishing = true;
+            } 
+            else
+            {
+                m_animator.SetBool("Fishing", false);
+                isFishing = false;
+            }
+        }
     }
 
     private void DisplayPause()
