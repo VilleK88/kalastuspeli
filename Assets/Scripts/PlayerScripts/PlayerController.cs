@@ -11,7 +11,7 @@ public class PlayerController : MonoBehaviour
     private InputAction m_jumpAction;
     private InputAction m_fishingAction;
     private InputAction m_stopFishingAction;
-    private InputAction m_fishingCastAction;
+    private InputAction m_throwLureAction;
 
     private InputAction m_pauseactionPlayer;
     private InputAction m_pauseActionUI;
@@ -25,6 +25,15 @@ public class PlayerController : MonoBehaviour
     public float jumpSpeed = 5;
 
     public GameObject pauseDisplay;
+
+    public GameObject lurePrefab;
+    public Transform castPoint;
+    public float maxCastForce = 20f;
+    public float chargeSpeed = 10f;
+
+    private float currentForce = 0f;
+    private bool isCharging = false;
+    private float chargeStartTime = 0f;
 
     private void OnEnable()
     {
@@ -43,13 +52,16 @@ public class PlayerController : MonoBehaviour
         m_fishingAction = InputSystem.actions.FindAction("Player/Fishing");
 
         m_stopFishingAction = InputSystem.actions.FindAction("FishingMode/Fishing");
-        m_fishingCastAction = InputSystem.actions.FindAction("FishingRodCast");
+        m_throwLureAction = InputSystem.actions.FindAction("ThrowLure");
 
         m_pauseactionPlayer = InputSystem.actions.FindAction("Player/Pause");
         m_pauseActionUI = InputSystem.actions.FindAction("UI/Pause");
 
         m_animator = GetComponent<Animator>();
         m_rigidbody = GetComponent<Rigidbody>();
+
+        m_throwLureAction.started += ctx => StartCharging();
+        m_throwLureAction.canceled += ctx => ReleaseCast();
     }
 
     private void Update()
@@ -63,12 +75,34 @@ public class PlayerController : MonoBehaviour
             Jump();
         }
 
+        if(isCharging)
+        {
+            currentForce += chargeSpeed * Time.deltaTime;
+            currentForce = Mathf.Clamp(currentForce, 0f, maxCastForce);
+        }
+
         DisplayPause();
     }
 
     private void FixedUpdate()
     {
         Walking();
+    }
+
+    private void StartCharging()
+    {
+        if (!m_animator.GetBool("Fishing")) return;
+
+        isCharging = true;
+        currentForce = 0f;
+    }
+
+    private void ReleaseCast()
+    {
+        if (!isCharging) return;
+
+        ThrowLure();
+        isCharging = false;
     }
 
     private void Fishing()
@@ -85,6 +119,13 @@ public class PlayerController : MonoBehaviour
             inputActions.FindActionMap("FishingMode").Disable();
             StartCoroutine(StopFishing());
         }
+    }
+
+    void ThrowLure()
+    {
+        GameObject lure = Instantiate(lurePrefab, castPoint.position, castPoint.rotation);
+        Rigidbody rb = lure.GetComponent<Rigidbody>();
+        rb.AddForce(castPoint.forward * currentForce, ForceMode.Impulse);
     }
 
     IEnumerator StopFishing()

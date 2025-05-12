@@ -1065,7 +1065,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "FishingRodeCast",
+                    "name": "ThrowLure",
                     "type": "Button",
                     "id": "c7f6082c-da7c-46be-a74c-7cd4ffc9dccc",
                     "expectedControlType": "",
@@ -1093,7 +1093,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": ";Keyboard&Mouse",
-                    "action": "FishingRodeCast",
+                    "action": "ThrowLure",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
