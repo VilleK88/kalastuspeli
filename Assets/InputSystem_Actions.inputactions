@@ -1050,6 +1050,54 @@
                     "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "FishingMode",
+            "id": "5ff8b930-0e3a-490a-a589-05e58f45c2f3",
+            "actions": [
+                {
+                    "name": "Fishing",
+                    "type": "Button",
+                    "id": "fc451aa7-6e90-406a-9c0b-c6807780e83c",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "FishingRodeCast",
+                    "type": "Button",
+                    "id": "c7f6082c-da7c-46be-a74c-7cd4ffc9dccc",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "410837de-cd0f-4637-9bc7-bcd9380fd9e5",
+                    "path": "<Keyboard>/f",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Keyboard&Mouse",
+                    "action": "Fishing",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "cf236c6e-8eb9-4385-a874-6d78d4e0a18e",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Keyboard&Mouse",
+                    "action": "FishingRodeCast",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": [

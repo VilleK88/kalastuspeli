@@ -1,13 +1,17 @@
+using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerMovement : MonoBehaviour
+public class PlayerController : MonoBehaviour
 {
     public InputActionAsset inputActions;
 
     private InputAction m_moveAction;
     private InputAction m_jumpAction;
     private InputAction m_fishingAction;
+    private InputAction m_stopFishingAction;
+    private InputAction m_fishingCastAction;
 
     private InputAction m_pauseactionPlayer;
     private InputAction m_pauseActionUI;
@@ -19,8 +23,6 @@ public class PlayerMovement : MonoBehaviour
     public float walkSpeed = 5;
     public float rotateSpeed = 5;
     public float jumpSpeed = 5;
-
-    public bool isFishing = false;
 
     public GameObject pauseDisplay;
 
@@ -38,7 +40,10 @@ public class PlayerMovement : MonoBehaviour
     {
         m_moveAction = InputSystem.actions.FindAction("Move");
         m_jumpAction = InputSystem.actions.FindAction("Jump");
-        m_fishingAction = InputSystem.actions.FindAction("Fishing");
+        m_fishingAction = InputSystem.actions.FindAction("Player/Fishing");
+
+        m_stopFishingAction = InputSystem.actions.FindAction("FishingMode/Fishing");
+        m_fishingCastAction = InputSystem.actions.FindAction("FishingRodCast");
 
         m_pauseactionPlayer = InputSystem.actions.FindAction("Player/Pause");
         m_pauseActionUI = InputSystem.actions.FindAction("UI/Pause");
@@ -49,36 +54,43 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
-        StartFishing();
+        Fishing();
 
-        if(!isFishing)
+        m_moveAmt = m_moveAction.ReadValue<Vector2>();
+
+        if (m_jumpAction.WasPressedThisFrame())
         {
-            m_moveAmt = m_moveAction.ReadValue<Vector2>();
-
-            if (m_jumpAction.WasPressedThisFrame())
-            {
-                Jump();
-            }
+            Jump();
         }
 
         DisplayPause();
     }
 
-    private void StartFishing()
+    private void FixedUpdate()
+    {
+        Walking();
+    }
+
+    private void Fishing()
     {
         if(m_fishingAction.WasPressedThisFrame())
         {
-            if(!isFishing)
-            {
-                m_animator.SetBool("Fishing", true);
-                isFishing = true;
-            } 
-            else
-            {
-                m_animator.SetBool("Fishing", false);
-                isFishing = false;
-            }
+            m_animator.SetBool("Fishing", true);
+            inputActions.FindActionMap("Player").Disable();
+            inputActions.FindActionMap("FishingMode").Enable();
         }
+        else if(m_stopFishingAction.WasPressedThisFrame())
+        {
+            m_animator.SetBool("Fishing", false);
+            inputActions.FindActionMap("FishingMode").Disable();
+            StartCoroutine(StopFishing());
+        }
+    }
+
+    IEnumerator StopFishing()
+    {
+        yield return new WaitForSeconds(1.5f);
+        inputActions.FindActionMap("Player").Enable();
     }
 
     private void DisplayPause()
@@ -101,11 +113,6 @@ public class PlayerMovement : MonoBehaviour
     {
         m_rigidbody.AddForceAtPosition(new Vector3(0, 5f, 0), Vector3.up, ForceMode.Impulse);
         m_animator.SetTrigger("Jump");
-    }
-
-    private void FixedUpdate()
-    {
-        Walking();
     }
 
     private void Walking()
