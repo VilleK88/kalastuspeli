@@ -83,7 +83,17 @@ public class PlayerMovement : MonoBehaviour
 
     private void Walking()
     {
+        // Kävely animaatio päivittyy eteen/taakse
         m_animator.SetFloat("Speed", m_moveAmt.y);
+
+        // Liike eteen/taakse
         m_rigidbody.MovePosition(m_rigidbody.position + transform.forward * m_moveAmt.y * walkSpeed * Time.deltaTime);
+
+        // Rotaatio
+        if(Mathf.Abs(m_moveAmt.x) > 0.1f)
+        {
+            Quaternion turnOffset = Quaternion.Euler(0, m_moveAmt.x * rotateSpeed, 0);
+            m_rigidbody.MoveRotation(m_rigidbody.rotation * turnOffset);
+        }
     }
 }
