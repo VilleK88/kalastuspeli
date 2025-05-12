@@ -94,9 +94,14 @@ public class PlayerController : MonoBehaviour
         {
             currentForce += chargeSpeed * Time.deltaTime;
             currentForce = Mathf.Clamp(currentForce, 0f, maxCastForce);
+            ThrowPowerUI.Instance.UpdatePowerBar(currentForce, maxCastForce);
+        }
+        else
+        {
+            ThrowPowerUI.Instance.ResetPowerBar();
         }
 
-        DisplayPause();
+            DisplayPause();
     }
 
     private void FixedUpdate()
