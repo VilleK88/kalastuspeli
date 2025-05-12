@@ -5,6 +5,9 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
+    public Camera thirdPersonCamera;
+    public Camera firstPersonCamera;
+
     public InputActionAsset inputActions;
 
     private InputAction m_moveAction;
@@ -26,7 +29,7 @@ public class PlayerController : MonoBehaviour
 
     public GameObject pauseDisplay;
 
-    public GameObject lurePrefab;
+    public GameObject baitPrefab;
     public Transform castPoint;
     public float maxCastForce = 20f;
     public float chargeSpeed = 10f;
@@ -34,6 +37,9 @@ public class PlayerController : MonoBehaviour
     private float currentForce = 0f;
     private bool isCharging = false;
     private float chargeStartTime = 0f;
+
+    public BaitSO[] baits;
+    public int selectedBaitIndex = 0;
 
     private void OnEnable()
     {
@@ -112,6 +118,8 @@ public class PlayerController : MonoBehaviour
             m_animator.SetBool("Fishing", true);
             inputActions.FindActionMap("Player").Disable();
             inputActions.FindActionMap("FishingMode").Enable();
+            SwitchToFirstPersonCamera();
+
         }
         else if(m_stopFishingAction.WasPressedThisFrame())
         {
@@ -121,9 +129,24 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    void SwitchToThirdPersonCamera()
+    {
+        firstPersonCamera.gameObject.SetActive(false);
+        thirdPersonCamera.gameObject.SetActive(true);
+        Debug.Log("Switch to third person camera");
+    }
+
+    void SwitchToFirstPersonCamera()
+    {
+        thirdPersonCamera.gameObject.SetActive(false);
+        firstPersonCamera.gameObject.SetActive(true);
+        Debug.Log("Switch to first person camera");
+    }
+
     void ThrowLure()
     {
-        GameObject lure = Instantiate(lurePrefab, castPoint.position, castPoint.rotation);
+        GameObject prefabToThrow = baits[selectedBaitIndex].prefab;
+        GameObject lure = Instantiate(prefabToThrow, castPoint.position, castPoint.rotation);
         Rigidbody rb = lure.GetComponent<Rigidbody>();
         rb.AddForce(castPoint.forward * currentForce, ForceMode.Impulse);
     }
@@ -132,6 +155,7 @@ public class PlayerController : MonoBehaviour
     {
         yield return new WaitForSeconds(1.5f);
         inputActions.FindActionMap("Player").Enable();
+        SwitchToThirdPersonCamera();
     }
 
     private void DisplayPause()
