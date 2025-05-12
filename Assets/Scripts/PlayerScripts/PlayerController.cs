@@ -13,8 +13,10 @@ public class PlayerController : MonoBehaviour
     private InputAction m_moveAction;
     private InputAction m_jumpAction;
     private InputAction m_fishingAction;
+
     private InputAction m_stopFishingAction;
-    private InputAction m_throwLureAction;
+    private InputAction m_throwBaitAction;
+    private InputAction m_reelInAction;
 
     private InputAction m_pauseactionPlayer;
     private InputAction m_pauseActionUI;
@@ -41,6 +43,10 @@ public class PlayerController : MonoBehaviour
     public BaitSO[] baits;
     public int selectedBaitIndex = 0;
 
+    public GameObject currentBait;
+    public bool isReeling = false;
+    private float reelSpeed = 12f;
+
     private void OnEnable()
     {
         inputActions.FindActionMap("Player").Enable();
@@ -58,7 +64,8 @@ public class PlayerController : MonoBehaviour
         m_fishingAction = InputSystem.actions.FindAction("Player/Fishing");
 
         m_stopFishingAction = InputSystem.actions.FindAction("FishingMode/Fishing");
-        m_throwLureAction = InputSystem.actions.FindAction("ThrowLure");
+        m_throwBaitAction = InputSystem.actions.FindAction("ThrowLure");
+        m_reelInAction = InputSystem.actions.FindAction("FishingMode/ReelIn");
 
         m_pauseactionPlayer = InputSystem.actions.FindAction("Player/Pause");
         m_pauseActionUI = InputSystem.actions.FindAction("UI/Pause");
@@ -66,8 +73,10 @@ public class PlayerController : MonoBehaviour
         m_animator = GetComponent<Animator>();
         m_rigidbody = GetComponent<Rigidbody>();
 
-        m_throwLureAction.started += ctx => StartCharging();
-        m_throwLureAction.canceled += ctx => ReleaseCast();
+        m_throwBaitAction.started += ctx => StartCharging();
+        m_throwBaitAction.canceled += ctx => ReleaseCast();
+
+        m_reelInAction.performed += ctx => StartReeling();
     }
 
     private void Update()
@@ -127,6 +136,8 @@ public class PlayerController : MonoBehaviour
             inputActions.FindActionMap("FishingMode").Disable();
             StartCoroutine(StopFishing());
         }
+
+        UpdateReeling();
     }
 
     void SwitchToThirdPersonCamera()
@@ -148,7 +159,39 @@ public class PlayerController : MonoBehaviour
         GameObject prefabToThrow = baits[selectedBaitIndex].prefab;
         GameObject lure = Instantiate(prefabToThrow, castPoint.position, castPoint.rotation);
         Rigidbody rb = lure.GetComponent<Rigidbody>();
+        currentBait = lure;
         rb.AddForce(castPoint.forward * currentForce, ForceMode.Impulse);
+        isReeling = false;
+    }
+
+    void StartReeling()
+    {
+        if(currentBait != null)
+        {
+            Rigidbody rb = currentBait.GetComponent<Rigidbody>();
+            if(rb != null)
+            {
+                rb.angularVelocity = Vector3.zero;
+                rb.isKinematic = true;
+            }
+        }
+        isReeling = true;
+    }
+
+    void UpdateReeling()
+    {
+        if (!isReeling || currentBait == null) return;
+
+        currentBait.transform.position = Vector3.MoveTowards(
+            currentBait.transform.position,
+            castPoint.position, reelSpeed * Time.deltaTime);
+
+        if(Vector3.Distance(currentBait.transform.position, castPoint.position) < 0.2f)
+        {
+            isReeling = false;
+            Destroy(currentBait);
+            currentBait = null;
+        }
     }
 
     IEnumerator StopFishing()

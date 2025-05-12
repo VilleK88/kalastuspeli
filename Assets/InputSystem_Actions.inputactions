@@ -1072,6 +1072,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "ReelIn",
+                    "type": "Button",
+                    "id": "4cbc235e-7cac-4ef3-9c28-f42a4adb79c5",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -1094,6 +1103,17 @@
                     "processors": "",
                     "groups": ";Keyboard&Mouse",
                     "action": "ThrowLure",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "f989d124-1bf6-464a-86de-03f8271a3032",
+                    "path": "<Keyboard>/r",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Keyboard&Mouse",
+                    "action": "ReelIn",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
