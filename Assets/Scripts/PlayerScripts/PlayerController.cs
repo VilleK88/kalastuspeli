@@ -76,7 +76,7 @@ public class PlayerController : MonoBehaviour
         m_throwBaitAction.started += ctx => StartCharging();
         m_throwBaitAction.canceled += ctx => ReleaseCast();
 
-        m_reelInAction.performed += ctx => StartReeling();
+        //m_reelInAction.performed += ctx => StartReeling();
     }
 
     private void Update()
@@ -100,6 +100,8 @@ public class PlayerController : MonoBehaviour
         {
             ThrowPowerUI.Instance.ResetPowerBar();
         }
+
+        isReeling = m_reelInAction.ReadValue<float>() > 0.5f;
 
             DisplayPause();
     }
