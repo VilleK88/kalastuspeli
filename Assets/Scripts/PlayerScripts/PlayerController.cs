@@ -118,7 +118,7 @@ public class PlayerController : MonoBehaviour
 
     private void StartCharging()
     {
-        if (!m_animator.GetBool("Fishing")) return;
+        if (!m_animator.GetBool("Fishing") || currentBait != null) return;
 
         isCharging = true;
         currentForce = 0f;
