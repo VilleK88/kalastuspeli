@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1268333eb3c94f44b907cbe71fa485c, type: 3}
   m_Name: Carrot
   m_EditorClassIdentifier: 
-  name: Carrot
+  name: Porkkana
   prefab: {fileID: 7218910709563869464, guid: 60568abbed781d643a95fe465ddf7d89, type: 3}

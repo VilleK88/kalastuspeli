@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1268333eb3c94f44b907cbe71fa485c, type: 3}
   m_Name: Banana
   m_EditorClassIdentifier: 
-  name: Banana
+  name: Banaani
   prefab: {fileID: 865217475929600065, guid: 148f39c355dbcd342a77c5edbfb43792, type: 3}

@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1268333eb3c94f44b907cbe71fa485c, type: 3}
   m_Name: Beer
   m_EditorClassIdentifier: 
-  name: Beer
+  name: Olut
   prefab: {fileID: 5233414496755891495, guid: c2004775e0ce89f48af3e88e6f9555a4, type: 3}

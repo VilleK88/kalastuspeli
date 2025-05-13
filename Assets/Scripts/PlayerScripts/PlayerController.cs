@@ -27,6 +27,8 @@ public class PlayerController : MonoBehaviour
 
     public float walkSpeed = 5;
     public float rotateSpeed = 5;
+    public float thirdPersonRotateSpeed = 5;
+    public float firstPersonRotateSpeed = 3;
     public float jumpSpeed = 5;
 
     public GameObject pauseDisplay;
@@ -61,7 +63,7 @@ public class PlayerController : MonoBehaviour
 
     private void Awake()
     {
-        m_moveAction = InputSystem.actions.FindAction("Move");
+        m_moveAction = InputSystem.actions.FindAction("Player/Move");
         m_jumpAction = InputSystem.actions.FindAction("Jump");
         m_fishingAction = InputSystem.actions.FindAction("Player/Fishing");
 
@@ -111,6 +113,7 @@ public class PlayerController : MonoBehaviour
     private void FixedUpdate()
     {
         Walking();
+        Rotating();
     }
 
     private void StartCharging()
@@ -136,6 +139,8 @@ public class PlayerController : MonoBehaviour
             m_animator.SetBool("Fishing", true);
             inputActions.FindActionMap("Player").Disable();
             inputActions.FindActionMap("FishingMode").Enable();
+            m_moveAction = inputActions.FindAction("FishingMode/Move");
+            rotateSpeed = firstPersonRotateSpeed;
             SwitchToFirstPersonCamera();
 
         }
@@ -143,6 +148,8 @@ public class PlayerController : MonoBehaviour
         {
             m_animator.SetBool("Fishing", false);
             inputActions.FindActionMap("FishingMode").Disable();
+            m_moveAction = inputActions.FindAction("Player/Move");
+            rotateSpeed = thirdPersonRotateSpeed;
             StartCoroutine(StopFishing());
         }
 
@@ -249,14 +256,19 @@ public class PlayerController : MonoBehaviour
 
     private void Walking()
     {
+        if (m_animator.GetBool("Fishing")) return;
+
         // Kävely animaatio päivittyy eteen/taakse
         m_animator.SetFloat("Speed", m_moveAmt.y);
 
         // Liike eteen/taakse
         m_rigidbody.MovePosition(m_rigidbody.position + transform.forward * m_moveAmt.y * walkSpeed * Time.deltaTime);
+    }
 
+    private void Rotating()
+    {
         // Rotaatio
-        if(Mathf.Abs(m_moveAmt.x) > 0.1f)
+        if (Mathf.Abs(m_moveAmt.x) > 0.1f)
         {
             Quaternion turnOffset = Quaternion.Euler(0, m_moveAmt.x * rotateSpeed, 0);
             m_rigidbody.MoveRotation(m_rigidbody.rotation * turnOffset);
