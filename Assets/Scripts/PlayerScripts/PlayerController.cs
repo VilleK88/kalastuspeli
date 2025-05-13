@@ -134,7 +134,7 @@ public class PlayerController : MonoBehaviour
 
     private void Fishing()
     {
-        if(m_fishingAction.WasPressedThisFrame())
+        if(m_fishingAction.WasPressedThisFrame() && m_moveAmt.y == 0)
         {
             m_animator.SetBool("Fishing", true);
             inputActions.FindActionMap("Player").Disable();
