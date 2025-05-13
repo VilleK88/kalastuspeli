@@ -17,6 +17,13 @@ public class Bait : MonoBehaviour
                     Animator anim = employer.GetComponent<Animator>();
                     if (anim != null) anim.enabled = false;
                 }
+
+                Rigidbody hipsRb = hips.GetComponent<Rigidbody>();
+                if(hipsRb != null)
+                {
+                    FixedJoint joint = gameObject.AddComponent<FixedJoint>();
+                    joint.connectedBody = hipsRb;
+                }
             }
         }
     }
