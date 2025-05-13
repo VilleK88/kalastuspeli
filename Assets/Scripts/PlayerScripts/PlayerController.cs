@@ -47,6 +47,8 @@ public class PlayerController : MonoBehaviour
     public bool isReeling = false;
     private float reelSpeed = 12f;
 
+    public LineRenderer fishingLine;
+
     private void OnEnable()
     {
         inputActions.FindActionMap("Player").Enable();
@@ -145,6 +147,7 @@ public class PlayerController : MonoBehaviour
         }
 
         UpdateReeling();
+        UpdateFishingLine();
     }
 
     void SwitchToThirdPersonCamera()
@@ -198,6 +201,20 @@ public class PlayerController : MonoBehaviour
             isReeling = false;
             Destroy(currentBait);
             currentBait = null;
+        }
+    }
+
+    void UpdateFishingLine()
+    {
+        if(currentBait != null)
+        {
+            fishingLine.enabled = true;
+            fishingLine.SetPosition(0, castPoint.position);
+            fishingLine.SetPosition(1, currentBait.transform.position);
+        }
+        else
+        {
+            fishingLine.enabled = false;
         }
     }
 
