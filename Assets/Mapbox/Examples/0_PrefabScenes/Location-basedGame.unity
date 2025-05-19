@@ -880,9 +880,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _map: {fileID: 1415313336}
-  _locationStrings:
-  - 60.22509343548881, 24.7602305119407
-  - 60.22379340843269, 24.757097691761455
+  _locationStrings: []
   _spawnScale: 100
   _markerPrefab: {fileID: 6930279890566018556, guid: 86ad82f45da8e2341824acdfa0861d77, type: 3}
 --- !u!4 &816380655
@@ -908,6 +906,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4310658642812482, guid: 35ce2bb4caba9434db5e656796b632b1, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4310658642812482, guid: 35ce2bb4caba9434db5e656796b632b1, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4310658642812482, guid: 35ce2bb4caba9434db5e656796b632b1, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
     - target: {fileID: 4886150424162858, guid: 35ce2bb4caba9434db5e656796b632b1, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -952,6 +962,10 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 114086566548189782, guid: 35ce2bb4caba9434db5e656796b632b1, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 114105500206378512, guid: 35ce2bb4caba9434db5e656796b632b1, type: 3}
       propertyPath: _tileProvider
       value: 
@@ -975,6 +989,10 @@ PrefabInstance:
     - target: {fileID: 114105500206378512, guid: 35ce2bb4caba9434db5e656796b632b1, type: 3}
       propertyPath: _vectorData._layerProperty._sourceType
       value: -2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114105500206378512, guid: 35ce2bb4caba9434db5e656796b632b1, type: 3}
+      propertyPath: _options.locationOptions.latitudeLongitude
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 114105500206378512, guid: 35ce2bb4caba9434db5e656796b632b1, type: 3}
       propertyPath: _terrain._layerProperty.elevationLayerType
@@ -1394,7 +1412,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 114658503893516242, guid: 35ce2bb4caba9434db5e656796b632b1, type: 3}
       propertyPath: '_latitudeLongitude.Array.data[0]'
-      value: 60.224294244537404, 24.757623403895455
+      value: 60.17092751486488, 24.93975569198646
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
