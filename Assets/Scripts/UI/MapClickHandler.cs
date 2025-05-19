@@ -10,7 +10,8 @@ public class MapClickHandler : MonoBehaviour, IPointerClickHandler
     public AbstractMap map;
     public Transform player;
     public Transform waypoint2;
-
+    public float moveSpeed = 5f;
+    private Vector3? targetPosition = null;
 
     public void OnPointerClick(PointerEventData eventData)
     {
@@ -39,8 +40,19 @@ public class MapClickHandler : MonoBehaviour, IPointerClickHandler
                 Vector3 newWorldPos = map.GeoToWorldPosition(latLon);
                 newWorldPos.y = waypoint2.position.y;
                 waypoint2.position = newWorldPos;
+                targetPosition = newWorldPos;
                 //map.UpdateMap(latLon, map.Zoom);
-                player.position = map.GeoToWorldPosition(latLon);
+                //player.position = map.GeoToWorldPosition(latLon);
+            }
+        }
+
+        if(targetPosition.HasValue)
+        {
+            player.position = Vector3.MoveTowards(player.position, targetPosition.Value, moveSpeed * Time.deltaTime);
+
+            if(Vector3.Distance(player.position, targetPosition.Value) < 0.1f)
+            {
+                targetPosition = null;
             }
         }
     }

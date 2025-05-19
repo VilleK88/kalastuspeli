@@ -2594,6 +2594,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 843921208}
     - target: {fileID: 2229297838591659287, guid: 928389fe433de77479c92bf688584fa4, type: 3}
+      propertyPath: moveSpeed
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 2229297838591659287, guid: 928389fe433de77479c92bf688584fa4, type: 3}
       propertyPath: waypoint2
       value: 
       objectReference: {fileID: 387518725}
