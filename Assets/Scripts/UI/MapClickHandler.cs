@@ -35,14 +35,11 @@ public class MapClickHandler : MonoBehaviour, IPointerClickHandler
             RaycastHit hit;
             if(Physics.Raycast(ray, out hit))
             {
-                Debug.Log("Clicked via raycast");
                 Vector2d latLon = map.WorldToGeoPosition(hit.point);
                 Vector3 newWorldPos = map.GeoToWorldPosition(latLon);
                 newWorldPos.y = waypoint2.position.y;
-                Debug.Log("Latlon: " + latLon);
-                Debug.Log("New world position: " + newWorldPos);
                 waypoint2.position = newWorldPos;
-                map.UpdateMap(latLon, map.Zoom);
+                //map.UpdateMap(latLon, map.Zoom);
                 player.position = map.GeoToWorldPosition(latLon);
             }
         }
