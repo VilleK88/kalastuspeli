@@ -12,8 +12,15 @@ public class BuildingTagModifier : GameObjectModifier
         if(ve.GameObject != null)
         {
             ve.GameObject.tag = "Building";
-            //int obstacleLayer = LayerMask.NameToLayer("Obstacle");
-            //ve.GameObject.layer = obstacleLayer;
+            int obstacleLayer = LayerMask.NameToLayer("Obstacle");
+            ve.GameObject.layer = obstacleLayer;
+
+            if(ve.GameObject.transform.localScale.y < 2f)
+            {
+                var scale = ve.GameObject.transform.localScale;
+                scale.y = 2f;
+                ve.GameObject.transform.localScale = scale;
+            }
         }
     }
 }
