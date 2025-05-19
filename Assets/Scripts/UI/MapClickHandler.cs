@@ -1,9 +1,6 @@
 using UnityEngine;
 using Mapbox.Unity.Map;
 using Mapbox.Utils;
-using Mapbox.Unity.Utilities;
-using UnityEngine.EventSystems;
-using Unity.VisualScripting;
 using Mapbox.Unity.MeshGeneration.Factories;
 using UnityEngine.AI;
 using Unity.AI.Navigation;
@@ -13,6 +10,7 @@ public class MapClickHandler : MonoBehaviour
 {
     public AbstractMap map;
     public Transform player;
+    [SerializeField] Animator playerAnim;
     NavMeshAgent agent;
     [SerializeField] NavMeshSurface surface;
     public Transform waypoint2;
@@ -24,6 +22,7 @@ public class MapClickHandler : MonoBehaviour
     void Start()
     {
         surface.GetComponent<NavMeshSurface>();
+        playerAnim = player.GetComponentInChildren<Animator>();
         StartCoroutine(DelayedAiInitialization(0.6f));
     }
 
@@ -50,9 +49,23 @@ public class MapClickHandler : MonoBehaviour
             //player.position = Vector3.MoveTowards(player.position, targetPosition.Value, moveSpeed * Time.deltaTime);
             agent.destination = targetPosition.Value;
 
-            if(Vector3.Distance(player.position, targetPosition.Value) < 0.1f)
+            if(!agent.pathPending && agent.remainingDistance <= agent.stoppingDistance)
             {
-                targetPosition = null;
+                if(!agent.hasPath || agent.velocity.sqrMagnitude < 0.01f)
+                {
+                    targetPosition = null;
+                    playerAnim.SetBool("Walk", false);
+                    agent.ResetPath();
+                }
+            }
+            else
+            {
+                if(agent.velocity.sqrMagnitude > 0.01f)
+                {
+                    Quaternion lookRotation = Quaternion.LookRotation(agent.velocity.normalized);
+                    player.rotation = Quaternion.Slerp(player.rotation, lookRotation, Time.deltaTime * 10f);
+                    playerAnim.SetBool("Walk", true);
+                }
             }
         }
     }
