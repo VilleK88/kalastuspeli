@@ -37,6 +37,11 @@ namespace Mapbox.Unity.MeshGeneration.Factories
 		GameObject _directionsGO;
 		private bool _recalculateNext;
 
+		private List<Vector3> routePoints = new List<Vector3>();
+		[SerializeField] Transform player;
+		[SerializeField] float moveSpeed = 10f;
+		private int currentRouteIndex = 0;
+
 		protected virtual void Awake()
 		{
 			if (_map == null)
@@ -65,7 +70,29 @@ namespace Mapbox.Unity.MeshGeneration.Factories
 			StartCoroutine(QueryTimer());
 		}
 
-		protected virtual void OnDestroy()
+        /*private void Update()
+        {
+            if(routePoints != null)
+			{
+				if(routePoints.Count > 0 && currentRouteIndex < routePoints.Count)
+				{
+                    Vector3 target = routePoints[currentRouteIndex];
+                    player.position = Vector3.MoveTowards(player.position, target, moveSpeed * Time.deltaTime);
+
+                    if (Vector3.Distance(player.position, target) < 0.1f)
+                    {
+                        currentRouteIndex++;
+                    }
+                }
+				else
+				{
+					Destroy(_directionsGO);
+					_waypoints[0].transform.position = player.position;
+				}
+			}
+        }*/
+
+        protected virtual void OnDestroy()
 		{
 			_map.OnInitialized -= Query;
 			_map.OnUpdated -= Query;
@@ -79,8 +106,9 @@ namespace Mapbox.Unity.MeshGeneration.Factories
 			{
 				wp[i] = _waypoints[i].GetGeoPosition(_map.CenterMercator, _map.WorldRelativeScale);
 			}
-			var _directionResource = new DirectionResource(wp, RoutingProfile.Driving);
-			_directionResource.Steps = true;
+            //var _directionResource = new DirectionResource(wp, RoutingProfile.Driving);
+            var _directionResource = new DirectionResource(wp, RoutingProfile.Walking);
+            _directionResource.Steps = true;
 			_directions.Query(_directionResource, HandleDirectionsResponse);
 		}
 
@@ -113,12 +141,18 @@ namespace Mapbox.Unity.MeshGeneration.Factories
 				return;
 			}
 
+			routePoints.Clear();
+
 			var meshData = new MeshData();
 			var dat = new List<Vector3>();
 			foreach (var point in response.Routes[0].Geometry)
 			{
-				dat.Add(Conversions.GeoToWorldPosition(point.x, point.y, _map.CenterMercator, _map.WorldRelativeScale).ToVector3xz());
-			}
+				//dat.Add(Conversions.GeoToWorldPosition(point.x, point.y, _map.CenterMercator, _map.WorldRelativeScale).ToVector3xz());
+                var pos = Conversions.GeoToWorldPosition(point.x, point.y, _map.CenterMercator, _map.WorldRelativeScale).ToVector3xz();
+				pos.y += 0.5f;
+				dat.Add(pos);
+				//routePoints.Add(pos);
+            }
 
 			var feat = new VectorFeatureUnity();
 			feat.Points.Add(dat);

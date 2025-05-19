@@ -4,6 +4,7 @@ using Mapbox.Utils;
 using Mapbox.Unity.Utilities;
 using UnityEngine.EventSystems;
 using Unity.VisualScripting;
+using Mapbox.Unity.MeshGeneration.Factories;
 
 public class MapClickHandler : MonoBehaviour, IPointerClickHandler
 {
@@ -12,6 +13,8 @@ public class MapClickHandler : MonoBehaviour, IPointerClickHandler
     public Transform waypoint2;
     public float moveSpeed = 5f;
     private Vector3? targetPosition = null;
+
+    [SerializeField] DirectionsFactory directionsFactory;
 
     public void OnPointerClick(PointerEventData eventData)
     {
