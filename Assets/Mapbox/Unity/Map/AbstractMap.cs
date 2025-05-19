@@ -27,7 +27,7 @@ namespace Mapbox.Unity.Map
 	{
 		#region Private Fields
 
-		[SerializeField] private MapOptions _options = new MapOptions();
+		[SerializeField] public MapOptions _options = new MapOptions();
 		[SerializeField] private bool _initializeOnStart = true;
 		[SerializeField] protected ImageryLayer _imagery = new ImageryLayer();
 		[SerializeField] protected TerrainLayer _terrain = new TerrainLayer();
@@ -337,7 +337,7 @@ namespace Mapbox.Unity.Map
 		public virtual void UpdateMap()
 		{
 			UpdateMap(Conversions.StringToLatLon(_options.locationOptions.latitudeLongitude), Zoom);
-		}
+        }
 
 		public virtual void UpdateMap(Vector2d latLon)
 		{
@@ -347,7 +347,7 @@ namespace Mapbox.Unity.Map
 		public virtual void UpdateMap(float zoom)
 		{
 			UpdateMap(Conversions.StringToLatLon(_options.locationOptions.latitudeLongitude), zoom);
-		}
+        }
 
 		/// <summary>
 		/// Updates the map.

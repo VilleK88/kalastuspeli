@@ -16,7 +16,7 @@ public class EventPointer : MonoBehaviour
 
     void Start()
     {
-        menuUIManager = GameObject.Find("Canvas").GetComponent<MenuUIManager>();
+        menuUIManager = GameObject.Find("MapUIcanvas").GetComponent<MenuUIManager>();
     }
 
     void Update()

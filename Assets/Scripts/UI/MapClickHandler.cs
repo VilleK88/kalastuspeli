@@ -39,8 +39,11 @@ public class MapClickHandler : MonoBehaviour, IPointerClickHandler
                 Vector2d latLon = map.WorldToGeoPosition(hit.point);
                 Vector3 newWorldPos = map.GeoToWorldPosition(latLon);
                 newWorldPos.y = waypoint2.position.y;
-
+                Debug.Log("Latlon: " + latLon);
+                Debug.Log("New world position: " + newWorldPos);
                 waypoint2.position = newWorldPos;
+                map.UpdateMap(latLon, map.Zoom);
+                player.position = map.GeoToWorldPosition(latLon);
             }
         }
     }

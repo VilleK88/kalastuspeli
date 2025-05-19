@@ -1,8 +1,9 @@
 ﻿namespace Mapbox.Examples
 {
 	using Mapbox.Unity.Location;
-	using Mapbox.Unity.Map;
-	using UnityEngine;
+    using Mapbox.Unity.Map;
+    using UnityEngine;
+	using System.Collections;
 
 	public class ImmediatePositionWithLocationProvider : MonoBehaviour
 	{
@@ -28,15 +29,23 @@
 		void Start()
 		{
 			LocationProviderFactory.Instance.mapManager.OnInitialized += () => _isInitialized = true;
-		}
+			StartCoroutine(DelayedPlayerPositionInitialization(0.5f));
+        }
 
-		void LateUpdate()
+		/*void LateUpdate()
 		{
 			if (_isInitialized)
 			{
 				var map = LocationProviderFactory.Instance.mapManager;
 				transform.localPosition = map.GeoToWorldPosition(LocationProvider.CurrentLocation.LatitudeLongitude);
-			}
+            }
+		}*/
+
+		IEnumerator DelayedPlayerPositionInitialization(float time)
+		{
+			yield return new WaitForSeconds(time);
+			var map = LocationProviderFactory.Instance.mapManager;
+			transform.localPosition = map.GeoToWorldPosition(LocationProvider.CurrentLocation.LatitudeLongitude);
 		}
 	}
 }
