@@ -5,7 +5,7 @@ using Mapbox.Unity.MeshGeneration.Data;
 public class MapTileBaker : MonoBehaviour
 {
     [MenuItem("Tools/Mapbox/Bake Map Tiles")]
-    public static void BakeTiles()
+    public static void BakeTiles(string cityName)
     {
         GameObject originalMap = GameObject.Find("Map");
         if(originalMap == null)
@@ -14,28 +14,23 @@ public class MapTileBaker : MonoBehaviour
             return;
         }
 
-        // Luo tarvittavat kansiot ennen silmukkaa
-        string folderPath = "Assets/MapPrefabs";
-        if (!AssetDatabase.IsValidFolder(folderPath))
-        {
-            AssetDatabase.CreateFolder("Assets", "MapPrefabs");
-        }
-
+        string folderPath = $"Assets/MapPrefabs/{cityName}";
         string meshFolder = $"{folderPath}/Meshes";
-        if (!AssetDatabase.IsValidFolder(meshFolder))
-        {
-            AssetDatabase.CreateFolder(folderPath, "Meshes");
-        }
-
         string materialFolder = $"{folderPath}/Materials";
+        string textureFolder = $"{folderPath}/Textures";
+
+        if (!AssetDatabase.IsValidFolder("Assets/MapPrefabs"))
+            AssetDatabase.CreateFolder("Assets", "MapPrefabs");
+        if (!AssetDatabase.IsValidFolder(folderPath))
+            AssetDatabase.CreateFolder("Assets/MapPrefabs", cityName);
+        if (!AssetDatabase.IsValidFolder(meshFolder))
+            AssetDatabase.CreateFolder(folderPath, "Meshes");
         if (!AssetDatabase.IsValidFolder(materialFolder))
             AssetDatabase.CreateFolder(folderPath, "Materials");
-
-        string textureFolder = $"{folderPath}/Textures";
         if (!AssetDatabase.IsValidFolder(textureFolder))
             AssetDatabase.CreateFolder(folderPath, "Textures");
 
-        GameObject bakedMap = new GameObject("StaticMap_Baked");
+        GameObject bakedMap = new GameObject("Map");
 
         foreach(Transform tile in originalMap.transform)
         {
@@ -58,6 +53,12 @@ public class MapTileBaker : MonoBehaviour
                     Mesh mesh = Object.Instantiate(meshFilter.sharedMesh);
                     AssetDatabase.CreateAsset(mesh, meshPath);
                     meshFilter.sharedMesh = mesh;
+
+                    MeshCollider meshCollider = child.GetComponent<MeshCollider>();
+                    if (meshCollider == null)
+                        meshCollider = child.gameObject.AddComponent<MeshCollider>();
+                    
+                    meshCollider.sharedMesh = mesh;
                 }
 
                 MeshRenderer meshRenderer = child.GetComponent<MeshRenderer>();
@@ -123,11 +124,11 @@ public class MapTileBaker : MonoBehaviour
         }
 
         // Save as prefab
-        string localPath = AssetDatabase.GenerateUniqueAssetPath($"{folderPath}/StaticMap_Baked.prefab");
+        string localPath = AssetDatabase.GenerateUniqueAssetPath($"{folderPath}/Map.prefab");
         PrefabUtility.SaveAsPrefabAsset(bakedMap, localPath);
 
         DestroyImmediate(bakedMap);
 
-        Debug.Log("Map baked and saved to: " + localPath);
+        Debug.Log($"Map for '{cityName}' baked and saved to: {localPath}");
     }
 }

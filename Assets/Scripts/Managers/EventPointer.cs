@@ -35,7 +35,7 @@ public class EventPointer : MonoBehaviour
 
     private void OnMouseDown()
     {
-        playerLocation = GameObject.Find("Canvas").GetComponent<LocationStatus>();
+        playerLocation = GameObject.Find("MapUIcanvas").GetComponent<LocationStatus>();
         var currentPlayerLocation = new GeoCoordinatePortable.GeoCoordinate(playerLocation.GetLocationLat(), playerLocation.GetLocationLon());
         var eventLocation = new GeoCoordinatePortable.GeoCoordinate(eventPos[0], eventPos[1]);
         var distance = currentPlayerLocation.GetDistanceTo(eventLocation);
