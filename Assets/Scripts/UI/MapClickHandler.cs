@@ -10,7 +10,7 @@ public class MapClickHandler : MonoBehaviour
 {
     public AbstractMap map;
     public Transform player;
-    [SerializeField] Animator playerAnim;
+    Animator playerAnim;
     NavMeshAgent agent;
     [SerializeField] NavMeshSurface surface;
     public Transform waypoint2;
@@ -50,12 +50,16 @@ public class MapClickHandler : MonoBehaviour
                 newWorldPos.y = waypoint2.position.y;
                 waypoint2.position = newWorldPos;
                 targetPosition = newWorldPos;
+                Debug.Log("Clicked");
+                Debug.Log("newWorldPos: " + newWorldPos);
             }
         }
 
         if (targetPosition.HasValue)
         {
+            Debug.Log("agent.destination before: " + agent.destination);
             agent.destination = targetPosition.Value;
+            Debug.Log("agent.destination after: " + agent.destination);
 
             if (!agent.pathPending && agent.remainingDistance <= agent.stoppingDistance)
             {
