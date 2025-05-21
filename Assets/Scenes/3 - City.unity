@@ -180,6 +180,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 39741ce595aa28745a184f7ff0aab4ae, type: 3}
+--- !u!1 &5276001 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8746355662157887530, guid: 39741ce595aa28745a184f7ff0aab4ae, type: 3}
+  m_PrefabInstance: {fileID: 5276000}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &46591910
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -214,7 +219,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4005402907464693990, guid: 4442861dd015bcf4ba8d9751b8cbc8c4, type: 3}
       propertyPath: '_latitudeLongitude.Array.data[0]'
-      value: 60.17094879749066, 24.939573288166844
+      value: 60.40495746957065, 25.102854125202892
       objectReference: {fileID: 0}
     - target: {fileID: 6145628584692796197, guid: 4442861dd015bcf4ba8d9751b8cbc8c4, type: 3}
       propertyPath: _tileProvider
@@ -604,7 +609,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2483002999463076752, guid: 8a339e6a59cf1c848bc63b89aa64ce19, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2968885794550252991, guid: 8a339e6a59cf1c848bc63b89aa64ce19, type: 3}
       propertyPath: m_Pivot.x
@@ -1394,6 +1399,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5902461849499285946, guid: f0f1f3d5f6fde5848906fb9ad8538046, type: 3}
   m_PrefabInstance: {fileID: 1368147177}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1368147179 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2316353018832390310, guid: f0f1f3d5f6fde5848906fb9ad8538046, type: 3}
+  m_PrefabInstance: {fileID: 1368147177}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1681276885
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1464,6 +1474,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1997762171}
+  - component: {fileID: 1997762172}
   m_Layer: 0
   m_Name: --- ENVIRONMENT ---
   m_TagString: Untagged
@@ -1488,6 +1499,21 @@ Transform:
   - {fileID: 315520787}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1997762172
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1997762170}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b5e53cc1bb257db45a7d8e6be93303ed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mapPrefabs:
+  - {fileID: 1368147179}
+  - {fileID: 5276001}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
