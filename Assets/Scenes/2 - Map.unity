@@ -848,6 +848,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 801222526}
     m_Modifications:
+    - target: {fileID: 546285925431856238, guid: d06ea091efc971e499e28ba065725d08, type: 3}
+      propertyPath: m_Transition
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1435715371280598988, guid: d06ea091efc971e499e28ba065725d08, type: 3}
       propertyPath: m_Name
       value: CityButton
