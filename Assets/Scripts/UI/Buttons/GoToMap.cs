@@ -19,7 +19,7 @@ public class GoToMap : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        StartCoroutine(ScaleTo(originalScale * 1.3f, 0.2f));
+        StartCoroutine(ScaleTo(originalScale * 1.2f, 0.2f));
     }
 
     public void OnPointerExit(PointerEventData eventData)
