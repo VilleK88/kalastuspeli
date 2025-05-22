@@ -53,7 +53,7 @@ public class GoToCity : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         Vector3 start = transform.localScale;
         float time = 0f;
 
-        while(time < duration)
+        while (time < duration)
         {
             transform.localScale = Vector3.Lerp(start, target, time / duration);
             time += Time.unscaledDeltaTime;
