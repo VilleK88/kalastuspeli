@@ -30,10 +30,3 @@ public class CoordinateConverter : MonoBehaviour
         return centerWorldPos + new Vector3(xOffset, 0, zOffset);
     }
 }
-
-public enum City
-{
-    Helsinki,
-    Turku,
-    Tampere
-}
