@@ -39,8 +39,18 @@ public class MouseManager : MonoBehaviour
             if (Physics.Raycast(ray, out hit))
             {
                 Vector3 clickedPosition = hit.point;
-                targetPosition = clickedPosition;
-                Debug.Log("Clicked");
+
+                NavMeshPath path = new NavMeshPath();
+                if(NavMesh.CalculatePath(agent.transform.position, clickedPosition, NavMesh.AllAreas, path) &&
+                    path.status == NavMeshPathStatus.PathComplete)
+                {
+                    targetPosition = clickedPosition;
+                    Debug.Log("Clicked");
+                }
+                else
+                {
+                    Debug.Log("Clicked position can't be reached");
+                }
             }
         }
 

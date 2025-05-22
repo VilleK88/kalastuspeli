@@ -370,7 +370,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2316353018832390310, guid: f0f1f3d5f6fde5848906fb9ad8538046, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5902461849499285946, guid: f0f1f3d5f6fde5848906fb9ad8538046, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1328,7 +1328,7 @@ GameObject:
   - component: {fileID: 4367053465028159388}
   - component: {fileID: 4367053465028159389}
   m_Layer: 0
-  m_Name: ClickHandler
+  m_Name: MouseManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
