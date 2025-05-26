@@ -27,7 +27,6 @@ public class EventPointer : MonoBehaviour
     void FloatAndRotatePointer()
     {
         transform.Rotate(Vector3.up, rotationSpeed * Time.deltaTime);
-        //transform.position = new Vector3(transform.position.x, (Mathf.Sin(Time.fixedTime * Mathf.PI * frequency) * amplitude) + 15, transform.position.z);
         float floatOffset = Mathf.Sin(Time.fixedTime * Mathf.PI * frequency) * amplitude;
         transform.position = new Vector3(transform.position.x, baseHeight + floatOffset, transform.position.z);
     }

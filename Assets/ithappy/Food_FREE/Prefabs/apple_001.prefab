@@ -13,6 +13,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ec6b75d454e7f8f4781f3ce98fea3e7f, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: ec6b75d454e7f8f4781f3ce98fea3e7f, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0
       objectReference: {fileID: 0}
@@ -91,6 +95,10 @@ MonoBehaviour:
   rotationSpeed: 50
   amplitude: 2
   frequency: 0.5
+  eventPos:
+    x: 0
+    y: 0
+  eventID: 0
 --- !u!65 &-7879332043497479433
 BoxCollider:
   m_ObjectHideFlags: 0
