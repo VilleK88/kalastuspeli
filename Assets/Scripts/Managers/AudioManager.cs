@@ -16,7 +16,7 @@ public class AudioManager : MonoBehaviour
     #endregion
 
     public Sound[] musicSounds, sfxSounds;
-    public AudioSource musicSource, sfxSource;
+    public AudioSource musicSource, sfxSource, footstepsSource;
 
     private void Start()
     {
@@ -44,5 +44,23 @@ public class AudioManager : MonoBehaviour
             Debug.Log("Sound not found");
         else
             sfxSource.PlayOneShot(s.clip);
+    }
+
+    public void PlayFootstepsSound()
+    {
+        Sound s = Array.Find(sfxSounds, x => x.name == "Footstep");
+
+        if (s == null)
+            Debug.Log("Sound not found");
+        else
+        {
+            footstepsSource.clip = s.clip;
+            footstepsSource.Play();
+        }
+    }
+    
+    public void StopFootstepsSound()
+    {
+        footstepsSource.Stop();
     }
 }

@@ -54,6 +54,8 @@ public class MouseManager : MonoBehaviour
                 if(NavMesh.CalculatePath(agent.transform.position, clickedPosition, NavMesh.AllAreas, path) &&
                     path.status == NavMeshPathStatus.PathComplete)
                 {
+                    if(targetPosition == null)
+                        AudioManager.Instance.PlayFootstepsSound();
                     targetPosition = clickedPosition;
                     Debug.Log("Clicked");
                 }
@@ -75,6 +77,7 @@ public class MouseManager : MonoBehaviour
                     targetPosition = null;
                     playerAnim.SetBool("Walk", false);
                     agent.ResetPath();
+                    AudioManager.Instance.StopFootstepsSound();
                 }
             }
             else
