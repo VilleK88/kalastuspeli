@@ -7,7 +7,7 @@ public class MenuManager : MonoBehaviour
 {
     [Header("Menu Objects")]
     [SerializeField] GameObject settingsBG;
-    [SerializeField] GameObject characterMenu;
+    [SerializeField] GameObject characterMenuBG;
     [Header("Audio")]
     [SerializeField] GameObject audioSettings;
     public Slider masterVol, musicVol, sfxVol;
@@ -28,17 +28,18 @@ public class MenuManager : MonoBehaviour
 
     public void StartGame()
     {
+        characterMenuBG.SetActive(false);
         SceneManager.LoadScene("2 - Map");
     }
 
     public void OpenCharacterMenu()
     {
-        characterMenu.SetActive(true);
+        characterMenuBG.SetActive(true);
     }
 
     public void CloseCharacterMenu()
     {
-        characterMenu.SetActive(false);
+        characterMenuBG.SetActive(false);
     }
 
     public void OpenSettingsMenu()

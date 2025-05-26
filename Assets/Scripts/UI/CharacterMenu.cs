@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 public class CharacterMenu : MonoBehaviour
@@ -6,6 +7,20 @@ public class CharacterMenu : MonoBehaviour
     [SerializeField] GameObject teuvoObject;
     [SerializeField] GameObject tarjaObject;
     [SerializeField] PlayerCharacter character;
+
+    private void Start()
+    {
+        if(GameManager.Instance != null)
+            InitializeCharacterBGs(GameManager.Instance.character);
+    }
+
+    void InitializeCharacterBGs(PlayerCharacter currentCharacter)
+    {
+        if (currentCharacter == PlayerCharacter.Timmy)
+            SetBG(true, false);
+        else
+            SetBG(false, true);
+    }
 
     public void SelectTeuvo()
     {
