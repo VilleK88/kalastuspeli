@@ -35,6 +35,7 @@ public class GoToCity : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 
     public void OnPointerClick(PointerEventData eventData)
     {
+        AudioManager.Instance.PlaySFX("ButtonClick");
         float timeSinceLastClick = Time.unscaledTime - lastClickTime;
 
         if (timeSinceLastClick <= doubleClickThreshold)

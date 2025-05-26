@@ -24,12 +24,14 @@ public class CharacterMenu : MonoBehaviour
 
     public void SelectTeuvo()
     {
+        AudioManager.Instance.PlaySFX("ButtonClick");
         SetBG(true, false);
         SelectThisCharacter(PlayerCharacter.Timmy);
     }
 
     public void SelectTarja()
     {
+        AudioManager.Instance.PlaySFX("ButtonClick");
         SetBG(false, true);
         SelectThisCharacter(PlayerCharacter.Claire);
     }
