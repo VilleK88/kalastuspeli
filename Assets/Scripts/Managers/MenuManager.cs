@@ -1,10 +1,13 @@
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Audio;
+using UnityEngine.SceneManagement;
 
 public class MenuManager : MonoBehaviour
 {
+    [Header("Menu Objects")]
     [SerializeField] GameObject settingsBG;
+    [SerializeField] GameObject characterMenu;
     [Header("Audio")]
     [SerializeField] GameObject audioSettings;
     public Slider masterVol, musicVol, sfxVol;
@@ -21,6 +24,21 @@ public class MenuManager : MonoBehaviour
         masterVol.onValueChanged.AddListener(delegate { ChangeMasterVolume(); });
         musicVol.onValueChanged.AddListener(delegate { ChangeMusicVolume(); });
         sfxVol.onValueChanged.AddListener(delegate { ChangeSFXVolume(); });
+    }
+
+    public void StartGame()
+    {
+        SceneManager.LoadScene("2 - Map");
+    }
+
+    public void OpenCharacterMenu()
+    {
+        characterMenu.SetActive(true);
+    }
+
+    public void CloseCharacterMenu()
+    {
+        characterMenu.SetActive(false);
     }
 
     public void OpenSettingsMenu()
