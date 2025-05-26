@@ -1,14 +1,12 @@
 using UnityEngine;
-using Mapbox.Unity.Map;
-using Mapbox.Utils;
-using Mapbox.Unity.MeshGeneration.Factories;
 using UnityEngine.AI;
 using Unity.AI.Navigation;
 using System.Collections;
 
 public class MouseManager : MonoBehaviour
 {
-    public Transform player;
+    [SerializeField] GameObject[] playerObjects;
+    [SerializeField] Transform player;
     Animator playerAnim;
     NavMeshAgent agent;
     [SerializeField] NavMeshSurface surface;
@@ -19,8 +17,20 @@ public class MouseManager : MonoBehaviour
 
     void Start()
     {
+        if(GameManager.Instance != null)
+        {
+            PlayerCharacter character = GameManager.Instance.character;
+            string characterName = character.ToString();
+            for(int i = 0; i < playerObjects.Length; i++)
+            {
+                if (playerObjects[i].name.Contains(characterName))
+                {
+                    playerObjects[i].SetActive(true);
+                    playerAnim = playerObjects[i].GetComponent<Animator>();
+                }
+            }
+        }
         surface.GetComponent<NavMeshSurface>();
-        playerAnim = player.GetComponentInChildren<Animator>();
         StartCoroutine(DelayedAiInitialization(0.6f));
     }
 

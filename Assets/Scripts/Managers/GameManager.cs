@@ -18,9 +18,15 @@ public class GameManager : MonoBehaviour
     #endregion
 
     public City city;
+    public PlayerCharacter character;
 
     public void SetCity(City cityToGo)
     {
         city = cityToGo;
+    }
+
+    public void SetCharacter(PlayerCharacter characterToGo)
+    {
+        character = characterToGo;
     }
 }
