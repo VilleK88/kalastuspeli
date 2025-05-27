@@ -64,8 +64,8 @@ public class MouseManager : MonoBehaviour
                         AudioManager.Instance.PlayFootstepsSound();
                     targetPosition = clickedPosition;
                 }
-                else
-                    Debug.Log("Clicked position can't be reached");
+                //else
+                    //Debug.Log("Clicked position can't be reached");
             }
         }
 
