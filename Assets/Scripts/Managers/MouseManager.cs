@@ -2,6 +2,9 @@ using UnityEngine;
 using UnityEngine.AI;
 using Unity.AI.Navigation;
 using System.Collections;
+using UnityEngine.EventSystems;
+using System.Collections.Generic;
+using UnityEngine.UIElements;
 
 public class MouseManager : MonoBehaviour
 {
@@ -43,6 +46,9 @@ public class MouseManager : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
+            if (IsPointerOverUIObject())
+                return;
+
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
 
@@ -94,5 +100,22 @@ public class MouseManager : MonoBehaviour
         yield return new WaitForSeconds(time);
         agent = player.GetComponent<NavMeshAgent>();
         surface.BuildNavMesh();
+    }
+
+    bool IsPointerOverUIObject()
+    {
+        PointerEventData eventData = new PointerEventData(EventSystem.current);
+        eventData.position = Input.mousePosition;
+
+        List<RaycastResult> results = new List<RaycastResult>();
+        EventSystem.current.RaycastAll(eventData, results);
+
+        foreach (RaycastResult result in results)
+        {
+            if (result.gameObject.GetComponent<UnityEngine.UI.Button>() != null)
+                return true;
+        }
+
+        return false;
     }
 }
