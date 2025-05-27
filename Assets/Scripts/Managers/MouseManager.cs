@@ -4,7 +4,6 @@ using Unity.AI.Navigation;
 using System.Collections;
 using UnityEngine.EventSystems;
 using System.Collections.Generic;
-using UnityEngine.UIElements;
 
 public class MouseManager : MonoBehaviour
 {

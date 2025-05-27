@@ -2278,6 +2278,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6267673026705911810}
   - component: {fileID: 5147760954582335207}
+  - component: {fileID: 7782236441140023088}
   m_Layer: 7
   m_Name: PlayerTarget
   m_TagString: Player
@@ -2285,6 +2286,21 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &7782236441140023088
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7782236441140023087}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e1a71525bc5c4e4b84574ad4ab8053f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  radius: 20
+  interactionTransform: {fileID: 6267673026705911810}
+  heightOffset: 7
 --- !u!224 &7801128445890465411
 RectTransform:
   m_ObjectHideFlags: 0
