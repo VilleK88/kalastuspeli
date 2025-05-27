@@ -15,7 +15,7 @@ public class MouseManager : MonoBehaviour
     public float moveSpeed = 5f;
     public float rotationSpeed = 10f;
     private Vector3? targetPosition = null;
-
+    int layerMask;
 
     void Start()
     {
@@ -34,6 +34,7 @@ public class MouseManager : MonoBehaviour
         }
         surface.GetComponent<NavMeshSurface>();
         StartCoroutine(DelayedAiInitialization(0.6f));
+        layerMask = ~(1 << LayerMask.NameToLayer("Player"));
     }
 
     void Update()
@@ -51,7 +52,7 @@ public class MouseManager : MonoBehaviour
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
 
-            if (Physics.Raycast(ray, out hit))
+            if (Physics.Raycast(ray, out hit, Mathf.Infinity, layerMask))
             {
                 Vector3 clickedPosition = hit.point;
 

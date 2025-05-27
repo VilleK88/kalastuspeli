@@ -2,25 +2,23 @@ using UnityEngine;
 
 public class Interact : MonoBehaviour
 {
-    public float radius = 20;
-    public Transform interactionTransform;
-    public float heightOffset = 7;
-    bool isFocus = false;
-    Transform player;
-    bool hasInteracted = false;
-    float distance;
-
-    private void Update()
+    private void OnTriggerEnter(Collider other)
     {
-        
+        Marker marker = other.GetComponentInParent<Marker>();
+        if(marker != null)
+        {
+            marker.EnableSFX();
+            Debug.Log("Entered marker area: " + marker.gameObject.name);
+        }
     }
 
-    private void OnDrawGizmosSelected()
+    private void OnTriggerExit(Collider other)
     {
-        //if (interactionTransform == null)
-            //interactionTransform = transform;
-
-        Gizmos.color = Color.yellow;
-        Gizmos.DrawWireSphere(interactionTransform.position + Vector3.up * heightOffset, radius);
+        Marker marker = other.GetComponentInParent<Marker>();
+        if(marker != null)
+        {
+            marker.DisableSFX();
+            Debug.Log("Exited marker area: " + marker.gameObject.name);
+        }
     }
 }
