@@ -54,6 +54,12 @@ public class MouseManager : MonoBehaviour
 
             if (Physics.Raycast(ray, out hit, Mathf.Infinity, layerMask))
             {
+                if(IsPointerOverMarker(hit.collider.gameObject))
+                {
+                    ClickMarker(hit.collider.gameObject);
+                    return;
+                }
+
                 Vector3 clickedPosition = hit.point;
 
                 NavMeshPath path = new NavMeshPath();
@@ -64,8 +70,8 @@ public class MouseManager : MonoBehaviour
                         AudioManager.Instance.PlayFootstepsSound();
                     targetPosition = clickedPosition;
                 }
-                //else
-                    //Debug.Log("Clicked position can't be reached");
+                else
+                    Debug.Log("Clicked position can't be reached");
             }
         }
 
@@ -76,23 +82,29 @@ public class MouseManager : MonoBehaviour
             if (!agent.pathPending && agent.remainingDistance <= agent.stoppingDistance)
             {
                 if (!agent.hasPath || agent.velocity.sqrMagnitude < 0.01f)
-                {
-                    targetPosition = null;
-                    playerAnim.SetBool("Walk", false);
-                    agent.ResetPath();
-                    AudioManager.Instance.StopFootstepsSound();
-                }
+                    StopWalking();
             }
             else
             {
                 if (agent.velocity.sqrMagnitude > 0.01f)
-                {
-                    Quaternion lookRotation = Quaternion.LookRotation(agent.velocity.normalized);
-                    player.rotation = Quaternion.Slerp(player.rotation, lookRotation, Time.deltaTime * rotationSpeed);
-                    playerAnim.SetBool("Walk", true);
-                }
+                    Walk();
             }
         }
+    }
+
+    void Walk()
+    {
+        Quaternion lookRotation = Quaternion.LookRotation(agent.velocity.normalized);
+        player.rotation = Quaternion.Slerp(player.rotation, lookRotation, Time.deltaTime * rotationSpeed);
+        playerAnim.SetBool("Walk", true);
+    }
+
+    void StopWalking()
+    {
+        targetPosition = null;
+        playerAnim.SetBool("Walk", false);
+        agent.ResetPath();
+        AudioManager.Instance.StopFootstepsSound();
     }
 
     IEnumerator DelayedAiInitialization(float time)
@@ -117,5 +129,21 @@ public class MouseManager : MonoBehaviour
         }
 
         return false;
+    }
+
+    bool IsPointerOverMarker(GameObject hitObject)
+    {
+        if (hitObject.layer == LayerMask.NameToLayer("Marker"))
+            return true;
+        return false;
+    }
+
+    void ClickMarker(GameObject hitObject)
+    {
+        Marker marker = hitObject.GetComponentInParent<Marker>();
+        if(marker != null)
+        {
+            marker.StartInteraction();
+        }
     }
 }
