@@ -15,4 +15,4 @@ MonoBehaviour:
   industryType: 0
   displayName: Customer Service and Sales
   finnishName: Asiakaspalvelu ja myynti
-  prefabIcon: {fileID: 0}
+  prefabIcon: {fileID: 5800862364511088968, guid: e76ab0d785807ba479e94899c856d5f6, type: 3}
