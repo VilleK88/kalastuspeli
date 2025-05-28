@@ -19,7 +19,8 @@ public class GoToCity : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     public void GoToThisCity()
     {
         GameManager.Instance.SetCity(city);
-        SceneManager.LoadScene("3 - City");
+        //SceneManager.LoadScene("3 - City");
+        GameManager.Instance.LoadCityScene();
     }
 
     public void OnPointerEnter(PointerEventData eventData)
