@@ -31,6 +31,8 @@ public class Marker : MonoBehaviour
         {
             GameObject iconInstance = Instantiate(industryData.prefabIcon, transform);
             iconInstance.transform.localPosition = Vector3.zero;
+            int markerLayer = LayerMask.NameToLayer("Marker");
+            iconInstance.layer = markerLayer;
         }
         else
             Debug.LogWarning($"Prefab icon missing for {industryType} on {gameObject.name}");
@@ -52,6 +54,7 @@ public class Marker : MonoBehaviour
     {
         if(canInteract)
         {
+            MarkerUI.Instance.OpenMarkerInfoPanel();
             Debug.Log("canInteract: " + canInteract);
         }
         else

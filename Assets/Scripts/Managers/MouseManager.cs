@@ -39,7 +39,8 @@ public class MouseManager : MonoBehaviour
 
     void Update()
     {
-        MouseControl();
+        if(!IsMarkerInfoPanelOpen())
+            MouseControl();
     }
 
     void MouseControl()
@@ -128,6 +129,13 @@ public class MouseManager : MonoBehaviour
                 return true;
         }
 
+        return false;
+    }
+
+    bool IsMarkerInfoPanelOpen()
+    {
+        if (MarkerUI.Instance.open)
+            return true;
         return false;
     }
 
