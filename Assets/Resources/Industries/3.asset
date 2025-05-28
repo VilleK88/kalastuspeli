@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d9737c449976837469152f9c21adb57d, type: 3}
   m_Name: 3
   m_EditorClassIdentifier: 
-  industryType: 0
+  industryType: 2
   displayName: Education and Research
   finnishName: Koulutus ja tutkimus
-  prefabIcon: {fileID: 0}
+  prefabIcon: {fileID: 6109482588984219076, guid: a4e51653abf0cca42a1af5a6222018b1, type: 3}

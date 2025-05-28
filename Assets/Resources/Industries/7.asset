@@ -15,4 +15,4 @@ MonoBehaviour:
   industryType: 6
   displayName: Cleaning and Security
   finnishName: Puhtaanapito ja turvallisuus
-  prefabIcon: {fileID: 0}
+  prefabIcon: {fileID: 7045833287466604385, guid: 27f1e58b5a235e247affd40101db2c5c, type: 3}

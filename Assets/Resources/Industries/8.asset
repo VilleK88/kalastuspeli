@@ -15,4 +15,4 @@ MonoBehaviour:
   industryType: 7
   displayName: Industry and Technology
   finnishName: Teollisuus ja teknologia
-  prefabIcon: {fileID: 0}
+  prefabIcon: {fileID: 6865300865549421194, guid: 95adb50b4b2cf284d9afd3de3847336a, type: 3}

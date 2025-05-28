@@ -15,4 +15,4 @@ MonoBehaviour:
   industryType: 4
   displayName: Logistics and Transportation
   finnishName: Logistiikka ja kuljetus
-  prefabIcon: {fileID: 0}
+  prefabIcon: {fileID: 4074644783454091147, guid: a703ebe110545e742a33a77c197da53d, type: 3}
