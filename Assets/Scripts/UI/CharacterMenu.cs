@@ -1,52 +1,51 @@
 using UnityEngine;
-using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 public class CharacterMenu : MonoBehaviour
 {
-    [SerializeField] GameObject teuvoObject;
-    [SerializeField] GameObject tarjaObject;
+    #region Singleton
+    public static CharacterMenu Instance;
+
+    private void Awake()
+    {
+        if (Instance == null)
+            Instance = this;
+        else
+            Destroy(gameObject);
+    }
+    #endregion
+
+    [SerializeField] GameObject[] characterButtons;
     [SerializeField] PlayerCharacter character;
 
     private void Start()
     {
-        if(GameManager.Instance != null)
-            InitializeCharacterBGs(GameManager.Instance.character);
+        SetBG();
     }
 
-    void InitializeCharacterBGs(PlayerCharacter currentCharacter)
-    {
-        if (currentCharacter == PlayerCharacter.Teijo)
-            SetBG(true, false);
-        else
-            SetBG(false, true);
-    }
-
-    public void SelectTeuvo()
-    {
-        AudioManager.Instance.PlaySFX("ButtonClick");
-        SetBG(true, false);
-        SelectThisCharacter(PlayerCharacter.Teijo);
-    }
-
-    public void SelectTarja()
-    {
-        AudioManager.Instance.PlaySFX("ButtonClick");
-        SetBG(false, true);
-        SelectThisCharacter(PlayerCharacter.Tarja);
-    }
-
-    void SetBG(bool a, bool b)
-    {
-        Image teuvoImg = teuvoObject.GetComponent<Image>();
-        teuvoImg.enabled = a;
-        Image tarjaImg = tarjaObject.GetComponent<Image>();
-        tarjaImg.enabled = b;
-    }
-
-    void SelectThisCharacter(PlayerCharacter thisCharacter)
+    public void SelectCharacter(PlayerCharacter thisCharacter)
     {
         if (GameManager.Instance != null)
             GameManager.Instance.SetCharacter(thisCharacter);
+        SetBG();
+    }
+
+    void SetBG()
+    {
+        for(int i = 0; i < characterButtons.Length; i++)
+        {
+            GameObject buttonObject = characterButtons[i];
+            Image buttonImage = buttonObject.GetComponent<Image>();
+            if (GameManager.Instance.character == buttonObject.GetComponent<CharacterButton>().character)
+                buttonImage.color = SetColor(buttonImage.color, 1f);
+            else
+                buttonImage.color = SetColor(buttonImage.color, 0f);
+        }
+    }
+
+    Color SetColor(Color c, float value)
+    {
+        c.a = value;
+        return c;
     }
 }
