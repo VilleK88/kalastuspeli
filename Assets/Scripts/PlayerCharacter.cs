@@ -1,5 +1,6 @@
 public enum PlayerCharacter
 {
-    Timmy,
-    Claire
+    Teijo,
+    Tarja,
+    Robo
 }

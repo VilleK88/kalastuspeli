@@ -16,7 +16,7 @@ public class CharacterMenu : MonoBehaviour
 
     void InitializeCharacterBGs(PlayerCharacter currentCharacter)
     {
-        if (currentCharacter == PlayerCharacter.Timmy)
+        if (currentCharacter == PlayerCharacter.Teijo)
             SetBG(true, false);
         else
             SetBG(false, true);
@@ -26,14 +26,14 @@ public class CharacterMenu : MonoBehaviour
     {
         AudioManager.Instance.PlaySFX("ButtonClick");
         SetBG(true, false);
-        SelectThisCharacter(PlayerCharacter.Timmy);
+        SelectThisCharacter(PlayerCharacter.Teijo);
     }
 
     public void SelectTarja()
     {
         AudioManager.Instance.PlaySFX("ButtonClick");
         SetBG(false, true);
-        SelectThisCharacter(PlayerCharacter.Claire);
+        SelectThisCharacter(PlayerCharacter.Tarja);
     }
 
     void SetBG(bool a, bool b)
