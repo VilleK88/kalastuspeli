@@ -8,7 +8,5 @@ public class CharacterButton : MonoBehaviour
     {
         AudioManager.Instance.PlaySFX("ButtonClick");
         CharacterMenu.Instance.SelectCharacter(character);
-
-        Debug.Log("Button clicked: " + character);
     }
 }
