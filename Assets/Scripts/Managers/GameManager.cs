@@ -1,12 +1,13 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 
 public class GameManager : MonoBehaviour
 {
+    [SerializeField] GameObject loadingUIPrefab;
+    GameObject loadingUIInstance;
+
     #region Singleton
     public static GameManager Instance;
 
@@ -16,6 +17,12 @@ public class GameManager : MonoBehaviour
         {
             DontDestroyOnLoad(gameObject);
             Instance = this;
+
+            if(loadingUIInstance == null && loadingUIPrefab != null)
+            {
+                loadingUIInstance = Instantiate(loadingUIPrefab);
+                DontDestroyOnLoad(loadingUIInstance);
+            }
         }
         else
             Destroy(gameObject);
@@ -26,10 +33,7 @@ public class GameManager : MonoBehaviour
     public PlayerCharacter character;
 
     [Header("Scenes to Load")]
-    [SerializeField] SceneField _persistentGameplay;
     [SerializeField] SceneField _levelScene;
-
-    List<AsyncOperation> _scenesToLoad = new List<AsyncOperation>();
 
     public void SetCity(City cityToGo)
     {
@@ -43,31 +47,37 @@ public class GameManager : MonoBehaviour
 
     public void LoadCityScene()
     {
-        //LoadingUI.Instance.loadingBG.enabled = true;
-        //LoadingUI.Instance.loadingBarObject.SetActive(true);
-
-        //_scenesToLoad.Add(SceneManager.LoadSceneAsync(_levelScene));
-        //StartCoroutine(ProgressLoadingBar());
         StartCoroutine(LoadCitySceneCoroutine());
     }
 
     IEnumerator LoadCitySceneCoroutine()
     {
-        LoadingUI.Instance.loadingBG.enabled = true;
-        LoadingUI.Instance.loadingBarObject.SetActive(true);
-        yield return null;
-        //_scenesToLoad.Add(SceneManager.LoadSceneAsync(_levelScene));
-        var operation = SceneManager.LoadSceneAsync(_levelScene, LoadSceneMode.Single);
-        StartCoroutine(ProgressLoadingBar(operation));
-    }
+        LoadingUI.Instance.Show();
 
-    IEnumerator ProgressLoadingBar(AsyncOperation operation)
-    {
-        while(!operation.isDone)
+        yield return new WaitForSeconds(0.1f);
+
+        AsyncOperation operation = SceneManager.LoadSceneAsync(_levelScene, LoadSceneMode.Single);
+        operation.allowSceneActivation = false;
+
+        while(operation.progress < 0.9f)
         {
             float progress = Mathf.Clamp01(operation.progress / 0.9f);
-            LoadingUI.Instance.loadingBar.fillAmount = progress;
+            LoadingUI.Instance.UpdateProgress(progress);
             yield return null;
         }
+
+        yield return new WaitForSeconds(0.5f);
+
+        operation.allowSceneActivation = true;
+
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        if (loadingUIInstance != null)
+            LoadingUI.Instance.Hide();
+
+        SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 }
