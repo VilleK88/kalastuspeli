@@ -17,6 +17,9 @@ public class MouseManager : MonoBehaviour
     private Vector3? targetPosition = null;
     int layerMask;
 
+    float clickCooldown = 0.2f;
+    float lastClickTime = 0f;
+
     void Start()
     {
         if(GameManager.Instance != null)
@@ -41,12 +44,31 @@ public class MouseManager : MonoBehaviour
     {
         if(!IsMarkerInfoPanelOpen())
             MouseControl();
+
+        if (targetPosition.HasValue)
+        {
+            if (!agent.pathPending && agent.remainingDistance <= agent.stoppingDistance)
+            {
+                if (!agent.hasPath || agent.velocity.sqrMagnitude < 0.01f)
+                    StopWalking();
+            }
+            else
+            {
+                if (agent.velocity.sqrMagnitude > 0.01f)
+                    Walk();
+            }
+        }
     }
 
     void MouseControl()
     {
+        if (Time.time - lastClickTime < clickCooldown)
+            return;
+
         if (Input.GetMouseButtonDown(0))
         {
+            lastClickTime = Time.time;
+
             if (IsPointerOverUIObject())
                 return;
 
@@ -67,44 +89,35 @@ public class MouseManager : MonoBehaviour
                 if(NavMesh.CalculatePath(agent.transform.position, clickedPosition, NavMesh.AllAreas, path) &&
                     path.status == NavMeshPathStatus.PathComplete)
                 {
-                    if(targetPosition == null)
+                    if(!agent.pathPending)
+                    {
+                        agent.SetDestination(clickedPosition);
+                        targetPosition = clickedPosition;
                         AudioManager.Instance.PlayFootstepsSound();
-                    targetPosition = clickedPosition;
+                    }
                 }
                 else
                     Debug.Log("Clicked position can't be reached");
-            }
-        }
-
-        if (targetPosition.HasValue)
-        {
-            agent.destination = targetPosition.Value;
-
-            if (!agent.pathPending && agent.remainingDistance <= agent.stoppingDistance)
-            {
-                if (!agent.hasPath || agent.velocity.sqrMagnitude < 0.01f)
-                    StopWalking();
-            }
-            else
-            {
-                if (agent.velocity.sqrMagnitude > 0.01f)
-                    Walk();
             }
         }
     }
 
     void Walk()
     {
-        Quaternion lookRotation = Quaternion.LookRotation(agent.velocity.normalized);
-        player.rotation = Quaternion.Slerp(player.rotation, lookRotation, Time.deltaTime * rotationSpeed);
-        playerAnim.SetBool("Walk", true);
+        if(agent.velocity.sqrMagnitude > 0.01f)
+        {
+            Quaternion lookRotation = Quaternion.LookRotation(agent.velocity.normalized);
+            player.rotation = Quaternion.Slerp(player.rotation, lookRotation, Time.deltaTime * rotationSpeed);
+            playerAnim.SetBool("Walk", true);
+        }
     }
 
     void StopWalking()
     {
         targetPosition = null;
         playerAnim.SetBool("Walk", false);
-        agent.ResetPath();
+        if (!agent.pathPending && agent.hasPath)
+            agent.ResetPath();
         AudioManager.Instance.StopFootstepsSound();
     }
 
@@ -150,8 +163,6 @@ public class MouseManager : MonoBehaviour
     {
         Marker marker = hitObject.GetComponentInParent<Marker>();
         if(marker != null)
-        {
             marker.StartInteraction();
-        }
     }
 }
