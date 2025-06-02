@@ -1,5 +1,5 @@
 using UnityEngine;
-using System.Runtime.InteropServices;
+using TMPro;
 
 public class MarkerUI : MonoBehaviour
 {
@@ -16,6 +16,7 @@ public class MarkerUI : MonoBehaviour
     #endregion
 
     [SerializeField] GameObject transparentBG;
+    [SerializeField] TMP_InputField inputField;
     public bool open;
 
     public void OpenMarkerInfoPanel()
@@ -32,7 +33,10 @@ public class MarkerUI : MonoBehaviour
 
     public void OpenGoogleMaps()
     {
-        OpenAddressInGoogleMaps("Karamalmin kampus");
+        if(inputField != null)
+            OpenAddressInGoogleMaps(inputField.text);
+        else
+            OpenAddressInGoogleMaps("Karamalmin kampus");
     }
 
 #if UNITY_WEBGL && !UNITY_EDITOR
