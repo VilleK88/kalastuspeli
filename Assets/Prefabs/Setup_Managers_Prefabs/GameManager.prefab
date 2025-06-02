@@ -44,11 +44,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f29de1c6cd54764caaecd1a7c3faed0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  loadingUIPrefab: {fileID: 1243748940647423941, guid: 5798b57f67ba989469c4f6b003718777, type: 3}
   city: 2
   character: 1
-  _persistentGameplay:
-    sceneAsset: {fileID: 0}
-    sceneName: 
   _levelScene:
     sceneAsset: {fileID: 102900000, guid: 17eea4741a99e3840b4250f106ae90bf, type: 3}
     sceneName: 3 - City

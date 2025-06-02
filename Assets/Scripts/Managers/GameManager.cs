@@ -17,12 +17,6 @@ public class GameManager : MonoBehaviour
         {
             DontDestroyOnLoad(gameObject);
             Instance = this;
-
-            if(loadingUIInstance == null && loadingUIPrefab != null)
-            {
-                loadingUIInstance = Instantiate(loadingUIPrefab);
-                DontDestroyOnLoad(loadingUIInstance);
-            }
         }
         else
             Destroy(gameObject);
@@ -34,6 +28,32 @@ public class GameManager : MonoBehaviour
 
     [Header("Scenes to Load")]
     [SerializeField] SceneField _levelScene;
+
+    public void CreateLoadingCanvas()
+    {
+        if (loadingUIInstance == null && loadingUIPrefab != null)
+        {
+            loadingUIInstance = Instantiate(loadingUIPrefab);
+            DontDestroyOnLoad(loadingUIInstance);
+        }
+    }
+
+    /*private void Start()
+    {
+        LoadingUI.Instance.Show();
+        StartCoroutine(FakeProgressTest());
+    }*/
+
+    IEnumerator FakeProgressTest()
+    {
+        float p = 0f;
+        while(p < 1f)
+        {
+            p += Time.deltaTime * 0.25f;
+            LoadingUI.Instance.UpdateProgress(p);
+            yield return null;
+        }
+    }
 
     public void SetCity(City cityToGo)
     {
@@ -54,7 +74,7 @@ public class GameManager : MonoBehaviour
     {
         LoadingUI.Instance.Show();
 
-        yield return new WaitForSeconds(0.1f);
+        yield return new WaitForSeconds(0.3f);
 
         AsyncOperation operation = SceneManager.LoadSceneAsync(_levelScene, LoadSceneMode.Single);
         operation.allowSceneActivation = false;
@@ -66,11 +86,13 @@ public class GameManager : MonoBehaviour
             yield return null;
         }
 
-        yield return new WaitForSeconds(0.5f);
-
-        operation.allowSceneActivation = true;
+        LoadingUI.Instance.UpdateProgress(1f);
 
         SceneManager.sceneLoaded += OnSceneLoaded;
+        operation.allowSceneActivation = true;
+        yield return new WaitForSeconds(0.5f);
+
+        //operation.allowSceneActivation = true;
     }
 
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
