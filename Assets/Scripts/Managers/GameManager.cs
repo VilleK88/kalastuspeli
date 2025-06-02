@@ -1,7 +1,6 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Collections;
-using System.Collections.Generic;
 
 public class GameManager : MonoBehaviour
 {
@@ -28,6 +27,9 @@ public class GameManager : MonoBehaviour
 
     [Header("Scenes to Load")]
     [SerializeField] SceneField _levelScene;
+
+    GameObject cityPrefab;
+    GameObject cityInstance;
 
     public void CreateLoadingCanvas()
     {
@@ -76,6 +78,8 @@ public class GameManager : MonoBehaviour
 
         yield return new WaitForSeconds(0.3f);
 
+        GetCityPrefabReady();
+
         AsyncOperation operation = SceneManager.LoadSceneAsync(_levelScene, LoadSceneMode.Single);
         operation.allowSceneActivation = false;
 
@@ -89,17 +93,42 @@ public class GameManager : MonoBehaviour
         LoadingUI.Instance.UpdateProgress(1f);
 
         SceneManager.sceneLoaded += OnSceneLoaded;
-        operation.allowSceneActivation = true;
         yield return new WaitForSeconds(0.5f);
 
-        //operation.allowSceneActivation = true;
+        operation.allowSceneActivation = true;
     }
 
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
+        if (cityInstance != null)
+            cityInstance.SetActive(true);
+
         if (loadingUIInstance != null)
             LoadingUI.Instance.Hide();
 
         SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    public void DestroyCityInstance()
+    {
+        if(cityInstance != null)
+            Destroy(cityInstance);
+    }
+
+    void GetCityPrefabReady()
+    {
+        string cityName = city.ToString();
+        string path = "Cities/" + cityName;
+
+        cityPrefab = Resources.Load<GameObject>(path);
+
+        if(cityPrefab != null)
+        {
+            cityInstance = Instantiate(cityPrefab);
+            cityInstance.SetActive(false);
+            DontDestroyOnLoad(cityInstance);
+        }
+        else
+            Debug.LogWarning($"City prefab not found at Resources/{path}");
     }
 }

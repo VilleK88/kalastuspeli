@@ -63,7 +63,7 @@ public class LoadingUI : MonoBehaviour
 
     IEnumerator FadeAndDestroy()
     {
-        yield return FadeCanvasGroup(canvasGroup, 1f, 0f, 2.5f);
+        yield return FadeCanvasGroup(canvasGroup, 1f, 0f, 3f);
 
 
         if (loadingBarObject != null) loadingBarObject.SetActive(false);
