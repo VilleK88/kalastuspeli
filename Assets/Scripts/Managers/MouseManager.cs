@@ -33,6 +33,7 @@ public class MouseManager : MonoBehaviour
     float lastClickTime = 0f;
 
     public bool fishing;
+    public LineRenderer fishingLine;
 
     void Start()
     {
@@ -198,5 +199,12 @@ public class MouseManager : MonoBehaviour
     {
         yield return new WaitForSeconds(time);
         fishing = false;
+    }
+
+    public void LookAtMarker(Transform markerTransform)
+    {
+        Vector3 targetPosition = markerTransform.position;
+        Vector3 direction = new Vector3(targetPosition.x, agent.transform.position.y, targetPosition.z);
+        agent.transform.LookAt(direction);
     }
 }

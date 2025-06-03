@@ -2882,6 +2882,7 @@ MonoBehaviour:
   moveSpeed: 10
   rotationSpeed: 20
   fishing: 0
+  fishingLine: {fileID: 0}
 --- !u!20 &4381237741469090673
 Camera:
   m_ObjectHideFlags: 0
