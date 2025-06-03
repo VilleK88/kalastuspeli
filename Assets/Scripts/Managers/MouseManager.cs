@@ -7,6 +7,18 @@ using System.Collections.Generic;
 
 public class MouseManager : MonoBehaviour
 {
+    #region Singleton
+    public static MouseManager Instance;
+
+    private void Awake()
+    {
+        if (Instance == null)
+            Instance = this;
+        else
+            Destroy(gameObject);
+    }
+    #endregion
+
     [SerializeField] GameObject[] playerObjects;
     [SerializeField] Transform player;
     Animator playerAnim;
@@ -19,6 +31,8 @@ public class MouseManager : MonoBehaviour
 
     float clickCooldown = 0.2f;
     float lastClickTime = 0f;
+
+    public bool fishing;
 
     void Start()
     {
@@ -42,7 +56,7 @@ public class MouseManager : MonoBehaviour
 
     void Update()
     {
-        if(!IsMarkerInfoPanelOpen())
+        if(!IsMarkerInfoPanelOpen() && !fishing)
             MouseControl();
 
         if (targetPosition.HasValue)
@@ -165,5 +179,24 @@ public class MouseManager : MonoBehaviour
         Marker marker = hitObject.GetComponentInParent<Marker>();
         if(marker != null)
             marker.StartInteraction();
+    }
+
+    public void StartFishing()
+    {
+        fishing = true;
+        playerAnim.SetTrigger("Fishing_Cast");
+        playerAnim.SetBool("Fishing_Idle", true);
+    }
+
+    public void StopFishing()
+    {
+        playerAnim.SetBool("Fishing_Idle", false);
+        StartCoroutine(DelayedStopFishing(1f));
+    }
+
+    IEnumerator DelayedStopFishing(float time)
+    {
+        yield return new WaitForSeconds(time);
+        fishing = false;
     }
 }

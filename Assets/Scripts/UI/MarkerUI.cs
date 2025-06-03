@@ -1,5 +1,6 @@
 using UnityEngine;
 using TMPro;
+using System.Collections;
 
 public class MarkerUI : MonoBehaviour
 {
@@ -21,14 +22,21 @@ public class MarkerUI : MonoBehaviour
 
     public void OpenMarkerInfoPanel()
     {
-        transparentBG.SetActive(true);
         open = true;
+        StartCoroutine(DelayedInfoPanelOpening(4f));
     }
 
     public void CloseMarkerInfoPanel()
     {
         transparentBG.SetActive(false);
         open = false;
+        MouseManager.Instance.StopFishing();
+    }
+
+    IEnumerator DelayedInfoPanelOpening(float time)
+    {
+        yield return new WaitForSeconds(time);
+        transparentBG.SetActive(true);
     }
 
     public void OpenGoogleMaps()

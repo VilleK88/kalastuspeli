@@ -59,6 +59,7 @@ public class Marker : MonoBehaviour
     {
         if(canInteract)
         {
+            MouseManager.Instance.StartFishing();
             MarkerUI.Instance.OpenMarkerInfoPanel();
             Debug.Log("canInteract: " + canInteract);
         }

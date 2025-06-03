@@ -659,7 +659,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5871874788425431092, guid: 9b1e4589cb0832e41bfa0556195255bf, type: 3}
       propertyPath: character
-      value: 2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7781961175858332554, guid: 9b1e4589cb0832e41bfa0556195255bf, type: 3}
       propertyPath: m_Name
@@ -2881,6 +2881,7 @@ MonoBehaviour:
   surface: {fileID: 4367053465028159388}
   moveSpeed: 10
   rotationSpeed: 20
+  fishing: 0
 --- !u!20 &4381237741469090673
 Camera:
   m_ObjectHideFlags: 0
