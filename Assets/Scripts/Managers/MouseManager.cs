@@ -126,6 +126,7 @@ public class MouseManager : MonoBehaviour
         yield return new WaitForSeconds(time);
         agent = player.GetComponent<NavMeshAgent>();
         surface.BuildNavMesh();
+        MarkerManager.Instance.InitializeMarkers();
     }
 
     bool IsPointerOverUIObject()

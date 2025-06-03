@@ -10,24 +10,29 @@ public class Marker : MonoBehaviour
 
     private void Start()
     {
+        InitializeMarker();
+    }
+
+    public void InitializeMarker()
+    {
         IndustryData[] allIndustryData = Resources.LoadAll<IndustryData>("Industries");
 
-        foreach(var data in allIndustryData)
+        foreach (var data in allIndustryData)
         {
-            if(data.industryType == industryType)
+            if (data.industryType == industryType)
             {
                 industryData = data;
                 break;
             }
         }
 
-        if(industryData == null)
+        if (industryData == null)
         {
             Debug.LogError($"IndustryData not found for type {industryType} on {gameObject.name}");
             return;
         }
 
-        if(industryData.prefabIcon != null)
+        if (industryData.prefabIcon != null)
         {
             GameObject iconInstance = Instantiate(industryData.prefabIcon, transform);
             iconInstance.transform.localPosition = Vector3.zero;

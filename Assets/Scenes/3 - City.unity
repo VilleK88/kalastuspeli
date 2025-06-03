@@ -135,6 +135,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Marker (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 5375383126886398909, guid: 8ae9e1923d753794e8a230f8fc62ca50, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8560285812923894450, guid: 8ae9e1923d753794e8a230f8fc62ca50, type: 3}
       propertyPath: m_LocalPosition.x
       value: -4.4
@@ -354,6 +358,10 @@ PrefabInstance:
     - target: {fileID: 5375383126886398909, guid: 8ae9e1923d753794e8a230f8fc62ca50, type: 3}
       propertyPath: m_Name
       value: Marker (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5375383126886398909, guid: 8ae9e1923d753794e8a230f8fc62ca50, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8560285812923894450, guid: 8ae9e1923d753794e8a230f8fc62ca50, type: 3}
       propertyPath: m_LocalPosition.x
@@ -678,6 +686,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Marker (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 5375383126886398909, guid: 8ae9e1923d753794e8a230f8fc62ca50, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8560285812923894450, guid: 8ae9e1923d753794e8a230f8fc62ca50, type: 3}
       propertyPath: m_LocalPosition.x
       value: -63.5
@@ -743,6 +755,10 @@ PrefabInstance:
     - target: {fileID: 5375383126886398909, guid: 8ae9e1923d753794e8a230f8fc62ca50, type: 3}
       propertyPath: m_Name
       value: Marker (7)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5375383126886398909, guid: 8ae9e1923d753794e8a230f8fc62ca50, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8560285812923894450, guid: 8ae9e1923d753794e8a230f8fc62ca50, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1001,8 +1017,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1299566303}
+  - component: {fileID: 1299566304}
   m_Layer: 0
-  m_Name: Markers
+  m_Name: MarkerManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1016,7 +1033,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1299566302}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1030,8 +1047,23 @@ Transform:
   - {fileID: 1912615447}
   - {fileID: 1023781527}
   - {fileID: 1854820330}
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 577676046798259787}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1299566304
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1299566302}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e501a1a873967104ba68852d73dbbc7c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  markerPrefab: {fileID: 5375383126886398909, guid: 8ae9e1923d753794e8a230f8fc62ca50, type: 3}
+  markerCount: 18
+  areaSize: 1000
 --- !u!1001 &1394406659
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1047,6 +1079,10 @@ PrefabInstance:
     - target: {fileID: 5375383126886398909, guid: 8ae9e1923d753794e8a230f8fc62ca50, type: 3}
       propertyPath: m_Name
       value: Marker (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5375383126886398909, guid: 8ae9e1923d753794e8a230f8fc62ca50, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8560285812923894450, guid: 8ae9e1923d753794e8a230f8fc62ca50, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1530,6 +1566,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Marker (8)
       objectReference: {fileID: 0}
+    - target: {fileID: 5375383126886398909, guid: 8ae9e1923d753794e8a230f8fc62ca50, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8560285812923894450, guid: 8ae9e1923d753794e8a230f8fc62ca50, type: 3}
       propertyPath: m_LocalPosition.x
       value: -94
@@ -1595,6 +1635,10 @@ PrefabInstance:
     - target: {fileID: 5375383126886398909, guid: 8ae9e1923d753794e8a230f8fc62ca50, type: 3}
       propertyPath: m_Name
       value: Marker (6)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5375383126886398909, guid: 8ae9e1923d753794e8a230f8fc62ca50, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8560285812923894450, guid: 8ae9e1923d753794e8a230f8fc62ca50, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1857,6 +1901,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Marker (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 5375383126886398909, guid: 8ae9e1923d753794e8a230f8fc62ca50, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8560285812923894450, guid: 8ae9e1923d753794e8a230f8fc62ca50, type: 3}
       propertyPath: m_LocalPosition.x
       value: 57.4
@@ -1939,6 +1987,10 @@ PrefabInstance:
     - target: {fileID: 5375383126886398909, guid: 8ae9e1923d753794e8a230f8fc62ca50, type: 3}
       propertyPath: m_Name
       value: Marker
+      objectReference: {fileID: 0}
+    - target: {fileID: 5375383126886398909, guid: 8ae9e1923d753794e8a230f8fc62ca50, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8560285812923894450, guid: 8ae9e1923d753794e8a230f8fc62ca50, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2084,6 +2136,7 @@ Transform:
   m_Children:
   - {fileID: 4166959050528186578}
   - {fileID: 600403890}
+  - {fileID: 1299566303}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &790578689352095675
@@ -4343,4 +4396,3 @@ SceneRoots:
   - {fileID: 2968885794318405367}
   - {fileID: 1997762171}
   - {fileID: 709602157}
-  - {fileID: 1299566303}
