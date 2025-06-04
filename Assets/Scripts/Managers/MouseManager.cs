@@ -4,6 +4,7 @@ using Unity.AI.Navigation;
 using System.Collections;
 using UnityEngine.EventSystems;
 using System.Collections.Generic;
+using System.Linq;
 
 public class MouseManager : MonoBehaviour
 {
@@ -20,6 +21,7 @@ public class MouseManager : MonoBehaviour
     #endregion
 
     [SerializeField] GameObject[] playerObjects;
+    GameObject activePlayerObject;
     [SerializeField] Transform player;
     Animator playerAnim;
     NavMeshAgent agent;
@@ -33,23 +35,18 @@ public class MouseManager : MonoBehaviour
     float lastClickTime = 0f;
 
     public bool fishing;
-    public LineRenderer fishingLine;
+    [SerializeField] Transform castPoint;
+    [SerializeField] LineRenderer fishingLine;
+
+    public BaitSO[] baits;
+    public int selectedBaitIndex = 0;
+
+    public GameObject currentBait;
+    float currentForce = 20f;
 
     void Start()
     {
-        if(GameManager.Instance != null)
-        {
-            PlayerCharacter character = GameManager.Instance.character;
-            string characterName = character.ToString();
-            for(int i = 0; i < playerObjects.Length; i++)
-            {
-                if (playerObjects[i].name.Contains(characterName))
-                {
-                    playerObjects[i].SetActive(true);
-                    playerAnim = playerObjects[i].GetComponent<Animator>();
-                }
-            }
-        }
+        InitializePlayerGameObject();
         surface.GetComponent<NavMeshSurface>();
         StartCoroutine(DelayedAiInitialization(0.6f));
         layerMask = ~(1 << LayerMask.NameToLayer("Player"));
@@ -187,6 +184,7 @@ public class MouseManager : MonoBehaviour
         fishing = true;
         playerAnim.SetTrigger("Fishing_Cast");
         playerAnim.SetBool("Fishing_Idle", true);
+        //ThrowLure();
     }
 
     public void StopFishing()
@@ -206,5 +204,46 @@ public class MouseManager : MonoBehaviour
         Vector3 targetPosition = markerTransform.position;
         Vector3 direction = new Vector3(targetPosition.x, agent.transform.position.y, targetPosition.z);
         agent.transform.LookAt(direction);
+    }
+
+    void InitializePlayerGameObject()
+    {
+        if (GameManager.Instance != null)
+        {
+            PlayerCharacter character = GameManager.Instance.character;
+            string characterName = character.ToString();
+            for (int i = 0; i < playerObjects.Length; i++)
+            {
+                if (playerObjects[i].name.Contains(characterName))
+                {
+                    activePlayerObject = playerObjects[i];
+                    activePlayerObject.SetActive(true);
+                    playerAnim = activePlayerObject.GetComponent<Animator>();
+                    //FindCastPointAndFishingLine();
+                }
+            }
+        }
+    }
+
+    void FindCastPointAndFishingLine()
+    {
+        castPoint = activePlayerObject.GetComponentsInChildren<Transform>(true)
+            .FirstOrDefault(t => t.name == "castPoint");
+
+        if (castPoint == null)
+            Debug.LogWarning("castPoint not found in player's children.");
+        else
+            Debug.Log("castPoint found: " + castPoint.name);
+
+        fishingLine = castPoint.GetComponentInChildren<LineRenderer>();
+    }
+
+    void ThrowLure()
+    {
+        GameObject prefabToThrow = baits[selectedBaitIndex].prefab;
+        GameObject lure = Instantiate(prefabToThrow, castPoint.position, castPoint.rotation);
+        Rigidbody rb = lure.GetComponent<Rigidbody>();
+        currentBait = lure;
+        rb.AddForce(castPoint.forward * currentForce, ForceMode.Impulse);
     }
 }
