@@ -5,7 +5,10 @@ public class MapController : MonoBehaviour, IDragHandler, IBeginDragHandler
 {
     public RectTransform mapRect;
     public RectTransform zoomContainer;
+
     public float dragSpeed = 1f;
+    public float keyboardSpeed = 1000f;
+
     Vector2 lastDragPosition;
 
     public Vector2 minPosition; // x: -400, y: -1000
@@ -19,6 +22,7 @@ public class MapController : MonoBehaviour, IDragHandler, IBeginDragHandler
     {
         HandleMouseZoom();
         HandleTouchZoom();
+        HandleKeyboardMovement();
     }
 
     void HandleMouseZoom()
@@ -79,6 +83,21 @@ public class MapController : MonoBehaviour, IDragHandler, IBeginDragHandler
         Vector2 newPos = mapRect.anchoredPosition + dragDelta * dragSpeed;
 
         newPos.x = Mathf.Clamp(newPos.x, minPosition.x, maxPosition.x);
+        newPos.y = Mathf.Clamp(newPos.y, minPosition.y, maxPosition.y);
+
+        mapRect.anchoredPosition = newPos;
+    }
+
+    void HandleKeyboardMovement()
+    {
+        Vector2 input = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+        if (input == Vector2.zero)
+            return;
+
+        Vector2 move = new Vector2(-input.x, -input.y) * keyboardSpeed * Time.deltaTime;
+        Vector2 newPos = mapRect.anchoredPosition + move;
+
+        newPos.x = Mathf.Clamp(newPos.x, minPosition.y, maxPosition.x);
         newPos.y = Mathf.Clamp(newPos.y, minPosition.y, maxPosition.y);
 
         mapRect.anchoredPosition = newPos;

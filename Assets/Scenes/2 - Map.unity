@@ -985,6 +985,7 @@ MonoBehaviour:
   mapRect: {fileID: 800282366}
   zoomContainer: {fileID: 683775348}
   dragSpeed: 1
+  keyboardSpeed: 1000
   minPosition: {x: -400, y: -1000}
   maxPosition: {x: 900, y: 3000}
   zoomSpeed: 0.1
@@ -1519,7 +1520,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.10559082, y: 0.00064086914}
+  m_AnchoredPosition: {x: -0.10559082, y: 0.0006713867}
   m_SizeDelta: {x: 0.21069336, y: -0.35998535}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1674785771
