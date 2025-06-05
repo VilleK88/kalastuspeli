@@ -2838,7 +2838,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2120468787470389576, guid: f0f1f3d5f6fde5848906fb9ad8538046, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2120468787470389576, guid: f0f1f3d5f6fde5848906fb9ad8538046, type: 3}
       propertyPath: m_StaticEditorFlags
@@ -8193,12 +8193,12 @@ NavMeshAgent:
   m_GameObject: {fileID: 7782236441140023087}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 0.5
-  m_Speed: 25
-  m_Acceleration: 10
+  m_Radius: 0.3
+  m_Speed: 15
+  m_Acceleration: 40
   avoidancePriority: 50
   m_AngularSpeed: 200
-  m_StoppingDistance: 0
+  m_StoppingDistance: 0.5
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
