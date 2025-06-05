@@ -52,8 +52,14 @@ public class MarkerManager : MonoBehaviour
                 IndustryType randomIndustry = (IndustryType)System.Enum.GetValues(typeof(IndustryType)).GetValue(randomIndex);
                 marker.industryType = randomIndustry;
 
-                int randomI = Random.Range(0, cityCompanies.Count);
-                marker.yritys = cityCompanies[randomI];
+                if(cityCompanies != null)
+                {
+                    if(cityCompanies.Count > 0)
+                    {
+                        int randomI = Random.Range(0, cityCompanies.Count);
+                        marker.yritys = cityCompanies[randomI];
+                    }
+                }
             }
         }
     }

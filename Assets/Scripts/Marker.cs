@@ -64,6 +64,8 @@ public class Marker : MonoBehaviour
         {
             MouseManager.Instance.LookAtMarker(transform);
             MouseManager.Instance.StartFishing();
+            if(yritys != null)
+                MarkerUI.Instance.UpdateCompanyParameters(yritys);
             MarkerUI.Instance.OpenMarkerInfoPanel();
             Debug.Log("canInteract: " + canInteract);
         }

@@ -2,6 +2,7 @@ using UnityEngine;
 using TMPro;
 using System.Collections;
 using System.Runtime.InteropServices;
+using Unity.VisualScripting;
 
 public class MarkerUI : MonoBehaviour
 {
@@ -18,8 +19,27 @@ public class MarkerUI : MonoBehaviour
     #endregion
 
     [SerializeField] GameObject transparentBG;
-    [SerializeField] TMP_InputField inputField;
     public bool open;
+
+    [Header("Company Parameters")]
+    public Yritys yritys;
+    public TextMeshProUGUI companyName;
+    public TextMeshProUGUI businessID;
+    public TextMeshProUGUI founded;
+    public TextMeshProUGUI postalAddress;
+    public TextMeshProUGUI postcode;
+    public TextMeshProUGUI municipality;
+
+    public void UpdateCompanyParameters(Yritys currentCompany)
+    {
+        yritys = currentCompany;
+        companyName.text = currentCompany.nimi ?? "-";
+        businessID.text = currentCompany.y_tunnus ?? "-";
+        founded.text = currentCompany.perustettu ?? "-";
+        postalAddress.text = currentCompany.postiosoite_katu ?? "-";
+        postcode.text = currentCompany.postinumero ?? "-";
+        municipality.text = currentCompany.kunta ?? "-";
+    }
 
     public void OpenMarkerInfoPanel()
     {
@@ -42,8 +62,8 @@ public class MarkerUI : MonoBehaviour
 
     public void OpenGoogleMaps()
     {
-        if(inputField != null)
-            OpenAddressInGoogleMaps(inputField.text);
+        if(yritys.postiosoite_katu != null)
+            OpenAddressInGoogleMaps(yritys.postiosoite_katu);
         else
             OpenAddressInGoogleMaps("Karamalmin kampus");
     }
