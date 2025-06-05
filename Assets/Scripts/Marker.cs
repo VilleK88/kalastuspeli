@@ -8,6 +8,9 @@ public class Marker : MonoBehaviour
     public IndustryType industryType;
     public IndustryData industryData;
 
+    [Header("Company Parameters")]
+    public Yritys yritys;
+
     private void Start()
     {
         InitializeMarker();

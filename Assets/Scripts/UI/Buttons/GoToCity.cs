@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.EventSystems;
 using System.Collections;
 
@@ -19,7 +18,6 @@ public class GoToCity : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     public void GoToThisCity()
     {
         GameManager.Instance.SetCity(city);
-        //SceneManager.LoadScene("3 - City");
         GameManager.Instance.LoadCityScene();
     }
 
