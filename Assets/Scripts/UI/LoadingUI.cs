@@ -36,7 +36,14 @@ public class LoadingUI : MonoBehaviour
 
     public void Hide()
     {
-        StartCoroutine(FadeAndDestroy());
+        //StartCoroutine(FadeAndDestroy());
+        StartCoroutine(DelayedHide(2f));
+    }
+
+    IEnumerator DelayedHide(float time)
+    {
+        yield return new WaitForSeconds(time);
+        StartCoroutine(FadeAndDestroy(1f));
     }
 
     public void UpdateProgress(float progress)
@@ -61,9 +68,9 @@ public class LoadingUI : MonoBehaviour
         group.alpha = to;
     }
 
-    IEnumerator FadeAndDestroy()
+    IEnumerator FadeAndDestroy(float time)
     {
-        yield return FadeCanvasGroup(canvasGroup, 1f, 0f, 3f);
+        yield return FadeCanvasGroup(canvasGroup, 1f, 0f, time);
 
 
         if (loadingBarObject != null) loadingBarObject.SetActive(false);
