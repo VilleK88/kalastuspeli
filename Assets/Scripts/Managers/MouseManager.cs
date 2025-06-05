@@ -54,8 +54,11 @@ public class MouseManager : MonoBehaviour
 
     void Update()
     {
-        if(!IsMarkerInfoPanelOpen() && !fishing)
+        if (!IsMarkerInfoPanelOpen() && !fishing)
+        {
             MouseControl();
+            TouchControl();
+        }
 
         if (targetPosition.HasValue)
         {
@@ -72,6 +75,22 @@ public class MouseManager : MonoBehaviour
         }
     }
 
+    void TouchControl()
+    {
+        if(Input.touchCount == 1 && Input.GetTouch(0).phase == TouchPhase.Began)
+        {
+            if (Time.time - lastClickTime < clickCooldown)
+                return;
+
+            lastClickTime = Time.time;
+
+            Touch touch = Input.GetTouch(0);
+
+            if (IsPointerOverUIObject(touch.position))
+                return;
+        }
+    }
+
     void MouseControl()
     {
         if (Time.time - lastClickTime < clickCooldown)
@@ -81,7 +100,7 @@ public class MouseManager : MonoBehaviour
         {
             lastClickTime = Time.time;
 
-            if (IsPointerOverUIObject())
+            if (IsPointerOverUIObject(Input.mousePosition))
                 return;
 
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -141,9 +160,28 @@ public class MouseManager : MonoBehaviour
         MarkerManager.Instance.InitializeMarkers();
     }
 
-    bool IsPointerOverUIObject()
+    bool isPointerOverUIObject()
+    {
+        return IsPointerOverUIObject(Input.mousePosition);
+    }
+
+    bool IsPointerOverUIObject(Vector2 screenPosition)
     {
         PointerEventData eventData = new PointerEventData(EventSystem.current);
+        eventData.position = screenPosition;
+
+        List<RaycastResult> results = new List<RaycastResult>();
+        EventSystem.current.RaycastAll(eventData, results);
+
+        foreach(RaycastResult result in results)
+        {
+            if (result.gameObject.GetComponent<UnityEngine.UI.Button>() != null)
+                return true;
+        }
+
+        return false;
+
+        /*PointerEventData eventData = new PointerEventData(EventSystem.current);
         eventData.position = Input.mousePosition;
 
         List<RaycastResult> results = new List<RaycastResult>();
@@ -155,7 +193,7 @@ public class MouseManager : MonoBehaviour
                 return true;
         }
 
-        return false;
+        return false;*/
     }
 
     bool IsMarkerInfoPanelOpen()
