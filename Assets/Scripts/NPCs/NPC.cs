@@ -35,10 +35,8 @@ public class NPC : MonoBehaviour
     private void Start()
     {
         InitializeNPC();
-        agent.speed = walkSpeed;
-        currentState = wanderState;
-        previousWaypoint = currentWaypoint;
-        Debug.Log("Current state: " + currentState);
+        currentState = idleState;
+        StartCoroutine(DelayedStartingStateChange(1f));
     }
 
     private void Update()
@@ -71,5 +69,15 @@ public class NPC : MonoBehaviour
             npcPrefab.transform.localPosition = Vector3.zero;
             anim = npcPrefab.GetComponent<Animator>();
         }
+
+        previousWaypoint = currentWaypoint;
+        agent.speed = walkSpeed;
+        currentState = wanderState;
+    }
+
+    IEnumerator DelayedStartingStateChange(float time)
+    {
+        yield return new WaitForSeconds(time);
+        currentState = wanderState;
     }
 }

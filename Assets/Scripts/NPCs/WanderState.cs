@@ -3,7 +3,7 @@ using UnityEngine;
 public class WanderState : INPCState
 {
     NPC thisNPC;
-    float waypointCounter;
+    float waypointCounter = 2f;
     float wayPointMaxTime = 2f;
 
     public WanderState(NPC npc)
@@ -25,7 +25,7 @@ public class WanderState : INPCState
                     while (true)
                     {
                         GameObject newWaypoint = SelectRandomWaypoint(waypoints);
-                        if (newWaypoint != this.thisNPC.previousWaypoint)
+                        if (newWaypoint != thisNPC.previousWaypoint)
                         {
                             thisNPC.previousWaypoint = thisNPC.currentWaypoint;
                             thisNPC.currentWaypoint = newWaypoint;
@@ -38,12 +38,13 @@ public class WanderState : INPCState
                     thisNPC.currentWaypoint = thisNPC.previousWaypoint;
                 }
             }
+            thisNPC.anim.SetBool("Walk", false);
+            waypointCounter = 0;
         }
 
         if(waypointCounter < wayPointMaxTime)
         {
             waypointCounter += Time.deltaTime;
-            thisNPC.anim.SetBool("Walk", false);
         }
         else
         {
