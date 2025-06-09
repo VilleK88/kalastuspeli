@@ -5,9 +5,22 @@ using System.Collections;
 using UnityEngine.EventSystems;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEngine.InputSystem;
 
 public class MouseManager : MonoBehaviour
 {
+    private void OnEnable()
+    {
+        inputActions.FindActionMap("Player").Enable();
+        clickAction.performed += OnClickPerformed;
+    }
+
+    private void OnDisable()
+    {
+        inputActions.FindActionMap("Player").Disable();
+        clickAction.performed -= OnClickPerformed;
+    }
+
     #region Singleton
     public static MouseManager Instance;
 
@@ -17,6 +30,8 @@ public class MouseManager : MonoBehaviour
             Instance = this;
         else
             Destroy(gameObject);
+
+        clickAction = InputSystem.actions.FindAction("Player/Click");
     }
     #endregion
 
@@ -44,6 +59,10 @@ public class MouseManager : MonoBehaviour
     public GameObject currentBait;
     float currentForce = 20f;
 
+    [Header("Input parameters")]
+    [SerializeField] InputActionAsset inputActions;
+    InputAction clickAction;
+
     void Start()
     {
         InitializePlayerGameObject();
@@ -54,12 +73,6 @@ public class MouseManager : MonoBehaviour
 
     void Update()
     {
-        if (!IsMarkerInfoPanelOpen() && !fishing)
-        {
-            MouseControl();
-            TouchControl();
-        }
-
         if (targetPosition.HasValue)
         {
             if (!agent.pathPending && agent.remainingDistance <= agent.stoppingDistance)
@@ -75,61 +88,45 @@ public class MouseManager : MonoBehaviour
         }
     }
 
-    void TouchControl()
+    void OnClickPerformed(InputAction.CallbackContext context)
     {
-        if(Input.touchCount == 1 && Input.GetTouch(0).phase == TouchPhase.Began)
-        {
-            if (Time.time - lastClickTime < clickCooldown)
-                return;
+        if (IsMarkerInfoPanelOpen() && fishing)
+            return;
 
-            lastClickTime = Time.time;
-
-            Touch touch = Input.GetTouch(0);
-
-            if (IsPointerOverUIObject(touch.position))
-                return;
-        }
-    }
-
-    void MouseControl()
-    {
         if (Time.time - lastClickTime < clickCooldown)
             return;
 
-        if (Input.GetMouseButtonDown(0))
+        lastClickTime = Time.time;
+
+        if (IsPointerOverUIObject(Mouse.current.position.ReadValue()))
+            return;
+
+        Ray ray = Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());
+        RaycastHit hit;
+
+        if (Physics.Raycast(ray, out hit, Mathf.Infinity, layerMask))
         {
-            lastClickTime = Time.time;
-
-            if (IsPointerOverUIObject(Input.mousePosition))
-                return;
-
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            RaycastHit hit;
-
-            if (Physics.Raycast(ray, out hit, Mathf.Infinity, layerMask))
+            if (IsPointerOverMarker(hit.collider.gameObject))
             {
-                if(IsPointerOverMarker(hit.collider.gameObject))
-                {
-                    ClickMarker(hit.collider.gameObject);
-                    return;
-                }
-
-                Vector3 clickedPosition = hit.point;
-
-                NavMeshPath path = new NavMeshPath();
-                if(NavMesh.CalculatePath(agent.transform.position, clickedPosition, NavMesh.AllAreas, path) &&
-                    path.status == NavMeshPathStatus.PathComplete)
-                {
-                    if(!agent.pathPending)
-                    {
-                        agent.SetDestination(clickedPosition);
-                        targetPosition = clickedPosition;
-                        AudioManager.Instance.PlayFootstepsSound();
-                    }
-                }
-                else
-                    Debug.Log("Clicked position can't be reached");
+                ClickMarker(hit.collider.gameObject);
+                return;
             }
+
+            Vector3 clickedPosition = hit.point;
+
+            NavMeshPath path = new NavMeshPath();
+            if (NavMesh.CalculatePath(agent.transform.position, clickedPosition, NavMesh.AllAreas, path) &&
+                path.status == NavMeshPathStatus.PathComplete)
+            {
+                if (!agent.pathPending)
+                {
+                    agent.SetDestination(clickedPosition);
+                    targetPosition = clickedPosition;
+                    AudioManager.Instance.PlayFootstepsSound();
+                }
+            }
+            else
+                Debug.Log("Clicked position can't be reached");
         }
     }
 

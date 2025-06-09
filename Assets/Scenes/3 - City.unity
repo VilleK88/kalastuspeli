@@ -8179,6 +8179,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: e73b955d80193c544a18ffd41928574a, type: 2}
   selectedBaitIndex: 0
   currentBait: {fileID: 0}
+  inputActions: {fileID: -944628639613478452, guid: 289c1b55c9541489481df5cc06664110, type: 3}
 --- !u!20 &4381237741469090673
 Camera:
   m_ObjectHideFlags: 0
