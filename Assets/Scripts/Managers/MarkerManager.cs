@@ -30,8 +30,7 @@ public class MarkerManager : MonoBehaviour
 
     public void InitializeMarkers()
     {
-        if(apiURL != null)
-            StartCoroutine(FetchCompanies());
+        StartCoroutine(FetchCompanies());
         StartCoroutine(DelayedMarkerGeneration(1f));
     }
 
