@@ -98,7 +98,7 @@ public class MarkerManager : MonoBehaviour
         else
         {
             string json = request.downloadHandler.text;
-            Debug.Log("Raw JSON: " + json);
+            //Debug.Log("Raw JSON: " + json);
             YritysApiResponse vastaus = JsonUtility.FromJson<YritysApiResponse>(json);
 
             foreach (var yritys in vastaus.results)
@@ -111,7 +111,7 @@ public class MarkerManager : MonoBehaviour
 
                 cityCompanies = vastaus.results.ToList();
 
-                Debug.Log($"🔹 {yritys.nimi ?? "(no name)"} - {yritys.kunta ?? "(no municipality)"}");
+                //Debug.Log($"🔹 {yritys.nimi ?? "(no name)"} - {yritys.kunta ?? "(no municipality)"}");
             }
         }
     }
