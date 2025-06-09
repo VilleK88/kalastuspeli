@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
 
 public class MapController : MonoBehaviour, IDragHandler, IBeginDragHandler
 {
@@ -18,6 +19,21 @@ public class MapController : MonoBehaviour, IDragHandler, IBeginDragHandler
     public float minScale = 0.3f;
     public float maxScale = 1f;
 
+    [Header("Input Actions")]
+    [SerializeField] InputActionAsset inputActions;
+    InputAction moveAction;
+
+    void OnEnable()
+    {
+        inputActions.FindActionMap("Player").Enable();
+        moveAction = InputSystem.actions.FindAction("Player/Move");
+    }
+
+    void OnDisable()
+    {
+        inputActions.FindActionMap("Player").Disable();
+    }
+
     void Update()
     {
         HandleMouseZoom();
@@ -27,7 +43,7 @@ public class MapController : MonoBehaviour, IDragHandler, IBeginDragHandler
 
     void HandleMouseZoom()
     {
-        float scroll = Input.GetAxis("Mouse ScrollWheel");
+        float scroll = Mouse.current.scroll.ReadValue().y * 0.1f;
         if (Mathf.Abs(scroll) > 0.001f)
         {
             Vector2 screenPoint = Input.mousePosition;
@@ -37,20 +53,27 @@ public class MapController : MonoBehaviour, IDragHandler, IBeginDragHandler
 
     void HandleTouchZoom()
     {
-        if(Input.touchCount == 2)
-        {
-            Touch touch0 = Input.GetTouch(0);
-            Touch touch1 = Input.GetTouch(1);
+        if (Touchscreen.current == null || Touchscreen.current.touches.Count < 2)
+            return;
 
-            Vector2 prevMid = (touch0.position - touch0.deltaPosition + touch1.position - touch1.deltaPosition) / 2f;
-            Vector2 currMid = (touch0.position + touch1.position) / 2f;
+        var touches = Touchscreen.current.touches;
 
-            float prevDist = Vector2.Distance(touch0.position - touch0.deltaPosition, touch1.position - touch1.deltaPosition);
-            float currDist = Vector2.Distance(touch0.position, touch1.position);
-            float delta = currDist - prevDist;
+        if (!touches[0].isInProgress || !touches[1].isInProgress)
+            return;
 
-            Zoom(delta * zoomSpeed * Time.deltaTime, currMid);
-        }
+        Vector2 touch0Prev = touches[0].position.ReadValue() - touches[0].delta.ReadValue();
+        Vector2 touch1Prev = touches[1].position.ReadValue() - touches[1].delta.ReadValue();
+
+        Vector2 prevMid = (touch0Prev + touch1Prev) / 2f;
+        Vector2 currMid = (touches[0].position.ReadValue() + touches[1].position.ReadValue() / 2f);
+
+
+        float prevDist = Vector2.Distance(touch0Prev, touch1Prev);
+        float currDist = Vector2.Distance(touches[0].position.ReadValue(), touches[1].position.ReadValue());
+
+        float delta = currDist - prevDist;
+
+        Zoom(delta * zoomSpeed * Time.deltaTime, currMid);
     }
 
     void Zoom(float amount, Vector2 screenPoint)
@@ -90,7 +113,7 @@ public class MapController : MonoBehaviour, IDragHandler, IBeginDragHandler
 
     void HandleKeyboardMovement()
     {
-        Vector2 input = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+        Vector2 input = moveAction.ReadValue<Vector2>();
         if (input == Vector2.zero)
             return;
 

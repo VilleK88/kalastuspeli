@@ -991,6 +991,7 @@ MonoBehaviour:
   zoomSpeed: 0.1
   minScale: 0.3
   maxScale: 1
+  inputActions: {fileID: -944628639613478452, guid: 289c1b55c9541489481df5cc06664110, type: 3}
 --- !u!1 &801222522
 GameObject:
   m_ObjectHideFlags: 0
