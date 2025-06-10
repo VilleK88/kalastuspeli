@@ -1,6 +1,5 @@
 using UnityEngine;
 using UnityEngine.AI;
-using Unity.AI.Navigation;
 using System.Collections;
 using UnityEngine.EventSystems;
 using System.Collections.Generic;
@@ -37,10 +36,9 @@ public class MouseManager : MonoBehaviour
 
     [SerializeField] GameObject[] playerObjects;
     GameObject activePlayerObject;
-    [SerializeField] Transform player;
+    [SerializeField] GameObject player;
     Animator playerAnim;
     NavMeshAgent agent;
-    [SerializeField] NavMeshSurface surface;
     public float moveSpeed = 5f;
     public float rotationSpeed = 10f;
     private Vector3? targetPosition = null;
@@ -65,9 +63,7 @@ public class MouseManager : MonoBehaviour
 
     void Start()
     {
-        InitializePlayerGameObject();
-        surface.GetComponent<NavMeshSurface>();
-        StartCoroutine(DelayedAiInitialization(0.6f));
+        StartCoroutine(DelayedPlayerInitialization(0.5f));
         layerMask = ~(1 << LayerMask.NameToLayer("Player"));
     }
 
@@ -135,7 +131,7 @@ public class MouseManager : MonoBehaviour
         if(agent.velocity.sqrMagnitude > 0.01f)
         {
             Quaternion lookRotation = Quaternion.LookRotation(agent.velocity.normalized);
-            player.rotation = Quaternion.Slerp(player.rotation, lookRotation, Time.deltaTime * rotationSpeed);
+            player.transform.rotation = Quaternion.Slerp(player.transform.rotation, lookRotation, Time.deltaTime * rotationSpeed);
             playerAnim.SetBool("Walk", true);
         }
     }
@@ -147,19 +143,6 @@ public class MouseManager : MonoBehaviour
         if (!agent.pathPending && agent.hasPath)
             agent.ResetPath();
         AudioManager.Instance.StopFootstepsSound();
-    }
-
-    IEnumerator DelayedAiInitialization(float time)
-    {
-        yield return new WaitForSeconds(time);
-        agent = player.GetComponent<NavMeshAgent>();
-        surface.BuildNavMesh();
-        MarkerManager.Instance.InitializeMarkers();
-    }
-
-    bool isPointerOverUIObject()
-    {
-        return IsPointerOverUIObject(Input.mousePosition);
     }
 
     bool IsPointerOverUIObject(Vector2 screenPosition)
@@ -177,20 +160,6 @@ public class MouseManager : MonoBehaviour
         }
 
         return false;
-
-        /*PointerEventData eventData = new PointerEventData(EventSystem.current);
-        eventData.position = Input.mousePosition;
-
-        List<RaycastResult> results = new List<RaycastResult>();
-        EventSystem.current.RaycastAll(eventData, results);
-
-        foreach (RaycastResult result in results)
-        {
-            if (result.gameObject.GetComponent<UnityEngine.UI.Button>() != null)
-                return true;
-        }
-
-        return false;*/
     }
 
     bool IsMarkerInfoPanelOpen()
@@ -243,6 +212,7 @@ public class MouseManager : MonoBehaviour
 
     void InitializePlayerGameObject()
     {
+        player.SetActive(true);
         if (GameManager.Instance != null)
         {
             PlayerCharacter character = GameManager.Instance.character;
@@ -258,6 +228,13 @@ public class MouseManager : MonoBehaviour
                 }
             }
         }
+        agent = player.GetComponent<NavMeshAgent>();
+    }
+
+    IEnumerator DelayedPlayerInitialization(float time)
+    {
+        yield return new WaitForSeconds(time);
+        InitializePlayerGameObject();
     }
 
     void FindCastPointAndFishingLine()

@@ -40,23 +40,6 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    /*private void Start()
-    {
-        LoadingUI.Instance.Show();
-        StartCoroutine(FakeProgressTest());
-    }*/
-
-    IEnumerator FakeProgressTest()
-    {
-        float p = 0f;
-        while(p < 1f)
-        {
-            p += Time.deltaTime * 0.25f;
-            LoadingUI.Instance.UpdateProgress(p);
-            yield return null;
-        }
-    }
-
     public void SetCity(City cityToGo)
     {
         city = cityToGo;
