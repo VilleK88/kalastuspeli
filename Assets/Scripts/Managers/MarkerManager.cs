@@ -21,8 +21,9 @@ public class MarkerManager : MonoBehaviour
     #endregion
 
     [SerializeField] GameObject markerPrefab;
-    public int markerCount = 9;
+    public int markerCount = 30;
     public float areaSize = 1000f;
+    public int currentCount = 0;
 
     [Header("Company Parameters")]
     public string apiURL;
@@ -37,29 +38,76 @@ public class MarkerManager : MonoBehaviour
     IEnumerator DelayedMarkerGeneration(float time)
     {
         yield return new WaitForSeconds(time);
+        GenerateMarkers();
+    }
+
+    void GenerateMarkers()
+    {
+        List<GameObject> gridObjectList = GetGridList(currentCount);
 
         for (int i = 0; i < markerCount; i++)
         {
-            Vector3 randomPoint = GetRandomPointOnNavMesh(transform.position, areaSize);
+            /*Vector3 randomPoint = GetRandomPointOnNavMesh(transform.position, areaSize);
             if (randomPoint != Vector3.zero)
             {
-                GameObject prefabInstance = Instantiate(markerPrefab, randomPoint, Quaternion.identity);
-                Marker marker = prefabInstance.GetComponent<Marker>();
+                CreateMarker(randomPoint);
+            }*/
 
-                int industryCount = System.Enum.GetValues(typeof(IndustryType)).Length;
-                int randomIndex = Random.Range(0, industryCount);
+            if(gridObjectList.Count > 0)
+            {
+                int randomIndex = Random.Range(0, gridObjectList.Count);
+                GameObject gridObject = gridObjectList[randomIndex];
+                GridPrefab gridPrefab = gridObject.GetComponent<GridPrefab>();
+                gridPrefab.markerCount += 1;
+                Vector3 randomPoint = GetRandomPointOnNavMesh(gridObject.transform.position, 50f);
+                CreateMarker(randomPoint);
+                gridObjectList.RemoveAt(randomIndex);
+                Debug.Log("Gridobject count: " + gridObjectList.Count);
+            }
+            else
+            {
+                Debug.Log("Get new list");
+                currentCount += 1;
+                gridObjectList = GetGridList(currentCount);
+            }
 
-                IndustryType randomIndustry = (IndustryType)System.Enum.GetValues(typeof(IndustryType)).GetValue(randomIndex);
-                marker.industryType = randomIndustry;
+        }
+    }
 
-                if(cityCompanies != null)
-                {
-                    if(cityCompanies.Count > 0)
-                    {
-                        int randomI = Random.Range(0, cityCompanies.Count);
-                        marker.yritys = cityCompanies[randomI];
-                    }
-                }
+    List<GameObject> GetGridList(int count)
+    {
+        List<GameObject> gridObjectList = new List<GameObject>();
+        for(int i = 0; i < GridManager.Instance.grid.Count; i++)
+        {
+            GameObject gridObject = GridManager.Instance.grid[i];
+            GridPrefab gridPrefab = gridObject.GetComponent<GridPrefab>();
+            if(gridPrefab.markerCount == count)
+            {
+                gridObjectList.Add(gridObject);
+            }
+        }
+        //Debug.Log("Return grid list: " + gridObjectList);
+        return gridObjectList;
+    }
+
+    void CreateMarker(Vector3 randomPoint)
+    {
+        GameObject prefabInstance = Instantiate(markerPrefab, randomPoint, Quaternion.identity);
+        prefabInstance.transform.parent = Instance.transform;
+        Marker marker = prefabInstance.GetComponent<Marker>();
+
+        int industryCount = System.Enum.GetValues(typeof(IndustryType)).Length;
+        int randomIndex = Random.Range(0, industryCount);
+
+        IndustryType randomIndustry = (IndustryType)System.Enum.GetValues(typeof(IndustryType)).GetValue(randomIndex);
+        marker.industryType = randomIndustry;
+
+        if (cityCompanies != null)
+        {
+            if (cityCompanies.Count > 0)
+            {
+                int randomI = Random.Range(0, cityCompanies.Count);
+                marker.yritys = cityCompanies[randomI];
             }
         }
     }

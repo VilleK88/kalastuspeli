@@ -9,7 +9,7 @@ public class Interact : MonoBehaviour
         if(marker != null)
         {
             marker.EnableSFX();
-            Debug.Log("Entered marker area: " + marker.gameObject.name);
+            //Debug.Log("Entered marker area: " + marker.gameObject.name);
         }
     }
 
@@ -19,7 +19,7 @@ public class Interact : MonoBehaviour
         if(marker != null)
         {
             marker.DisableSFX();
-            Debug.Log("Exited marker area: " + marker.gameObject.name);
+            //Debug.Log("Exited marker area: " + marker.gameObject.name);
         }
     }
 }
