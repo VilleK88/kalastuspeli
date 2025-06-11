@@ -47,20 +47,14 @@ public class MarkerManager : MonoBehaviour
 
         for (int i = 0; i < markerCount; i++)
         {
-            /*Vector3 randomPoint = GetRandomPointOnNavMesh(transform.position, areaSize);
-            if (randomPoint != Vector3.zero)
-            {
-                CreateMarker(randomPoint);
-            }*/
-
             if(gridObjectList.Count > 0)
             {
                 int randomIndex = Random.Range(0, gridObjectList.Count);
                 GameObject gridObject = gridObjectList[randomIndex];
                 GridPrefab gridPrefab = gridObject.GetComponent<GridPrefab>();
                 gridPrefab.markerCount += 1;
-                Vector3 randomPoint = GetRandomPointOnNavMesh(gridObject.transform.position, 50f);
-                CreateMarker(randomPoint);
+                Vector3 randomPoint = GetRandomPointInGridCell(gridObject, 1.25f);
+                CreateMarker(randomPoint, gridObject.transform);
                 gridObjectList.RemoveAt(randomIndex);
                 Debug.Log("Gridobject count: " + gridObjectList.Count);
             }
@@ -86,14 +80,15 @@ public class MarkerManager : MonoBehaviour
                 gridObjectList.Add(gridObject);
             }
         }
-        //Debug.Log("Return grid list: " + gridObjectList);
+
         return gridObjectList;
     }
 
-    void CreateMarker(Vector3 randomPoint)
+    void CreateMarker(Vector3 randomPoint, Transform parentObject)
     {
         GameObject prefabInstance = Instantiate(markerPrefab, randomPoint, Quaternion.identity);
-        prefabInstance.transform.parent = Instance.transform;
+        //prefabInstance.transform.parent = Instance.transform;
+        prefabInstance.transform.parent = parentObject;
         Marker marker = prefabInstance.GetComponent<Marker>();
 
         int industryCount = System.Enum.GetValues(typeof(IndustryType)).Length;
@@ -112,20 +107,39 @@ public class MarkerManager : MonoBehaviour
         }
     }
 
-    Vector3 GetRandomPointOnNavMesh(Vector3 center, float range)
+    Vector3 GetRandomChildCell(GameObject gridObject)
     {
-        for (int i = 0; i < 30; i++)
+        List<GameObject> cellsInGrid = new List<GameObject>();
+        for(int i = 0; i < gridObject.transform.childCount; i++)
         {
-            Vector3 randomPos = center + new Vector3(
-                Random.Range(-range, range),
-                0,
-                Random.Range(-range, range));
+            GameObject cell = gridObject.transform.GetChild(i).gameObject;
+            if (cell.transform.childCount == 0)
+                cellsInGrid.Add(cell);
+        }
 
-            if (NavMesh.SamplePosition(randomPos, out NavMeshHit hit, 2f, NavMesh.AllAreas))
+        int randomIndex = Random.Range(0, cellsInGrid.Count);
+
+        return cellsInGrid[randomIndex].transform.position;
+    }
+
+    Vector3 GetRandomPointInGridCell(GameObject gridObject, float cellSize)
+    {
+        Vector3 gridCenter = GetRandomChildCell(gridObject);
+
+        float half = cellSize / 2;
+
+        for(int i = 0; i < 30; i++)
+        {
+            float offsetX = Random.Range(-half, half);
+            float offsetZ = Random.Range(-half, half);
+
+            Vector3 randomPosition = new Vector3(gridCenter.x + offsetX, gridCenter.y, gridCenter.z + offsetZ);
+
+            if (NavMesh.SamplePosition(randomPosition, out NavMeshHit hit, 1, NavMesh.AllAreas))
                 return hit.position;
         }
 
-        return Vector3.zero;
+        return gridCenter;
     }
 
     IEnumerator FetchCompanies()

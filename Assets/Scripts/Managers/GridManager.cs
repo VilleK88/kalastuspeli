@@ -19,14 +19,13 @@ public class GridManager : MonoBehaviour
 
     [SerializeField] GameObject parentObject;
     [SerializeField] GameObject gridPrefab;
-    //public GameObject[] grid;
     public List<GameObject> grid = new List<GameObject>();
     int gridAmount = 5;
     int transformStartX = -165;
     int startingValueX;
     int transformStartZ = 175;
     int addition = 100;
-    int gridHeight = 0;
+    int gridHeight = 10;
 
     private void Start()
     {
