@@ -36,10 +36,10 @@ public class GridPrefab : MonoBehaviour
             GameObject gridPrefabInstance = Instantiate(gridCubePrefab, currentPosition, Quaternion.identity);
             grid.Add(gridPrefabInstance);
             gridPrefabInstance.transform.parent = parentObject.transform;
-            gridPrefabInstance.transform.localScale = new Vector3(0.125f, 1, 0.125f);
+            gridPrefabInstance.transform.localScale = new Vector3(0.125f, 15, 0.125f);
             GridCubePrefab gridCubePrefabInstance = gridPrefabInstance.GetComponent<GridCubePrefab>();
             gridCubePrefabInstance.scaleX = 12.5f;
-            gridCubePrefabInstance.scaleY = 1;
+            gridCubePrefabInstance.scaleY = 15;
             gridCubePrefabInstance.scaleZ = 12.5f;
             transformStartX += addition;
         }

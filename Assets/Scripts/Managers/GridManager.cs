@@ -25,7 +25,7 @@ public class GridManager : MonoBehaviour
     int startingValueX;
     int transformStartZ = 175;
     int addition = 100;
-    int gridHeight = 10;
+    int gridHeight = 8;
 
     private void Start()
     {
