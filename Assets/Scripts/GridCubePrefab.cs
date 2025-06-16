@@ -13,9 +13,9 @@ public class GridCubePrefab : MonoBehaviour
         if (Physics.CheckBox(center, checkAreaSize / 2, Quaternion.identity, obstacleMask))
             gameObject.SetActive(false);
     }
-    private void OnDrawGizmos()
+    /*private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireCube(transform.position, new Vector3(scaleX, scaleY, scaleZ));
-    }
+    }*/
 }

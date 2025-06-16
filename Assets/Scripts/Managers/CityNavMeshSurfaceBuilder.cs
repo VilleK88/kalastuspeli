@@ -19,9 +19,16 @@ public class CityNavMeshSurfaceBuilder : MonoBehaviour
 
     private void Start()
     {
+        Debug.Log("CityNavMeshSurfaceBuilder started");
         surface.BuildNavMesh();
+        Debug.Log("NavMesh surface built");
         if(npcs != null)
             npcs.SetActive(true);
         MarkerManager.Instance.InitializeMarkers();
+    }
+
+    public Vector3 GetNavMeshSurfaceCenter()
+    {
+        return surface.center;
     }
 }

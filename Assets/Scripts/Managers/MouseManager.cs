@@ -5,6 +5,7 @@ using UnityEngine.EventSystems;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine.InputSystem;
+using Unity.AI.Navigation;
 
 public class MouseManager : MonoBehaviour
 {
@@ -63,7 +64,7 @@ public class MouseManager : MonoBehaviour
 
     void Start()
     {
-        StartCoroutine(DelayedPlayerInitialization(0.5f));
+        StartCoroutine(DelayedPlayerInitialization(1f)); // 0.5f
         layerMask = ~(1 << LayerMask.NameToLayer("Player"));
     }
 
@@ -212,8 +213,35 @@ public class MouseManager : MonoBehaviour
         agent.transform.LookAt(direction);
     }
 
+    void SetPlayerPosition()
+    {
+        if(CityNavMeshSurfaceBuilder.Instance != null)
+        {
+            Vector3 surfaceCenter = CityNavMeshSurfaceBuilder.Instance.GetNavMeshSurfaceCenter();
+            if(surfaceCenter != null)
+            {
+                int mask = ~LayerMask.GetMask("Player");
+                RaycastHit hit;
+                if(Physics.Raycast(surfaceCenter, Vector3.down, out hit, 500f, mask))
+                {
+                    NavMeshHit navHit;
+                    if(NavMesh.SamplePosition(hit.point, out navHit, 2f, NavMesh.AllAreas))
+                    {
+                        player.transform.position = navHit.position;
+                        agent = player.GetComponent<NavMeshAgent>();
+                        agent.Warp(navHit.position);
+                        Debug.Log("Set player position");
+                    }
+                }
+            }
+        }
+        else 
+            Debug.LogError("CityNavMeshSurfaceBuilder not found");
+    }
+
     void InitializePlayerGameObject()
     {
+        SetPlayerPosition();
         player.SetActive(true);
         if (GameManager.Instance != null)
         {
@@ -230,7 +258,7 @@ public class MouseManager : MonoBehaviour
                 }
             }
         }
-        agent = player.GetComponent<NavMeshAgent>();
+        //agent = player.GetComponent<NavMeshAgent>();
     }
 
     IEnumerator DelayedPlayerInitialization(float time)
