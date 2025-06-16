@@ -1187,72 +1187,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3251572426130692313, guid: ab45caca33be639458cf615b686856be, type: 3}
   m_PrefabInstance: {fileID: 767925479}
   m_PrefabAsset: {fileID: 0}
---- !u!1001 &1133948252
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 1997762171}
-    m_Modifications:
-    - target: {fileID: 2120468787470389576, guid: f0f1f3d5f6fde5848906fb9ad8538046, type: 3}
-      propertyPath: m_Name
-      value: Helsinki
-      objectReference: {fileID: 0}
-    - target: {fileID: 2120468787470389576, guid: f0f1f3d5f6fde5848906fb9ad8538046, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8032411857749687956, guid: f0f1f3d5f6fde5848906fb9ad8538046, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8032411857749687956, guid: f0f1f3d5f6fde5848906fb9ad8538046, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8032411857749687956, guid: f0f1f3d5f6fde5848906fb9ad8538046, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8032411857749687956, guid: f0f1f3d5f6fde5848906fb9ad8538046, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8032411857749687956, guid: f0f1f3d5f6fde5848906fb9ad8538046, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8032411857749687956, guid: f0f1f3d5f6fde5848906fb9ad8538046, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8032411857749687956, guid: f0f1f3d5f6fde5848906fb9ad8538046, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8032411857749687956, guid: f0f1f3d5f6fde5848906fb9ad8538046, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8032411857749687956, guid: f0f1f3d5f6fde5848906fb9ad8538046, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8032411857749687956, guid: f0f1f3d5f6fde5848906fb9ad8538046, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: f0f1f3d5f6fde5848906fb9ad8538046, type: 3}
---- !u!4 &1133948253 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 8032411857749687956, guid: f0f1f3d5f6fde5848906fb9ad8538046, type: 3}
-  m_PrefabInstance: {fileID: 1133948252}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1247682772
 GameObject:
   m_ObjectHideFlags: 0
@@ -1881,7 +1815,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6267673026705911810}
-  - {fileID: 1133948253}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2020230473
@@ -2382,6 +2315,67 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
+--- !u!1001 &4438951127061782497
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2259782189229549232, guid: f0f1f3d5f6fde5848906fb9ad8538046, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2259782189229549232, guid: f0f1f3d5f6fde5848906fb9ad8538046, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2259782189229549232, guid: f0f1f3d5f6fde5848906fb9ad8538046, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2259782189229549232, guid: f0f1f3d5f6fde5848906fb9ad8538046, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2259782189229549232, guid: f0f1f3d5f6fde5848906fb9ad8538046, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2259782189229549232, guid: f0f1f3d5f6fde5848906fb9ad8538046, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2259782189229549232, guid: f0f1f3d5f6fde5848906fb9ad8538046, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2259782189229549232, guid: f0f1f3d5f6fde5848906fb9ad8538046, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2259782189229549232, guid: f0f1f3d5f6fde5848906fb9ad8538046, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2259782189229549232, guid: f0f1f3d5f6fde5848906fb9ad8538046, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3930051184760281440, guid: f0f1f3d5f6fde5848906fb9ad8538046, type: 3}
+      propertyPath: m_Name
+      value: Helsinki
+      objectReference: {fileID: 0}
+    - target: {fileID: 3930051184760281440, guid: f0f1f3d5f6fde5848906fb9ad8538046, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: f0f1f3d5f6fde5848906fb9ad8538046, type: 3}
 --- !u!195 &5147760954582335207
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -3040,3 +3034,4 @@ SceneRoots:
   - {fileID: 709602157}
   - {fileID: 140068611}
   - {fileID: 8620604329186841514}
+  - {fileID: 4438951127061782497}
