@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class GridManager : MonoBehaviour
 {
@@ -24,7 +25,35 @@ public class GridManager : MonoBehaviour
 
     Vector3 originPosition;
 
-    private void Start()
+    /*private void Start()
+    {
+        SetGridManagerPosition();
+        originPosition = GetCenterOfChildren(CityNavMeshSurfaceBuilder.Instance.transform);
+        InitializeGrid();
+    }*/
+
+    public void SetGridManagerPosition()
+    {
+        if(CityNavMeshSurfaceBuilder.Instance != null)
+        {
+            Debug.Log("NavMeshSurfaceBuilder found");
+            Vector3 surfaceCenter = CityNavMeshSurfaceBuilder.Instance.GetNavMeshSurfaceCenter();
+            if(surfaceCenter != null)
+            {
+                RaycastHit hit;
+                if(Physics.Raycast(surfaceCenter, Vector3.down, out hit, 500f))
+                {
+                    NavMeshHit navHit;
+                    if(NavMesh.SamplePosition(hit.point, out navHit, 2f, NavMesh.AllAreas))
+                    {
+                        transform.position = navHit.position;
+                    }
+                }
+            }
+        }
+    }
+
+    public void PublicInitializeGrid()
     {
         originPosition = GetCenterOfChildren(CityNavMeshSurfaceBuilder.Instance.transform);
         InitializeGrid();
@@ -55,7 +84,7 @@ public class GridManager : MonoBehaviour
                 float offsetX = -halfGridSize + x * addition;
                 float offsetZ = -halfGridSize + z * addition;
 
-                Vector3 currentPosition = new Vector3(originPosition.x + offsetX, gridHeight, originPosition.z + offsetZ);
+                Vector3 currentPosition = new Vector3(originPosition.x + offsetX, parentObject.transform.position.y + gridHeight, originPosition.z + offsetZ);
 
                 GameObject gridPrefabInstance = Instantiate(gridPrefab, currentPosition, Quaternion.identity);
                 grid.Add(gridPrefabInstance);
