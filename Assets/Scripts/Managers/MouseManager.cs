@@ -166,6 +166,7 @@ public class MouseManager : MonoBehaviour
     {
         if (MarkerUI.Instance.open)
             return true;
+
         return false;
     }
 
@@ -173,6 +174,7 @@ public class MouseManager : MonoBehaviour
     {
         if (hitObject.layer == LayerMask.NameToLayer("Marker"))
             return true;
+
         return false;
     }
 

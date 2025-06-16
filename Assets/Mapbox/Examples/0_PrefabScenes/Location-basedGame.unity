@@ -2369,25 +2369,19 @@ MonoBehaviour:
         - admin
         - aeroway
         - airport_label
-        - barrier_line
         - building
-        - country_label
         - housenum_label
         - landuse
         - landuse_overlay
-        - marine_label
         - motorway_junction
-        - mountain_peak_label
+        - natural_label
         - place_label
         - poi_label
-        - rail_station_label
         - road
-        - road_label
-        - state_label
+        - structure
+        - transit_stop_label
         - water
-        - water_label
         - waterway
-        - waterway_label
       _sourceType: -2
       sourceOptions:
         isActive: 1
@@ -3831,7 +3825,7 @@ MonoBehaviour:
   _updateInterval: 1
   _sendEvent: 0
   _latitudeLongitude:
-  - 60.17092751486488, 24.93975569198646
+  - 65.00973571077397, 25.468092125415865
   _heading: 112
 --- !u!1 &5734771646140246953
 GameObject:
