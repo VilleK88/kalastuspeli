@@ -222,7 +222,7 @@ public class MouseManager : MonoBehaviour
             {
                 int mask = ~LayerMask.GetMask("Player");
                 RaycastHit hit;
-                if(Physics.Raycast(surfaceCenter, Vector3.down, out hit, 500f, mask))
+                if(Physics.Raycast(surfaceCenter + Vector3.up * 100f, Vector3.down, out hit, 1000f, mask))
                 {
                     NavMeshHit navHit;
                     if(NavMesh.SamplePosition(hit.point, out navHit, 2f, NavMesh.AllAreas))
