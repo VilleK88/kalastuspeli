@@ -51,7 +51,6 @@ public class MarkerUI : MonoBehaviour
     public void CloseMarkerInfoPanel()
     {
         transparentBG.SetActive(false);
-        //open = false;
         MouseManager.Instance.StopFishing();
         StartCoroutine(DelayedBooleanValueChange(1f));
     }

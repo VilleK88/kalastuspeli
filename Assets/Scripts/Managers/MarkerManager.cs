@@ -56,11 +56,9 @@ public class MarkerManager : MonoBehaviour
                 Vector3 randomPoint = GetRandomPointInGridCell(gridObject, 1.25f);
                 CreateMarker(randomPoint, gridObject.transform);
                 gridObjectList.RemoveAt(randomIndex);
-                //Debug.Log("Gridobject count: " + gridObjectList.Count);
             }
             else
             {
-                //Debug.Log("Get new list");
                 currentCount += 1;
                 gridObjectList = GetGridList(currentCount);
             }

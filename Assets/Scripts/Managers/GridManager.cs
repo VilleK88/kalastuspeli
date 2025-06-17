@@ -25,13 +25,6 @@ public class GridManager : MonoBehaviour
 
     Vector3 originPosition;
 
-    /*private void Start()
-    {
-        SetGridManagerPosition();
-        originPosition = GetCenterOfChildren(CityNavMeshSurfaceBuilder.Instance.transform);
-        InitializeGrid();
-    }*/
-
     public void SetGridManagerPosition()
     {
         if(CityNavMeshSurfaceBuilder.Instance != null)
