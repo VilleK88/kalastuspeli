@@ -1403,7 +1403,7 @@ MonoBehaviour:
   markerCount: 30
   areaSize: 1000
   currentCount: 0
-  apiURL: 
+  apiURL: https://harjoittelupaikka.fi/api.php
 --- !u!1 &1355743504
 GameObject:
   m_ObjectHideFlags: 0

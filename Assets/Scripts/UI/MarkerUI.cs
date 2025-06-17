@@ -1,8 +1,9 @@
-using UnityEngine;
-using TMPro;
 using System.Collections;
 using System.Runtime.InteropServices;
+using TMPro;
 using Unity.VisualScripting;
+using UnityEngine;
+using UnityEngine.Networking;
 
 public class MarkerUI : MonoBehaviour
 {
@@ -75,17 +76,8 @@ public class MarkerUI : MonoBehaviour
             OpenAddressInGoogleMaps("Karamalmin kampus");
     }
 
-#if UNITY_WEBGL && !UNITY_EDITOR
-    [DllImport("__Internal")]
-        private static extern void OpenGoogleMaps(string address);
-#endif
-
     public void OpenAddressInGoogleMaps(string address)
     {
-#if UNITY_WEBGL && !UNITY_EDITOR
-        OpenGoogleMaps(address);
-#else
-        Debug.Log("Google Maps opening is only supported in WebGL builds.");
-#endif
+        Application.OpenURL("https://www.google.com/maps/search/?api=1&query=" + UnityWebRequest.EscapeURL(address));
     }
 }
