@@ -728,6 +728,67 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 272910398}
   m_CullTransparentMesh: 1
+--- !u!1001 &303194947
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2259782189229549232, guid: f0f1f3d5f6fde5848906fb9ad8538046, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2259782189229549232, guid: f0f1f3d5f6fde5848906fb9ad8538046, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2259782189229549232, guid: f0f1f3d5f6fde5848906fb9ad8538046, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2259782189229549232, guid: f0f1f3d5f6fde5848906fb9ad8538046, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2259782189229549232, guid: f0f1f3d5f6fde5848906fb9ad8538046, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2259782189229549232, guid: f0f1f3d5f6fde5848906fb9ad8538046, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2259782189229549232, guid: f0f1f3d5f6fde5848906fb9ad8538046, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2259782189229549232, guid: f0f1f3d5f6fde5848906fb9ad8538046, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2259782189229549232, guid: f0f1f3d5f6fde5848906fb9ad8538046, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2259782189229549232, guid: f0f1f3d5f6fde5848906fb9ad8538046, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3930051184760281440, guid: f0f1f3d5f6fde5848906fb9ad8538046, type: 3}
+      propertyPath: m_Name
+      value: Helsinki
+      objectReference: {fileID: 0}
+    - target: {fileID: 3930051184760281440, guid: f0f1f3d5f6fde5848906fb9ad8538046, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: f0f1f3d5f6fde5848906fb9ad8538046, type: 3}
 --- !u!1001 &401151578
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1403,7 +1464,7 @@ MonoBehaviour:
   markerCount: 30
   areaSize: 1000
   currentCount: 0
-  apiURL: https://harjoittelupaikka.fi/api.php
+  apiURL: 
 --- !u!1 &1355743504
 GameObject:
   m_ObjectHideFlags: 0
@@ -2911,3 +2972,4 @@ SceneRoots:
   - {fileID: 1997762171}
   - {fileID: 709602157}
   - {fileID: 140068611}
+  - {fileID: 303194947}
