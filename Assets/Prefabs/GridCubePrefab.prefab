@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4886770351880594373}
   - component: {fileID: 8013476136805103594}
   - component: {fileID: 4913150546428603041}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: GridCubePrefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}

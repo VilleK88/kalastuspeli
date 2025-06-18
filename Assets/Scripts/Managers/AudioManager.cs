@@ -9,7 +9,10 @@ public class AudioManager : MonoBehaviour
     private void Awake()
     {
         if (Instance == null)
+        {
             Instance = this;
+            LoadMuteState();
+        }
         else
             Destroy(Instance);
     }
@@ -17,6 +20,8 @@ public class AudioManager : MonoBehaviour
 
     public Sound[] musicSounds, sfxSounds;
     public AudioSource musicSource, sfxSource, footstepsSource;
+    const string MutePrefKey = "AudioMuted";
+    public bool IsMuted { get; private set; } = false;
 
     private void Start()
     {
@@ -62,5 +67,25 @@ public class AudioManager : MonoBehaviour
     public void StopFootstepsSound()
     {
         footstepsSource.Stop();
+    }
+
+    public void SetMuted(bool muted)
+    {
+        IsMuted = muted;
+
+        musicSource.mute = muted;
+        sfxSource.mute = muted;
+        footstepsSource.mute = muted;
+
+        PlayerPrefs.SetInt(MutePrefKey, muted ? 1 : 0);
+        PlayerPrefs.Save();
+    }
+
+    void LoadMuteState()
+    {
+        IsMuted = PlayerPrefs.GetInt(MutePrefKey, 0) == 1;
+        musicSource.mute = IsMuted;
+        sfxSource.mute = IsMuted;
+        footstepsSource.mute = IsMuted;
     }
 }
