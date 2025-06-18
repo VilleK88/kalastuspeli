@@ -46,12 +46,6 @@ public class GridManager : MonoBehaviour
         }
     }
 
-    public void PublicInitializeGrid()
-    {
-        originPosition = GetCenterOfChildren(CityNavMeshSurfaceBuilder.Instance.transform);
-        InitializeGrid();
-    }
-
     Vector3 GetCenterOfChildren(Transform parent)
     {
         Vector3 total = Vector3.zero;
@@ -66,8 +60,10 @@ public class GridManager : MonoBehaviour
         return total / count;
     }
 
-    void InitializeGrid()
+    public void InitializeGrid()
     {
+        originPosition = GetCenterOfChildren(CityNavMeshSurfaceBuilder.Instance.transform);
+
         float halfGridSize = (gridAmount - 1) * addition / 2;
 
         for(int z = 0; z < gridAmount; z++)

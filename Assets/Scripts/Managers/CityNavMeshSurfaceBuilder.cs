@@ -20,13 +20,16 @@ public class CityNavMeshSurfaceBuilder : MonoBehaviour
     private void Start()
     {
         surface.BuildNavMesh();
+
         if(npcs != null)
             npcs.SetActive(true);
-        if(GridManager.Instance != null)
+
+        if (GridManager.Instance != null)
         {
             GridManager.Instance.SetGridManagerPosition();
-            GridManager.Instance.PublicInitializeGrid();
+            GridManager.Instance.InitializeGrid();
         }
+
         MarkerManager.Instance.InitializeMarkers();
     }
 
