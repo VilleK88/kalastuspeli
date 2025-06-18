@@ -1465,6 +1465,7 @@ MonoBehaviour:
   areaSize: 1000
   currentCount: 0
   apiURL: 
+  apiConfig: {fileID: 11400000, guid: 13dfb27a68e490f468c4ba9774be1b17, type: 2}
 --- !u!1 &1355743504
 GameObject:
   m_ObjectHideFlags: 0

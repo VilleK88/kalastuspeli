@@ -27,10 +27,13 @@ public class MarkerManager : MonoBehaviour
 
     [Header("Company Parameters")]
     public string apiURL;
+    [SerializeField] ApiConfig apiConfig;
     List<Yritys> cityCompanies = new List<Yritys>();
 
     public void InitializeMarkers()
     {
+        if(apiConfig != null)
+            apiURL = apiConfig.apiURL.ToString();
         StartCoroutine(FetchCompanies());
         StartCoroutine(DelayedMarkerGeneration(1f));
     }
