@@ -1,23 +1,23 @@
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class AudioButton : MonoBehaviour
+public class AudioButton : MonoBehaviour, IPointerClickHandler
 {
-    [SerializeField] Toggle toggle;
-    [SerializeField] GameObject checkmark;
+    [SerializeField] Image checkmarkImg;
 
     private void Start()
     {
-        toggle.onValueChanged.AddListener(SetAudioMuted);
-        bool audioOn = !AudioManager.Instance.IsMuted;
-        toggle.isOn = audioOn;
-        checkmark.SetActive(audioOn);
+        bool isMuted = AudioManager.Instance.IsMuted;
+        checkmarkImg.enabled = isMuted;
     }
 
-    void SetAudioMuted(bool isOn)
+    public void OnPointerClick(PointerEventData eventData)
     {
-        bool muted = !isOn;
-        AudioManager.Instance.SetMuted(muted);
-        checkmark.SetActive(muted);
+        bool isCurrentlyMuted = AudioManager.Instance.IsMuted;
+        bool newMuteState = !isCurrentlyMuted;
+
+        AudioManager.Instance.SetMuted(newMuteState);
+        checkmarkImg.enabled = newMuteState;
     }
 }
