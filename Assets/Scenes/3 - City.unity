@@ -2362,6 +2362,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2968885794318405367}
     m_Modifications:
+    - target: {fileID: 709373302125359943, guid: 117fbac3b14226e4e821e03deeb70774, type: 3}
+      propertyPath: sceneName
+      value: 2 - Map
+      objectReference: {fileID: 0}
     - target: {fileID: 1207260682117159843, guid: 117fbac3b14226e4e821e03deeb70774, type: 3}
       propertyPath: m_Name
       value: UI_Buttons

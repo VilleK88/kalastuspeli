@@ -55,7 +55,7 @@ MonoBehaviour:
     m_Right: 0
     m_Top: 0
     m_Bottom: 0
-  m_ChildAlignment: 4
+  m_ChildAlignment: 0
   m_Spacing: 0
   m_ChildForceExpandWidth: 1
   m_ChildForceExpandHeight: 1
@@ -72,6 +72,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 5226002181735205821}
     m_Modifications:
+    - target: {fileID: 3312841511506727546, guid: 994297bdef77312488b1b4818f5b20ca, type: 3}
+      propertyPath: sceneName
+      value: 1 - Menu
+      objectReference: {fileID: 0}
     - target: {fileID: 3969132502475185623, guid: 994297bdef77312488b1b4818f5b20ca, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5

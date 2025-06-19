@@ -1852,45 +1852,9 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 801222526}
     m_Modifications:
-    - target: {fileID: 709373302125359943, guid: 117fbac3b14226e4e821e03deeb70774, type: 3}
-      propertyPath: sceneName
-      value: 1 - Menu
-      objectReference: {fileID: 0}
     - target: {fileID: 1207260682117159843, guid: 117fbac3b14226e4e821e03deeb70774, type: 3}
       propertyPath: m_Name
       value: UI_Buttons
-      objectReference: {fileID: 0}
-    - target: {fileID: 1383889816498257130, guid: 117fbac3b14226e4e821e03deeb70774, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1383889816498257130, guid: 117fbac3b14226e4e821e03deeb70774, type: 3}
-      propertyPath: m_AnchorMin.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1383889816498257130, guid: 117fbac3b14226e4e821e03deeb70774, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1383889816498257130, guid: 117fbac3b14226e4e821e03deeb70774, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2883697881814929425, guid: 117fbac3b14226e4e821e03deeb70774, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2883697881814929425, guid: 117fbac3b14226e4e821e03deeb70774, type: 3}
-      propertyPath: m_AnchorMin.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2883697881814929425, guid: 117fbac3b14226e4e821e03deeb70774, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2883697881814929425, guid: 117fbac3b14226e4e821e03deeb70774, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5226002181735205821, guid: 117fbac3b14226e4e821e03deeb70774, type: 3}
       propertyPath: m_Pivot.x
