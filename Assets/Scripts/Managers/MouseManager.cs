@@ -294,17 +294,17 @@ public class MouseManager : MonoBehaviour
         Rigidbody rb = lure.GetComponent<Rigidbody>();
         currentBait = lure;
 
-        //Vector3 direction = (markerTransform.position - castPoint.position).normalized;
-        //float distance = Vector3.Distance(markerTransform.position, castPoint.position);
-        //float forceMultiplier = 3;
-        //float adjustedForce = distance * forceMultiplier;
-        //rb.AddForce(direction * adjustedForce, ForceMode.Impulse);
+        Vector3 direction = (markerTransform.position - castPoint.position).normalized;
+        float distance = Vector3.Distance(markerTransform.position, castPoint.position);
+        float forceMultiplier = 3;
+        float adjustedForce = distance * forceMultiplier;
+        rb.AddForce(direction * adjustedForce, ForceMode.Impulse);
 
-        Vector3 start = castPoint.position;
-        Vector3 end = markerTransform.position;
-        float height = 3f;
-        Vector3 velocity = CalculateArcVelocity(start, end, height);
-        rb.linearVelocity = velocity;
+        //Vector3 start = castPoint.position;
+        //Vector3 end = markerTransform.position;
+        //float height = 3f;
+        //Vector3 velocity = CalculateArcVelocity(start, end, height);
+        //rb.linearVelocity = velocity;
     }
 
     IEnumerator DelayedThrowLure(float time, Transform markerTransform)
