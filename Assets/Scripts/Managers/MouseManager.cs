@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine.InputSystem;
 using Unity.AI.Navigation;
+using UnityEditor.ShaderGraph.Internal;
 
 public class MouseManager : MonoBehaviour
 {
@@ -83,6 +84,9 @@ public class MouseManager : MonoBehaviour
                     Walk();
             }
         }
+
+        if(fishingLine != null)
+            UpdateFishingLine();
     }
 
     void OnClickPerformed(InputAction.CallbackContext context)
@@ -186,17 +190,19 @@ public class MouseManager : MonoBehaviour
             marker.StartInteraction();
     }
 
-    public void StartFishing()
+    public void StartFishing(Transform markerTransform)
     {
         fishing = true;
         playerAnim.SetTrigger("Fishing_Cast");
         playerAnim.SetBool("Fishing_Idle", true);
         //ThrowLure();
+        StartCoroutine(DelayedThrowLure(1.5f, markerTransform));
     }
 
     public void StopFishing()
     {
         playerAnim.SetBool("Fishing_Idle", false);
+        Destroy(currentBait);
         StartCoroutine(DelayedStopFishing(1f));
     }
 
@@ -211,6 +217,7 @@ public class MouseManager : MonoBehaviour
         Vector3 targetPosition = markerTransform.position;
         Vector3 direction = new Vector3(targetPosition.x, agent.transform.position.y, targetPosition.z);
         agent.transform.LookAt(direction);
+        StartFishing(markerTransform);
     }
 
     void SetPlayerPosition()
@@ -254,7 +261,7 @@ public class MouseManager : MonoBehaviour
                     activePlayerObject = playerObjects[i];
                     activePlayerObject.SetActive(true);
                     playerAnim = activePlayerObject.GetComponent<Animator>();
-                    //FindCastPointAndFishingLine();
+                    FindCastPointAndFishingLine();
                 }
             }
         }
@@ -280,12 +287,60 @@ public class MouseManager : MonoBehaviour
         fishingLine = castPoint.GetComponentInChildren<LineRenderer>();
     }
 
-    void ThrowLure()
+    void ThrowLure(Transform markerTransform)
     {
         GameObject prefabToThrow = baits[selectedBaitIndex].prefab;
         GameObject lure = Instantiate(prefabToThrow, castPoint.position, castPoint.rotation);
         Rigidbody rb = lure.GetComponent<Rigidbody>();
         currentBait = lure;
-        rb.AddForce(castPoint.forward * currentForce, ForceMode.Impulse);
+
+        //Vector3 direction = (markerTransform.position - castPoint.position).normalized;
+        //float distance = Vector3.Distance(markerTransform.position, castPoint.position);
+        //float forceMultiplier = 3;
+        //float adjustedForce = distance * forceMultiplier;
+        //rb.AddForce(direction * adjustedForce, ForceMode.Impulse);
+
+        Vector3 start = castPoint.position;
+        Vector3 end = markerTransform.position;
+        float height = 3f;
+        Vector3 velocity = CalculateArcVelocity(start, end, height);
+        rb.linearVelocity = velocity;
+    }
+
+    IEnumerator DelayedThrowLure(float time, Transform markerTransform)
+    {
+        yield return new WaitForSeconds(time);
+        ThrowLure(markerTransform);
+    }
+
+    void UpdateFishingLine()
+    {
+        if (currentBait != null)
+        {
+            fishingLine.enabled = true;
+            fishingLine.SetPosition(0, castPoint.position);
+            fishingLine.SetPosition(1, currentBait.transform.position);
+        }
+        else
+        {
+            fishingLine.enabled = false;
+        }
+    }
+
+    Vector3 CalculateArcVelocity(Vector3 start, Vector3 end, float arcHeight)
+    {
+        float gravity = Mathf.Abs(Physics.gravity.y);
+        Vector3 direction = new Vector3(end.x - start.x, 0, end.z - start.z);
+        float horizontalDistance = direction.magnitude;
+        float verticalOffset = start.y - end.y;
+
+        float timeUp = Mathf.Sqrt(2 * arcHeight / gravity);
+        float timeDown = Mathf.Sqrt(2 * (arcHeight + verticalOffset) / gravity);
+        float totalTime = timeUp + timeDown;
+
+        Vector3 horizontalVelocity = direction / totalTime;
+        float verticalVelocity = gravity * timeUp;
+
+        return horizontalVelocity + Vector3.up * verticalVelocity;
     }
 }

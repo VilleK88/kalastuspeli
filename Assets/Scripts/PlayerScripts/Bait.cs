@@ -1,11 +1,12 @@
-using Unity.Hierarchy;
 using UnityEngine;
 
 public class Bait : MonoBehaviour
 {
+    [SerializeField] Rigidbody rb;
+
     private void OnCollisionEnter(Collision collision)
     {
-        if(collision.gameObject.layer == LayerMask.NameToLayer("Employer"))
+        /*if(collision.gameObject.layer == LayerMask.NameToLayer("Employer"))
         {
             Transform hips = collision.transform.root.Find("mixamorig:Hips");
             if(hips != null)
@@ -24,6 +25,16 @@ public class Bait : MonoBehaviour
                     FixedJoint joint = gameObject.AddComponent<FixedJoint>();
                     joint.connectedBody = hipsRb;
                 }
+            }
+        }*/
+        if(collision.gameObject.layer == LayerMask.NameToLayer("Marker"))
+        {
+            if(rb != null)
+            {
+                rb.angularVelocity = Vector3.zero;
+                rb.angularVelocity = Vector3.zero;
+                rb.isKinematic = true;
+                rb.useGravity = false;
             }
         }
     }
