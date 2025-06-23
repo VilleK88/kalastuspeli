@@ -6,7 +6,6 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine.InputSystem;
 using Unity.AI.Navigation;
-using UnityEditor.ShaderGraph.Internal;
 
 public class MouseManager : MonoBehaviour
 {
@@ -91,6 +90,14 @@ public class MouseManager : MonoBehaviour
 
     void OnClickPerformed(InputAction.CallbackContext context)
     {
+        Vector2 screenPosition;
+
+        if (Touchscreen.current != null && Touchscreen.current.primaryTouch.press.isPressed)
+            screenPosition = Touchscreen.current.primaryTouch.position.ReadValue();
+        else if (Mouse.current != null)
+            screenPosition = Mouse.current.position.ReadValue();
+        else return;
+
         if (IsMarkerInfoPanelOpen() && fishing)
             return;
 
@@ -99,10 +106,10 @@ public class MouseManager : MonoBehaviour
 
         lastClickTime = Time.time;
 
-        if (IsPointerOverUIObject(Mouse.current.position.ReadValue()))
+        if (IsPointerOverUIObject(screenPosition))
             return;
 
-        Ray ray = Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());
+        Ray ray = Camera.main.ScreenPointToRay(screenPosition);
         RaycastHit hit;
 
         if (Physics.Raycast(ray, out hit, Mathf.Infinity, layerMask))
