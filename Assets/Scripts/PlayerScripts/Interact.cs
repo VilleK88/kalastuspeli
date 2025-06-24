@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.EventSystems;
 
 public class Interact : MonoBehaviour
 {
@@ -7,19 +6,13 @@ public class Interact : MonoBehaviour
     {
         Marker marker = other.GetComponentInParent<Marker>();
         if(marker != null)
-        {
             marker.EnableSFX();
-            //Debug.Log("Entered marker area: " + marker.gameObject.name);
-        }
     }
 
     private void OnTriggerExit(Collider other)
     {
         Marker marker = other.GetComponentInParent<Marker>();
         if(marker != null)
-        {
             marker.DisableSFX();
-            //Debug.Log("Exited marker area: " + marker.gameObject.name);
-        }
     }
 }
