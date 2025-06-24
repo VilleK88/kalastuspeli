@@ -5,8 +5,6 @@ using UnityEngine.EventSystems;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine.InputSystem;
-using Unity.AI.Navigation;
-using System.IO;
 
 public class MouseManager : MonoBehaviour
 {
@@ -53,14 +51,11 @@ public class MouseManager : MonoBehaviour
     public bool fishing;
     [SerializeField] Transform castPoint;
     [SerializeField] LineRenderer fishingLine;
-
     public BaitSO[] baits;
     public int selectedBaitIndex = 0;
-
     public GameObject currentBait;
-    float launchSpeed = 90f;
+    float launchSpeed = 90;
     float heightSpeedFactor = 2;
-    float throwUpwardForce = 5f;
     [SerializeField] GameObject projectilePrefab;
 
     [Header("Trajectory Display")]
@@ -97,17 +92,6 @@ public class MouseManager : MonoBehaviour
 
         if(fishingLine != null)
             UpdateFishingLine();
-
-
-        if(Input.GetKeyDown(KeyCode.T))
-        {
-            LaunchProjectile();
-        }
-
-        if(Input.GetKeyDown(KeyCode.R))
-        {
-            DrawTrajectory();
-        }
     }
 
     void OnClickPerformed(InputAction.CallbackContext context)
@@ -225,7 +209,6 @@ public class MouseManager : MonoBehaviour
         playerAnim.SetTrigger("Fishing_Cast");
         playerAnim.SetBool("Fishing_Idle", true);
 
-        //StartCoroutine(DelayedThrowLure(1.5f, markerTransform));
         StartCoroutine(DelayedLaunchProjectile(1.5f, markerTransform));
     }
 
@@ -318,8 +301,6 @@ public class MouseManager : MonoBehaviour
 
     IEnumerator DelayedLaunchProjectile(float duration, Transform markerTransform)
     {
-        //LaunchProjectile(markerTransform);
-
         float elapsed = 0;
 
         while(elapsed < duration)
@@ -341,7 +322,6 @@ public class MouseManager : MonoBehaviour
     {
         Vector3 launchPosition = activePlayerObject.transform.position + Vector3.up * 10;
         Transform childObject = markerTransform.GetChild(1);
-        //Vector3 direction = (childObject.position - launchPosition).normalized;
         Renderer childRenderer = childObject.GetComponent<Renderer>();
         Vector3 targetCenter = childRenderer != null ? childRenderer.bounds.center : childObject.position;
         Vector3 direction = (targetCenter - launchPosition).normalized;
@@ -352,12 +332,11 @@ public class MouseManager : MonoBehaviour
         if (heightDifference > 0)
             adjustedSpeed += heightDifference * heightSpeedFactor;
 
-        //GameObject projectileInstance = Instantiate(projectilePrefab, launchPosition, activePlayerObject.transform.rotation);
-        GameObject projectileInstance = Instantiate(projectilePrefab, launchPosition, Quaternion.LookRotation(direction));
+        GameObject prefabToThrow = baits[selectedBaitIndex].prefab;
+        GameObject projectileInstance = Instantiate(prefabToThrow, launchPosition, Quaternion.LookRotation(direction));
         Rigidbody projectileRB = projectileInstance.GetComponent<Rigidbody>();
-        //projectileRB.linearVelocity = launchSpeed * activePlayerObject.transform.forward;
-        //projectileRB.linearVelocity = direction * launchSpeed;
         projectileRB.linearVelocity = direction * adjustedSpeed;
+        currentBait = projectileInstance;
     }
 
     void DrawTrajectory(Transform markerTransform)
@@ -366,7 +345,6 @@ public class MouseManager : MonoBehaviour
         Transform childObject = markerTransform.GetChild(1);
         Vector3 direction = (childObject.position - launchPosition).normalized;
         Vector3 startVelocity = direction * launchSpeed;
-        //Vector3 startVelocity = launchSpeed * activePlayerObject.transform.forward;
         lineRenderer.positionCount = linePoints;
         float time = 0;
         for (int i = 0; i < linePoints; i++)
@@ -379,53 +357,6 @@ public class MouseManager : MonoBehaviour
             lineRenderer.SetPosition(i, launchPosition + point);
             time += timeIntervalinPoints;
         }
-    }
-
-    void LaunchProjectile()
-    {
-        Vector3 launchPosition = activePlayerObject.transform.position + Vector3.up * 10;
-        GameObject projectileInstance = Instantiate(projectilePrefab, launchPosition, activePlayerObject.transform.rotation);
-        Rigidbody projectileRB = projectileInstance.GetComponent<Rigidbody>();
-        projectileRB.linearVelocity = launchSpeed * activePlayerObject.transform.forward;
-    }
-
-    void DrawTrajectory()
-    {
-        Vector3 launchPosition = activePlayerObject.transform.position + Vector3.up * 10;
-        Vector3 origin = launchPosition;
-        Vector3 startVelocity = launchSpeed * activePlayerObject.transform.forward;
-        lineRenderer.positionCount = linePoints;
-        float time = 0;
-        for(int i = 0; i < linePoints; i++)
-        {
-            // s = u*t + 1/2*g*t*t
-            var x = (startVelocity.x * time) + (Physics.gravity.x / 2 * time * time);
-            var y = (startVelocity.y * time) + (Physics.gravity.y / 2 * time * time);
-            var z = (startVelocity.z * time) + (Physics.gravity.z / 2 * time * time);
-            Vector3 point = new Vector3(x, y, z);
-            lineRenderer.SetPosition(i, origin + point);
-            time += timeIntervalinPoints;
-        }
-    }
-
-    void ThrowLure(Transform markerTransform)
-    {
-        GameObject prefabToThrow = baits[selectedBaitIndex].prefab;
-        GameObject lure = Instantiate(prefabToThrow, castPoint.position, castPoint.rotation);
-        Rigidbody rb = lure.GetComponent<Rigidbody>();
-        currentBait = lure;
-
-        //Vector3 direction = (markerTransform.position - castPoint.position + transform.up * throwUpwardForce).normalized;
-        //float distance = Vector3.Distance(markerTransform.position, castPoint.position);
-        //float forceMultiplier = 3;
-        //float adjustedForce = distance * forceMultiplier;
-        //rb.AddForce(direction * adjustedForce, ForceMode.Impulse);
-    }
-
-    IEnumerator DelayedThrowLure(float time, Transform markerTransform)
-    {
-        yield return new WaitForSeconds(time);
-        ThrowLure(markerTransform);
     }
 
     void UpdateFishingLine()
