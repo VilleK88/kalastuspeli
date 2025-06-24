@@ -209,7 +209,7 @@ public class MouseManager : MonoBehaviour
         playerAnim.SetTrigger("Fishing_Cast");
         playerAnim.SetBool("Fishing_Idle", true);
 
-        StartCoroutine(DelayedLaunchProjectile(1.5f, markerTransform));
+        StartCoroutine(DelayedLaunchProjectile(1.7f, markerTransform));
     }
 
     public void StopFishing()
@@ -301,7 +301,7 @@ public class MouseManager : MonoBehaviour
 
     IEnumerator DelayedLaunchProjectile(float duration, Transform markerTransform)
     {
-        float elapsed = 0;
+        /*float elapsed = 0;
 
         while(elapsed < duration)
         {
@@ -312,10 +312,9 @@ public class MouseManager : MonoBehaviour
             yield return new WaitForSeconds(0.5f);
 
             elapsed += 0.5f;
-        }
-
+        }*/
+        yield return new WaitForSeconds(duration);
         LaunchProjectile(markerTransform);
-        Debug.Log("Finished looping.");
     }
 
     void LaunchProjectile(Transform markerTransform)
