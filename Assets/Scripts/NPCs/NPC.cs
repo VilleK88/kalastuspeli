@@ -10,6 +10,8 @@ public class NPC : MonoBehaviour
     [HideInInspector] public INPCState currentState;
     [HideInInspector] public IdleState idleState;
     [HideInInspector] public WalkState walkState;
+    [HideInInspector] public PhoneState phoneState;
+    [HideInInspector] public YawnState yawnState;
 
     [Header("NPC Parameters")]
     [SerializeField] NPCType npcType;
@@ -30,6 +32,8 @@ public class NPC : MonoBehaviour
     {
         idleState = new IdleState(this);
         walkState = new WalkState(this);
+        phoneState = new PhoneState(this);
+        yawnState = new YawnState(this);
     }
 
     private void Start()
@@ -78,6 +82,8 @@ public class NPC : MonoBehaviour
     IEnumerator DelayedStartingStateChange(float time)
     {
         yield return new WaitForSeconds(time);
+        agent.SetDestination(currentWaypoint.transform.position);
+        anim.SetBool("Walk", true);
         currentState = walkState;
     }
 }

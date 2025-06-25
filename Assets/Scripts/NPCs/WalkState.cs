@@ -29,6 +29,8 @@ public class WalkState : INPCState
                         {
                             thisNPC.previousWaypoint = thisNPC.currentWaypoint;
                             thisNPC.currentWaypoint = newWaypoint;
+                            ToIdleState();
+                            //SelectRandomIdleState();
                             break;
                         }
                     }
@@ -36,36 +38,47 @@ public class WalkState : INPCState
                 else
                 {
                     thisNPC.currentWaypoint = thisNPC.previousWaypoint;
+                    ToIdleState();
+                    //SelectRandomIdleState();
                 }
             }
-            thisNPC.anim.SetBool("Walk", false);
-            waypointCounter = 0;
-        }
-
-        if(waypointCounter < wayPointMaxTime)
-        {
-            waypointCounter += Time.deltaTime;
-        }
-        else
-        {
-            thisNPC.agent.SetDestination(thisNPC.currentWaypoint.transform.position);
-            thisNPC.anim.SetBool("Walk", true);
-            //Debug.Log("Distance to waypoint: " + distanceToWaypoint);
         }
     }
 
-    public void ToWanderState()
+    public void ToWalkState()
     {
     }
 
     public void ToIdleState()
     {
+        thisNPC.anim.SetBool("Walk", false);
         thisNPC.currentState = thisNPC.idleState;
+    }
+
+    public void ToPhoneState()
+    {
+        thisNPC.anim.SetBool("Walk", false);
+        thisNPC.anim.SetBool("Phone", true);
+        thisNPC.currentState = thisNPC.phoneState;
+    }
+
+    public void ToYawnState()
+    {
+
     }
 
     GameObject SelectRandomWaypoint(GameObject[] waypoints)
     {
         int randomIndex = Random.Range(0, waypoints.Length);
         return waypoints[randomIndex];
+    }
+
+    void SelectRandomIdleState()
+    {
+        int randomIndex = Random.Range(0, 2);
+        if (randomIndex == 0)
+            ToIdleState();
+        else if (randomIndex == 1)
+            ToPhoneState();
     }
 }
