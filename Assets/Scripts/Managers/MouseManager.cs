@@ -41,6 +41,7 @@ public class MouseManager : MonoBehaviour
     NavMeshAgent agent;
     public float moveSpeed = 5f;
     public float rotationSpeed = 10f;
+    public bool walking;
     private Vector3? targetPosition = null;
     int layerMask;
 
@@ -151,6 +152,7 @@ public class MouseManager : MonoBehaviour
             Quaternion lookRotation = Quaternion.LookRotation(agent.velocity.normalized);
             player.transform.rotation = Quaternion.Slerp(player.transform.rotation, lookRotation, Time.deltaTime * rotationSpeed);
             playerAnim.SetBool("Walk", true);
+            walking = true;
         }
     }
 
@@ -161,6 +163,7 @@ public class MouseManager : MonoBehaviour
         if (!agent.pathPending && agent.hasPath)
             agent.ResetPath();
         AudioManager.Instance.StopFootstepsSound();
+        walking = false;
     }
 
     bool IsPointerOverUIObject(Vector2 screenPosition)
@@ -209,7 +212,7 @@ public class MouseManager : MonoBehaviour
         playerAnim.SetTrigger("Fishing_Cast");
         playerAnim.SetBool("Fishing_Idle", true);
 
-        StartCoroutine(DelayedLaunchProjectile(1.7f, markerTransform));
+        StartCoroutine(DelayedLaunchProjectile(1.9f, markerTransform));
     }
 
     public void StopFishing()

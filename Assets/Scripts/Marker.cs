@@ -60,17 +60,12 @@ public class Marker : MonoBehaviour
 
     public void StartInteraction()
     {
-        if(canInteract)
+        if(canInteract && !MouseManager.Instance.walking)
         {
             MouseManager.Instance.LookAtMarker(transform);
             if(yritys != null)
                 MarkerUI.Instance.UpdateCompanyParameters(yritys);
             MarkerUI.Instance.OpenMarkerInfoPanel();
-            Debug.Log("canInteract: " + canInteract);
-        }
-        else
-        {
-            Debug.Log("canInteract: " + canInteract);
         }
     }
 }

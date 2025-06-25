@@ -2409,6 +2409,7 @@ MonoBehaviour:
   player: {fileID: 7782236441140023087}
   moveSpeed: 10
   rotationSpeed: 20
+  walking: 0
   fishing: 0
   castPoint: {fileID: 0}
   fishingLine: {fileID: 0}
