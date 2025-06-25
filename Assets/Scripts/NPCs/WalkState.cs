@@ -1,12 +1,12 @@
 using UnityEngine;
 
-public class WanderState : INPCState
+public class WalkState : INPCState
 {
     NPC thisNPC;
     float waypointCounter = 2f;
     float wayPointMaxTime = 2f;
 
-    public WanderState(NPC npc)
+    public WalkState(NPC npc)
     {
         this.thisNPC = npc;
     }

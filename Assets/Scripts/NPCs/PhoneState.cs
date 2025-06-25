@@ -1,10 +1,10 @@
 using UnityEngine;
 
-public class IdleState : INPCState
+public class PhoneState : INPCState
 {
     NPC thisNPC;
 
-    public IdleState(NPC npc)
+    public PhoneState(NPC npc)
     {
         this.thisNPC = npc;
     }

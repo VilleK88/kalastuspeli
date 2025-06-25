@@ -9,7 +9,7 @@ public class NPC : MonoBehaviour
     [Header("Behaviour States")]
     [HideInInspector] public INPCState currentState;
     [HideInInspector] public IdleState idleState;
-    [HideInInspector] public WanderState wanderState;
+    [HideInInspector] public WalkState walkState;
 
     [Header("NPC Parameters")]
     [SerializeField] NPCType npcType;
@@ -29,7 +29,7 @@ public class NPC : MonoBehaviour
     private void Awake()
     {
         idleState = new IdleState(this);
-        wanderState = new WanderState(this);
+        walkState = new WalkState(this);
     }
 
     private void Start()
@@ -72,12 +72,12 @@ public class NPC : MonoBehaviour
 
         previousWaypoint = currentWaypoint;
         agent.speed = walkSpeed;
-        currentState = wanderState;
+        currentState = walkState;
     }
 
     IEnumerator DelayedStartingStateChange(float time)
     {
         yield return new WaitForSeconds(time);
-        currentState = wanderState;
+        currentState = walkState;
     }
 }
