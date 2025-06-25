@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3d1f9a97b885a0c4db8dd5f2146648c9, type: 3}
-  m_Name: TheBoss
+  m_Name: Adventurous_Explorer
   m_EditorClassIdentifier: 
   npcType: 0
-  displayName: Pomo
-  finnishName: The Boss
-  npcPrefab: {fileID: 2936099305477449271, guid: 5b6450da5efa28443aa61173fa78638b, type: 3}
+  displayName: Adventurous_Explorer
+  finnishName: Tutkimusmatkailija
+  npcPrefab: {fileID: 4497020059963586868, guid: 7a8e8f37be343144da607f5b3785366c, type: 3}

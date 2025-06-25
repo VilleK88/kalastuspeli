@@ -1,6 +1,7 @@
 public enum NPCType
 {
-    TheBoss,
-    Test1,
-    Test2,
+    Adventurous_Explorer,
+    Businessman_Bob,
+    Businessman_in_Blue_s,
+    Wrestler_in_Purple_Ou,
 }
