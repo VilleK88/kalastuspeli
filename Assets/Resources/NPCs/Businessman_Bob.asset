@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3d1f9a97b885a0c4db8dd5f2146648c9, type: 3}
-  m_Name: Adventurous_Explorer
+  m_Name: Businessman_Bob
   m_EditorClassIdentifier: 
-  npcType: 0
-  displayName: Adventurous Explorer
-  finnishName: Tutkimusmatkailija
-  npcPrefab: {fileID: 4497020059963586868, guid: 7a8e8f37be343144da607f5b3785366c, type: 3}
+  npcType: 1
+  displayName: Businessman Bob
+  finnishName: Liikemies Bob
+  npcPrefab: {fileID: 1205910829620777730, guid: 878ab940a3eda8b48a60ca00e2d1e581, type: 3}
