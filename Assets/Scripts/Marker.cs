@@ -10,6 +10,8 @@ public class Marker : MonoBehaviour
 
     [Header("Company Parameters")]
     public Yritys yritys;
+    [Header("JobListing Parameters")]
+    public JobListing jobListing;
 
     private void Start()
     {
@@ -65,6 +67,8 @@ public class Marker : MonoBehaviour
             MouseManager.Instance.LookAtMarker(transform);
             if(yritys != null)
                 MarkerUI.Instance.UpdateCompanyParameters(yritys);
+            if (jobListing != null)
+                MarkerUI.Instance.UpdateJobListingParameters(jobListing);
             MarkerUI.Instance.OpenMarkerInfoPanel();
         }
     }

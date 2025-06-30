@@ -26,11 +26,12 @@ public class MarkerManager : MonoBehaviour
     public int currentCount = 0;
 
     [Header("Company Parameters")]
-    public string jobListing_ApiURL;
-    public string companyInfo_ApiURL;
+    [HideInInspector] public string jobListing_ApiURL;
+    [HideInInspector] public string companyInfo_ApiURL;
     [SerializeField] ApiConfig jobListingApiConfig;
     [SerializeField] ApiConfig companyInfoApiConfig;
     List<Yritys> cityCompanies = new List<Yritys>();
+    List<JobListing> cityJobListings = new List<JobListing>();
 
     public void InitializeMarkers()
     {
@@ -110,6 +111,15 @@ public class MarkerManager : MonoBehaviour
                 marker.yritys = cityCompanies[randomI];
             }
         }
+
+        if(cityJobListings != null)
+        {
+            if(cityJobListings.Count > 0)
+            {
+                int randomI = Random.Range(0, cityJobListings.Count);
+                marker.jobListing = cityJobListings[randomI];
+            }
+        }
     }
 
     Vector3 GetRandomChildCell(GameObject gridObject)
@@ -176,7 +186,9 @@ public class MarkerManager : MonoBehaviour
                     continue;
                 }
 
-                Debug.Log($"Job: {job.title}, description: {job.description}\n, salary: {job.salary}, summary: {job.summary}");
+                cityJobListings = response.results.ToList();
+
+                //Debug.Log($"Job: {job.title}, description: {job.description}\n, salary: {job.salary}, summary: {job.summary}");
             }
         }
     }
