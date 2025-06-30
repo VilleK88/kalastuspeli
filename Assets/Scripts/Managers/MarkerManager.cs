@@ -26,14 +26,19 @@ public class MarkerManager : MonoBehaviour
     public int currentCount = 0;
 
     [Header("Company Parameters")]
-    public string apiURL;
-    [SerializeField] ApiConfig apiConfig;
+    public string jobListing_ApiURL;
+    public string companyInfo_ApiURL;
+    [SerializeField] ApiConfig jobListingApiConfig;
+    [SerializeField] ApiConfig companyInfoApiConfig;
     List<Yritys> cityCompanies = new List<Yritys>();
 
     public void InitializeMarkers()
     {
-        if(apiConfig != null)
-            apiURL = apiConfig.apiURL.ToString();
+        if(jobListingApiConfig != null)
+            jobListing_ApiURL = jobListingApiConfig.apiURL.ToString();
+        if (companyInfoApiConfig != null)
+            companyInfo_ApiURL = companyInfoApiConfig.apiURL.ToString();
+        StartCoroutine(FetchJobs());
         StartCoroutine(FetchCompanies());
         StartCoroutine(DelayedMarkerGeneration(1f));
     }
@@ -88,7 +93,6 @@ public class MarkerManager : MonoBehaviour
     void CreateMarker(Vector3 randomPoint, Transform parentObject)
     {
         GameObject prefabInstance = Instantiate(markerPrefab, randomPoint, Quaternion.identity);
-        //prefabInstance.transform.parent = Instance.transform;
         prefabInstance.transform.parent = parentObject;
         Marker marker = prefabInstance.GetComponent<Marker>();
 
@@ -143,10 +147,10 @@ public class MarkerManager : MonoBehaviour
         return gridCenter;
     }
 
-    IEnumerator FetchCompanies()
+    IEnumerator FetchJobs()
     {
         string currentCity = GameManager.Instance.city.ToString();
-        string URL = apiURL + "?kunta=" + currentCity.ToUpper();
+        string URL = jobListing_ApiURL + "?kunta=" + currentCity.ToUpper();
         UnityWebRequest request = UnityWebRequest.Get(URL);
         yield return request.SendWebRequest();
 
@@ -162,11 +166,44 @@ public class MarkerManager : MonoBehaviour
         {
             string json = request.downloadHandler.text;
             //Debug.Log("Raw JSON: " + json);
+            JobListingResponse response = JsonUtility.FromJson<JobListingResponse>(json);
+
+            foreach (var job in response.results)
+            {
+                if(job == null)
+                {
+                    Debug.LogWarning("Null job found!");
+                    continue;
+                }
+
+                Debug.Log($"Job: {job.title}, description: {job.description}\n, salary: {job.salary}, summary: {job.summary}");
+            }
+        }
+    }
+
+    IEnumerator FetchCompanies()
+    {
+        string currentCity = GameManager.Instance.city.ToString();
+        string URL = companyInfo_ApiURL + "?kunta=" + currentCity.ToUpper();
+        UnityWebRequest request = UnityWebRequest.Get(URL);
+        yield return request.SendWebRequest();
+
+#if UNITY_2020_1_OR_NEWER
+        if (request.result != UnityWebRequest.Result.Success)
+#else
+        if (request.isNetworkError || request.isHttpError)
+#endif
+        {
+            Debug.LogError("API-virhe: " + request.error);
+        }
+        else
+        {
+            string json = request.downloadHandler.text;
             YritysApiResponse vastaus = JsonUtility.FromJson<YritysApiResponse>(json);
 
             foreach (var yritys in vastaus.results)
             {
-                if(yritys == null)
+                if (yritys == null)
                 {
                     Debug.LogWarning("Null company found!");
                     continue;
@@ -176,6 +213,7 @@ public class MarkerManager : MonoBehaviour
 
                 //Debug.Log($"🔹 {yritys.nimi ?? "(no name)"} - {yritys.kunta ?? "(no municipality)"}");
             }
+
         }
     }
 }

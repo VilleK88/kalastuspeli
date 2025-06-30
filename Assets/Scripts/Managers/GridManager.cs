@@ -29,7 +29,6 @@ public class GridManager : MonoBehaviour
     {
         if(CityNavMeshSurfaceBuilder.Instance != null)
         {
-            Debug.Log("NavMeshSurfaceBuilder found");
             Vector3 surfaceCenter = CityNavMeshSurfaceBuilder.Instance.GetNavMeshSurfaceCenter();
             if(surfaceCenter != null)
             {

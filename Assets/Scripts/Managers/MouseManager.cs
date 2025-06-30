@@ -253,7 +253,7 @@ public class MouseManager : MonoBehaviour
                         player.transform.position = navHit.position;
                         agent = player.GetComponent<NavMeshAgent>();
                         agent.Warp(navHit.position);
-                        Debug.Log("Set player position");
+                        //Debug.Log("Set player position");
                     }
                 }
             }
@@ -294,10 +294,10 @@ public class MouseManager : MonoBehaviour
         castPoint = activePlayerObject.GetComponentsInChildren<Transform>(true)
             .FirstOrDefault(t => t.name == "castPoint");
 
-        if (castPoint == null)
+        /*if (castPoint == null)
             Debug.LogWarning("castPoint not found in player's children.");
         else
-            Debug.Log("castPoint found: " + castPoint.name);
+            Debug.Log("castPoint found: " + castPoint.name);*/
 
         fishingLine = castPoint.GetComponentInChildren<LineRenderer>();
     }

@@ -914,7 +914,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3930051184760281440, guid: f0f1f3d5f6fde5848906fb9ad8538046, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5440059117420311486, guid: f0f1f3d5f6fde5848906fb9ad8538046, type: 3}
       propertyPath: npcType
@@ -1718,8 +1718,10 @@ MonoBehaviour:
   markerCount: 30
   areaSize: 1000
   currentCount: 0
-  apiURL: 
-  apiConfig: {fileID: 11400000, guid: 13dfb27a68e490f468c4ba9774be1b17, type: 2}
+  jobListing_ApiURL: 
+  companyInfo_ApiURL: 
+  jobListingApiConfig: {fileID: 11400000, guid: 13dfb27a68e490f468c4ba9774be1b17, type: 2}
+  companyInfoApiConfig: {fileID: 11400000, guid: db9d95b41c91b3a428dd0e4c1e8b661d, type: 2}
 --- !u!1 &1355743504
 GameObject:
   m_ObjectHideFlags: 0
