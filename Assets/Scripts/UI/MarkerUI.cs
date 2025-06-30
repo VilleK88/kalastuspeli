@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Networking;
+using UnityEngine.EventSystems;
 using System.Reflection;
-using System.Globalization;
 
 public class MarkerUI : MonoBehaviour
 {
@@ -37,26 +37,8 @@ public class MarkerUI : MonoBehaviour
     [SerializeField] JobListing jobListing;
     [SerializeField] GameObject jobInfoObject;
     [SerializeField] Transform contentTransform;
-    [SerializeField] TextMeshProUGUI title;
-    [SerializeField] TextMeshProUGUI link;
-    [SerializeField] TextMeshProUGUI company;
-    [SerializeField] TextMeshProUGUI location;
-    [SerializeField] TextMeshProUGUI published;
-    [SerializeField] TextMeshProUGUI deadline;
-    [SerializeField] TextMeshProUGUI summary;
-    [SerializeField] TextMeshProUGUI[] job_types;
-    [SerializeField] TextMeshProUGUI salary_basis;
-    [SerializeField] TextMeshProUGUI salary;
-    [SerializeField] TextMeshProUGUI language;
-    [SerializeField] TextMeshProUGUI employment_type;
-    [SerializeField] TextMeshProUGUI working_hours;
-    [SerializeField] TextMeshProUGUI start_date;
-    [SerializeField] TextMeshProUGUI business_id;
-    [SerializeField] TextMeshProUGUI company_description;
-    [SerializeField] TextMeshProUGUI open_positions;
-    [SerializeField] TextMeshProUGUI application_link;
-    [SerializeField] TextMeshProUGUI locations;
-    [SerializeField] TextMeshProUGUI address;
+    [SerializeField] GameObject descriptionPopup;
+    [SerializeField] Transform descriptionPopupTransform;
 
     [SerializeField] TextMeshProUGUI textPrefab;
 
@@ -123,18 +105,58 @@ public class MarkerUI : MonoBehaviour
             string fieldName = field.Name;
             string fieldValue;
 
-            if (value == null)
-                fieldValue = "-";
-            else if (field.FieldType == typeof(string[]))
-                fieldValue = string.Join(", ", (string[])value);
-            else if (field.FieldType == typeof(Contact[]))
-                fieldValue = $"({((Contact[])value).Length} contact(s))";
-            else
-                fieldValue = value.ToString();
+            if(fieldName != "description")
+            {
+                if (value == null)
+                    fieldValue = "-";
+                else if (field.FieldType == typeof(string[]))
+                    fieldValue = string.Join(", ", (string[])value);
+                else if (field.FieldType == typeof(Contact[]))
+                    fieldValue = $"({((Contact[])value).Length} contact(s))";
+                else
+                    fieldValue = value.ToString();
 
-            TextMeshProUGUI tmp = Instantiate(textPrefab, contentTransform);
-            tmp.text = $"<b>{fieldName}:</b> {fieldValue}";
+                TextMeshProUGUI tmp = Instantiate(textPrefab, contentTransform);
+                tmp.text = $"<b>{fieldName}:</b> {fieldValue}";
+            }
+            else
+            {
+                if (value == null)
+                    fieldValue = "-";
+                else
+                    fieldValue = value.ToString();
+
+                //fieldValue = string.Join(", ", (string[])value);
+                TextMeshProUGUI tmp = Instantiate(textPrefab, contentTransform);
+                tmp.text = $"<link=\"description\"><color=#00BFFF><u>Show Description</u></color></link>";
+
+                TMP_LinkHandler handler = tmp.gameObject.AddComponent<TMP_LinkHandler>();
+                handler.OnLinkClicked = (string linkID) =>
+                {
+                    foreach (Transform child in descriptionPopupTransform)
+                    {
+                        Destroy(child.gameObject);
+                    }
+
+                    TextMeshProUGUI tmpDescription = Instantiate(textPrefab, descriptionPopupTransform);
+                    tmpDescription.text = $"<b>{fieldName}:</b> {fieldValue}";
+
+                    OpenDescriptionPopup();
+                };
+            }
         }
+    }
+
+    public void OpenDescriptionPopup()
+    {
+        jobInfoObject.SetActive(false);
+        descriptionPopup.SetActive(true);
+    }
+
+    public void CloseDescriptionPopup()
+    {
+        descriptionPopup.SetActive(false);
+        jobInfoObject.SetActive(true);
     }
 
     public void OpenGoogleMaps()
