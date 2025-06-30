@@ -160,7 +160,9 @@ public class MarkerManager : MonoBehaviour
     IEnumerator FetchJobs()
     {
         string currentCity = GameManager.Instance.city.ToString();
-        string URL = jobListing_ApiURL + "?kunta=" + currentCity.ToUpper();
+        //string URL = jobListing_ApiURL + "?kunta=" + currentCity.ToUpper();
+        string URL = jobListing_ApiURL + "?location=" + currentCity.ToUpper();
+        Debug.Log("URL: " + URL);
         UnityWebRequest request = UnityWebRequest.Get(URL);
         yield return request.SendWebRequest();
 

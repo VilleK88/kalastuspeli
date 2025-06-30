@@ -1,7 +1,10 @@
 using System.Collections;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Networking;
+using System.Reflection;
+using System.Globalization;
 
 public class MarkerUI : MonoBehaviour
 {
@@ -21,6 +24,7 @@ public class MarkerUI : MonoBehaviour
     public bool open;
 
     [Header("Company Parameters")]
+    [SerializeField] Yritys yritys;
     [SerializeField] GameObject companyInfoObject;
     [SerializeField] TextMeshProUGUI companyName;
     [SerializeField] TextMeshProUGUI businessID;
@@ -30,7 +34,9 @@ public class MarkerUI : MonoBehaviour
     [SerializeField] TextMeshProUGUI municipality;
 
     [Header("Job Listing Parameters")]
+    [SerializeField] JobListing jobListing;
     [SerializeField] GameObject jobInfoObject;
+    [SerializeField] Transform contentTransform;
     [SerializeField] TextMeshProUGUI title;
     [SerializeField] TextMeshProUGUI link;
     [SerializeField] TextMeshProUGUI company;
@@ -52,44 +58,24 @@ public class MarkerUI : MonoBehaviour
     [SerializeField] TextMeshProUGUI locations;
     [SerializeField] TextMeshProUGUI address;
 
+    [SerializeField] TextMeshProUGUI textPrefab;
+
     public void UpdateCompanyParameters(Yritys currentCompany)
     {
-        companyName.text = currentCompany.nimi ?? "-";
+        yritys = currentCompany;
+
+        /*companyName.text = currentCompany.nimi ?? "-";
         businessID.text = currentCompany.y_tunnus ?? "-";
         founded.text = currentCompany.perustettu ?? "-";
         postalAddress.text = currentCompany.postiosoite_katu ?? "-";
         postcode.text = currentCompany.postinumero ?? "-";
-        municipality.text = currentCompany.kunta ?? "-";
+        municipality.text = currentCompany.kunta ?? "-";*/
     }
 
     public void UpdateJobListingParameters(JobListing currentJob)
     {
-        title.text = currentJob.title ?? "-";
-        link.text = currentJob.link ?? "-";
-        company.text = currentJob.company ?? "-";
-        location.text = currentJob.location ?? "-";
-        published.text = currentJob.published ?? "-";
-        deadline.text = currentJob.deadline ?? "-";
-        summary.text = currentJob.summary ?? "-";
-
-        job_types = null;
-        for(int i = 0; i < currentJob.job_types.Length; i++)
-        {
-            job_types[i].text = currentJob.job_types[i];
-        }
-
-        /*salary_basis.text = currentJob.salary_basis ?? "-";
-        salary.text = currentJob.salary ?? "-";
-        language.text = currentJob.language ?? "-";
-        employment_type.text = currentJob.employement_type ?? "-";
-        working_hours.text = currentJob.working_hours ?? "-";
-        start_date.text = currentJob.start_date ?? "-";
-        business_id.text = currentJob.business_id ?? "-";
-        company_description.text = currentJob.company_description ?? "-";
-        open_positions.text = currentJob.open_positions.ToString();
-        application_link.text = currentJob.application_link ?? "-";
-        locations.text = currentJob.locations ?? "-";
-        address.text = currentJob.address ?? "-";*/
+        jobListing = currentJob;
+        OpenJobListingInfo();
     }
 
     public void OpenMarkerInfoPanel()
@@ -121,10 +107,40 @@ public class MarkerUI : MonoBehaviour
         jobInfoObject.SetActive(true);
     }
 
+    void OpenJobListingInfo()
+    {
+        foreach(Transform child in contentTransform)
+        {
+            Destroy(child.gameObject);
+        }
+
+        FieldInfo[] fields = typeof(JobListing).GetFields();
+
+        foreach(FieldInfo field in fields)
+        {
+            object value = field.GetValue(jobListing);
+
+            string fieldName = field.Name;
+            string fieldValue;
+
+            if (value == null)
+                fieldValue = "-";
+            else if (field.FieldType == typeof(string[]))
+                fieldValue = string.Join(", ", (string[])value);
+            else if (field.FieldType == typeof(Contact[]))
+                fieldValue = $"({((Contact[])value).Length} contact(s))";
+            else
+                fieldValue = value.ToString();
+
+            TextMeshProUGUI tmp = Instantiate(textPrefab, contentTransform);
+            tmp.text = $"<b>{fieldName}:</b> {fieldValue}";
+        }
+    }
+
     public void OpenGoogleMaps()
     {
-        if (postalAddress != null)
-            OpenAddressInGoogleMaps(postalAddress.text);
+        if (jobListing.address != null)
+            OpenAddressInGoogleMaps(jobListing.address);
         else
             OpenAddressInGoogleMaps("Karamalmin kampus");
     }
