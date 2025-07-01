@@ -126,7 +126,6 @@ public class MarkerUI : MonoBehaviour
                 else
                     fieldValue = value.ToString();
 
-                //fieldValue = string.Join(", ", (string[])value);
                 TextMeshProUGUI tmp = Instantiate(textPrefab, contentTransform);
                 tmp.text = $"<link=\"description\"><color=#00BFFF><u>Show Description</u></color></link>";
 
@@ -138,8 +137,11 @@ public class MarkerUI : MonoBehaviour
                         Destroy(child.gameObject);
                     }
 
+                    string formattedDescription = System.Text.RegularExpressions.Regex
+                    .Replace(fieldValue, @"(?<=[.!?])\s+", "\n");
+
                     TextMeshProUGUI tmpDescription = Instantiate(textPrefab, descriptionPopupTransform);
-                    tmpDescription.text = $"<b>{fieldName}:</b> {fieldValue}";
+                    tmpDescription.text = $"<b>{fieldName}:</b>\n{formattedDescription}";
 
                     OpenDescriptionPopup();
                 };
