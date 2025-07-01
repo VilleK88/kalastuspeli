@@ -739,12 +739,12 @@ PlayerSettings:
   webGLLinkerTarget: 1
   webGLThreadsSupport: 0
   webGLDecompressionFallback: 0
-  webGLInitialMemorySize: 32
+  webGLInitialMemorySize: 128
   webGLMaximumMemorySize: 2048
   webGLMemoryGrowthMode: 2
   webGLMemoryLinearGrowthStep: 16
   webGLMemoryGeometricGrowthStep: 0.2
-  webGLMemoryGeometricGrowthCap: 96
+  webGLMemoryGeometricGrowthCap: 192
   webGLPowerPreference: 2
   webGLWebAssemblyTable: 0
   webGLWebAssemblyBigInt: 0

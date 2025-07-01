@@ -34,6 +34,11 @@ public class MapController : MonoBehaviour, IDragHandler, IBeginDragHandler
         inputActions.FindActionMap("Player").Disable();
     }
 
+    void Start()
+    {
+        //UpdateMapBounds();
+    }
+
     void Update()
     {
         HandleMouseZoom();
@@ -124,5 +129,17 @@ public class MapController : MonoBehaviour, IDragHandler, IBeginDragHandler
         newPos.y = Mathf.Clamp(newPos.y, minPosition.y, maxPosition.y);
 
         mapRect.anchoredPosition = newPos;
+    }
+
+    void UpdateMapBounds()
+    {
+        float width = mapRect.rect.width * mapRect.localScale.x;
+        float height = mapRect.rect.height * mapRect.localScale.y;
+
+        float containerWidth = zoomContainer.rect.width;
+        float containerHeight = zoomContainer.rect.height;
+
+        minPosition = new Vector2(containerWidth - width, containerHeight - height);
+        maxPosition = Vector2.zero;
     }
 }

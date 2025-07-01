@@ -117403,7 +117403,7 @@ PrefabInstance:
     - target: {fileID: 7137753555722690849, guid: f1ee193d7c5f36c469c0054aac4b6267, type: 3}
       propertyPath: 'waypoints.Array.data[1]'
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 5007247285803082526}
     - target: {fileID: 7179514992351693986, guid: f1ee193d7c5f36c469c0054aac4b6267, type: 3}
       propertyPath: m_LocalPosition.x
       value: 148
@@ -117541,6 +117541,11 @@ Transform:
 --- !u!1 &4788628098044480443 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7837000481405109692, guid: f1ee193d7c5f36c469c0054aac4b6267, type: 3}
+  m_PrefabInstance: {fileID: 3365879455935548935}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &5007247285803082526 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7767391490841914649, guid: f1ee193d7c5f36c469c0054aac4b6267, type: 3}
   m_PrefabInstance: {fileID: 3365879455935548935}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &5789028411491814790 stripped
