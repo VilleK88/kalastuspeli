@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
@@ -95,6 +96,8 @@ public class MapController : MonoBehaviour, IDragHandler, IBeginDragHandler
 
         mapRect.localScale = new Vector3(newScale, newScale, 1f);
         mapRect.anchoredPosition = newPosition;
+
+        //UpdateMapBounds();
     }
 
     public void OnBeginDrag(PointerEventData eventData)
@@ -125,7 +128,7 @@ public class MapController : MonoBehaviour, IDragHandler, IBeginDragHandler
         Vector2 move = new Vector2(-input.x, -input.y) * keyboardSpeed * Time.deltaTime;
         Vector2 newPos = mapRect.anchoredPosition + move;
 
-        newPos.x = Mathf.Clamp(newPos.x, minPosition.y, maxPosition.x);
+        newPos.x = Mathf.Clamp(newPos.x, minPosition.x, maxPosition.x);
         newPos.y = Mathf.Clamp(newPos.y, minPosition.y, maxPosition.y);
 
         mapRect.anchoredPosition = newPos;
@@ -133,13 +136,24 @@ public class MapController : MonoBehaviour, IDragHandler, IBeginDragHandler
 
     void UpdateMapBounds()
     {
-        float width = mapRect.rect.width * mapRect.localScale.x;
-        float height = mapRect.rect.height * mapRect.localScale.y;
+        int columns = 3;
+        int rows = 5;
+
+        float cellWidth = 1024;
+        float cellHeight = 1080;
+
+        float totalWidth = columns * cellWidth;
+        float totalHeight = rows * cellHeight;
+
+        float scaledWidth = totalWidth * mapRect.localScale.x;
+        float scaledHeight = totalHeight * mapRect.localScale.y;
 
         float containerWidth = zoomContainer.rect.width;
         float containerHeight = zoomContainer.rect.height;
 
-        minPosition = new Vector2(containerWidth - width, containerHeight - height);
+        minPosition = new Vector2(
+            containerWidth - scaledWidth,
+            containerHeight - scaledHeight);
         maxPosition = Vector2.zero;
     }
 }

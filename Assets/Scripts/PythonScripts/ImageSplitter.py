@@ -2,7 +2,7 @@ from PIL import Image
 import os
 
 # Avaa kuva
-kuva = Image.open("Suomi_kartta_uusi_versio.png")
+kuva = Image.open("Map_of_Finland.png")
 kuva_leveys, kuva_korkeus = kuva.size
 
 # Määritä palasten koko
