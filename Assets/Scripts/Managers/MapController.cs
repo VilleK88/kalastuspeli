@@ -1,4 +1,3 @@
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
@@ -35,15 +34,10 @@ public class MapController : MonoBehaviour, IDragHandler, IBeginDragHandler
         inputActions.FindActionMap("Player").Disable();
     }
 
-    void Start()
-    {
-        //UpdateMapBounds();
-    }
-
     void Update()
     {
-        HandleMouseZoom();
-        HandleTouchZoom();
+        //HandleMouseZoom();
+        //HandleTouchZoom();
         HandleKeyboardMovement();
     }
 
@@ -113,7 +107,10 @@ public class MapController : MonoBehaviour, IDragHandler, IBeginDragHandler
 
         Vector2 newPos = mapRect.anchoredPosition + dragDelta * dragSpeed;
 
-        newPos.x = Mathf.Clamp(newPos.x, minPosition.x, maxPosition.x);
+        float minX = -400;
+        float maxX = 400;
+
+        newPos.x = Mathf.Clamp(newPos.x, minX, maxX);
         newPos.y = Mathf.Clamp(newPos.y, minPosition.y, maxPosition.y);
 
         mapRect.anchoredPosition = newPos;
@@ -128,32 +125,12 @@ public class MapController : MonoBehaviour, IDragHandler, IBeginDragHandler
         Vector2 move = new Vector2(-input.x, -input.y) * keyboardSpeed * Time.deltaTime;
         Vector2 newPos = mapRect.anchoredPosition + move;
 
-        newPos.x = Mathf.Clamp(newPos.x, minPosition.x, maxPosition.x);
+        float minX = -400;
+        float maxX = 400;
+
+        newPos.x = Mathf.Clamp(newPos.x, minX, maxX);
         newPos.y = Mathf.Clamp(newPos.y, minPosition.y, maxPosition.y);
 
         mapRect.anchoredPosition = newPos;
-    }
-
-    void UpdateMapBounds()
-    {
-        int columns = 3;
-        int rows = 5;
-
-        float cellWidth = 1024;
-        float cellHeight = 1080;
-
-        float totalWidth = columns * cellWidth;
-        float totalHeight = rows * cellHeight;
-
-        float scaledWidth = totalWidth * mapRect.localScale.x;
-        float scaledHeight = totalHeight * mapRect.localScale.y;
-
-        float containerWidth = zoomContainer.rect.width;
-        float containerHeight = zoomContainer.rect.height;
-
-        minPosition = new Vector2(
-            containerWidth - scaledWidth,
-            containerHeight - scaledHeight);
-        maxPosition = Vector2.zero;
     }
 }
