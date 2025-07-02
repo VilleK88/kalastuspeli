@@ -12,8 +12,8 @@ public class MapController : MonoBehaviour, IDragHandler, IBeginDragHandler
 
     Vector2 lastDragPosition;
 
-    public Vector2 minPosition; // x: -400, y: -1000
-    public Vector2 maxPosition; // x: 900, y: 3000
+    public Vector2 minPosition; // x: 0, y: -1800
+    public Vector2 maxPosition; // x: 0, y: 2350
 
     public float zoomSpeed = 0.1f;
     public float minScale = 0.3f;
