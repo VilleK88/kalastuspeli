@@ -50,7 +50,6 @@ public class WalkState : INPCState
     public void ToIdleState()
     {
         thisNPC.anim.SetBool("Walk", false);
-        Debug.Log("To idle state");
         thisNPC.idleState.idleStartTime = Time.time;
         thisNPC.currentState = thisNPC.idleState;
     }
