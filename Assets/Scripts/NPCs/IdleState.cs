@@ -3,8 +3,8 @@ using UnityEngine;
 public class IdleState : INPCState
 {
     NPC thisNPC;
-    float waypointCounter = 0;
-    float wayPointMaxTime = 2;
+    public float idleStartTime;
+    float maxIdleTime = 2;
 
     public IdleState(NPC npc)
     {
@@ -13,11 +13,7 @@ public class IdleState : INPCState
 
     public void UpdateState()
     {
-        if(waypointCounter < wayPointMaxTime)
-        {
-            waypointCounter += Time.deltaTime;
-        }
-        else
+        if(Time.time - idleStartTime >= maxIdleTime)
         {
             ToWalkState();
         }
@@ -31,7 +27,6 @@ public class IdleState : INPCState
     {
         thisNPC.agent.SetDestination(thisNPC.currentWaypoint.transform.position);
         thisNPC.anim.SetBool("Walk", true);
-        waypointCounter = 0;
         thisNPC.currentState = thisNPC.walkState;
     }
 

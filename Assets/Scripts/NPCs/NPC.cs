@@ -28,6 +28,9 @@ public class NPC : MonoBehaviour
     public NavMeshAgent agent;
     public float walkSpeed = 10f;
 
+    float updateTimer = 0;
+    float updateInterval = 0.2f;
+
     private void Awake()
     {
         idleState = new IdleState(this);
@@ -45,7 +48,14 @@ public class NPC : MonoBehaviour
 
     private void Update()
     {
-        currentState.UpdateState();
+        updateTimer += Time.deltaTime;
+        if(updateTimer >= updateInterval)
+        {
+            currentState.UpdateState();
+            updateTimer = 0;
+        }
+
+        //currentState.UpdateState();
     }
 
     void InitializeNPC()
