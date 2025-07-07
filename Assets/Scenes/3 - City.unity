@@ -1303,7 +1303,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4145402621310484463, guid: c4e5673151973414ebf689dd72dce0db, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 78.1
+      value: 78.76
       objectReference: {fileID: 0}
     - target: {fileID: 4145402621310484463, guid: c4e5673151973414ebf689dd72dce0db, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1920,9 +1920,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   anim: {fileID: 699946329}
-  waypoints: []
-  previousWaypoint: {fileID: 0}
-  currentWaypoint: {fileID: 0}
+  waypoints:
+  - {fileID: 980935686}
+  - {fileID: 980935685}
+  - {fileID: 980935683}
+  - {fileID: 980935684}
+  waypointIndex: 0
   agent: {fileID: 699946331}
   walkSpeed: 15
 --- !u!1 &706312716
@@ -2485,6 +2488,26 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f0f1f3d5f6fde5848906fb9ad8538046, type: 3}
+--- !u!1 &980935683 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2016422304218359741, guid: f0f1f3d5f6fde5848906fb9ad8538046, type: 3}
+  m_PrefabInstance: {fileID: 980935682}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &980935684 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4669324323966330886, guid: f0f1f3d5f6fde5848906fb9ad8538046, type: 3}
+  m_PrefabInstance: {fileID: 980935682}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &980935685 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1944387991734307007, guid: f0f1f3d5f6fde5848906fb9ad8538046, type: 3}
+  m_PrefabInstance: {fileID: 980935682}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &980935686 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7051430104606294213, guid: f0f1f3d5f6fde5848906fb9ad8538046, type: 3}
+  m_PrefabInstance: {fileID: 980935682}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1010243169
 GameObject:
   m_ObjectHideFlags: 0

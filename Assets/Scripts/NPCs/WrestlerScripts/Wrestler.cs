@@ -14,8 +14,7 @@ public class Wrestler : MonoBehaviour
 
     [Header("Waypoint Parameters")]
     public GameObject[] waypoints;
-    public GameObject previousWaypoint;
-    public GameObject currentWaypoint;
+    public int waypointIndex = 0;
 
     [Header("AI Navigation")]
     public NavMeshAgent agent;
@@ -32,14 +31,7 @@ public class Wrestler : MonoBehaviour
 
     private void Start()
     {
-        ac = anim.runtimeAnimatorController;
-        
-        foreach(AnimationClip clip in ac.animationClips)
-        {
-            Debug.Log($"Clip {clip.name} duration: {clip.length} seconds");
-        }
-
-        currentState = idleState;
+        StartCoroutine(DelayedStartingStateChange(1));
     }
 
     private void Update()
@@ -50,5 +42,13 @@ public class Wrestler : MonoBehaviour
             currentState.WUpdateState();
             updateTimer = 0;
         }
+    }
+
+    IEnumerator DelayedStartingStateChange(float time)
+    {
+        yield return new WaitForSeconds(time);
+        agent.SetDestination(waypoints[waypointIndex].transform.position);
+        anim.SetBool("Walk", true);
+        currentState = walkState;
     }
 }
