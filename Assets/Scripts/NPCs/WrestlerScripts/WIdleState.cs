@@ -5,6 +5,8 @@ public class WIdleState : IWrestlerState
     Wrestler wrestler;
     public float idleStartTime;
     public float maxIdleTime = 2;
+    public string[] animations = { "Yawn", "RumbaDancing", "ArmStretching", "BoxJump", "Phone", "Angry" };
+    public string currentAnim;
 
     public WIdleState(Wrestler thisWrestler)
     {
