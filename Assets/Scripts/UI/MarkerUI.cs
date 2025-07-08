@@ -45,13 +45,6 @@ public class MarkerUI : MonoBehaviour
     public void UpdateCompanyParameters(Yritys currentCompany)
     {
         yritys = currentCompany;
-
-        /*companyName.text = currentCompany.nimi ?? "-";
-        businessID.text = currentCompany.y_tunnus ?? "-";
-        founded.text = currentCompany.perustettu ?? "-";
-        postalAddress.text = currentCompany.postiosoite_katu ?? "-";
-        postcode.text = currentCompany.postinumero ?? "-";
-        municipality.text = currentCompany.kunta ?? "-";*/
     }
 
     public void UpdateJobListingParameters(JobListing currentJob)
@@ -68,10 +61,13 @@ public class MarkerUI : MonoBehaviour
 
     public void CloseMarkerInfoPanel()
     {
+        descriptionPopup.SetActive(false);
         companyInfoObject.SetActive(false);
         jobInfoObject.SetActive(false);
         transparentBG.SetActive(false);
         MouseManager.Instance.StopFishing();
+        Destroy(MarkerManager.Instance.currentMarker.gameObject);
+        MarkerManager.Instance.GenerateNewMarker();
         StartCoroutine(DelayedBooleanValueChange(1f));
     }
 
@@ -85,7 +81,6 @@ public class MarkerUI : MonoBehaviour
     {
         yield return new WaitForSeconds(time);
         transparentBG.SetActive(true);
-        //companyInfoObject.SetActive(true);
         jobInfoObject.SetActive(true);
     }
 

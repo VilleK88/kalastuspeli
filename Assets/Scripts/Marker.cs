@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Marker : MonoBehaviour
@@ -69,6 +70,11 @@ public class Marker : MonoBehaviour
                 MarkerUI.Instance.UpdateCompanyParameters(yritys);
             if (jobListing != null)
                 MarkerUI.Instance.UpdateJobListingParameters(jobListing);
+
+            MarkerManager.Instance.currentMarker = this;
+            GridPrefab gridPrefab = GetComponentInParent<GridPrefab>();
+            gridPrefab.markerCount--;
+
             MarkerUI.Instance.OpenMarkerInfoPanel();
         }
     }

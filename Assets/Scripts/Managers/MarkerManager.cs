@@ -33,20 +33,25 @@ public class MarkerManager : MonoBehaviour
     List<Yritys> cityCompanies = new List<Yritys>();
     List<JobListing> cityJobListings = new List<JobListing>();
 
+    [Header("Marker Parameters")]
+    public Marker currentMarker;
+
     public void InitializeMarkers()
     {
         if(jobListingApiConfig != null)
             jobListing_ApiURL = jobListingApiConfig.apiURL.ToString();
+
         if (companyInfoApiConfig != null)
             companyInfo_ApiURL = companyInfoApiConfig.apiURL.ToString();
-        StartCoroutine(FetchJobs());
-        StartCoroutine(FetchCompanies());
-        StartCoroutine(DelayedMarkerGeneration(1f));
+
+        StartCoroutine(InitializeMarkerData());
     }
 
-    IEnumerator DelayedMarkerGeneration(float time)
+    IEnumerator InitializeMarkerData()
     {
-        yield return new WaitForSeconds(time);
+        yield return StartCoroutine(FetchJobs());
+        yield return StartCoroutine(FetchCompanies());
+        yield return new WaitForSeconds(1);
         GenerateMarkers();
     }
 
@@ -72,6 +77,24 @@ public class MarkerManager : MonoBehaviour
                 gridObjectList = GetGridList(currentCount);
             }
 
+        }
+    }
+
+    public void GenerateNewMarker()
+    {
+        List<GameObject> gridObjectList = GetGridList(currentCount);
+
+        while(true)
+        {
+            int randomIndex = Random.Range(0, gridObjectList.Count);
+            GridPrefab gridPrefab = gridObjectList[randomIndex].GetComponent<GridPrefab>();
+            if(gridPrefab.markerCount <= 1)
+            {
+                Vector3 randomPoint = GetRandomPointInGridCell(gridPrefab.gameObject, 1.25f);
+                CreateMarker(randomPoint, gridPrefab.gameObject.transform);
+                gridPrefab.markerCount++;
+                break;
+            }
         }
     }
 
@@ -103,16 +126,13 @@ public class MarkerManager : MonoBehaviour
         IndustryType randomIndustry = (IndustryType)System.Enum.GetValues(typeof(IndustryType)).GetValue(randomIndex);
         marker.industryType = randomIndustry;
 
-        if (cityCompanies != null)
+        if (cityCompanies.Count > 0)
         {
-            if (cityCompanies.Count > 0)
-            {
-                int randomI = Random.Range(0, cityCompanies.Count);
-                marker.yritys = cityCompanies[randomI];
-            }
+            int randomI = Random.Range(0, cityCompanies.Count);
+            marker.yritys = cityCompanies[randomI];
         }
 
-        if(cityJobListings != null)
+        if (cityJobListings != null)
         {
             if(cityJobListings.Count > 0)
             {
@@ -186,11 +206,9 @@ public class MarkerManager : MonoBehaviour
                     Debug.LogWarning("Null job found!");
                     continue;
                 }
-
-                cityJobListings = response.results.ToList();
-
                 //Debug.Log($"Job: {job.title}, description: {job.description}\n, salary: {job.salary}, summary: {job.summary}");
             }
+            cityJobListings = response.results.ToList();
         }
     }
 
