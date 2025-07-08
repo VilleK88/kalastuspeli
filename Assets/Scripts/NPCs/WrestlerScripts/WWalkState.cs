@@ -22,8 +22,17 @@ public class WWalkState : IWrestlerState
     {
         wrestler.anim.SetBool("Walk", false);
         wrestler.idleState.idleStartTime = Time.time;
-        SelectRandomIdleState();
-        wrestler.currentState = wrestler.idleState;
+
+        int randomChoice = Random.Range(0, 2);
+        if(randomChoice == 0)
+            SelectRandomIdleState();
+        else
+        {
+            wrestler.anim.SetBool("RumbaDancing", true);
+            wrestler.idleState.maxIdleTime = 6;
+        }
+
+            wrestler.currentState = wrestler.idleState;
     }
 
     public void ToWWalkState()
