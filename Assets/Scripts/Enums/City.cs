@@ -6,7 +6,7 @@ public enum City
     Oulu,
     Pori,
     Rovaniemi,
-    Turku,
     Tampere,
+    Turku,
     Vaasa
 }

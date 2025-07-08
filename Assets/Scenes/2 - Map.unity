@@ -420,7 +420,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1013141480552879850, guid: d06ea091efc971e499e28ba065725d08, type: 3}
       propertyPath: city
-      value: 7
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 1136459533944836210, guid: d06ea091efc971e499e28ba065725d08, type: 3}
       propertyPath: m_Name
@@ -640,7 +640,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1013141480552879850, guid: d06ea091efc971e499e28ba065725d08, type: 3}
       propertyPath: city
-      value: 6
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 1136459533944836210, guid: d06ea091efc971e499e28ba065725d08, type: 3}
       propertyPath: m_Name

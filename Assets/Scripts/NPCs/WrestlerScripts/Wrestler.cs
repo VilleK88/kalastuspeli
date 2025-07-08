@@ -1,4 +1,3 @@
-using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -31,16 +30,9 @@ public class Wrestler : MonoBehaviour
 
     private void Start()
     {
-        //StartCoroutine(DelayedStartingStateChange(1));
         agent.SetDestination(waypoints[waypointIndex].transform.position);
         anim.SetBool("Walk", true);
         currentState = walkState;
-
-        RuntimeAnimatorController rac = anim.runtimeAnimatorController;
-        foreach(AnimationClip clip in rac.animationClips)
-        {
-            Debug.Log("animation name: " + clip.name);
-        }
     }
 
     private void Update()
@@ -51,13 +43,5 @@ public class Wrestler : MonoBehaviour
             currentState.WUpdateState();
             updateTimer = 0;
         }
-    }
-
-    IEnumerator DelayedStartingStateChange(float time)
-    {
-        yield return new WaitForSeconds(time);
-        agent.SetDestination(waypoints[waypointIndex].transform.position);
-        anim.SetBool("Walk", true);
-        currentState = walkState;
     }
 }
