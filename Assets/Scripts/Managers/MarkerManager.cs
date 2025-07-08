@@ -160,7 +160,6 @@ public class MarkerManager : MonoBehaviour
     IEnumerator FetchJobs()
     {
         string currentCity = GameManager.Instance.city.ToString();
-        //string URL = jobListing_ApiURL + "?kunta=" + currentCity.ToUpper();
         string URL = jobListing_ApiURL + "?location=" + currentCity.ToUpper();
         Debug.Log("URL: " + URL);
         UnityWebRequest request = UnityWebRequest.Get(URL);
@@ -177,7 +176,7 @@ public class MarkerManager : MonoBehaviour
         else
         {
             string json = request.downloadHandler.text;
-            //Debug.Log("Raw JSON: " + json);
+            Debug.Log("Raw JSON: " + json);
             JobListingResponse response = JsonUtility.FromJson<JobListingResponse>(json);
 
             foreach (var job in response.results)
