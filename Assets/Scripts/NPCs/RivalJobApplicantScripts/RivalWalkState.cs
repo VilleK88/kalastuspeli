@@ -15,26 +15,17 @@ public class RivalWalkState : IRivalState
 
     public void UpdateState()
     {
-        ReachTheClosestMarker();
+
     }
 
     public void ToRivalIdleState()
     {
+        rival.idleState.idleStartTime = Time.time;
         rival.currentState = rival.idleState;
     }
 
     public void ToRivalWalkState()
     {
 
-    }
-
-    public void ReachTheClosestMarker()
-    {
-        if(rival.currentDistance < 5)
-        {
-            Debug.Log("Marker reached");
-            rival.DestroyCurrentMarker();
-            ToRivalIdleState();
-        }
     }
 }

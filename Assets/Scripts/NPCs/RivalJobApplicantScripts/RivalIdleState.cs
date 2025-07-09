@@ -13,7 +13,7 @@ public class RivalIdleState : IRivalState
 
     public void UpdateState()
     {
-        if(rival.currentMarkerObject == null)
+        if (Time.time - idleStartTime >= maxIdleTime)
         {
             ToRivalWalkState();
         }
@@ -26,7 +26,7 @@ public class RivalIdleState : IRivalState
 
     public void ToRivalWalkState()
     {
-        rival.FindClosestMarker();
+        Debug.Log("back to walk state");
         rival.currentState = rival.walkState;
     }
 }

@@ -13,7 +13,7 @@ public class RivalJobApplicant : MonoBehaviour
     public Animator anim;
 
     [Header("AI Navigation")]
-    public NavMeshAgent agent;
+    NavMeshAgent agent;
     public float walkSpeed = 10f;
 
     public GameObject currentMarkerObject;
@@ -42,6 +42,12 @@ public class RivalJobApplicant : MonoBehaviour
         updateTimer += Time.deltaTime;
         if (updateTimer >= updateInterval)
         {
+            if(currentMarkerObject == null && agent != null)
+            {
+                Debug.Log("Find closest marker object");
+                FindClosestMarker();
+            }
+
             currentState.UpdateState();
             updateTimer = 0;
         }
@@ -50,7 +56,8 @@ public class RivalJobApplicant : MonoBehaviour
     IEnumerator DelayedStart(float time)
     {
         yield return new WaitForSeconds(3);
-        FindClosestMarker();
+        agent = GetComponent<NavMeshAgent>();
+        //FindClosestMarker();
         yield return null;
     }
 
@@ -84,20 +91,16 @@ public class RivalJobApplicant : MonoBehaviour
         agent.SetDestination(currentMarkerObject.transform.position);
     }
 
-    public void DestroyCurrentMarker()
+    private void OnTriggerEnter(Collider other)
     {
-        if(currentMarkerObject != null)
+        Marker marker = other.GetComponentInParent<Marker>();
+        if(marker != null)
         {
-            Marker marker = currentMarkerObject.GetComponent<Marker>();
             marker.DecreaseGridPrefabMarkerCount();
-            Destroy(currentMarkerObject);
+            Destroy(marker.gameObject);
             MarkerManager.Instance.GenerateNewMarker();
+            currentMarkerObject = null;
+            walkState.ToRivalIdleState();
         }
-        else
-        {
-            Debug.Log("Current marker is null");
-            Debug.Log("Current marker name: " + currentMarkerObject?.name);
-        }
-        currentMarkerObject = null;
     }
 }

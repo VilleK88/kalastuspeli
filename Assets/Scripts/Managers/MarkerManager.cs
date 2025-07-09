@@ -196,7 +196,7 @@ public class MarkerManager : MonoBehaviour
         else
         {
             string json = request.downloadHandler.text;
-            Debug.Log("Raw JSON: " + json);
+            //Debug.Log("Raw JSON: " + json);
             JobListingResponse response = JsonUtility.FromJson<JobListingResponse>(json);
 
             foreach (var job in response.results)
