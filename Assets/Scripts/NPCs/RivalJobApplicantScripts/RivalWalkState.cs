@@ -1,3 +1,7 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 public class RivalWalkState : IRivalState
@@ -11,16 +15,26 @@ public class RivalWalkState : IRivalState
 
     public void UpdateState()
     {
-
+        ReachTheClosestMarker();
     }
 
     public void ToRivalIdleState()
     {
-
+        rival.currentState = rival.idleState;
     }
 
     public void ToRivalWalkState()
     {
 
+    }
+
+    public void ReachTheClosestMarker()
+    {
+        if(rival.currentDistance < 5)
+        {
+            Debug.Log("Marker reached");
+            rival.DestroyCurrentMarker();
+            ToRivalIdleState();
+        }
     }
 }

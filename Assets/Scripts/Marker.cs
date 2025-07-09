@@ -72,10 +72,15 @@ public class Marker : MonoBehaviour
                 MarkerUI.Instance.UpdateJobListingParameters(jobListing);
 
             MarkerManager.Instance.currentMarker = this;
-            GridPrefab gridPrefab = GetComponentInParent<GridPrefab>();
-            gridPrefab.markerCount--;
+            DecreaseGridPrefabMarkerCount();
 
             MarkerUI.Instance.OpenMarkerInfoPanel();
         }
+    }
+
+    public void DecreaseGridPrefabMarkerCount()
+    {
+        GridPrefab gridPrefab = GetComponentInParent<GridPrefab>();
+        gridPrefab.markerCount--;
     }
 }

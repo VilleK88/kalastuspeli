@@ -13,7 +13,10 @@ public class RivalIdleState : IRivalState
 
     public void UpdateState()
     {
-
+        if(rival.currentMarkerObject == null)
+        {
+            ToRivalWalkState();
+        }
     }
 
     public void ToRivalIdleState()
@@ -23,6 +26,7 @@ public class RivalIdleState : IRivalState
 
     public void ToRivalWalkState()
     {
-
+        rival.FindClosestMarker();
+        rival.currentState = rival.walkState;
     }
 }
