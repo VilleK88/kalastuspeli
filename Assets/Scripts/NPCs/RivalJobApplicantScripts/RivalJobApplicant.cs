@@ -13,11 +13,12 @@ public class RivalJobApplicant : MonoBehaviour
     public Animator anim;
 
     [Header("AI Navigation")]
-    NavMeshAgent agent;
+    [HideInInspector] public NavMeshAgent agent;
     public float walkSpeed = 10f;
 
     public GameObject currentMarkerObject;
     public float currentDistance;
+    public bool currentMarker;
 
     float detectionRadius = 100;
     float stopDistance = 1.5f;
@@ -35,6 +36,8 @@ public class RivalJobApplicant : MonoBehaviour
     {
         StartCoroutine(DelayedStart(3));
         currentState = walkState;
+        agent.SetDestination(currentMarkerObject.transform.position);
+        anim.SetBool("Walk", true);
     }
 
     private void Update()
@@ -88,7 +91,8 @@ public class RivalJobApplicant : MonoBehaviour
         currentMarkerObject = closest.gameObject;
         currentDistance = closestDistance;
 
-        agent.SetDestination(currentMarkerObject.transform.position);
+        //agent.SetDestination(currentMarkerObject.transform.position);
+        currentMarker = true;
     }
 
     private void OnTriggerEnter(Collider other)

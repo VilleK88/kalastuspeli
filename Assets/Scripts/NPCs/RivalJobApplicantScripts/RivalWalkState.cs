@@ -1,7 +1,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
 
 public class RivalWalkState : IRivalState
@@ -21,6 +20,7 @@ public class RivalWalkState : IRivalState
     public void ToRivalIdleState()
     {
         rival.idleState.idleStartTime = Time.time;
+        rival.anim.SetBool("Walk", false);
         rival.currentState = rival.idleState;
     }
 
