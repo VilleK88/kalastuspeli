@@ -170,8 +170,13 @@ public class MarkerManager : MonoBehaviour
 
             Vector3 randomPosition = new Vector3(gridCenter.x + offsetX, gridCenter.y, gridCenter.z + offsetZ);
 
-            if (NavMesh.SamplePosition(randomPosition, out NavMeshHit hit, 1, NavMesh.AllAreas))
-                return hit.position;
+            if(Physics.Raycast(randomPosition, Vector3.down, out RaycastHit rayHit, 100, ~LayerMask.GetMask("Obstacle")))
+            {
+                Vector3 candidate = rayHit.point;
+
+                if (NavMesh.SamplePosition(candidate, out NavMeshHit hit, 1, NavMesh.AllAreas))
+                    return hit.position;
+            }
         }
 
         return gridCenter;
