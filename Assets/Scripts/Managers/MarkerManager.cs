@@ -82,7 +82,8 @@ public class MarkerManager : MonoBehaviour
 
     public void GenerateNewMarker()
     {
-        List<GameObject> gridObjectList = GetGridList(currentCount);
+        int randomCount = Random.Range(0, 2);
+        List<GameObject> gridObjectList = GetGridList(randomCount);
 
         while(true)
         {

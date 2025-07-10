@@ -22,8 +22,10 @@ public class RivalJobApplicant : MonoBehaviour
     float updateTimer = 0;
     float updateInterval = 0.2f;
 
-    public float stuckTimer = 0;
     public Vector3 lastPosition;
+    public float stuckTimer = 0;
+    public float stuckThreshold = 0.2f;
+    public float movementTolerance = 0.5f;
 
     private void Awake()
     {
@@ -44,6 +46,7 @@ public class RivalJobApplicant : MonoBehaviour
         if (updateTimer >= updateInterval)
         {
             currentState.UpdateState();
+            CheckIfStuck();
             updateTimer = 0;
         }
     }
@@ -88,7 +91,7 @@ public class RivalJobApplicant : MonoBehaviour
         }
     }
 
-    public void JumpToTarget(Vector3 target)
+    public void WarpToTarget(Vector3 target)
     {
         Debug.Log("Jumping to unreachable marker...");
         StartCoroutine(JumpOverBuilding(target));
@@ -96,9 +99,44 @@ public class RivalJobApplicant : MonoBehaviour
 
     IEnumerator JumpOverBuilding(Vector3 target)
     {
+        agent.enabled = false;
         yield return new WaitForSeconds(0.5f);
         transform.position = target + Vector3.up * 1.5f;
+        yield return null;
+        agent.enabled = true;
         agent.Warp(target);
         FindClosestMarker();
+    }
+
+    void CheckIfStuck()
+    {
+        if (currentMarkerObject == null)
+            return;
+
+        float movedDistance = Vector3.Distance(transform.position, lastPosition);
+
+        if(movedDistance < movementTolerance)
+        {
+            stuckTimer += Time.deltaTime;
+
+            if(stuckTimer > stuckThreshold)
+            {
+                Debug.LogWarning("Rival stuck. Warping to marker.");
+                WarpToTarget(currentMarkerObject.transform.position);
+                stuckTimer = 0;
+            }
+        }
+        else
+        {
+            stuckTimer = 0;
+        }
+
+            lastPosition = transform.position;
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawSphere(lastPosition, 0.2f);
     }
 }
