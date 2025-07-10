@@ -25,6 +25,21 @@ public class RivalWalkState : IRivalState
             rival.agent.SetDestination(rival.currentMarkerObject.transform.position);
             Debug.Log("Find new path in Walk State");
         }
+
+        if(Vector3.Distance(rival.transform.position, rival.lastPosition) < 0.5f)
+        {
+            rival.stuckTimer += Time.deltaTime;
+            if(rival.stuckTimer > 3)
+            {
+                rival.JumpToTarget(rival.currentMarkerObject.transform.position);
+                rival.stuckTimer = 0;
+            }
+        }
+        else
+        {
+            rival.stuckTimer = 0;
+            rival.lastPosition = rival.transform.position;
+        }
     }
 
     public void ToRivalIdleState()

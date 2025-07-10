@@ -22,6 +22,9 @@ public class RivalJobApplicant : MonoBehaviour
     float updateTimer = 0;
     float updateInterval = 0.2f;
 
+    public float stuckTimer = 0;
+    public Vector3 lastPosition;
+
     private void Awake()
     {
         idleState = new RivalIdleState(this);
@@ -32,8 +35,7 @@ public class RivalJobApplicant : MonoBehaviour
     private void Start()
     {
         currentState = idleState;
-        //agent.SetDestination(currentMarkerObject.transform.position);
-        //anim.SetBool("Walk", true);
+        lastPosition = transform.position;
     }
 
     private void Update()
@@ -84,5 +86,19 @@ public class RivalJobApplicant : MonoBehaviour
             MarkerManager.Instance.GenerateNewMarker();
             currentMarkerObject = null;
         }
+    }
+
+    public void JumpToTarget(Vector3 target)
+    {
+        Debug.Log("Jumping to unreachable marker...");
+        StartCoroutine(JumpOverBuilding(target));
+    }
+
+    IEnumerator JumpOverBuilding(Vector3 target)
+    {
+        yield return new WaitForSeconds(0.5f);
+        transform.position = target + Vector3.up * 1.5f;
+        agent.Warp(target);
+        FindClosestMarker();
     }
 }
