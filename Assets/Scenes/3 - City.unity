@@ -1632,6 +1632,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2409823210786727497, guid: f0f1f3d5f6fde5848906fb9ad8538046, type: 3}
+      propertyPath: m_BuildHeightMesh
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2409823210786727497, guid: f0f1f3d5f6fde5848906fb9ad8538046, type: 3}
+      propertyPath: m_LayerMask.m_Bits
+      value: 4294967295
+      objectReference: {fileID: 0}
     - target: {fileID: 3930051184760281440, guid: f0f1f3d5f6fde5848906fb9ad8538046, type: 3}
       propertyPath: m_Name
       value: Helsinki
@@ -4054,6 +4062,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 539201785}
     m_Modifications:
+    - target: {fileID: 455709003397227423, guid: 74ae8c4115db9c94da8737c20ddaa3a6, type: 3}
+      propertyPath: m_Radius
+      value: 0.1
+      objectReference: {fileID: 0}
     - target: {fileID: 2423092408706571003, guid: 74ae8c4115db9c94da8737c20ddaa3a6, type: 3}
       propertyPath: m_Name
       value: RivalJobApplicant

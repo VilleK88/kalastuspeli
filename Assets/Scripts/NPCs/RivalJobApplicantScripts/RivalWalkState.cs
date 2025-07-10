@@ -14,11 +14,23 @@ public class RivalWalkState : IRivalState
 
     public void UpdateState()
     {
+        if(rival.currentMarkerObject == null)
+        {
+            ToRivalIdleState();
+            return;
+        }
 
+        if (!rival.agent.hasPath)
+        {
+            rival.agent.SetDestination(rival.currentMarkerObject.transform.position);
+            Debug.Log("Find new path in Walk State");
+        }
     }
 
     public void ToRivalIdleState()
     {
+        rival.agent.ResetPath();
+        Debug.Log("Reset path and go to Idle State");
         rival.idleState.idleStartTime = Time.time;
         rival.anim.SetBool("Walk", false);
         rival.currentState = rival.idleState;

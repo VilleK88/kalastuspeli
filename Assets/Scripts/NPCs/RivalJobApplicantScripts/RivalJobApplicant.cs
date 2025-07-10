@@ -18,10 +18,6 @@ public class RivalJobApplicant : MonoBehaviour
 
     public GameObject currentMarkerObject;
     public float currentDistance;
-    public bool currentMarker;
-
-    float detectionRadius = 100;
-    float stopDistance = 1.5f;
 
     float updateTimer = 0;
     float updateInterval = 0.2f;
@@ -30,14 +26,14 @@ public class RivalJobApplicant : MonoBehaviour
     {
         idleState = new RivalIdleState(this);
         walkState = new RivalWalkState(this);
+        agent = GetComponent<NavMeshAgent>();
     }
 
     private void Start()
     {
-        StartCoroutine(DelayedStart(3));
-        currentState = walkState;
-        agent.SetDestination(currentMarkerObject.transform.position);
-        anim.SetBool("Walk", true);
+        currentState = idleState;
+        //agent.SetDestination(currentMarkerObject.transform.position);
+        //anim.SetBool("Walk", true);
     }
 
     private void Update()
@@ -45,23 +41,9 @@ public class RivalJobApplicant : MonoBehaviour
         updateTimer += Time.deltaTime;
         if (updateTimer >= updateInterval)
         {
-            if(currentMarkerObject == null && agent != null)
-            {
-                Debug.Log("Find closest marker object");
-                FindClosestMarker();
-            }
-
             currentState.UpdateState();
             updateTimer = 0;
         }
-    }
-
-    IEnumerator DelayedStart(float time)
-    {
-        yield return new WaitForSeconds(3);
-        agent = GetComponent<NavMeshAgent>();
-        //FindClosestMarker();
-        yield return null;
     }
 
     public void FindClosestMarker()
@@ -90,9 +72,6 @@ public class RivalJobApplicant : MonoBehaviour
 
         currentMarkerObject = closest.gameObject;
         currentDistance = closestDistance;
-
-        //agent.SetDestination(currentMarkerObject.transform.position);
-        currentMarker = true;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -104,7 +83,6 @@ public class RivalJobApplicant : MonoBehaviour
             Destroy(marker.gameObject);
             MarkerManager.Instance.GenerateNewMarker();
             currentMarkerObject = null;
-            walkState.ToRivalIdleState();
         }
     }
 }
