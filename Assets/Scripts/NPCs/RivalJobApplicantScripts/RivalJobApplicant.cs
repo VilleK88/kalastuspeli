@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -24,7 +25,7 @@ public class RivalJobApplicant : MonoBehaviour
 
     public Vector3 lastPosition;
     public float stuckTimer = 0;
-    public float stuckThreshold = 0.2f;
+    public float stuckThreshold = 0.05f;
     public float movementTolerance = 0.5f;
 
     private void Awake()
@@ -70,8 +71,11 @@ public class RivalJobApplicant : MonoBehaviour
             float distance = Vector3.Distance(transform.position, marker.transform.position);
             if(distance < closestDistance)
             {
-                closest = marker;
-                closestDistance = distance;
+                if(!marker.markerOpen)
+                {
+                    closest = marker;
+                    closestDistance = distance;
+                }
             }
         }
 
@@ -82,7 +86,7 @@ public class RivalJobApplicant : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         Marker marker = other.GetComponentInParent<Marker>();
-        if(marker != null)
+        if(marker != null && !marker.markerOpen)
         {
             marker.DecreaseGridPrefabMarkerCount();
             Destroy(marker.gameObject);
@@ -94,10 +98,10 @@ public class RivalJobApplicant : MonoBehaviour
     public void WarpToTarget(Vector3 target)
     {
         Debug.Log("Jumping to unreachable marker...");
-        StartCoroutine(JumpOverBuilding(target));
+        StartCoroutine(WarpCoroutine(target));
     }
 
-    IEnumerator JumpOverBuilding(Vector3 target)
+    IEnumerator WarpCoroutine(Vector3 target)
     {
         agent.enabled = false;
         yield return new WaitForSeconds(0.5f);

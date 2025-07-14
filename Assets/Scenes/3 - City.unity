@@ -4072,7 +4072,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3334816000320229148, guid: 74ae8c4115db9c94da8737c20ddaa3a6, type: 3}
       propertyPath: stuckThreshold
-      value: 0.2
+      value: 0.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 3334816000320229148, guid: 74ae8c4115db9c94da8737c20ddaa3a6, type: 3}
+      propertyPath: movementTolerance
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 4035297505925921803, guid: 74ae8c4115db9c94da8737c20ddaa3a6, type: 3}
       propertyPath: m_LocalPosition.x

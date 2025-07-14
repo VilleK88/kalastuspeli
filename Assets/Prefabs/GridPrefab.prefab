@@ -123,5 +123,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   markerCount: 0
   parentObject: {fileID: 5961401994460398457}
-  gridCubePrefab: {fileID: 4456997455166496558, guid: b504fb1ca4794ca4eb664f92bfef764d, type: 3}
+  gridCellPrefab: {fileID: 4456997455166496558, guid: b504fb1ca4794ca4eb664f92bfef764d, type: 3}
   grid: []

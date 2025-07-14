@@ -6,7 +6,7 @@ public class GridPrefab : MonoBehaviour
     public int markerCount; // how many markers on this grid area
 
     [SerializeField] GameObject parentObject;
-    public GameObject gridCubePrefab;
+    public GameObject gridCellPrefab;
     public List<GameObject> grid = new List<GameObject>();
     int gridAmount = 8;
     float transformStartX = -43.75f;
@@ -33,18 +33,23 @@ public class GridPrefab : MonoBehaviour
         for (int i = 0; i < gridAmount; i++)
         {
             Vector3 currentPosition = new Vector3(parentObject.transform.position.x + transformStartX, parentObject.transform.position.y, parentObject.transform.position.z + transformStartZ);
-            GameObject gridPrefabInstance = Instantiate(gridCubePrefab, currentPosition, Quaternion.identity);
-            grid.Add(gridPrefabInstance);
-            gridPrefabInstance.transform.parent = parentObject.transform;
-            gridPrefabInstance.transform.localScale = new Vector3(0.125f, 15, 0.125f);
-            GridCubePrefab gridCubePrefabInstance = gridPrefabInstance.GetComponent<GridCubePrefab>();
-            gridCubePrefabInstance.scaleX = 12.5f;
-            gridCubePrefabInstance.scaleY = 15;
-            gridCubePrefabInstance.scaleZ = 12.5f;
+            GameObject gridCellInstance = Instantiate(gridCellPrefab, currentPosition, Quaternion.identity);
+            grid.Add(gridCellInstance);
+            gridCellInstance.transform.parent = parentObject.transform;
+            gridCellInstance.transform.localScale = new Vector3(0.125f, 15, 0.125f);
+            GridCellPrefab gridCellprefab = gridCellInstance.GetComponent<GridCellPrefab>();
+            gridCellprefab.scaleX = 12.5f;
+            gridCellprefab.scaleY = 15;
+            gridCellprefab.scaleZ = 12.5f;
             transformStartX += addition;
         }
         transformStartX = startingValueX;
         transformStartZ -= addition;
+    }
+
+    public void DecreaseMarkerCount()
+    {
+        markerCount--;
     }
 
     private void OnDrawGizmos()

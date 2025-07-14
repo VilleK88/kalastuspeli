@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class GridCubePrefab : MonoBehaviour
+public class GridCellPrefab : MonoBehaviour
 {
     [Header("Obstacle Detection")]
     [SerializeField] LayerMask obstacleMask;
@@ -54,9 +54,9 @@ public class GridCubePrefab : MonoBehaviour
         return rDiff < tolerance && gDiff < tolerance && bDiff < tolerance;
     }
 
-    /*private void OnDrawGizmos()
+    private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireCube(transform.position, new Vector3(scaleX, scaleY, scaleZ));
-    }*/
+    }
 }

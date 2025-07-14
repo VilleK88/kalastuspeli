@@ -67,8 +67,9 @@ public class MarkerManager : MonoBehaviour
                 GameObject gridObject = gridObjectList[randomIndex];
                 GridPrefab gridPrefab = gridObject.GetComponent<GridPrefab>();
                 gridPrefab.markerCount += 1;
-                Vector3 randomPoint = GetRandomPointInGridCell(gridObject, 1.25f);
-                CreateMarker(randomPoint, gridObject.transform);
+                Transform gridCellTransform = GetRandomGridCellPrefab(gridObject);
+                Vector3 randomPoint = GetRandomPointInGridPrefabsCell(gridCellTransform, 1.25f);
+                CreateMarker(randomPoint, gridCellTransform);
                 gridObjectList.RemoveAt(randomIndex);
             }
             else
@@ -82,8 +83,10 @@ public class MarkerManager : MonoBehaviour
 
     public void GenerateNewMarker()
     {
-        int randomCount = Random.Range(0, 2);
-        List<GameObject> gridObjectList = GetGridList(randomCount);
+        List<GameObject> gridObjectList = GetGridList(0);
+
+        if (gridObjectList.Count == 0)
+            gridObjectList = GetGridList(1);
 
         while(true)
         {
@@ -91,7 +94,8 @@ public class MarkerManager : MonoBehaviour
             GridPrefab gridPrefab = gridObjectList[randomIndex].GetComponent<GridPrefab>();
             if(gridPrefab.markerCount <= 1)
             {
-                Vector3 randomPoint = GetRandomPointInGridCell(gridPrefab.gameObject, 1.25f);
+                Transform gridCellTransform = GetRandomGridCellPrefab(gridPrefab.gameObject);
+                Vector3 randomPoint = GetRandomPointInGridPrefabsCell(gridCellTransform, 1.25f);
                 CreateMarker(randomPoint, gridPrefab.gameObject.transform);
                 gridPrefab.markerCount++;
                 break;
@@ -106,7 +110,7 @@ public class MarkerManager : MonoBehaviour
         {
             GameObject gridObject = GridManager.Instance.grid[i];
             GridPrefab gridPrefab = gridObject.GetComponent<GridPrefab>();
-            if(gridPrefab.markerCount == count)
+            if(gridPrefab.markerCount <= count)
             {
                 gridObjectList.Add(gridObject);
             }
@@ -143,7 +147,7 @@ public class MarkerManager : MonoBehaviour
         }
     }
 
-    Vector3 GetRandomChildCell(GameObject gridObject)
+    Transform GetRandomGridCellPrefab(GameObject gridObject)
     {
         List<GameObject> cellsInGrid = new List<GameObject>();
         for(int i = 0; i < gridObject.transform.childCount; i++)
@@ -155,12 +159,12 @@ public class MarkerManager : MonoBehaviour
 
         int randomIndex = Random.Range(0, cellsInGrid.Count);
 
-        return cellsInGrid[randomIndex].transform.position;
+        return cellsInGrid[randomIndex].transform;
     }
 
-    Vector3 GetRandomPointInGridCell(GameObject gridObject, float cellSize)
+    Vector3 GetRandomPointInGridPrefabsCell(Transform gridCellTransform, float cellSize)
     {
-        Vector3 gridCenter = GetRandomChildCell(gridObject);
+        Vector3 gridCellCenter = gridCellTransform.position;
 
         float half = cellSize / 2;
 
@@ -169,7 +173,7 @@ public class MarkerManager : MonoBehaviour
             float offsetX = Random.Range(-half, half);
             float offsetZ = Random.Range(-half, half);
 
-            Vector3 randomPosition = new Vector3(gridCenter.x + offsetX, gridCenter.y, gridCenter.z + offsetZ);
+            Vector3 randomPosition = new Vector3(gridCellCenter.x + offsetX, gridCellCenter.y, gridCellCenter.z + offsetZ);
 
             if(Physics.Raycast(randomPosition, Vector3.down, out RaycastHit rayHit, 100, ~LayerMask.GetMask("Obstacle")))
             {
@@ -180,7 +184,7 @@ public class MarkerManager : MonoBehaviour
             }
         }
 
-        return gridCenter;
+        return gridCellCenter;
     }
 
     IEnumerator FetchJobs()
