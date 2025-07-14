@@ -15,9 +15,10 @@ public class RivalWalkState : IRivalState
 
     public void UpdateState()
     {
-        if(rival.currentMarkerObject == null)
+        if(rival.currentMarkerObject == null || rival.fishing)
         {
-            ToRivalIdleState();
+            //ToRivalIdleState();
+            ToRivalFishingState();
             return;
         }
 
@@ -26,6 +27,8 @@ public class RivalWalkState : IRivalState
             if(rival.agent.enabled && rival.agent.isOnNavMesh)
                 rival.agent.SetDestination(rival.currentMarkerObject.transform.position);
         }
+        /*if (rival.agent.enabled && rival.agent.isOnNavMesh)
+            rival.agent.SetDestination(rival.currentMarkerObject.transform.position);*/
     }
 
     public void ToRivalIdleState()
@@ -39,5 +42,25 @@ public class RivalWalkState : IRivalState
     public void ToRivalWalkState()
     {
 
+    }
+
+    public void ToRivalFishingState()
+    {
+        Debug.Log("To fishing state");
+        rival.agent.ResetPath();
+        rival.fishingState.idleStartTime = Time.time;
+        rival.anim.SetBool("Walk", false);
+        rival.anim.SetTrigger("FishingCast");
+        rival.anim.SetBool("FishingIdle", true);
+        rival.currentState = rival.fishingState;
+    }
+
+    public IEnumerator DelayedStateChange(float time)
+    {
+        rival.anim.SetBool("Walk", false);
+        yield return new WaitForSeconds(time);
+        rival.anim.SetTrigger("FishingCast");
+        rival.anim.SetBool("FishingIdle", true);
+        Debug.Log("To rival fishing state");
     }
 }

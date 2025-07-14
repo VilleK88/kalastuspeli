@@ -1,12 +1,12 @@
 using UnityEngine;
 
-public class RivalIdleState : IRivalState
+public class RivalFishingState : IRivalState
 {
     RivalJobApplicant rival;
     public float idleStartTime;
-    float maxIdleTime = 2;
+    float maxIdleTime = 12;
 
-    public RivalIdleState(RivalJobApplicant thisRival)
+    public RivalFishingState(RivalJobApplicant thisRival)
     {
         this.rival = thisRival;
     }
@@ -26,9 +26,12 @@ public class RivalIdleState : IRivalState
 
     public void ToRivalWalkState()
     {
+        rival.StartCoroutine(rival.DestroyMarkerAndTransition());
+
+        /*rival.anim.SetBool("FishingIdle", false);
         rival.FindClosestMarker();
 
-        if(rival.currentMarkerObject != null)
+        if (rival.currentMarkerObject != null)
         {
             Debug.Log("back to walk state");
             rival.agent.SetDestination(rival.currentMarkerObject.transform.position);
@@ -38,7 +41,7 @@ public class RivalIdleState : IRivalState
         else
         {
             idleStartTime = Time.time;
-        }
+        }*/
     }
 
     public void ToRivalFishingState()

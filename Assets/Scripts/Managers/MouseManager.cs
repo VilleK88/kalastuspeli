@@ -253,7 +253,6 @@ public class MouseManager : MonoBehaviour
                         player.transform.position = navHit.position;
                         agent = player.GetComponent<NavMeshAgent>();
                         agent.Warp(navHit.position);
-                        //Debug.Log("Set player position");
                     }
                 }
             }
@@ -294,28 +293,11 @@ public class MouseManager : MonoBehaviour
         castPoint = activePlayerObject.GetComponentsInChildren<Transform>(true)
             .FirstOrDefault(t => t.name == "castPoint");
 
-        /*if (castPoint == null)
-            Debug.LogWarning("castPoint not found in player's children.");
-        else
-            Debug.Log("castPoint found: " + castPoint.name);*/
-
         fishingLine = castPoint.GetComponentInChildren<LineRenderer>();
     }
 
     IEnumerator DelayedLaunchProjectile(float duration, Transform markerTransform)
     {
-        /*float elapsed = 0;
-
-        while(elapsed < duration)
-        {
-            Debug.Log("Tick at: " + Time.time);
-
-            DrawTrajectory(markerTransform);
-
-            yield return new WaitForSeconds(0.5f);
-
-            elapsed += 0.5f;
-        }*/
         yield return new WaitForSeconds(duration);
         LaunchProjectile(markerTransform);
     }

@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -10,6 +9,7 @@ public class RivalJobApplicant : MonoBehaviour
     [HideInInspector] public IRivalState currentState;
     [HideInInspector] public RivalIdleState idleState;
     [HideInInspector] public RivalWalkState walkState;
+    [HideInInspector] public RivalFishingState fishingState;
 
     public Animator anim;
 
@@ -18,6 +18,7 @@ public class RivalJobApplicant : MonoBehaviour
     public float walkSpeed = 10f;
 
     public GameObject currentMarkerObject;
+    public Marker currentMarker;
     public float currentDistance;
 
     float updateTimer = 0;
@@ -28,10 +29,13 @@ public class RivalJobApplicant : MonoBehaviour
     public float stuckThreshold = 0.05f;
     public float movementTolerance = 0.5f;
 
+    public bool fishing;
+
     private void Awake()
     {
         idleState = new RivalIdleState(this);
         walkState = new RivalWalkState(this);
+        fishingState = new RivalFishingState(this);
         agent = GetComponent<NavMeshAgent>();
     }
 
@@ -83,18 +87,6 @@ public class RivalJobApplicant : MonoBehaviour
         currentDistance = closestDistance;
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        Marker marker = other.GetComponentInParent<Marker>();
-        if(marker != null && !marker.markerOpen)
-        {
-            marker.DecreaseGridPrefabMarkerCount();
-            Destroy(marker.gameObject);
-            MarkerManager.Instance.GenerateNewMarker();
-            currentMarkerObject = null;
-        }
-    }
-
     public void WarpToTarget(Vector3 target)
     {
         Debug.Log("Jumping to unreachable marker...");
@@ -112,9 +104,42 @@ public class RivalJobApplicant : MonoBehaviour
         FindClosestMarker();
     }
 
+    public IEnumerator DestroyMarkerAndTransition()
+    {
+        if(currentMarker != null)
+        {
+            Debug.Log("Destroy the marker");
+            currentMarker.DecreaseGridPrefabMarkerCount();
+            Destroy(currentMarker.gameObject);
+            MarkerManager.Instance.GenerateNewMarker();
+            //currentMarkerObject = null;
+            //currentMarker = null;
+        }
+
+        yield return new WaitForSeconds(0.5f);
+        currentMarkerObject = null;
+        currentMarker = null;
+
+        anim.SetBool("FishingIdle", false);
+        FindClosestMarker();
+
+        if (currentMarkerObject != null)
+        {
+            Debug.Log("Back to walk state");
+            agent.SetDestination(currentMarkerObject.transform.position);
+            anim.SetBool("Walk", true);
+            fishing = false;
+            currentState = walkState;
+        }
+        else
+        {
+            fishingState.idleStartTime = Time.time;
+        }
+    }
+
     void CheckIfStuck()
     {
-        if (currentMarkerObject == null)
+        if (currentMarkerObject == null || fishing)
             return;
 
         float movedDistance = Vector3.Distance(transform.position, lastPosition);
@@ -138,9 +163,31 @@ public class RivalJobApplicant : MonoBehaviour
             lastPosition = transform.position;
     }
 
+    public void LookAtMarker(Transform markerTransform)
+    {
+        Vector3 targetPosition = markerTransform.position;
+        Vector3 direction = new Vector3(targetPosition.x, agent.transform.position.y, targetPosition.z);
+        transform.LookAt(direction);
+    }
+
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;
         Gizmos.DrawSphere(lastPosition, 0.2f);
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        Marker marker = other.GetComponentInParent<Marker>();
+        if (marker != null && !marker.markerOpen)
+        {
+            fishing = true;
+            currentMarker = marker;
+            LookAtMarker(marker.transform);
+            //marker.DecreaseGridPrefabMarkerCount();
+            //Destroy(marker.gameObject);
+            //MarkerManager.Instance.GenerateNewMarker();
+            //currentMarkerObject = null;
+        }
     }
 }
