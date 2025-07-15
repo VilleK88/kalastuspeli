@@ -127,6 +127,7 @@ public class RivalJobApplicant : MonoBehaviour
         {
             Debug.Log("Destroy the marker");
             currentMarker.DecreaseGridPrefabMarkerCount();
+            MarkerManager.Instance.currentGridPrefab = currentMarkerObject.GetComponentInParent<GridPrefab>();
             Destroy(currentMarker.gameObject);
             MarkerManager.Instance.GenerateNewMarker();
         }

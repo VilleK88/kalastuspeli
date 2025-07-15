@@ -35,6 +35,7 @@ public class MarkerManager : MonoBehaviour
 
     [Header("Marker Parameters")]
     public Marker currentMarker;
+    public GridPrefab currentGridPrefab; // this variable is used when marker is destroyed to make sure new marker isn't generated on the same gridprefab.
 
     public void InitializeMarkers()
     {
@@ -83,10 +84,13 @@ public class MarkerManager : MonoBehaviour
 
     public void GenerateNewMarker()
     {
-        List<GameObject> gridObjectList = GetGridList(0);
+        List<GameObject> gridObjectList = GetGridList(1);
 
         if (gridObjectList.Count == 0)
-            gridObjectList = GetGridList(1);
+            gridObjectList = GetGridList(2);
+
+        gridObjectList.Remove(currentGridPrefab.gameObject);
+        currentGridPrefab = null;
 
         while(true)
         {
