@@ -4,7 +4,7 @@ public class RivalFishingState : IRivalState
 {
     RivalJobApplicant rival;
     public float idleStartTime;
-    float maxIdleTime = 12;
+    float maxIdleTime = 10;
 
     public RivalFishingState(RivalJobApplicant thisRival)
     {
@@ -16,6 +16,10 @@ public class RivalFishingState : IRivalState
         if (Time.time - idleStartTime >= maxIdleTime)
         {
             ToRivalWalkState();
+        }
+        else
+        {
+            rival.LookAtMarker(rival.currentMarkerObject.transform);
         }
     }
 

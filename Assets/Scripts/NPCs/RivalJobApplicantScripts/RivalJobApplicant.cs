@@ -51,7 +51,6 @@ public class RivalJobApplicant : MonoBehaviour
         if (updateTimer >= updateInterval)
         {
             currentState.UpdateState();
-            CheckIfStuck();
             updateTimer = 0;
         }
     }
@@ -112,8 +111,6 @@ public class RivalJobApplicant : MonoBehaviour
             currentMarker.DecreaseGridPrefabMarkerCount();
             Destroy(currentMarker.gameObject);
             MarkerManager.Instance.GenerateNewMarker();
-            //currentMarkerObject = null;
-            //currentMarker = null;
         }
 
         yield return new WaitForSeconds(0.5f);
@@ -126,7 +123,14 @@ public class RivalJobApplicant : MonoBehaviour
         if (currentMarkerObject != null)
         {
             Debug.Log("Back to walk state");
-            agent.SetDestination(currentMarkerObject.transform.position);
+            if (!agent.hasPath)
+            {
+                if (agent.enabled && agent.isOnNavMesh)
+                {
+                    Vector3 pointNearMarker = GetRandomPointNearMarker(currentMarkerObject.transform.position, 5, 10);
+                    agent.SetDestination(pointNearMarker);
+                }
+            }
             anim.SetBool("Walk", true);
             fishing = false;
             currentState = walkState;
@@ -137,30 +141,32 @@ public class RivalJobApplicant : MonoBehaviour
         }
     }
 
-    void CheckIfStuck()
+    public Vector3 GetRandomPointNearMarker(Vector3 markerPosition, float minDistance, float maxDistance)
     {
-        if (currentMarkerObject == null || fishing)
-            return;
+        Debug.Log("Get random point near marker");
 
-        float movedDistance = Vector3.Distance(transform.position, lastPosition);
-
-        if(movedDistance < movementTolerance)
+        float currentDistance = Vector3.Distance(transform.position, currentMarkerObject.transform.position);
+        if(currentDistance < 10)
         {
-            stuckTimer += Time.deltaTime;
+            Debug.Log("Already within fishing range. Staying put");
+            return transform.position;
+        }
 
-            if(stuckTimer > stuckThreshold)
+        for (int i = 0; i < 30; i++)
+        {
+            float angle = Random.Range(0, 2 * Mathf.PI);
+            float distance = Random.Range(minDistance, maxDistance);
+
+            Vector3 direction = new Vector3(Mathf.Cos(angle), 0, Mathf.Sin(angle));
+            Vector3 candidate = markerPosition + direction * distance;
+
+            if(NavMesh.SamplePosition(candidate, out NavMeshHit hit, 50, NavMesh.AllAreas))
             {
-                Debug.LogWarning("Rival stuck. Warping to marker.");
-                WarpToTarget(currentMarkerObject.transform.position);
-                stuckTimer = 0;
+                return hit.position;
             }
         }
-        else
-        {
-            stuckTimer = 0;
-        }
 
-            lastPosition = transform.position;
+        return markerPosition;
     }
 
     public void LookAtMarker(Transform markerTransform)
@@ -170,12 +176,6 @@ public class RivalJobApplicant : MonoBehaviour
         transform.LookAt(direction);
     }
 
-    private void OnDrawGizmosSelected()
-    {
-        Gizmos.color = Color.red;
-        Gizmos.DrawSphere(lastPosition, 0.2f);
-    }
-
     private void OnTriggerEnter(Collider other)
     {
         Marker marker = other.GetComponentInParent<Marker>();
@@ -183,11 +183,6 @@ public class RivalJobApplicant : MonoBehaviour
         {
             fishing = true;
             currentMarker = marker;
-            LookAtMarker(marker.transform);
-            //marker.DecreaseGridPrefabMarkerCount();
-            //Destroy(marker.gameObject);
-            //MarkerManager.Instance.GenerateNewMarker();
-            //currentMarkerObject = null;
         }
     }
 }

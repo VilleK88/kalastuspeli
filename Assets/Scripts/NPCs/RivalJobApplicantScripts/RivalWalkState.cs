@@ -1,8 +1,5 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.AI;
 
 public class RivalWalkState : IRivalState
 {
@@ -17,18 +14,19 @@ public class RivalWalkState : IRivalState
     {
         if(rival.currentMarkerObject == null || rival.fishing)
         {
-            //ToRivalIdleState();
             ToRivalFishingState();
             return;
         }
 
         if (!rival.agent.hasPath)
         {
+            Debug.Log("Rival agent does not have a path");
             if(rival.agent.enabled && rival.agent.isOnNavMesh)
-                rival.agent.SetDestination(rival.currentMarkerObject.transform.position);
+            {
+                Vector3 pointNearMarker = rival.GetRandomPointNearMarker(rival.currentMarkerObject.transform.position, 5, 10);
+                rival.agent.SetDestination(pointNearMarker);
+            }
         }
-        /*if (rival.agent.enabled && rival.agent.isOnNavMesh)
-            rival.agent.SetDestination(rival.currentMarkerObject.transform.position);*/
     }
 
     public void ToRivalIdleState()
