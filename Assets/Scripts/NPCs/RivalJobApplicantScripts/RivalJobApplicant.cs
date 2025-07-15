@@ -121,19 +121,23 @@ public class RivalJobApplicant : MonoBehaviour
     public IEnumerator DestroyMarkerAndTransition()
     {
         Destroy(currentBait);
-        Marker currentMarker = currentMarkerObject.GetComponent<Marker>();
-
-        if (currentMarker != null)
+        if(currentMarkerObject != null)
         {
-            Debug.Log("Destroy the marker");
-            currentMarker.DecreaseGridPrefabMarkerCount();
-            MarkerManager.Instance.currentGridPrefab = currentMarkerObject.GetComponentInParent<GridPrefab>();
-            Destroy(currentMarker.gameObject);
-            MarkerManager.Instance.GenerateNewMarker();
+            Marker currentMarker = currentMarkerObject.GetComponent<Marker>();
+            if (currentMarker != null)
+            {
+                if(!currentMarker.markerOpen)
+                {
+                    currentMarker.DecreaseGridPrefabMarkerCount();
+                    MarkerManager.Instance.currentGridPrefab = currentMarkerObject.GetComponentInParent<GridPrefab>();
+                    Destroy(currentMarker.gameObject);
+                    MarkerManager.Instance.GenerateNewMarker();
+                }
+            }
+            currentMarkerObject = null;
         }
 
         yield return new WaitForSeconds(0.5f);
-        currentMarkerObject = null;
 
         anim.SetBool("FishingIdle", false);
         FindClosestMarker();

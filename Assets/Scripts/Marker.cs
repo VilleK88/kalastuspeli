@@ -74,6 +74,7 @@ public class Marker : MonoBehaviour
                 MarkerUI.Instance.UpdateJobListingParameters(jobListing);
 
             MarkerManager.Instance.currentMarker = this;
+            MarkerManager.Instance.currentGridPrefab = this.gameObject.GetComponentInParent<GridPrefab>();
             markerOpen = true;
             DecreaseGridPrefabMarkerCount();
             MarkerUI.Instance.OpenMarkerInfoPanel();

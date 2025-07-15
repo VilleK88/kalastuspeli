@@ -40,7 +40,7 @@ public class PlayerController : MonoBehaviour
 
     private float currentForce = 0f;
     private bool isCharging = false;
-    private float chargeStartTime = 0f;
+    //private float chargeStartTime = 0f;
 
     public BaitSO[] baits;
     public int selectedBaitIndex = 0;

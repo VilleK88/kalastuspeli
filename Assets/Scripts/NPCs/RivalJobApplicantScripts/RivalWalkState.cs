@@ -21,14 +21,17 @@ public class RivalWalkState : IRivalState
         if (!rival.agent.hasPath)
         {
             Debug.Log("Rival agent does not have a path");
-            if(rival.agent.enabled && rival.agent.isOnNavMesh)
+            rival.anim.SetBool("Walk", false);
+            if (rival.agent.enabled && rival.agent.isOnNavMesh)
             {
                 Vector3 pointNearMarker = rival.GetRandomPointNearMarker(rival.currentMarkerObject.transform.position, 5, 10);
                 rival.agent.SetDestination(pointNearMarker);
             }
         }
+        else
+            rival.anim.SetBool("Walk", true);
 
-        float distanceToMarker = Vector3.Distance(rival.transform.position, rival.currentMarkerObject.transform.position);
+            float distanceToMarker = Vector3.Distance(rival.transform.position, rival.currentMarkerObject.transform.position);
         if (distanceToMarker <= 30)
             rival.fishing = true;
     }

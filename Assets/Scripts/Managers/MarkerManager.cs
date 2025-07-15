@@ -89,10 +89,13 @@ public class MarkerManager : MonoBehaviour
         if (gridObjectList.Count == 0)
             gridObjectList = GetGridList(2);
 
-        gridObjectList.Remove(currentGridPrefab.gameObject);
-        currentGridPrefab = null;
+        if(currentGridPrefab != null)
+        {
+            gridObjectList.Remove(currentGridPrefab.gameObject);
+            currentGridPrefab = null;
+        }
 
-        while(true)
+        while (true)
         {
             int randomIndex = Random.Range(0, gridObjectList.Count);
             GridPrefab gridPrefab = gridObjectList[randomIndex].GetComponent<GridPrefab>();

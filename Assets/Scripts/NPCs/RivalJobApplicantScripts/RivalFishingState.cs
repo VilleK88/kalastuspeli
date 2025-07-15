@@ -21,7 +21,8 @@ public class RivalFishingState : IRivalState
         }
         else
         {
-            rival.LookAtMarker(rival.currentMarkerObject.transform);
+            if(rival.currentMarkerObject != null)
+                rival.LookAtMarker(rival.currentMarkerObject.transform);
         }
     }
 
