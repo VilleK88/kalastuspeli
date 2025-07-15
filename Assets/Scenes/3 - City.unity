@@ -2533,6 +2533,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3251572426130692313, guid: ab45caca33be639458cf615b686856be, type: 3}
   m_PrefabInstance: {fileID: 1126260270}
   m_PrefabAsset: {fileID: 0}
+--- !u!120 &1131163105 stripped
+LineRenderer:
+  m_CorrespondingSourceObject: {fileID: 1274229409941909860, guid: ab45caca33be639458cf615b686856be, type: 3}
+  m_PrefabInstance: {fileID: 1126260270}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1247682772
 GameObject:
   m_ObjectHideFlags: 0
@@ -4221,14 +4226,34 @@ PrefabInstance:
       propertyPath: m_Name
       value: RivalJobApplicant
       objectReference: {fileID: 0}
+    - target: {fileID: 2423092408706571003, guid: 74ae8c4115db9c94da8737c20ddaa3a6, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3334816000320229148, guid: 74ae8c4115db9c94da8737c20ddaa3a6, type: 3}
+      propertyPath: castPoint
+      value: 
+      objectReference: {fileID: 1126260271}
+    - target: {fileID: 3334816000320229148, guid: 74ae8c4115db9c94da8737c20ddaa3a6, type: 3}
+      propertyPath: fishingLine
+      value: 
+      objectReference: {fileID: 1131163105}
     - target: {fileID: 3334816000320229148, guid: 74ae8c4115db9c94da8737c20ddaa3a6, type: 3}
       propertyPath: stuckThreshold
       value: 0.05
       objectReference: {fileID: 0}
     - target: {fileID: 3334816000320229148, guid: 74ae8c4115db9c94da8737c20ddaa3a6, type: 3}
+      propertyPath: baits.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3334816000320229148, guid: 74ae8c4115db9c94da8737c20ddaa3a6, type: 3}
       propertyPath: movementTolerance
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 3334816000320229148, guid: 74ae8c4115db9c94da8737c20ddaa3a6, type: 3}
+      propertyPath: 'baits.Array.data[0]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 5cc2db99eaa28bf4fad1c55c772809b9, type: 2}
     - target: {fileID: 4035297505925921803, guid: 74ae8c4115db9c94da8737c20ddaa3a6, type: 3}
       propertyPath: m_LocalPosition.x
       value: 84.62138
@@ -4279,6 +4304,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 3337558073306134102, guid: 74ae8c4115db9c94da8737c20ddaa3a6, type: 3}
+    - {fileID: 5488306697104625501, guid: 74ae8c4115db9c94da8737c20ddaa3a6, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 8473128335963691434, guid: 74ae8c4115db9c94da8737c20ddaa3a6, type: 3}

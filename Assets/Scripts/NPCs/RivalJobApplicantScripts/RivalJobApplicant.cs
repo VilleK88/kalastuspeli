@@ -1,3 +1,4 @@
+using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -18,7 +19,6 @@ public class RivalJobApplicant : MonoBehaviour
     public float walkSpeed = 10f;
 
     public GameObject currentMarkerObject;
-    public Marker currentMarker;
     public float currentDistance;
 
     float updateTimer = 0;
@@ -29,7 +29,16 @@ public class RivalJobApplicant : MonoBehaviour
     public float stuckThreshold = 0.05f;
     public float movementTolerance = 0.5f;
 
+    [Header("Fishing Parameters")]
     public bool fishing;
+    [SerializeField] Transform castPoint;
+    [SerializeField] LineRenderer fishingLine;
+    public BaitSO[] baits;
+    public int selectedBaitIndex = 0;
+    public GameObject currentBait;
+    float launchSpeed = 90;
+    float heightSpeedFactor = 2;
+    [SerializeField] GameObject projectilePrefab;
 
     private void Awake()
     {
@@ -41,6 +50,7 @@ public class RivalJobApplicant : MonoBehaviour
 
     private void Start()
     {
+        FindCastPointAndFishingLine();
         currentState = idleState;
         lastPosition = transform.position;
     }
@@ -53,6 +63,9 @@ public class RivalJobApplicant : MonoBehaviour
             currentState.UpdateState();
             updateTimer = 0;
         }
+
+        if (fishingLine != null)
+            UpdateFishingLine();
     }
 
     public void FindClosestMarker()
@@ -103,9 +116,14 @@ public class RivalJobApplicant : MonoBehaviour
         FindClosestMarker();
     }
 
+    // Delay is used because destroying the marker and immediately accessing NavMesh/marker data 
+    // in the same frame causes race conditions. Waiting one frame ensures safe state transition.
     public IEnumerator DestroyMarkerAndTransition()
     {
-        if(currentMarker != null)
+        Destroy(currentBait);
+        Marker currentMarker = currentMarkerObject.GetComponent<Marker>();
+
+        if (currentMarker != null)
         {
             Debug.Log("Destroy the marker");
             currentMarker.DecreaseGridPrefabMarkerCount();
@@ -115,7 +133,6 @@ public class RivalJobApplicant : MonoBehaviour
 
         yield return new WaitForSeconds(0.5f);
         currentMarkerObject = null;
-        currentMarker = null;
 
         anim.SetBool("FishingIdle", false);
         FindClosestMarker();
@@ -134,6 +151,7 @@ public class RivalJobApplicant : MonoBehaviour
             anim.SetBool("Walk", true);
             fishing = false;
             currentState = walkState;
+            fishingState.coroutineRunning = false;
         }
         else
         {
@@ -176,13 +194,52 @@ public class RivalJobApplicant : MonoBehaviour
         transform.LookAt(direction);
     }
 
-    private void OnTriggerEnter(Collider other)
+    void FindCastPointAndFishingLine()
     {
-        Marker marker = other.GetComponentInParent<Marker>();
-        if (marker != null && !marker.markerOpen)
+        castPoint = this.gameObject.GetComponentsInChildren<Transform>(true)
+            .FirstOrDefault(t => t.name == "castPoint");
+
+        fishingLine = castPoint.GetComponentInChildren<LineRenderer>();
+    }
+
+    public IEnumerator DelayedLaunchProjectile(float duration, Transform markerTransform)
+    {
+        yield return new WaitForSeconds(duration);
+        LaunchProjectile(markerTransform);
+    }
+
+    public void LaunchProjectile(Transform markerTransform)
+    {
+        Vector3 launchPosition = this.gameObject.transform.position + Vector3.up * 10;
+        Transform childObject = markerTransform.GetChild(1);
+        Renderer childRenderer = childObject.GetComponent<Renderer>();
+        Vector3 targetCenter = childRenderer != null ? childRenderer.bounds.center : childObject.position;
+        Vector3 direction = (targetCenter - launchPosition).normalized;
+
+        float heightDifference = childObject.position.y - launchPosition.y;
+        float adjustedSpeed = launchSpeed;
+
+        if (heightDifference > 0)
+            adjustedSpeed += heightDifference * heightSpeedFactor;
+
+        GameObject prefabToThrow = baits[selectedBaitIndex].prefab;
+        GameObject projectileInstance = Instantiate(prefabToThrow, launchPosition, Quaternion.LookRotation(direction));
+        Rigidbody projectileRB = projectileInstance.GetComponent<Rigidbody>();
+        projectileRB.linearVelocity = direction * adjustedSpeed;
+        currentBait = projectileInstance;
+    }
+
+    void UpdateFishingLine()
+    {
+        if (currentBait != null)
         {
-            fishing = true;
-            currentMarker = marker;
+            fishingLine.enabled = true;
+            fishingLine.SetPosition(0, castPoint.position);
+            fishingLine.SetPosition(1, currentBait.transform.position);
+        }
+        else
+        {
+            fishingLine.enabled = false;
         }
     }
 }

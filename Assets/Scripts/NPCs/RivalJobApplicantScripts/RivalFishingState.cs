@@ -5,6 +5,7 @@ public class RivalFishingState : IRivalState
     RivalJobApplicant rival;
     public float idleStartTime;
     float maxIdleTime = 10;
+    public bool coroutineRunning; // this makes sure that the coroutine only runs once
 
     public RivalFishingState(RivalJobApplicant thisRival)
     {
@@ -15,7 +16,8 @@ public class RivalFishingState : IRivalState
     {
         if (Time.time - idleStartTime >= maxIdleTime)
         {
-            ToRivalWalkState();
+            if(!coroutineRunning)
+                ToRivalWalkState();
         }
         else
         {
@@ -31,21 +33,7 @@ public class RivalFishingState : IRivalState
     public void ToRivalWalkState()
     {
         rival.StartCoroutine(rival.DestroyMarkerAndTransition());
-
-        /*rival.anim.SetBool("FishingIdle", false);
-        rival.FindClosestMarker();
-
-        if (rival.currentMarkerObject != null)
-        {
-            Debug.Log("back to walk state");
-            rival.agent.SetDestination(rival.currentMarkerObject.transform.position);
-            rival.anim.SetBool("Walk", true);
-            rival.currentState = rival.walkState;
-        }
-        else
-        {
-            idleStartTime = Time.time;
-        }*/
+        coroutineRunning = true;
     }
 
     public void ToRivalFishingState()

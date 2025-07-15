@@ -27,6 +27,10 @@ public class RivalWalkState : IRivalState
                 rival.agent.SetDestination(pointNearMarker);
             }
         }
+
+        float distanceToMarker = Vector3.Distance(rival.transform.position, rival.currentMarkerObject.transform.position);
+        if (distanceToMarker <= 30)
+            rival.fishing = true;
     }
 
     public void ToRivalIdleState()
@@ -50,6 +54,7 @@ public class RivalWalkState : IRivalState
         rival.anim.SetBool("Walk", false);
         rival.anim.SetTrigger("FishingCast");
         rival.anim.SetBool("FishingIdle", true);
+        rival.StartCoroutine(rival.DelayedLaunchProjectile(1.9f, rival.currentMarkerObject.transform));
         rival.currentState = rival.fishingState;
     }
 
