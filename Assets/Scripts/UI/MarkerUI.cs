@@ -87,6 +87,7 @@ public class MarkerUI : MonoBehaviour
             currentMarker.DecreaseGridPrefabMarkerCount();
             transparentBG.SetActive(true);
             jobInfoObject.SetActive(true);
+            JobApplicationsManager.Instance.IncreasePlayersJobAppCount();
         }
         else
             MouseManager.Instance.StopFishing(true);
