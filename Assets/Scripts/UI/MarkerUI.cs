@@ -65,7 +65,7 @@ public class MarkerUI : MonoBehaviour
         companyInfoObject.SetActive(false);
         jobInfoObject.SetActive(false);
         transparentBG.SetActive(false);
-        MouseManager.Instance.StopFishing();
+        MouseManager.Instance.StopFishing(false);
         Destroy(MarkerManager.Instance.currentMarker.gameObject);
         MarkerManager.Instance.GenerateNewMarker();
         StartCoroutine(DelayedBooleanValueChange(1f));
@@ -80,8 +80,16 @@ public class MarkerUI : MonoBehaviour
     IEnumerator DelayedInfoPanelOpening(float time)
     {
         yield return new WaitForSeconds(time);
-        transparentBG.SetActive(true);
-        jobInfoObject.SetActive(true);
+        Marker currentMarker = MarkerManager.Instance.currentMarker;
+        if (currentMarker != null)
+        {
+            currentMarker.markerOpen = true;
+            currentMarker.DecreaseGridPrefabMarkerCount();
+            transparentBG.SetActive(true);
+            jobInfoObject.SetActive(true);
+        }
+        else
+            MouseManager.Instance.StopFishing(true);
     }
 
     void OpenJobListingInfo()
