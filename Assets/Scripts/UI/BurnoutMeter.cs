@@ -18,6 +18,7 @@ public class BurnoutMeter : MonoBehaviour
     public Image fill;
     public float maxHealth = 100;
     float currentHealth;
+    float damage = 0.5f;
 
     float maxTime = 1;
     float timer = 0;
@@ -36,7 +37,7 @@ public class BurnoutMeter : MonoBehaviour
         }
         else
         {
-            TakeDamage(0.5f);
+            TakeDamage(damage);
             timer = 0;
         }
     }
@@ -45,6 +46,14 @@ public class BurnoutMeter : MonoBehaviour
     {
         currentHealth -= amount;
         currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
+
+        if(currentHealth <= 0)
+        {
+            currentHealth = 0;
+            MatchResultUI.Instance.ShowGameOverScreen();
+            PauseManager.Instance.PauseGame();
+        }
+
         UpdateBurnoutMeter();
     }
 

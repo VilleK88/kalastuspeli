@@ -3,11 +3,23 @@ using TMPro;
 
 public class GameTimer : MonoBehaviour
 {
+    #region Singleton
+    public static GameTimer Instance;
+
+    private void Awake()
+    {
+        if (Instance == null)
+            Instance = this;
+        else
+            Destroy(gameObject);
+    }
+    #endregion
+
     [SerializeField] TextMeshProUGUI timerText;
     float maxTime = 1;
     float counter = 0;
-    float currentGameTimeMin = 0;
-    float currentGameTimeSec = 0;
+    public float currentGameTimeMin = 0;
+    public float currentGameTimeSec = 0;
 
     private void Update()
     {
