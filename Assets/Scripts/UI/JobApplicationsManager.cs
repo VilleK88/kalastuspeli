@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Rendering;
 using UnityEngine.UI;
 
 public class JobApplicationsManager : MonoBehaviour
@@ -25,5 +26,13 @@ public class JobApplicationsManager : MonoBehaviour
     public void IncreaseRivalsJobAppCount()
     {
         rivalJobApp.IncreaseJobAppCount();
+    }
+
+    public void ShowEndingScreen()
+    {
+        if (playerJobApp.jobApplicationCount > rivalJobApp.jobApplicationCount)
+            MatchResultUI.Instance.ShowResult("1st place", MatchResultUI.Instance.firstPlace);
+        else
+            MatchResultUI.Instance.ShowResult("2nd place", MatchResultUI.Instance.secondPlace);
     }
 }

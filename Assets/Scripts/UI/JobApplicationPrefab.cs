@@ -4,7 +4,7 @@ using TMPro;
 public class JobApplicationPrefab : MonoBehaviour
 {
     [SerializeField] TextMeshProUGUI countText;
-    [SerializeField] int jobApplicationCount = 0;
+    public int jobApplicationCount = 0;
 
     public void IncreaseJobAppCount()
     {
