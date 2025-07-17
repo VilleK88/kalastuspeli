@@ -65,10 +65,11 @@ public class MarkerUI : MonoBehaviour
         companyInfoObject.SetActive(false);
         jobInfoObject.SetActive(false);
         transparentBG.SetActive(false);
-        MouseManager.Instance.StopFishing(false);
+        MouseManager.Instance.StopFishing();
         Destroy(MarkerManager.Instance.currentMarker.gameObject);
         MarkerManager.Instance.GenerateNewMarker();
         StartCoroutine(DelayedBooleanValueChange(1f));
+        PauseManager.Instance.ResumeGame();
     }
 
     IEnumerator DelayedBooleanValueChange(float time)
@@ -88,9 +89,11 @@ public class MarkerUI : MonoBehaviour
             transparentBG.SetActive(true);
             jobInfoObject.SetActive(true);
             JobApplicationsManager.Instance.IncreasePlayersJobAppCount();
+            PauseManager.Instance.PauseGame();
+            BurnoutMeter.Instance.Heal(10);
         }
         else
-            MouseManager.Instance.StopFishing(true);
+            MouseManager.Instance.StopFishing();
     }
 
     void OpenJobListingInfo()

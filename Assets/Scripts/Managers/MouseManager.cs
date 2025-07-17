@@ -215,13 +215,10 @@ public class MouseManager : MonoBehaviour
         StartCoroutine(DelayedLaunchProjectile(1.9f, markerTransform));
     }
 
-    public void StopFishing(bool rivalWasFirst)
+    public void StopFishing()
     {
-        if(rivalWasFirst)
-            playerAnim.Play("Idle");
-        else
-            playerAnim.SetBool("Fishing_Idle", false);
-
+        playerAnim.Play("Fishing_Idle");
+        playerAnim.SetBool("Fishing_Idle", false);
         Destroy(currentBait);
         StartCoroutine(DelayedStopFishing(1f));
     }
