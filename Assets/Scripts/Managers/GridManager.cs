@@ -37,9 +37,7 @@ public class GridManager : MonoBehaviour
                 {
                     NavMeshHit navHit;
                     if(NavMesh.SamplePosition(hit.point, out navHit, 2f, NavMesh.AllAreas))
-                    {
                         transform.position = navHit.position;
-                    }
                 }
             }
         }
