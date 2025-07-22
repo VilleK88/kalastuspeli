@@ -211,7 +211,8 @@ public class RivalJobApplicant : MonoBehaviour
     public IEnumerator DelayedLaunchProjectile(float duration, Transform markerTransform)
     {
         yield return new WaitForSeconds(duration);
-        LaunchProjectile(markerTransform);
+        if(markerTransform != null)
+            LaunchProjectile(markerTransform);
     }
 
     public void LaunchProjectile(Transform markerTransform)

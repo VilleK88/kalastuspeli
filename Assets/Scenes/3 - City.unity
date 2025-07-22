@@ -3608,7 +3608,7 @@ PrefabInstance:
     - target: {fileID: 6747576594385119308, guid: 79c215efa5ab95e4a849a9bbc44855d0, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1146057085}
+      objectReference: {fileID: 1689073127}
     - target: {fileID: 6747576594385119308, guid: 79c215efa5ab95e4a849a9bbc44855d0, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
@@ -3619,7 +3619,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6747576594385119308, guid: 79c215efa5ab95e4a849a9bbc44855d0, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: GoToScene, Assembly-CSharp
+      value: MatchResultUI, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 6747576594385119308, guid: 79c215efa5ab95e4a849a9bbc44855d0, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
@@ -3628,34 +3628,13 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 4302681336575807633, guid: 79c215efa5ab95e4a849a9bbc44855d0, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1146057085}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 79c215efa5ab95e4a849a9bbc44855d0, type: 3}
 --- !u!224 &1134600508 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 2979699207394530538, guid: 79c215efa5ab95e4a849a9bbc44855d0, type: 3}
   m_PrefabInstance: {fileID: 1134600507}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1146057080 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4302681336575807633, guid: 79c215efa5ab95e4a849a9bbc44855d0, type: 3}
-  m_PrefabInstance: {fileID: 1134600507}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1146057085
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1146057080}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7e4c333dffe1c7c4284b23a3a5257891, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sceneName: 2 - Map
 --- !u!1 &1173388902
 GameObject:
   m_ObjectHideFlags: 0

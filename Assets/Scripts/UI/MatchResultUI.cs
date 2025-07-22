@@ -62,4 +62,11 @@ public class MatchResultUI : MonoBehaviour
         CloseGameOverScreen();
         PauseManager.Instance.ResumeGame();
     }
+
+    public void GoToThisScene()
+    {
+        PauseManager.Instance.ResumeGame();
+        SceneManager.LoadScene("2 - Map");
+        Debug.Log("Change scene to: " + "2 - Map");
+    }
 }

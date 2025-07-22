@@ -57,7 +57,8 @@ public class RivalWalkState : IRivalState
         rival.anim.SetBool("Walk", false);
         rival.anim.SetTrigger("FishingCast");
         rival.anim.SetBool("FishingIdle", true);
-        rival.StartCoroutine(rival.DelayedLaunchProjectile(1.9f, rival.currentMarkerObject.transform));
+        if(rival.currentMarkerObject != null)
+            rival.StartCoroutine(rival.DelayedLaunchProjectile(1.9f, rival.currentMarkerObject.transform));
         rival.currentState = rival.fishingState;
     }
 
