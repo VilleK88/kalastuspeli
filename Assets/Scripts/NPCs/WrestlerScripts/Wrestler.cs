@@ -9,7 +9,6 @@ public class Wrestler : MonoBehaviour
     [HideInInspector] public WWalkState walkState;
 
     public Animator anim;
-    RuntimeAnimatorController ac;
 
     [Header("Waypoint Parameters")]
     public GameObject[] waypoints;

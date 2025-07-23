@@ -54,8 +54,6 @@ public class WWalkState : IWrestlerState
             {
                 wrestler.idleState.maxIdleTime = clip.length;
                 wrestler.anim.SetTrigger(wrestler.idleState.currentAnim);
-                //Debug.Log("Clip length: " + clip.length);
-                //Debug.Log("maxIdleTime: " + wrestler.idleState.maxIdleTime);
                 break;
             }
         }

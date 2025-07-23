@@ -357,4 +357,9 @@ public class MouseManager : MonoBehaviour
             fishingLine.enabled = false;
         }
     }
+
+    public Transform GetPlayerPosition()
+    {
+        return player.transform;
+    }
 }
