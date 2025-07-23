@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 7af490ac9513f2b4a88be930c89da620
+guid: 884dae88488f6644cad764894920f5ba
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
@@ -110,5 +110,5 @@ AssetOrigin:
   productId: 73764
   packageName: Simple Gems and Items Ultimate Animated Customizable Pack
   packageVersion: 1.3
-  assetPath: Assets/BTM_Assets/BTM_Items_Gems/Models/Lock.fbx
+  assetPath: Assets/BTM_Assets/BTM_Items_Gems/Models/Star.fbx
   uploadId: 739389
