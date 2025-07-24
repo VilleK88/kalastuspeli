@@ -31,7 +31,8 @@ public class MarkerManager : MonoBehaviour
     [SerializeField] ApiConfig jobListingApiConfig;
     [SerializeField] ApiConfig companyInfoApiConfig;
     List<Yritys> cityCompanies = new List<Yritys>();
-    List<JobListing> cityJobListings = new List<JobListing>();
+    public List<JobListing> cityJobListings = new List<JobListing>();
+    public List<JobListing> collectedJobListings = new List<JobListing>();
 
     [Header("Marker Parameters")]
     public Marker currentMarker;

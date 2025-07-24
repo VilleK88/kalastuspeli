@@ -47,6 +47,17 @@ public class GameTimer : MonoBehaviour
                 PauseManager.Instance.PauseGame();
             }
         }
+
+        // for testing purposes
+        if(Input.GetKeyDown(KeyCode.T))
+        {
+            for(int i = 0; i < MarkerManager.Instance.cityJobListings.Count; i++)
+            {
+                MarkerManager.Instance.collectedJobListings.Add(MarkerManager.Instance.cityJobListings[i]);
+            }
+            currentGameTimeMin = 3;
+
+        }
     }
 
     string ReturnString(float time)

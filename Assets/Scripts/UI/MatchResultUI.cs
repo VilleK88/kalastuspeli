@@ -23,11 +23,18 @@ public class MatchResultUI : MonoBehaviour
     public GameObject showJobsButton;
     public GameObject playAgainButton;
     public GameObject gameOverScreen;
+    public GameObject innerBG;
+
+    public GameObject innerBG_JobApplicationsList;
+    public GameObject jobListingContent;
+    public GameObject jobListingButtonObj;
 
     public void ShowResult(string resultString, GameObject medal)
     {
         transparentBG.SetActive(true);
+        innerBG.SetActive(true);
         showJobsButton.SetActive(true);
+        resultText.enabled = true;
         resultText.text = resultString;
         medal.SetActive(true);
     }
@@ -35,16 +42,20 @@ public class MatchResultUI : MonoBehaviour
     public void ShowGameOverScreen()
     {
         transparentBG.SetActive(true);
+        innerBG.SetActive(true);
         playAgainButton.SetActive(true);
         gameOverScreen.SetActive(true);
+        resultText.enabled = true;
         resultText.text = "Hidden jobs are an opportunity, don’t hang yourself.";
     }
 
     public void CloseGameOverScreen()
     {
         playAgainButton.SetActive(false);
+        innerBG_JobApplicationsList.SetActive(false);
         gameOverScreen.SetActive(false);
         transparentBG.SetActive(false);
+        MarkerManager.Instance.collectedJobListings = null;
     }
 
     public void PlayAgain()
@@ -68,5 +79,23 @@ public class MatchResultUI : MonoBehaviour
         PauseManager.Instance.ResumeGame();
         SceneManager.LoadScene("2 - Map");
         Debug.Log("Change scene to: " + "2 - Map");
+    }
+
+    public void ShowJobs()
+    {
+        innerBG.SetActive(false);
+        innerBG_JobApplicationsList.SetActive(true);
+
+        for(int i = 0; i < MarkerManager.Instance.collectedJobListings.Count; i++)
+        {
+            GameObject prefabInstance = Instantiate(jobListingButtonObj, transform.position, Quaternion.identity);
+            prefabInstance.transform.parent = jobListingContent.transform;
+            JobListingButton jobListingButton = prefabInstance.GetComponent<JobListingButton>();
+            jobListingButton.jobListing = MarkerManager.Instance.collectedJobListings[i];
+            jobListingButton.text.text = jobListingButton.jobListing.title.ToString();
+        }
+
+        showJobsButton.SetActive(false);
+        playAgainButton.SetActive(true);
     }
 }

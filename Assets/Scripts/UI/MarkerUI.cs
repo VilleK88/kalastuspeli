@@ -55,8 +55,16 @@ public class MarkerUI : MonoBehaviour
 
     public void OpenMarkerInfoPanel()
     {
-        open = true;
-        StartCoroutine(DelayedInfoPanelOpening(4f));
+        if(GameTimer.Instance.currentGameTimeMin < 1)
+        {
+            open = true;
+            StartCoroutine(DelayedInfoPanelOpening(4f));
+        }
+        else
+        {
+            transparentBG.SetActive(true);
+            jobInfoObject.SetActive(true);
+        }
     }
 
     public void CloseMarkerInfoPanel()
@@ -65,11 +73,15 @@ public class MarkerUI : MonoBehaviour
         companyInfoObject.SetActive(false);
         jobInfoObject.SetActive(false);
         transparentBG.SetActive(false);
-        MouseManager.Instance.StopFishing();
-        Destroy(MarkerManager.Instance.currentMarker.gameObject);
-        MarkerManager.Instance.GenerateNewMarker();
-        StartCoroutine(DelayedBooleanValueChange(1f));
-        PauseManager.Instance.ResumeGame();
+
+        if (GameTimer.Instance.currentGameTimeMin < 1)
+        {
+            MouseManager.Instance.StopFishing();
+            Destroy(MarkerManager.Instance.currentMarker.gameObject);
+            MarkerManager.Instance.GenerateNewMarker();
+            StartCoroutine(DelayedBooleanValueChange(1f));
+            PauseManager.Instance.ResumeGame();
+        }
     }
 
     IEnumerator DelayedBooleanValueChange(float time)
