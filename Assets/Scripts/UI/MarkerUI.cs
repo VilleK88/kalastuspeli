@@ -55,7 +55,7 @@ public class MarkerUI : MonoBehaviour
 
     public void OpenMarkerInfoPanel()
     {
-        if(GameTimer.Instance.currentGameTimeMin < 1)
+        if(GameTimer.Instance.currentGameTimeMin < 3)
         {
             open = true;
             StartCoroutine(DelayedInfoPanelOpening(4f));
