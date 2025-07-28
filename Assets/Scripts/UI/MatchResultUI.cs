@@ -72,6 +72,10 @@ public class MatchResultUI : MonoBehaviour
 
         CloseGameOverScreen();
         PauseManager.Instance.ResumeGame();
+        MouseManager.Instance.ReturnToStartPosition();
+
+        RivalJobApplicant rival = FindAnyObjectByType<RivalJobApplicant>();
+        rival.ReturnToStartPosition();
     }
 
     public void GoToThisScene()

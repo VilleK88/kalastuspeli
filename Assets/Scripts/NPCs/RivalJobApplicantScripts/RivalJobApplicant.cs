@@ -40,6 +40,8 @@ public class RivalJobApplicant : MonoBehaviour
     float heightSpeedFactor = 2;
     [SerializeField] GameObject projectilePrefab;
 
+    public Vector3 startPosition;
+
     private void Awake()
     {
         idleState = new RivalIdleState(this);
@@ -53,6 +55,7 @@ public class RivalJobApplicant : MonoBehaviour
         FindCastPointAndFishingLine();
         currentState = idleState;
         lastPosition = transform.position;
+        startPosition = lastPosition;
     }
 
     private void Update()
@@ -101,7 +104,6 @@ public class RivalJobApplicant : MonoBehaviour
 
     public void WarpToTarget(Vector3 target)
     {
-        Debug.Log("Jumping to unreachable marker...");
         StartCoroutine(WarpCoroutine(target));
     }
 
@@ -140,12 +142,16 @@ public class RivalJobApplicant : MonoBehaviour
 
         yield return new WaitForSeconds(0.5f);
 
+        StopFishing();
+    }
+
+    void StopFishing()
+    {
         anim.SetBool("FishingIdle", false);
         FindClosestMarker();
 
         if (currentMarkerObject != null)
         {
-            Debug.Log("Back to walk state");
             if (!agent.hasPath)
             {
                 if (agent.enabled && agent.isOnNavMesh)
@@ -167,14 +173,10 @@ public class RivalJobApplicant : MonoBehaviour
 
     public Vector3 GetRandomPointNearMarker(Vector3 markerPosition, float minDistance, float maxDistance)
     {
-        Debug.Log("Get random point near marker");
 
         float currentDistance = Vector3.Distance(transform.position, currentMarkerObject.transform.position);
         if(currentDistance < 10)
-        {
-            Debug.Log("Already within fishing range. Staying put");
             return transform.position;
-        }
 
         for (int i = 0; i < 30; i++)
         {
@@ -248,5 +250,13 @@ public class RivalJobApplicant : MonoBehaviour
         {
             fishingLine.enabled = false;
         }
+    }
+
+    public void ReturnToStartPosition()
+    {
+        StopCoroutine(DestroyMarkerAndTransition());
+        agent.isStopped = true;
+        agent.Warp(startPosition);
+        agent.isStopped = false;
     }
 }

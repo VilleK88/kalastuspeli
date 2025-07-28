@@ -68,9 +68,11 @@ public class MouseManager : MonoBehaviour
     [SerializeField] InputActionAsset inputActions;
     InputAction clickAction;
 
+    public Vector3 startPosition;
+
     void Start()
     {
-        StartCoroutine(DelayedPlayerInitialization(1f)); // 0.5f
+        StartCoroutine(DelayedPlayerInitialization(1f));
         layerMask = ~(1 << LayerMask.NameToLayer("Player"));
         lineRenderer = player.GetComponent<LineRenderer>();
     }
@@ -278,6 +280,7 @@ public class MouseManager : MonoBehaviour
                     activePlayerObject.SetActive(true);
                     playerAnim = activePlayerObject.GetComponent<Animator>();
                     FindCastPointAndFishingLine();
+                    startPosition = player.transform.position;
                 }
             }
         }
@@ -361,5 +364,12 @@ public class MouseManager : MonoBehaviour
     public Transform GetPlayerPosition()
     {
         return player.transform;
+    }
+
+    public void ReturnToStartPosition()
+    {
+        agent.isStopped = true;
+        agent.Warp(startPosition);
+        agent.isStopped = false;
     }
 }

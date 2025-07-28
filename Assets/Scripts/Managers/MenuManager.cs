@@ -8,6 +8,7 @@ public class MenuManager : MonoBehaviour
     [Header("Menu Objects")]
     [SerializeField] GameObject settingsBG;
     [SerializeField] GameObject characterMenuBG;
+    [SerializeField] GameObject guideText;
     [Header("Audio")]
     [SerializeField] GameObject audioSettings;
     public Slider masterVol, musicVol, sfxVol;
@@ -49,17 +50,31 @@ public class MenuManager : MonoBehaviour
 
     public void CloseSettingsMenu()
     {
+        CloseAudioSettings();
+        CloseGuideText();
         settingsBG.SetActive(false);
     }
 
     public void OpenAudioSettings()
     {
+        CloseGuideText();
         audioSettings.SetActive(true);
     }
 
     public void CloseAudioSettings()
     {
         audioSettings.SetActive(false);
+    }
+
+    public void OpenGuideText()
+    {
+        CloseAudioSettings();
+        guideText.SetActive(true);
+    }
+
+    public void CloseGuideText()
+    {
+        guideText.SetActive(false);
     }
 
     public void ChangeMasterVolume()

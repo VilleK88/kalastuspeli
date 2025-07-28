@@ -21,8 +21,16 @@ public class RivalFishingState : IRivalState
         }
         else
         {
-            if(rival.currentMarkerObject != null)
+            if (rival.currentMarkerObject != null)
                 rival.LookAtMarker(rival.currentMarkerObject.transform);
+            else
+            {
+                if (!coroutineRunning)
+                {
+                    rival.anim.Play("FishingIdle");
+                    ToRivalWalkState();
+                }
+            }
         }
     }
 

@@ -2205,7 +2205,7 @@ MonoBehaviour:
   timerText: {fileID: 541385416}
   currentGameTimeMin: 0
   currentGameTimeSec: 0
-  maxGameTime: 1
+  maxGameTime: 3
 --- !u!114 &541385416
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2875,7 +2875,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5871874788425431092, guid: 9b1e4589cb0832e41bfa0556195255bf, type: 3}
       propertyPath: city
-      value: 6
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5871874788425431092, guid: 9b1e4589cb0832e41bfa0556195255bf, type: 3}
       propertyPath: character
@@ -6761,6 +6761,7 @@ MonoBehaviour:
   linePoints: 175
   timeIntervalinPoints: 0.01
   inputActions: {fileID: -944628639613478452, guid: 289c1b55c9541489481df5cc06664110, type: 3}
+  startPosition: {x: 0, y: 0, z: 0}
 --- !u!20 &4381237741469090673
 Camera:
   m_ObjectHideFlags: 0

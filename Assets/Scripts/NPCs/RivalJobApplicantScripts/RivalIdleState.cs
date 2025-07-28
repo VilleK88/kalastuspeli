@@ -30,7 +30,6 @@ public class RivalIdleState : IRivalState
 
         if(rival.currentMarkerObject != null)
         {
-            Debug.Log("back to walk state");
             rival.agent.SetDestination(rival.currentMarkerObject.transform.position);
             rival.anim.SetBool("Walk", true);
             rival.currentState = rival.walkState;

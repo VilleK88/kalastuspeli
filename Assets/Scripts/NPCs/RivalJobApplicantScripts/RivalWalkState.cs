@@ -20,7 +20,6 @@ public class RivalWalkState : IRivalState
 
         if (!rival.agent.hasPath)
         {
-            Debug.Log("Rival agent does not have a path");
             rival.anim.SetBool("Walk", false);
             if (rival.agent.enabled && rival.agent.isOnNavMesh)
             {
@@ -51,7 +50,6 @@ public class RivalWalkState : IRivalState
 
     public void ToRivalFishingState()
     {
-        Debug.Log("To fishing state");
         rival.agent.ResetPath();
         rival.fishingState.idleStartTime = Time.time;
         rival.anim.SetBool("Walk", false);
@@ -68,6 +66,5 @@ public class RivalWalkState : IRivalState
         yield return new WaitForSeconds(time);
         rival.anim.SetTrigger("FishingCast");
         rival.anim.SetBool("FishingIdle", true);
-        Debug.Log("To rival fishing state");
     }
 }
