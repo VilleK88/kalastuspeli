@@ -3,7 +3,7 @@ using TMPro;
 using UnityEngine.EventSystems;
 using System.Collections;
 
-public class JobListingButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler//, IPointerClickHandler
+public class JobListingButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     public JobListing jobListing;
     public TextMeshProUGUI text;
@@ -23,11 +23,6 @@ public class JobListingButton : MonoBehaviour, IPointerEnterHandler, IPointerExi
     {
         StartCoroutine(ScaleTo(originalScale, 0.2f));
     }
-
-    /*public void OnPointerClick(PointerEventData eventData)
-    {
-        ShowJobListing();
-    }*/
 
     public void ShowJobListing()
     {

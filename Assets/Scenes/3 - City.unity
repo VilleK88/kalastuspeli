@@ -2205,6 +2205,7 @@ MonoBehaviour:
   timerText: {fileID: 541385416}
   currentGameTimeMin: 0
   currentGameTimeSec: 0
+  maxGameTime: 1
 --- !u!114 &541385416
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2874,7 +2875,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5871874788425431092, guid: 9b1e4589cb0832e41bfa0556195255bf, type: 3}
       propertyPath: city
-      value: 0
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 5871874788425431092, guid: 9b1e4589cb0832e41bfa0556195255bf, type: 3}
       propertyPath: character

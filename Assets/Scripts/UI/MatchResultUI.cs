@@ -55,7 +55,7 @@ public class MatchResultUI : MonoBehaviour
         innerBG_JobApplicationsList.SetActive(false);
         gameOverScreen.SetActive(false);
         transparentBG.SetActive(false);
-        MarkerManager.Instance.collectedJobListings = null;
+        MarkerManager.Instance.collectedJobListings.Clear();
     }
 
     public void PlayAgain()

@@ -1,9 +1,7 @@
 using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Networking;
-using UnityEngine.EventSystems;
 using System.Reflection;
 
 public class MarkerUI : MonoBehaviour
@@ -42,6 +40,13 @@ public class MarkerUI : MonoBehaviour
 
     [SerializeField] TextMeshProUGUI textPrefab;
 
+    float maxGameTime = 1;
+
+    private void Start()
+    {
+        maxGameTime = GameTimer.Instance.maxGameTime;
+    }
+
     public void UpdateCompanyParameters(Yritys currentCompany)
     {
         yritys = currentCompany;
@@ -55,7 +60,7 @@ public class MarkerUI : MonoBehaviour
 
     public void OpenMarkerInfoPanel()
     {
-        if(GameTimer.Instance.currentGameTimeMin < 3)
+        if(GameTimer.Instance.currentGameTimeMin < maxGameTime)
         {
             open = true;
             StartCoroutine(DelayedInfoPanelOpening(4f));
@@ -74,7 +79,7 @@ public class MarkerUI : MonoBehaviour
         jobInfoObject.SetActive(false);
         transparentBG.SetActive(false);
 
-        if (GameTimer.Instance.currentGameTimeMin < 3)
+        if (GameTimer.Instance.currentGameTimeMin < maxGameTime)
         {
             MouseManager.Instance.StopFishing();
             Destroy(MarkerManager.Instance.currentMarker.gameObject);
@@ -100,6 +105,7 @@ public class MarkerUI : MonoBehaviour
             currentMarker.DecreaseGridPrefabMarkerCount();
             transparentBG.SetActive(true);
             jobInfoObject.SetActive(true);
+            MarkerManager.Instance.collectedJobListings.Add(jobListing);
             JobApplicationsManager.Instance.IncreasePlayersJobAppCount();
             PauseManager.Instance.PauseGame();
             BurnoutMeter.Instance.Heal(10);

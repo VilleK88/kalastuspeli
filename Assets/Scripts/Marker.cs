@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Marker : MonoBehaviour
@@ -75,7 +74,6 @@ public class Marker : MonoBehaviour
 
             MarkerManager.Instance.currentMarker = this;
             MarkerManager.Instance.currentGridPrefab = this.gameObject.GetComponentInParent<GridPrefab>();
-            MarkerManager.Instance.collectedJobListings.Add(jobListing);
             MarkerUI.Instance.OpenMarkerInfoPanel();
         }
     }

@@ -21,6 +21,8 @@ public class GameTimer : MonoBehaviour
     public float currentGameTimeMin = 0;
     public float currentGameTimeSec = 0;
 
+    public float maxGameTime = 3;
+
     private void Update()
     {
         if(counter <= maxTime)
@@ -41,7 +43,7 @@ public class GameTimer : MonoBehaviour
 
             counter = 0;
 
-            if(currentGameTimeMin >= 3)
+            if(currentGameTimeMin >= maxGameTime)
             {
                 JobApplicationsManager.Instance.ShowEndingScreen();
                 PauseManager.Instance.PauseGame();
