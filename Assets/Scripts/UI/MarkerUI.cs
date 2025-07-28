@@ -74,7 +74,7 @@ public class MarkerUI : MonoBehaviour
         jobInfoObject.SetActive(false);
         transparentBG.SetActive(false);
 
-        if (GameTimer.Instance.currentGameTimeMin < 1)
+        if (GameTimer.Instance.currentGameTimeMin < 3)
         {
             MouseManager.Instance.StopFishing();
             Destroy(MarkerManager.Instance.currentMarker.gameObject);
