@@ -255,6 +255,9 @@ public class RivalJobApplicant : MonoBehaviour
     public void ReturnToStartPosition()
     {
         StopCoroutine(DestroyMarkerAndTransition());
+        currentMarkerObject = null;
+        anim.SetBool("FishingIdle", false);
+        anim.Play("Idle");
         agent.isStopped = true;
         agent.Warp(startPosition);
         agent.isStopped = false;
