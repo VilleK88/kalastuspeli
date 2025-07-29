@@ -34,13 +34,10 @@ public class MapTileBaker : MonoBehaviour
             if (!tile.name.Contains("/")) continue;
 
             // Duplicate the tile
-            GameObject tileCopy = Instantiate(tile.gameObject);
-            tileCopy.name = tile.name;
-            tileCopy.hideFlags = HideFlags.None;
-            tileCopy.transform.SetParent(bakedMap.transform);
+            GameObject tileCopy = DuplicateTile(tile, bakedMap);
 
             // Process all child objects (e.g., buildings, roads)
-            foreach(Transform child in tileCopy.GetComponentsInChildren<Transform>())
+            foreach (Transform child in tileCopy.GetComponentsInChildren<Transform>())
             {
                 // Process meshes
                 ProcessMeshes(child, tileCopy, meshFolder);
@@ -163,5 +160,14 @@ public class MapTileBaker : MonoBehaviour
             AssetDatabase.CreateFolder(folderPath, "Materials");
         if (!AssetDatabase.IsValidFolder(textureFolder))
             AssetDatabase.CreateFolder(folderPath, "Textures");
+    }
+
+    static GameObject DuplicateTile(Transform tile, GameObject bakedMap)
+    {
+        GameObject tileCopy = Instantiate(tile.gameObject);
+        tileCopy.name = tile.name;
+        tileCopy.hideFlags = HideFlags.None;
+        tileCopy.transform.SetParent(bakedMap.transform);
+        return tileCopy;
     }
 }
