@@ -52,78 +52,10 @@ public class MapTileBaker : MonoBehaviour
             foreach(Transform child in tileCopy.GetComponentsInChildren<Transform>())
             {
                 // Process meshes
-                MeshFilter meshFilter = child.GetComponent<MeshFilter>();
-                if (meshFilter != null && meshFilter.sharedMesh != null)
-                {
-                    // Create a safe name and path for mesh asset
-                    string safeName = $"{tileCopy.name}_{child.name}".Replace("/", "_");
-                    string meshPath = $"{meshFolder}/{safeName}_Mesh.asset";
-                    meshPath = AssetDatabase.GenerateUniqueAssetPath(meshPath);
-
-                    // Duplicate and save mesh
-                    Mesh mesh = Instantiate(meshFilter.sharedMesh);
-                    AssetDatabase.CreateAsset(mesh, meshPath);
-                    meshFilter.sharedMesh = mesh;
-
-                    // Ensure a MeshCollider is added and uses the same mesh
-                    MeshCollider meshCollider = child.GetComponent<MeshCollider>();
-                    if (meshCollider == null)
-                        meshCollider = child.gameObject.AddComponent<MeshCollider>();
-                    
-                    meshCollider.sharedMesh = mesh;
-                }
+                ProcessMeshes(child, tileCopy, meshFolder);
 
                 // Process materials
-                MeshRenderer meshRenderer = child.GetComponent<MeshRenderer>();
-                if (meshRenderer != null && meshRenderer.sharedMaterials.Length > 0)
-                {
-                    var originalMaterials = meshRenderer.sharedMaterials;
-                    Material[] newMaterials = new Material[originalMaterials.Length];
-
-                    for(int i = 0; i < originalMaterials.Length; i++)
-                    {
-                        var originalMat = originalMaterials[i];
-                        if (originalMat == null)
-                            continue;
-
-                        // Safe material file name
-                        string safeName = $"{tileCopy.name}_{child.name}_{i}".Replace("/", "_");
-                        string materialPath = AssetDatabase.GenerateUniqueAssetPath($"{materialFolder}/{safeName}_Material.mat");
-
-                        // Create a new material based on URP Lit
-                        Shader shader = Shader.Find("Universal Render Pipeline/Lit");
-                        Material matCopy = new Material(shader);
-                        matCopy.CopyPropertiesFromMaterial(originalMat);
-
-                        // Optional: Set base color if supported
-                        if (matCopy.HasProperty("_BaseColor"))
-                            matCopy.SetColor("_BaseColor", originalMat.color);
-
-                        // Handle main texture saving
-                        Texture mainTex = originalMat.mainTexture;
-                        if (mainTex is Texture2D tex2D)
-                        {
-                            string texturePath = $"{textureFolder}/{safeName}_MainTex.png";
-
-                            byte[] pngData = tex2D.EncodeToPNG();
-                            if (pngData != null)
-                            {
-                                System.IO.File.WriteAllBytes(texturePath, pngData);
-                                AssetDatabase.ImportAsset(texturePath);
-
-                                Texture2D importedTex = AssetDatabase.LoadAssetAtPath<Texture2D>(texturePath);
-                                if (importedTex != null && matCopy.HasProperty("_BaseMap"))
-                                    matCopy.SetTexture("_BaseMap", importedTex);
-                            }
-                        }
-
-                        AssetDatabase.CreateAsset(matCopy, materialPath);
-                        newMaterials[i] = matCopy;
-                    }
-
-                    // Assign the new material array
-                    meshRenderer.sharedMaterials = newMaterials;
-                }
+                ProcessMaterials(child, tileCopy, materialFolder, textureFolder);
             }
 
             // Remove UnityTile component (Mapbox-related)
@@ -151,5 +83,84 @@ public class MapTileBaker : MonoBehaviour
         DestroyImmediate(bakedMap);
 
         Debug.Log($"Map for '{cityName}' baked and saved to: {localPath}");
+    }
+
+    static void ProcessMeshes(Transform child, GameObject tileCopy, string meshFolder)
+    {
+        // Process meshes
+        MeshFilter meshFilter = child.GetComponent<MeshFilter>();
+        if (meshFilter != null && meshFilter.sharedMesh != null)
+        {
+            // Create a safe name and path for mesh asset
+            string safeName = $"{tileCopy.name}_{child.name}".Replace("/", "_");
+            string meshPath = $"{meshFolder}/{safeName}_Mesh.asset";
+            meshPath = AssetDatabase.GenerateUniqueAssetPath(meshPath);
+
+            // Duplicate and save mesh
+            Mesh mesh = Instantiate(meshFilter.sharedMesh);
+            AssetDatabase.CreateAsset(mesh, meshPath);
+            meshFilter.sharedMesh = mesh;
+
+            // Ensure a MeshCollider is added and uses the same mesh
+            MeshCollider meshCollider = child.GetComponent<MeshCollider>();
+            if (meshCollider == null)
+                meshCollider = child.gameObject.AddComponent<MeshCollider>();
+
+            meshCollider.sharedMesh = mesh;
+        }
+    }
+
+    static void ProcessMaterials(Transform child, GameObject tileCopy, string materialFolder, string textureFolder)
+    {
+        MeshRenderer meshRenderer = child.GetComponent<MeshRenderer>();
+        if (meshRenderer != null && meshRenderer.sharedMaterials.Length > 0)
+        {
+            var originalMaterials = meshRenderer.sharedMaterials;
+            Material[] newMaterials = new Material[originalMaterials.Length];
+
+            for (int i = 0; i < originalMaterials.Length; i++)
+            {
+                var originalMat = originalMaterials[i];
+                if (originalMat == null)
+                    continue;
+
+                // Safe material file name
+                string safeName = $"{tileCopy.name}_{child.name}_{i}".Replace("/", "_");
+                string materialPath = AssetDatabase.GenerateUniqueAssetPath($"{materialFolder}/{safeName}_Material.mat");
+
+                // Create a new material based on URP Lit
+                Shader shader = Shader.Find("Universal Render Pipeline/Lit");
+                Material matCopy = new Material(shader);
+                matCopy.CopyPropertiesFromMaterial(originalMat);
+
+                // Optional: Set base color if supported
+                if (matCopy.HasProperty("_BaseColor"))
+                    matCopy.SetColor("_BaseColor", originalMat.color);
+
+                // Handle main texture saving
+                Texture mainTex = originalMat.mainTexture;
+                if (mainTex is Texture2D tex2D)
+                {
+                    string texturePath = $"{textureFolder}/{safeName}_MainTex.png";
+
+                    byte[] pngData = tex2D.EncodeToPNG();
+                    if (pngData != null)
+                    {
+                        System.IO.File.WriteAllBytes(texturePath, pngData);
+                        AssetDatabase.ImportAsset(texturePath);
+
+                        Texture2D importedTex = AssetDatabase.LoadAssetAtPath<Texture2D>(texturePath);
+                        if (importedTex != null && matCopy.HasProperty("_BaseMap"))
+                            matCopy.SetTexture("_BaseMap", importedTex);
+                    }
+                }
+
+                AssetDatabase.CreateAsset(matCopy, materialPath);
+                newMaterials[i] = matCopy;
+            }
+
+            // Assign the new material array
+            meshRenderer.sharedMaterials = newMaterials;
+        }
     }
 }
