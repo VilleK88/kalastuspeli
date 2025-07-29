@@ -22,16 +22,7 @@ public class MapTileBaker : MonoBehaviour
         string textureFolder = $"{folderPath}/Textures";
 
         // Ensure folders exist or create them
-        if (!AssetDatabase.IsValidFolder("Assets/MapPrefabs"))
-            AssetDatabase.CreateFolder("Assets", "MapPrefabs");
-        if (!AssetDatabase.IsValidFolder(folderPath))
-            AssetDatabase.CreateFolder("Assets/MapPrefabs", cityName);
-        if (!AssetDatabase.IsValidFolder(meshFolder))
-            AssetDatabase.CreateFolder(folderPath, "Meshes");
-        if (!AssetDatabase.IsValidFolder(materialFolder))
-            AssetDatabase.CreateFolder(folderPath, "Materials");
-        if (!AssetDatabase.IsValidFolder(textureFolder))
-            AssetDatabase.CreateFolder(folderPath, "Textures");
+        FolderCheck(folderPath, cityName, meshFolder, materialFolder, textureFolder);
 
         // Create a new GameObject to store baked content
         GameObject bakedMap = new GameObject("Map");
@@ -61,17 +52,13 @@ public class MapTileBaker : MonoBehaviour
             // Remove UnityTile component (Mapbox-related)
             var unityTile = tileCopy.GetComponent<UnityTile>();
             if(unityTile != null)
-            {
                 DestroyImmediate(unityTile);
-            }
 
             // Remove any other leftover MonoBehaviours
             foreach (var comp in tileCopy.GetComponents<MonoBehaviour>())
             {
                 if(comp != null)
-                {
                     DestroyImmediate(comp);
-                }
             }
         }
 
@@ -162,5 +149,19 @@ public class MapTileBaker : MonoBehaviour
             // Assign the new material array
             meshRenderer.sharedMaterials = newMaterials;
         }
+    }
+
+    static void FolderCheck(string folderPath, string cityName, string meshFolder, string materialFolder, string textureFolder)
+    {
+        if (!AssetDatabase.IsValidFolder("Assets/MapPrefabs"))
+            AssetDatabase.CreateFolder("Assets", "MapPrefabs");
+        if (!AssetDatabase.IsValidFolder(folderPath))
+            AssetDatabase.CreateFolder("Assets/MapPrefabs", cityName);
+        if (!AssetDatabase.IsValidFolder(meshFolder))
+            AssetDatabase.CreateFolder(folderPath, "Meshes");
+        if (!AssetDatabase.IsValidFolder(materialFolder))
+            AssetDatabase.CreateFolder(folderPath, "Materials");
+        if (!AssetDatabase.IsValidFolder(textureFolder))
+            AssetDatabase.CreateFolder(folderPath, "Textures");
     }
 }
