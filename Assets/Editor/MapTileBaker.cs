@@ -31,13 +31,6 @@ public class MapTileBaker : MonoBehaviour
         MeshFilter targetMeshFilter = bakedMap.AddComponent<MeshFilter>();
         MeshRenderer targetRenderer = bakedMap.AddComponent<MeshRenderer>();
 
-        /*Shader defaultShader = Shader.Find("Universal Render Pipeline/Lit");
-        if (defaultShader == null)
-            defaultShader = Shader.Find("Standard"); // fallback
-        targetRenderer.sharedMaterial = new Material(defaultShader);
-
-        List<MeshFilter> listMeshFilter = new List<MeshFilter>();*/
-
         List<Mesh> meshes = new List<Mesh>();
         List<Matrix4x4> transforms = new List<Matrix4x4>();
         List<Vector2[]> uvsList = new List<Vector2[]>();
@@ -69,14 +62,59 @@ public class MapTileBaker : MonoBehaviour
             return;
         }
 
-        // Pack textures into an atlas
-        Texture2D atlas = new Texture2D(1, 1);
-        Rect[] uvRects = atlas.PackTextures(textures.ToArray(), 2, 8192, false);
+        // Texture packing
+        int tileCount = Mathf.CeilToInt(Mathf.Sqrt(textures.Count));
+        int tileSize = 2048;
+        int atlasSize = tileCount * tileSize;
 
-        // Save the atlas
+        Texture2D atlas = new Texture2D(atlasSize, atlasSize, TextureFormat.RGBA32, false);
+        atlas.name = "CombinedAtlas";
+
+        Rect[] uvRects = new Rect[textures.Count];
+
+        for(int i = 0; i < textures.Count; i++)
+        {
+            int x = i % tileCount;
+            int y = i / tileCount;
+            int px = x * tileSize;
+            int py = y * tileSize;
+
+            Texture2D src = textures[i];
+
+            // Scale to 1024x1024 via RenderTexture
+            RenderTexture rt = RenderTexture.GetTemporary(tileSize, tileSize, 0, RenderTextureFormat.ARGB32);
+            Graphics.Blit(src, rt);
+            RenderTexture.active = rt;
+
+            Texture2D scaled = new Texture2D(tileSize, tileSize, TextureFormat.RGBA32, false);
+            scaled.ReadPixels(new Rect(0, 0, tileSize, tileSize), 0, 0);
+            scaled.Apply();
+
+            RenderTexture.active = null;
+            RenderTexture.ReleaseTemporary(rt);
+
+            atlas.SetPixels(px, py, tileSize, tileSize, scaled.GetPixels());
+            uvRects[i] = new Rect((float)px / atlasSize, (float)py / atlasSize, (float)tileSize / atlasSize, (float)tileSize / atlasSize);
+
+        }
+        atlas.Apply();
+
         string atlasPath = $"{textureFolder}/CombinedAtlas.png";
         File.WriteAllBytes(atlasPath, atlas.EncodeToPNG());
         AssetDatabase.ImportAsset(atlasPath);
+
+        // Optional: make sure it's uncompressed and uses point filter mode
+        TextureImporter importer = AssetImporter.GetAtPath(atlasPath) as TextureImporter;
+        if(importer != null)
+        {
+            importer.textureCompression = TextureImporterCompression.Uncompressed;
+            importer.filterMode = FilterMode.Bilinear;
+            importer.mipmapEnabled = false;
+            importer.isReadable = true;
+            importer.alphaSource = TextureImporterAlphaSource.FromInput;
+            importer.SaveAndReimport();
+        }
+
         Texture2D savedAtlas = AssetDatabase.LoadAssetAtPath<Texture2D>(atlasPath);
 
 
