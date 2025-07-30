@@ -1,6 +1,8 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 using Mapbox.Unity.MeshGeneration.Data;
+using System.IO;
 
 public class MapTileBaker : MonoBehaviour
 {
@@ -26,8 +28,121 @@ public class MapTileBaker : MonoBehaviour
 
         // Create a new GameObject to store baked content
         GameObject bakedMap = new GameObject("Map");
+        MeshFilter targetMeshFilter = bakedMap.AddComponent<MeshFilter>();
+        MeshRenderer targetRenderer = bakedMap.AddComponent<MeshRenderer>();
 
-        // Loop over all tiles in the original map
+        /*Shader defaultShader = Shader.Find("Universal Render Pipeline/Lit");
+        if (defaultShader == null)
+            defaultShader = Shader.Find("Standard"); // fallback
+        targetRenderer.sharedMaterial = new Material(defaultShader);
+
+        List<MeshFilter> listMeshFilter = new List<MeshFilter>();*/
+
+        List<Mesh> meshes = new List<Mesh>();
+        List<Matrix4x4> transforms = new List<Matrix4x4>();
+        List<Vector2[]> uvsList = new List<Vector2[]>();
+        List<Texture2D> textures = new List<Texture2D>();
+
+        foreach (Transform tile in originalMap.transform)
+        {
+            // Skip invalid or non-tile objects
+            if (!tile.name.Contains("/")) continue;
+
+            MeshFilter mf = tile.GetComponent<MeshFilter>();
+            MeshRenderer mr = tile.GetComponent<MeshRenderer>();
+            if (mf == null || mf.sharedMesh == null || mr == null || mr.sharedMaterial == null)
+                continue;
+
+            Texture2D tex = mr.sharedMaterial.mainTexture as Texture2D;
+            if (tex == null)
+                continue;
+
+            meshes.Add(Instantiate(mf.sharedMesh));
+            transforms.Add(mf.transform.localToWorldMatrix);
+            uvsList.Add(mf.sharedMesh.uv);
+            textures.Add(tex);
+        }
+
+        if (meshes.Count == 0)
+        {
+            Debug.LogWarning("No valid tile meshes with textures found.");
+            return;
+        }
+
+        // Pack textures into an atlas
+        Texture2D atlas = new Texture2D(1, 1);
+        Rect[] uvRects = atlas.PackTextures(textures.ToArray(), 2, 8192, false);
+
+        // Save the atlas
+        string atlasPath = $"{textureFolder}/CombinedAtlas.png";
+        File.WriteAllBytes(atlasPath, atlas.EncodeToPNG());
+        AssetDatabase.ImportAsset(atlasPath);
+        Texture2D savedAtlas = AssetDatabase.LoadAssetAtPath<Texture2D>(atlasPath);
+
+
+        // Create new material
+        Shader shader = Shader.Find("Universal Render Pipeline/Lit");
+        if (shader == null)
+            shader = Shader.Find("Standard");
+
+        Material combinedMat = new Material(shader);
+        combinedMat.SetTexture("_BaseMap", savedAtlas);
+        if (combinedMat.HasProperty("_MainTex"))
+            combinedMat.mainTexture = savedAtlas;
+
+        string materialPath = $"{materialFolder}/CombinedMaterial.mat";
+        AssetDatabase.CreateAsset(combinedMat, materialPath);
+        AssetDatabase.SaveAssets();
+
+        // Build combined mesh
+        List<CombineInstance> combineInstances = new List<CombineInstance>();
+        Mesh finalMesh = new Mesh();
+        finalMesh.indexFormat = UnityEngine.Rendering.IndexFormat.UInt32;
+
+        for (int i = 0; i < meshes.Count; i++)
+        {
+            Mesh m = meshes[i];
+            Vector2[] originalUV = uvsList[i];
+            Rect rect = uvRects[i];
+            Vector2[] remappedUV = new Vector2[originalUV.Length];
+
+            for (int j = 0; j < originalUV.Length; j++)
+            {
+                remappedUV[j] = new Vector2(
+                    Mathf.Lerp(rect.xMin, rect.xMax, originalUV[j].x),
+                    Mathf.Lerp(rect.yMin, rect.yMax, originalUV[j].y)
+                    );
+            }
+
+            m.uv = remappedUV;
+
+            combineInstances.Add(new CombineInstance
+            {
+                mesh = m,
+                transform = transforms[i]
+            });
+        }
+
+        finalMesh.CombineMeshes(combineInstances.ToArray(), true, true);
+
+        string meshAssetPath = AssetDatabase.GenerateUniqueAssetPath($"{meshFolder}/CombinedMapMesh.asset");
+        AssetDatabase.CreateAsset(finalMesh, meshAssetPath);
+        AssetDatabase.SaveAssets();
+
+        targetMeshFilter.sharedMesh = AssetDatabase.LoadAssetAtPath<Mesh>(meshAssetPath);
+        targetRenderer.sharedMaterial = AssetDatabase.LoadAssetAtPath<Material>(materialPath);
+
+        MeshCollider mc = bakedMap.AddComponent<MeshCollider>();
+        mc.sharedMesh = finalMesh;
+
+        string prefabPath = AssetDatabase.GenerateUniqueAssetPath($"{folderPath}/Map.prefab");
+        PrefabUtility.SaveAsPrefabAsset(bakedMap, prefabPath);
+        DestroyImmediate(bakedMap);
+
+        Debug.Log($"Map '{cityName}' baked with atlas and saved at: {prefabPath}");
+
+        // old code
+        /*// Loop over all tiles in the original map
         foreach(Transform tile in originalMap.transform)
         {
             // Skip invalid or non-tile objects
@@ -66,7 +181,7 @@ public class MapTileBaker : MonoBehaviour
         // Clean up
         DestroyImmediate(bakedMap);
 
-        Debug.Log($"Map for '{cityName}' baked and saved to: {localPath}");
+        Debug.Log($"Map for '{cityName}' baked and saved to: {localPath}");*/
     }
 
     static void ProcessMeshes(Transform child, GameObject tileCopy, string meshFolder)
