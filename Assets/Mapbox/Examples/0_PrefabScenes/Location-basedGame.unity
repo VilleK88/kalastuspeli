@@ -3909,7 +3909,7 @@ MonoBehaviour:
   _updateInterval: 1
   _sendEvent: 0
   _latitudeLongitude:
-  - 61.498169787061386, 23.760409868479886
+  - 63.09578153685334, 21.61607357056142
   _heading: 112
 --- !u!1 &5734771646140246953
 GameObject:
