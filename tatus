@@ -1,0 +1,1483 @@
+[33mcommit 13bbffd8f7f53fc0e1ef08a914cd927d71cbb077[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Author: ville <ville.karppinen88@gmail.com>
+Date:   Thu Jul 31 13:37:36 2025 +0300
+
+    merged cities in progress...
+
+[33mcommit af736bf01e83202d7d84ec0aae81717c6e468373[m
+Author: ville <ville.karppinen88@gmail.com>
+Date:   Thu Jul 31 13:03:41 2025 +0300
+
+    Merged Helsinki city works now.
+
+[33mcommit 753ea3ee3e030ee66de14e02e0e6593dccaf277e[m
+Author: ville <ville.karppinen88@gmail.com>
+Date:   Thu Jul 31 11:48:32 2025 +0300
+
+    Game optimization in progress. The MapTileBaker script now generates a unified map object from Mapbox tiles and assigns buildings as its child objects. A custom MapBuildingMerger script has been implemented to run on the baked map, merging all buildings that are in contact with each other into a single mesh.
+
+[33mcommit 98cea980018d2b1e47e99ee5b9fdb00931c86273[m
+Author: ville <ville.karppinen88@gmail.com>
+Date:   Thu Jul 31 10:48:53 2025 +0300
+
+    MapTileBaker in progress...
+
+[33mcommit c644c3bf7968d57f7353a7236d193ed041bd1e01[m
+Author: ville <ville.karppinen88@gmail.com>
+Date:   Thu Jul 31 09:47:00 2025 +0300
+
+    MapTileBaker in progress...
+
+[33mcommit 5bf614aae35923fa57114daa4d45a718179294b7[m
+Author: ville <ville.karppinen88@gmail.com>
+Date:   Wed Jul 30 13:08:39 2025 +0300
+
+    MapTileBaker in progress...
+
+[33mcommit b506e5d4b401267ecfd89af89ee9ae3a341414cf[m
+Author: ville <ville.karppinen88@gmail.com>
+Date:   Wed Jul 30 12:34:36 2025 +0300
+
+    MapTileBaker in progress...
+
+[33mcommit 81077a15d2fb31969a0acba72bb7f6a12f2d50c2[m
+Author: ville <ville.karppinen88@gmail.com>
+Date:   Tue Jul 29 12:53:25 2025 +0300
+
+    cleaning up code...
+
+[33mcommit 6bc42da1f60c2f71c1a1a135ab86a776eccf5025[m
+Author: ville <ville.karppinen88@gmail.com>
+Date:   Tue Jul 29 12:35:02 2025 +0300
+
+    cleaning up code...
+
+[33mcommit 1cdd27af82847c4000c2ae242b7526dd2d94e3b1[m
+Author: ville <ville.karppinen88@gmail.com>
+Date:   Tue Jul 29 12:28:36 2025 +0300
+
+    cleaning up code...
+
+[33mcommit 3db3c34e6a6c959b57b4f548549e95abf86c79f9[m
+Author: ville <ville.karppinen88@gmail.com>
+Date:   Tue Jul 29 12:09:18 2025 +0300
+
+    comments added to the code
+
+[33mcommit e89f84948197b9c5bec3c9e2d23ff808e4093deb[m
+Author: ville <ville.karppinen88@gmail.com>
+Date:   Mon Jul 28 13:50:48 2025 +0300
+
+    Quick fix
+
+[33mcommit d14cbdcdf436d2da6f526bad926c47bdc1ba0728[m
+Author: ville <ville.karppinen88@gmail.com>
+Date:   Mon Jul 28 13:40:08 2025 +0300
+
+    Enemy AI improved so that the enemy moves to the next marker faster if the player catches the current marker the enemy is trying to fish first. Other improvements have also been made in the code...
+
+[33mcommit 7a7e4a250fd9529fdb759c70aedaf8989915552d[m
+Author: ville <ville.karppinen88@gmail.com>
+Date:   Mon Jul 28 11:02:11 2025 +0300
+
+    Debugging and cleaning up the code...
+
+[33mcommit c2a26b6d3f1e7fa0fdc5638adc5986d6c61ae2b0[m
+Author: ville <ville.karppinen88@gmail.com>
+Date:   Mon Jul 28 09:22:45 2025 +0300
+
+    Fixed a bug that caused the game to freeze when fishing a marker after one minute of gameplay.
+
+[33mcommit ca5bca487ba8b95ad3f96111f357015f8a6f9516[m
+Author: ville <ville.karppinen88@gmail.com>
+Date:   Thu Jul 24 14:44:36 2025 +0300
+
+    bug fixed.
+
+[33mcommit 1047705436bf9d6699cd2ad45ae4c176ea2362cd[m
+Author: ville <ville.karppinen88@gmail.com>
+Date:   Thu Jul 24 11:26:13 2025 +0300
+
+    The collected jobs are now listed on the end screen.
+
+[33mcommit 392d16ec0ee60fc6353e7040315ed3b84142c39a[m
+Author: ville <ville.karppinen88@gmail.com>
+Date:   Wed Jul 23 14:43:09 2025 +0300
+
+    Restored marker icons that shouldn't have been removed.
+
+[33mcommit a6eaf5c976504d910eac9aa6b301af1c390984e7[m
+Author: ville <ville.karppinen88@gmail.com>
+Date:   Wed Jul 23 12:30:52 2025 +0300
+
+    hidden job seeker in progress...
+
+[33mcommit f6551105bcd3233fc07d99beac454183ab6150c2[m
+Author: ville <ville.karppinen88@gmail.com>
+Date:   Tue Jul 22 16:13:24 2025 +0300
+
+    Project clean up in progress - deleting unnecessary files.
+
+[33mcommit 77ba1e31cc84ae7c56c8685f79cf1664714854de[m
+Author: ville <ville.karppinen88@gmail.com>
+Date:   Tue Jul 22 16:05:36 2025 +0300
+
+    Project clean up in progress - deleting unnecessary files.
+
+[33mcommit 4002ec70ba1b5dbdd48ea47f8f5d1735dba112c4[m
+Author: ville <ville.karppinen88@gmail.com>
+Date:   Tue Jul 22 15:59:24 2025 +0300
+
+    Project clean up in progress - deleting unnecessary files. Also fixed some bugs.
+
+[33mcommit 290a649eda5cef2b07fdb5744c602ceefc5d171f[m
+Author: ville <ville.karppinen88@gmail.com>
+Date:   Mon Jul 21 12:19:39 2025 +0300
+
+    A rival job applicant has been added to all cities. Additionally, the NavMesh Surface settings for the cities were unexpectedly reset. This issue has now been resolved.
+
+[33mcommit 7252e418d8d7f4b730e7ebfb2211bf1ee070e881[m
+Author: ville <ville.karppinen88@gmail.com>
+Date:   Thu Jul 17 15:38:26 2025 +0300
+
+    GameOver screen completed.
+
+[33mcommit a91b5634cb883f5b33319970695a3c62c6779ee1[m
+Author: ville <ville.karppinen88@gmail.com>
+Date:   Thu Jul 17 14:32:31 2025 +0300
+
+    Completed the Job Applications UI, Game Timer, Match Result UI, and the logic for game-winning conditions.
+
+[33mcommit bb023e3be50439557e71bded077610b08727b20e[m
+Author: ville <ville.karppinen88@gmail.com>
+Date:   Thu Jul 17 09:05:59 2025 +0300
+
+    Added a burnout meter to the game. You lose 0.5 health per second. You can restore health by collecting job applications. Opening a job application pauses the game, and closing it resumes gameplay.
+
+[33mcommit 73f0fcc7186de4c1727491b54dcc2ae3e8676cf3[m
+Author: ville <ville.karppinen88@gmail.com>
+Date:   Wed Jul 16 12:18:29 2025 +0300
+
+    Job application UI completed. Job applications collected by the player and the rival job applicant are now displayed in the UI.
+
+[33mcommit 4014e78cf02216b28c424a59be2e1693b7595033[m
+Author: ville <ville.karppinen88@gmail.com>
+Date:   Wed Jul 16 09:56:29 2025 +0300
+
+    Fixed a bug that caused the player's fishing idle animation to get stuck if a rival job applicant was competing for the same job marker and managed to claim it first.
+
+[33mcommit 40400509d674fc1aa098dade09332409e485e753[m
+Author: ville <ville.karppinen88@gmail.com>
+Date:   Tue Jul 15 16:51:29 2025 +0300
+
+    No error now occurs if the player captures a marker right in front of the rival job applicant.
+
+[33mcommit 71a1cb6ee6e5c3d903e94df24f7cef64461b9567[m
+Author: ville <ville.karppinen88@gmail.com>
+Date:   Tue Jul 15 12:53:52 2025 +0300
+
+    Added logic to prevent a new marker from being generated on the same GridPrefab after the previous one was destroyed.
+
+[33mcommit c3a2ea02a8f4d7117f82eb05ebd01b6d00a0499d[m
+Author: ville <ville.karppinen88@gmail.com>
+Date:   Tue Jul 15 12:32:35 2025 +0300
+
+    Rival job applicant in progress...
+
+[33mcommit 7a6dfd6198c947ffc7e19bdb96eabaae49fb5b27[m
+Author: ville <ville.karppinen88@gmail.com>
+Date:   Tue Jul 15 09:50:45 2025 +0300
+
+    Replaced the rival job applicant's navigation logic to the job marker with an approach that, going forward, finds the nearest valid NavMesh path within 5–10 meters of the job marker. This works around the issue where a valid NavMesh path cannot be found directly to the job marker itself.
+
+[33mcommit c273a24c4013a85c0b14c6cb7620f119a54fff72[m
+Author: ville <ville.karppinen88@gmail.com>
+Date:   Mon Jul 14 15:20:06 2025 +0300
+
+    Rival job applicants now fish for job markers just like the player does.
+
+[33mcommit f89aa3b02d91cb707bd16a530e0ba71de05a648e[m
+Author: ville <ville.karppinen88@gmail.com>
+Date:   Mon Jul 14 11:12:19 2025 +0300
+
+    I noticed that, in rare cases, some markers were overlapping. I revised the logic in the MarkerManager script and also renamed the functions to improve clarity. Also updated additional code to prevent a rival job applicant from destroying a job marker that the player is in the process of unlocking.
+
+[33mcommit b05cc77e8c440a64926ecc9658a320f15b944deb[m
+Author: ville <ville.karppinen88@gmail.com>
+Date:   Thu Jul 10 13:24:54 2025 +0300
+
+    The rival job applicant's navigation to the marker now works. If it can’t reach the marker, it warps there.
+
+[33mcommit c4ffe0a5b8e0d305098353172941b11643b9a8e8[m
+Author: ville <ville.karppinen88@gmail.com>
+Date:   Thu Jul 10 11:08:58 2025 +0300
+
+    Rival job applicant in progress...
+
+[33mcommit 73b6918871fea52ebbc82f7b586dcee63b60aa10[m
+Author: ville <ville.karppinen88@gmail.com>
+Date:   Thu Jul 10 10:39:47 2025 +0300
+
+    The MarkerManager code has been updated by adding a raycast check that ensures markers are not created on top of buildings, but only on a navmesh surface without the 'obstacle' layer. This improved the rival job applicant's ability to reach the markers, but it hasn't fully solved the issue. I will continue working on the solution.
+
+[33mcommit 0636634dbdcc7419c020cb195b128863551fcb35[m
+Author: ville <ville.karppinen88@gmail.com>
+Date:   Thu Jul 10 09:13:46 2025 +0300
+
+    Rival job applicant in progress...
+
+[33mcommit c81605a4142b0590beaf2ded8703f27557cf932a[m
+Author: ville <ville.karppinen88@gmail.com>
+Date:   Thu Jul 10 08:01:33 2025 +0300
+
+    Rival job applicant in progress...
+
+[33mcommit e9a3f9638c991e6483f70b5cbc012409f2a3d19c[m
+Author: ville <ville.karppinen88@gmail.com>
+Date:   Wed Jul 9 14:17:19 2025 +0300
+
+    Rival job applicant in progress...
+
+[33mcommit c36d184d22af6c928abda070a9809ea4db2735bc[m
+Author: ville <ville.karppinen88@gmail.com>
+Date:   Wed Jul 9 12:32:31 2025 +0300
+
+    Rival job applicant in progress...
+
+[33mcommit 4435083980c1f7d266605cee9f149531d37beb2d[m
+Author: ville <ville.karppinen88@gmail.com>
+Date:   Tue Jul 8 14:47:31 2025 +0300
+
+    Now the marker is destroyed when it's caught. After that, the MarkerManager creates a new marker at a random location on the map.
+
+[33mcommit c6b5d25e5540fc843ed175535fa993fdc4808918[m
+Author: ville <ville.karppinen88@gmail.com>
+Date:   Tue Jul 8 13:47:26 2025 +0300
+
+    Rival job applicant and marker system in progress...
+
+[33mcommit 0ecc59de8fa836f7adf15286d6c4c201792ae91b[m
+Author: ville <ville.karppinen88@gmail.com>
+Date:   Tue Jul 8 12:01:26 2025 +0300
+
+    Wrestler added to all cities and debugging.
+
+[33mcommit 610043a7110fad36acdb91ed87e1dc76c989bf4d[m
+Author: ville <ville.karppinen88@gmail.com>
+Date:   Tue Jul 8 10:48:45 2025 +0300
+
+    Wrestler state machine completed.
+
+[33mcommit 86b7a5350e71ae87159e3723a9466b36590901c5[m
+Author: ville <ville.karppinen88@gmail.com>
+Date:   Tue Jul 8 09:21:24 2025 +0300
+
+    Wrestler state machine in progress - the random idle state sin WIdleState now receive the correct maxIdleTime length via code.
+
+[33mcommit 79fe7a1a8cf9dae18777118b1956192ddb6e9f6e[m
+Author: ville <ville.karppinen88@gmail.com>
+Date:   Mon Jul 7 14:50:00 2025 +0300
+
+    Wrestler state machine in progress...
+
+[33mcommit b041afdedb3f9496672cea6a6580bcbacfd0e318[m
+Author: ville <ville.karppinen88@gmail.com>
+Date:   Thu Jul 3 15:13:13 2025 +0300
+
+    Wrestler statemachine in progress...
+
+[33mcommit f02d2122e2bed6a99cbe194c3333d9514cbf62e9[m
+Author: ville <ville.karppinen88@gmail.com>
+Date:   Thu Jul 3 13:24:25 2025 +0300
+
+    All cities set to static.
+
+[33mcommit ce335d8f91fd128886a202d3459ecaa9821538f6[m
+Author: ville <ville.karppinen88@gmail.com>
+Date:   Thu Jul 3 12:02:41 2025 +0300
+
+    game optimization in progress...
+
+[33mcommit d1761bb5b926eb270c1db92a60de2600bd28b1ed[m
+Author: ville <ville.karppinen88@gmail.com>
+Date:   Thu Jul 3 11:30:54 2025 +0300
+
+    The NPC state machine has been optimized so that it no longer runs every frame, but instead every 0.2 seconds.
+
+[33mcommit 865ace67bba738eaf1e9b450294167348ed7c427[m
+Author: ville <ville.karppinen88@gmail.com>
+Date:   Thu Jul 3 09:13:51 2025 +0300
+
+    Game optimization - player characters and NPCs texture sizes reduced.
+
+[33mcommit 6616beaa9e44a6ccf82ba9af4c80000b80945905[m
+Author: ville <ville.karppinen88@gmail.com>
+Date:   Thu Jul 3 09:01:30 2025 +0300
+
+    Game optimization – map texture sizes have been reduced.
+
+[33mcommit aa8859c2fc274d9076c9cb7a01249427d9a56ac6[m
+Author: ville <ville.karppinen88@gmail.com>
+Date:   Wed Jul 2 17:05:59 2025 +0300
+
+    new wrestler animations in progress...
+
+[33mcommit e6101209ae9296a746e7b6fdc59ee870dde66f46[m
+Author: ville <ville.karppinen88@gmail.com>
+Date:   Wed Jul 2 14:57:29 2025 +0300
+
+    Map of Finland in progress...
+
+[33mcommit ca4dac04377341fbdcbc0811cdbf6a8a5efe5d0e[m
+Author: ville <ville.karppinen88@gmail.com>
+Date:   Wed Jul 2 12:47:56 2025 +0300
+
+    Map of Finland in progress...
+
+[33mcommit 77f843f94e3624e6b29ee15be0a52874fb40f5d5[m
+Author: ville <ville.karppinen88@gmail.com>
+Date:   Wed Jul 2 09:59:15 2025 +0300
+
+    New map in progress... The old map UI font has been replaced with Inter Semi Bold.
+
+[33mcommit 847f641f5d89de69a85499f35047444426fd85ce[m
+Author: ville <ville.karppinen88@gmail.com>
+Date:   Wed Jul 2 09:36:46 2025 +0300
+
+    New map in progress...
+
+[33mcommit e07b541216d993fd467dac40c4b0c7bfb637f3fc[m
+Author: ville <ville.karppinen88@gmail.com>
+Date:   Wed Jul 2 08:06:56 2025 +0300
+
+    quick fix
+
+[33mcommit 04f82d151528cf0bfc6c6f202695d0ef33a21697[m
+Author: ville <ville.karppinen88@gmail.com>
+Date:   Tue Jul 1 17:57:25 2025 +0300
+
+    New map of Finland in progress...
+
+[33mcommit 1403a446d6bb888a91034d253cc42ef12b378e48[m
+Author: ville <ville.karppinen88@gmail.com>
+Date:   Tue Jul 1 10:36:54 2025 +0300
+
+    Job listing in progress...
+
+[33mcommit fd1589b5df3ead091064b055115160377f8a208b[m
+Author: ville <ville.karppinen88@gmail.com>
+Date:   Mon Jun 30 17:25:06 2025 +0300
+
+    Job listing in progress...
+
+[33mcommit dc621c19edf5e77b35c736fb6d556136e9fdd1fe[m
+Author: ville <ville.karppinen88@gmail.com>
+Date:   Mon Jun 30 15:21:41 2025 +0300
+
+    Job listing in progress...
+
+[33mcommit c09b2ed28b04ec91774ddfcdfad994fcf3504e2d[m
+Author: ville <ville.karppinen88@gmail.com>
+Date:   Mon Jun 30 13:50:45 2025 +0300
+
+    Job listing in progress...
+
+[33mcommit 481831c2c83926c00ec44bbb99c29bfb5895c903[m
+Author: ville <ville.karppinen88@gmail.com>
+Date:   Mon Jun 30 11:40:48 2025 +0300
+
+    Job listing search via API has been added to the MarkerManager script.
+
+[33mcommit 72957a8572248b0b6d29b1f6ee84a1a594492100[m
+Author: ville <ville.karppinen88@gmail.com>
+Date:   Thu Jun 26 13:00:23 2025 +0300
+
+    A platform check has been implemented to determine whether the game is being played on PC or mobile. Based on this check, the Map scene loads either a high-resolution or low-resolution map of Finland accordingly.
+
+[33mcommit 9b404c2ebcb0b16dab9370040699fad40ded4662[m
+Author: ville <ville.karppinen88@gmail.com>
+Date:   Wed Jun 25 16:16:12 2025 +0300
+
+    NPC state machine in progress...
+
+[33mcommit 1a49a852394beefd77bd308c074dfd3807a23687[m
+Author: ville <ville.karppinen88@gmail.com>
+Date:   Wed Jun 25 11:43:50 2025 +0300
+
+    NPC state machine in progress...
+
+[33mcommit 2e7dc53a4102d2a168418bb964bfdc5768c9e8a3[m
+Author: ville <ville.karppinen88@gmail.com>
+Date:   Wed Jun 25 11:24:40 2025 +0300
+
+    Wrestler in Purple Outfit has been added to the NPC characters.
+
+[33mcommit a1088ec0c37ffc24639bdfc88075660b477b9e89[m
+Author: ville <ville.karppinen88@gmail.com>
+Date:   Wed Jun 25 11:03:02 2025 +0300
+
+    Businessman in Blue S has been added to the NPC characters.
+
+[33mcommit ec3b474bf7ff9aeab64453f5dd42cae7054210bd[m
+Author: ville <ville.karppinen88@gmail.com>
+Date:   Wed Jun 25 10:42:43 2025 +0300
+
+    quick fix
+
+[33mcommit 3217b340251d6ba2dc4aff682bd573ed3f81bbfa[m
+Author: ville <ville.karppinen88@gmail.com>
+Date:   Wed Jun 25 09:57:14 2025 +0300
+
+    Businessman Bob has been added to the NPC characters.
+
+[33mcommit 423164d6134ff85ba8e87db6bf4e4ceb51d16830[m
+Author: ville <ville.karppinen88@gmail.com>
+Date:   Wed Jun 25 09:32:57 2025 +0300
+
+    The Boss character has been replaced with the Adventurous_Explorer.
+
+[33mcommit aeedd6618c6a1f160ef9b858af427bdf4d98b55b[m
+Author: ville <ville.karppinen88@gmail.com>
+Date:   Wed Jun 25 07:22:03 2025 +0300
+
+    The player can no longer start fishing a job while walking. This prevents a bug where the lure was cast during movement. Additionally, the timing of the lure cast was adjusted to better match the animation.
+
+[33mcommit 3bbb380a1dd0ae849789c8dc52f5f38befde7a5e[m
+Author: ville <ville.karppinen88@gmail.com>
+Date:   Tue Jun 24 13:07:56 2025 +0300
+
+    The lure, along with the fishing line, is now launched for all player characters.
+
+[33mcommit a140b0605a5476c31bc9970fefeea64de8436518[m
+Author: ville <ville.karppinen88@gmail.com>
+Date:   Tue Jun 24 12:07:54 2025 +0300
+
+    The lure now hits the target marker with 100% accuracy.
+
+[33mcommit 403120f361049e6bd6667b1befcf9272f80fc971[m
+Author: ville <ville.karppinen88@gmail.com>
+Date:   Tue Jun 24 11:36:31 2025 +0300
+
+    Marker targeting in progress...
+
+[33mcommit b71f9f079e5854e5360a12c045b11452a8427e86[m
+Author: ville <ville.karppinen88@gmail.com>
+Date:   Mon Jun 23 09:10:08 2025 +0300
+
+    Waypoints and NPCs added to Vaasa.
+
+[33mcommit 27b4b66e131e797b7dc8611a80723a93125a71ec[m
+Author: ville <ville.karppinen88@gmail.com>
+Date:   Mon Jun 23 08:54:11 2025 +0300
+
+    Waypoints and NPCs added to Turku.
+
+[33mcommit 8da92cd658b67b4496999077ab50a4274fa916eb[m
+Author: ville <ville.karppinen88@gmail.com>
+Date:   Mon Jun 23 08:35:28 2025 +0300
+
+    Waypoints and NPCs added to Rovaniemi.
+
+[33mcommit ded03f69856e6de304061b0ee1efe87473787bc4[m
+Author: ville <ville.karppinen88@gmail.com>
+Date:   Mon Jun 23 08:09:17 2025 +0300
+
+    Waypoints and NPCs added to Rovaniemi.
+
+[33mcommit 3dc0a3d8b16ce4c4eee12f4f73f3e043e8487d2b[m
+Author: ville <ville.karppinen88@gmail.com>
+Date:   Mon Jun 23 07:51:06 2025 +0300
+
+    Waypoints and NPCs added to Pori.
+
+[33mcommit bdac9e19954f141dd9bfda61e5f4bb06264cb94e[m
+Author: ville <ville.karppinen88@gmail.com>
+Date:   Mon Jun 23 07:33:16 2025 +0300
+
+    Waypoints and NPCs added to Oulu.
+
+[33mcommit 7e16e2640fa877bed523d48de5407c448071cd39[m
+Author: ville <ville.karppinen88@gmail.com>
+Date:   Mon Jun 23 07:21:38 2025 +0300
+
+    Waypoints and NPCs added to Lahti.
+
+[33mcommit 6553469c305a0d5e5e95a381a6567c66fa3b5533[m
+Author: ville <ville.karppinen88@gmail.com>
+Date:   Mon Jun 23 06:58:32 2025 +0300
+
+    Waypoints and NPCs added to Joensuu.
+
+[33mcommit 4f62e6ee5e9918c3308072cd7cd91069ef72afd4[m
+Author: ville <ville.karppinen88@gmail.com>
+Date:   Mon Jun 23 06:15:54 2025 +0300
+
+    Touch support added to the City scene.
+
+[33mcommit d729386509b6336057f5d97ad2a81efbb37bc157[m
+Author: ville <ville.karppinen88@gmail.com>
+Date:   Thu Jun 19 11:18:34 2025 +0300
+
+    Fishing in progress...
+
+[33mcommit bbd3b7e19d70f95c18b5596c5ebbcc90025b0d96[m
+Author: ville <ville.karppinen88@gmail.com>
+Date:   Thu Jun 19 11:12:16 2025 +0300
+
+    fishing in progress...
+
+[33mcommit 542631735d3d66cb98d160874e890762506cea16[m
+Author: ville <ville.karppinen88@gmail.com>
+Date:   Thu Jun 19 08:49:10 2025 +0300
+
+    UI button position fix
+
+[33mcommit 4847bad3227181f85d88853be9f65b933b89606a[m
+Author: ville <ville.karppinen88@gmail.com>
+Date:   Thu Jun 19 08:25:15 2025 +0300
+
+    UI scaling has been fixed in the menu
+
+[33mcommit 75ec86334a86ce444030a21b6d5910692ccbfbdf[m
+Author: ville <ville.karppinen88@gmail.com>
+Date:   Thu Jun 19 07:42:56 2025 +0300
+
+    Music playback has been stopped. Other sounds are functioning normally.
+
+[33mcommit 6bf86f175382586ebad7dfaad3e64143d54d412b[m
+Author: ville <ville.karppinen88@gmail.com>
+Date:   Thu Jun 19 07:17:01 2025 +0300
+
+    AudioButton is working now
+
+[33mcommit 41344a998aa9bbb229eec6318f78c22db6f7a8b6[m
+Author: ville <ville.karppinen88@gmail.com>
+Date:   Thu Jun 19 06:57:26 2025 +0300
+
+    AudioButton in progress...
+
+[33mcommit bb1a45a098fc79328a4b74070dd63cae7587870d[m
+Author: ville <ville.karppinen88@gmail.com>
+Date:   Thu Jun 19 06:51:17 2025 +0300
+
+    AudioButton in progress...
+
+[33mcommit a9f6a17245d8c4c791266d0956cbf0c08af7dc0a[m
+Author: ville <ville.karppinen88@gmail.com>
+Date:   Wed Jun 18 16:16:31 2025 +0300
+
+    Audio button in progress...
+
+[33mcommit dfd495b6c127f98a88b25b352e0303df1a535980[m
+Author: ville <ville.karppinen88@gmail.com>
+Date:   Wed Jun 18 13:01:18 2025 +0300
+
+    The water is now recognized in the map by the texture's color, so that Markers aren't placed in the ocean or lakes.
+
+[33mcommit a72af2b61c7c2eb2e4c339622d914dc98391f704[m
+Author: ville <ville.karppinen88@gmail.com>
+Date:   Wed Jun 18 10:56:25 2025 +0300
+
+    A Configs folder was created for ApiConfig ScriptableObjects, which contain the API_URL. A .gitignore rule was also added to exclude this file from version history.
+
+[33mcommit 9554160798735451c21e1d93afd493ce5eb76d3a[m
+Author: ville <ville.karppinen88@gmail.com>
+Date:   Wed Jun 18 10:04:18 2025 +0300
+
+    backup commit
+
+[33mcommit 2a774cbad742cf122974f7d5b1b8fa195d992f4d[m
+Author: VK88 <126750132+VilleK88@users.noreply.github.com>
+Date:   Tue Jun 17 16:09:33 2025 +0300
+
+    The size and settings of the NavMesh surface have been manually adjusted for the lahti map
+
+[33mcommit 48f39ab3485b77a6f4959cba645458e41dda245b[m
+Author: VK88 <126750132+VilleK88@users.noreply.github.com>
+Date:   Tue Jun 17 15:06:22 2025 +0300
+
+    An unnecessary plugin was deleted.
+
+[33mcommit ce7ea15f0ec727963254ee99e8de7c8ffc09f25f[m
+Author: VK88 <126750132+VilleK88@users.noreply.github.com>
+Date:   Tue Jun 17 13:14:18 2025 +0300
+
+    Vaasa added to cities
+
+[33mcommit ca63265539cb235d9449e57e02c18b8436462cbb[m
+Author: VK88 <126750132+VilleK88@users.noreply.github.com>
+Date:   Tue Jun 17 12:59:07 2025 +0300
+
+    Rovaniemi added to cities
+
+[33mcommit 78c8d2de679ef22e8078f919d94b098007ba9ab6[m
+Author: VK88 <126750132+VilleK88@users.noreply.github.com>
+Date:   Tue Jun 17 07:37:49 2025 +0300
+
+    Pori and Joensuu added to cities
+
+[33mcommit 8847e067fa0e6a67f2ae6dcd7f58eaa4695560fa[m
+Author: VK88 <126750132+VilleK88@users.noreply.github.com>
+Date:   Mon Jun 16 16:50:54 2025 +0300
+
+    Lahti added to the cities.
+
+[33mcommit d6f0be9efa85c62fcda2d3ddc47584e3f0e717b4[m
+Author: VK88 <126750132+VilleK88@users.noreply.github.com>
+Date:   Mon Jun 16 16:35:35 2025 +0300
+
+    The map of Oulu replaced with a higher-quality version featuring more detailed textures.
+
+[33mcommit dd78b697b5966f813ba72fc3823757dbd533535c[m
+Author: VK88 <126750132+VilleK88@users.noreply.github.com>
+Date:   Mon Jun 16 16:24:31 2025 +0300
+
+    The map of Tampere replaced with a higher-quality version featuring more detailed textures.
+
+[33mcommit 65420e31e051a85cae1486d9fe5f6da48c08b775[m
+Author: VK88 <126750132+VilleK88@users.noreply.github.com>
+Date:   Mon Jun 16 15:47:08 2025 +0300
+
+    The city map Turku has been replaced with a higher-quality version featuring more detailed textures.
+
+[33mcommit c771677b35d72e7437abdcb7e3a83e539fefee7d[m
+Author: VK88 <126750132+VilleK88@users.noreply.github.com>
+Date:   Mon Jun 16 15:34:03 2025 +0300
+
+    The transform.position used in the Raycast check has been elevated by 100f in the SetPlayerPosition function.
+
+[33mcommit 5543d0ef768c5118aef43ae6eac6d8343535cc49[m
+Author: VK88 <126750132+VilleK88@users.noreply.github.com>
+Date:   Mon Jun 16 14:50:52 2025 +0300
+
+    The Helsinki map has been replaced with a higher-quality version featuring more detailed textures.
+
+[33mcommit cdf5d8251a3dd2ffcbfc86ab6a6c2359c6d2d70c[m
+Author: VK88 <126750132+VilleK88@users.noreply.github.com>
+Date:   Mon Jun 16 14:16:48 2025 +0300
+
+    Tampere works now
+
+[33mcommit 9932e914318fa6946bf12de10315ece5237fb07d[m
+Author: VK88 <126750132+VilleK88@users.noreply.github.com>
+Date:   Mon Jun 16 13:23:14 2025 +0300
+
+    The NavMeshSurface area was manually created for Tampere because the NavMeshSurface's y-position differs from that of its parent object Tampere
+    
+    A SetPlayerPosition function was added to the MouseManager script to ensure the player can align with the manually defined NavMesh surface.
+
+[33mcommit 2b56b10df1aba3b1b08b5f6d99048c8b36ffa2af[m
+Author: VK88 <126750132+VilleK88@users.noreply.github.com>
+Date:   Mon Jun 16 07:42:54 2025 +0300
+
+    Oulu has been added to the available cities.
+
+[33mcommit ca92917842bb3bb3d6fa72f6a9013af50446ef9f[m
+Author: VK88 <126750132+VilleK88@users.noreply.github.com>
+Date:   Thu Jun 12 08:46:07 2025 +0300
+
+    Cleaned up obsolete code
+
+[33mcommit e4b66f5824d24729e5e98440cc2e499aa305c1c3[m
+Author: VK88 <126750132+VilleK88@users.noreply.github.com>
+Date:   Wed Jun 11 16:23:40 2025 +0300
+
+    Grid/Marker system in progress...
+
+[33mcommit bea74fa8d1fbda5c0d9cfd2c0a57c013a1f58887[m
+Author: VK88 <126750132+VilleK88@users.noreply.github.com>
+Date:   Wed Jun 11 13:42:21 2025 +0300
+
+    Grid/Marker system in progress...
+
+[33mcommit e679ff6cba9f0cba5211e34f0bf056b86d916fc4[m
+Author: VK88 <126750132+VilleK88@users.noreply.github.com>
+Date:   Wed Jun 11 12:03:50 2025 +0300
+
+    Grid/Marker system in progress...
+
+[33mcommit 59a20ef3b35d81d61bc9ba308b3e91f70ed7541f[m
+Author: VK88 <126750132+VilleK88@users.noreply.github.com>
+Date:   Tue Jun 10 16:30:15 2025 +0300
+
+    Grid system in progress...
+
+[33mcommit 6119a3db62309d7adc7a5cb12b7b23a58c2a3847[m
+Author: VK88 <126750132+VilleK88@users.noreply.github.com>
+Date:   Tue Jun 10 12:20:50 2025 +0300
+
+    Some unused code cleaned up
+
+[33mcommit a51681a9447eba1b83c87126ce36a14a950384b5[m
+Author: VK88 <126750132+VilleK88@users.noreply.github.com>
+Date:   Tue Jun 10 09:53:33 2025 +0300
+
+    The issue "Failed to create agent because there is no valid NavMesh" was resolved
+    
+    The issue "Failed to create agent because there is no valid NavMesh" was resolved by implementing a NavMeshSurfaceBuilder script, which was attached to the City GameObject. This script ensures that the NavMesh surface for the City environment is built first during the initialization process. NPC agents are only activated after the surface has been successfully generated. To further prevent race conditions, the player is activated with a 0.5-second delay in the MouseManager script, allowing sufficient time for the environment to initialize properly.
+
+[33mcommit 06519a121d2d628232ec252de40c116bb12b53c2[m
+Author: VK88 <126750132+VilleK88@users.noreply.github.com>
+Date:   Mon Jun 9 16:22:39 2025 +0300
+
+    Added a delay before the NPC character enters the WanderState, to ensure the NavMesh surface has time to bake first.
+
+[33mcommit 712ed493dadea7a91eefcff8488f92f9a59d0567[m
+Author: VK88 <126750132+VilleK88@users.noreply.github.com>
+Date:   Mon Jun 9 15:54:19 2025 +0300
+
+    NPC AI and waypoint system in progress...
+
+[33mcommit 47c0dc70e05c6c83e5735a7053d95487eb895866[m
+Author: VK88 <126750132+VilleK88@users.noreply.github.com>
+Date:   Mon Jun 9 09:47:19 2025 +0300
+
+    The MapController script has been updated to work with the new Input System
+
+[33mcommit 1bfec6a7fcff2b0cd0f11664318d07536cb87a2f[m
+Author: VK88 <126750132+VilleK88@users.noreply.github.com>
+Date:   Mon Jun 9 09:11:26 2025 +0300
+
+    The MouseManager script has been updated to work with the new Input System.
+
+[33mcommit 37f1a8815e9c107a5e30a6e83e3ce6285dd1f7bf[m
+Author: VK88 <126750132+VilleK88@users.noreply.github.com>
+Date:   Mon Jun 9 08:17:34 2025 +0300
+
+    Quick fix
+
+[33mcommit abd15046acfba376ddb8de871dbb43f5d6483c6f[m
+Author: VK88 <126750132+VilleK88@users.noreply.github.com>
+Date:   Thu Jun 5 15:25:31 2025 +0300
+
+    Touch screen support added to the City scene
+
+[33mcommit e39214fc0f4541c7dd523b16a408e359698a9f1c[m
+Author: VK88 <126750132+VilleK88@users.noreply.github.com>
+Date:   Thu Jun 5 15:10:08 2025 +0300
+
+    Keyboard support added to the MapController
+
+[33mcommit 4511a0d687647f967012b1fca6639b7768407fc3[m
+Author: VK88 <126750132+VilleK88@users.noreply.github.com>
+Date:   Thu Jun 5 14:57:00 2025 +0300
+
+    Map scene updated
+    
+    The map of Finland has been replaced with a larger one, and a MapController script has been created to enable movement and zooming on the map. It supports both mouse and touch screen input.
+
+[33mcommit 9a7f93df61f5d42ebc01fe2e4a12d1cee0fa1e67[m
+Author: VK88 <126750132+VilleK88@users.noreply.github.com>
+Date:   Thu Jun 5 13:26:12 2025 +0300
+
+    Rotating skybox added to the city scene
+
+[33mcommit c373ec229115736d59434be751ddc3648bbb8d55[m
+Author: VK88 <126750132+VilleK88@users.noreply.github.com>
+Date:   Thu Jun 5 12:00:28 2025 +0300
+
+    NavMeshAgent settings have been adjusted. The player character's movement is now smoother
+
+[33mcommit e15684e4c4da7e1a46ce2545ef30e9a58135020d[m
+Author: VK88 <126750132+VilleK88@users.noreply.github.com>
+Date:   Thu Jun 5 11:41:06 2025 +0300
+
+    UI color changes
+
+[33mcommit e386999fd5e537634d6be1dc273ac5dc1c6d9fba[m
+Author: VK88 <126750132+VilleK88@users.noreply.github.com>
+Date:   Thu Jun 5 11:11:30 2025 +0300
+
+    The MarkerInfoPanel now receives company data from the API call
+
+[33mcommit cbcb0a355440ce657b2ad32dc068245749615bd3[m
+Author: VK88 <126750132+VilleK88@users.noreply.github.com>
+Date:   Thu Jun 5 10:08:46 2025 +0300
+
+    The city-specific job search now works through the API
+
+[33mcommit 4caddccf125db4e9f0b66074ddb0fc2078f8acaa[m
+Author: VK88 <126750132+VilleK88@users.noreply.github.com>
+Date:   Thu Jun 5 07:25:22 2025 +0300
+
+    Quick fix
+
+[33mcommit 90f93554aab4c90d6220ccee2c82ff774a4e91e2[m
+Author: VK88 <126750132+VilleK88@users.noreply.github.com>
+Date:   Wed Jun 4 12:28:04 2025 +0300
+
+    CityPrefabs set to static
+
+[33mcommit 7bdecb3d8ad79b2eadea1a247baa6ae16ddcaa7b[m
+Author: VK88 <126750132+VilleK88@users.noreply.github.com>
+Date:   Wed Jun 4 11:18:13 2025 +0300
+
+    UI fixes...
+
+[33mcommit d5a2e43be1376f033ac01ec4bc101110b2e6d342[m
+Author: VK88 <126750132+VilleK88@users.noreply.github.com>
+Date:   Tue Jun 3 13:42:17 2025 +0300
+
+    The player now looks at the marker when casting the line
+
+[33mcommit f21d5b3f10122ee744ebc6286c6fb80dca60f7d4[m
+Author: VK88 <126750132+VilleK88@users.noreply.github.com>
+Date:   Tue Jun 3 13:27:05 2025 +0300
+
+    Now Robo can fish too
+
+[33mcommit 51060f1174fac9e0b2f2957e552b7ca642736c8c[m
+Author: VK88 <126750132+VilleK88@users.noreply.github.com>
+Date:   Tue Jun 3 13:10:32 2025 +0300
+
+    Teuvo And Tarja can now both fish jobs
+
+[33mcommit 27b6d216b1fddef7e5b3355189e4c48e499b820e[m
+Author: VK88 <126750132+VilleK88@users.noreply.github.com>
+Date:   Tue Jun 3 12:32:37 2025 +0300
+
+    Fishing jobs in progress...
+
+[33mcommit da71d1e95e6a1b09c9dedaddd5e78fc8376fbe46[m
+Author: VK88 <126750132+VilleK88@users.noreply.github.com>
+Date:   Tue Jun 3 10:47:10 2025 +0300
+
+    Robo replaced with a higher-quality version
+
+[33mcommit 04a113053dc14c25fa3deceb14a8936e3ef2e23a[m
+Author: VK88 <126750132+VilleK88@users.noreply.github.com>
+Date:   Tue Jun 3 10:26:14 2025 +0300
+
+    Tarja has been replaced with a higher-quality version
+
+[33mcommit 316f86593ce4a70ea26019beb919a4e9c8ffd034[m
+Author: VK88 <126750132+VilleK88@users.noreply.github.com>
+Date:   Tue Jun 3 09:33:15 2025 +0300
+
+    Teijo has been replaced with a higher-quality version
+
+[33mcommit 0683cadbd2700456b82a820d750bd9077bd0da02[m
+Author: VK88 <126750132+VilleK88@users.noreply.github.com>
+Date:   Tue Jun 3 08:58:06 2025 +0300
+
+    The markers are now instantiated randomly on the city map
+
+[33mcommit c5063a000fe04bd25663a4af2be8740f3387450d[m
+Author: VK88 <126750132+VilleK88@users.noreply.github.com>
+Date:   Mon Jun 2 16:16:08 2025 +0300
+
+    InputField added for testing
+
+[33mcommit 01c2cb896ac947ef184d2cd0ca4a61f5a81430d7[m
+Author: VK88 <126750132+VilleK88@users.noreply.github.com>
+Date:   Mon Jun 2 15:47:51 2025 +0300
+
+    Industry icon burger changed with new one
+
+[33mcommit 46c583479ebf2fd01c31db06db53d321f0af8679[m
+Author: VK88 <126750132+VilleK88@users.noreply.github.com>
+Date:   Mon Jun 2 15:19:22 2025 +0300
+
+    The order of the characters in the character selection menu has been changed by placing Robo the Unemployed in the center
+
+[33mcommit 95af2708268fba9abf8ce69500bad198429d92c2[m
+Author: VK88 <126750132+VilleK88@users.noreply.github.com>
+Date:   Mon Jun 2 15:13:10 2025 +0300
+
+    Robo the Unemployed added to character selection
+
+[33mcommit 95989073fdfb4816c9df93621e3221117bbe9457[m
+Author: VK88 <126750132+VilleK88@users.noreply.github.com>
+Date:   Mon Jun 2 14:11:51 2025 +0300
+
+    Timmy and Claire have been replaced with Teijo and Tarha in the character selection of the menu scene
+
+[33mcommit 9a298601f58c0524e29817add91fce802dc35eb0[m
+Author: VK88 <126750132+VilleK88@users.noreply.github.com>
+Date:   Mon Jun 2 13:41:18 2025 +0300
+
+    Robo the Unemployed added to the characters
+
+[33mcommit 399c293145e00d8e46f35943b80883784e3d6689[m
+Author: VK88 <126750132+VilleK88@users.noreply.github.com>
+Date:   Mon Jun 2 13:23:13 2025 +0300
+
+    MouseManager script updated
+    
+    and Timmy replaced with Teijo Työtön.
+
+[33mcommit 6ca118e0dc8d46ebd4e444ee1ae35e21382fc9e1[m
+Author: VK88 <126750132+VilleK88@users.noreply.github.com>
+Date:   Mon Jun 2 12:54:20 2025 +0300
+
+    Claire was replaced with Tarja the Unemployed
+
+[33mcommit 3985574fe5a3bb85d233b1fe8f77abc9efb40e7d[m
+Author: VK88 <126750132+VilleK88@users.noreply.github.com>
+Date:   Mon Jun 2 12:30:25 2025 +0300
+
+    Scene transition updated
+    
+    Now the city prefab is loaded from the Resources folder during the asynchronous scene loading progress to avoid a major stutter at the end of the City scene loading.
+
+[33mcommit 04391696d7c35746c805a5fa83275c16c5ac4467[m
+Author: VK88 <126750132+VilleK88@users.noreply.github.com>
+Date:   Mon Jun 2 11:43:49 2025 +0300
+
+    Smooth scene transition in progress...
+
+[33mcommit b5a25dc917c248cdd648066fd27d23625e721b18[m
+Author: VK88 <126750132+VilleK88@users.noreply.github.com>
+Date:   Mon Jun 2 09:50:13 2025 +0300
+
+    Smooth scene transition in progress...
+
+[33mcommit 01803d773a497d7eafc100ee470f3250a68cc96d[m
+Author: VK88 <126750132+VilleK88@users.noreply.github.com>
+Date:   Mon Jun 2 07:52:33 2025 +0300
+
+    Publishing settings fixed
+
+[33mcommit d45e75cefe3f63250ce971f4cf7f9824611b5291[m
+Author: VK88 <126750132+VilleK88@users.noreply.github.com>
+Date:   Mon Jun 2 06:12:15 2025 +0300
+
+    Build works
+    
+    Opening google maps works
+
+[33mcommit e58fcc10f43b2aaaea11cfe878fbee27545b8754[m
+Author: VK88 <126750132+VilleK88@users.noreply.github.com>
+Date:   Wed May 28 15:58:38 2025 +0300
+
+    MarkerInfoPanel in progress...
+
+[33mcommit 4a5d4ac2b7fd2d98c47c52bc553c10328a845be1[m
+Author: VK88 <126750132+VilleK88@users.noreply.github.com>
+Date:   Wed May 28 15:19:08 2025 +0300
+
+    Created icons for all industries
+
+[33mcommit eb26acc67ec3c28e5756aaa9b1551e0de564f774[m
+Author: VK88 <126750132+VilleK88@users.noreply.github.com>
+Date:   Wed May 28 14:09:35 2025 +0300
+
+    Marker icons in progress...
+
+[33mcommit 97f1b5b4a11c8d57aef36b91b17c8bc107c1de25[m
+Author: VK88 <126750132+VilleK88@users.noreply.github.com>
+Date:   Wed May 28 13:32:59 2025 +0300
+
+    Marker in progress...
+    
+    Created enum IndustryType and scriptable object IndustryInfo.
+
+[33mcommit 5dca660375e2aa8218b3b71d812c5d4fa62fb47f[m
+Author: VK88 <126750132+VilleK88@users.noreply.github.com>
+Date:   Wed May 28 11:26:36 2025 +0300
+
+    Created a round-edged loading bar for scene transitions
+
+[33mcommit 4ad0e2446afb25e727b35fc6075dba77a713e4ec[m
+Author: VK88 <126750132+VilleK88@users.noreply.github.com>
+Date:   Wed May 28 08:40:34 2025 +0300
+
+    The 3 - City scene is now being loaded asynchronously in the 2 - Map scene, with a loading bar.
+
+[33mcommit 6bc15f0d6af431aa1bf681ecbf228c95e4a79f02[m
+Author: VK88 <126750132+VilleK88@users.noreply.github.com>
+Date:   Tue May 27 15:58:13 2025 +0300
+
+    Added a detection for Marker clicks in the MouseManager script
+    
+    Also made the script's code more modular.
+
+[33mcommit 2db358668c85ea29fc5d27dba03084bcfa5e4edc[m
+Author: VK88 <126750132+VilleK88@users.noreply.github.com>
+Date:   Tue May 27 15:09:35 2025 +0300
+
+    Interaction system and markers in progress...
+
+[33mcommit fb92f30f885677aa748968607d98a45c960c3223[m
+Author: VK88 <126750132+VilleK88@users.noreply.github.com>
+Date:   Tue May 27 12:41:51 2025 +0300
+
+    Interact system and markers in progress...
+    
+    The Marker's particle system now works correctly: it is enabled when the player's SphereCollider enters the Marker's collider, and it is disabled when the SphereCollider exists and is no longer touching it.
+
+[33mcommit 5f15e831c235d75ecfd8222c1d72c93a2c9fdbf1[m
+Author: VK88 <126750132+VilleK88@users.noreply.github.com>
+Date:   Tue May 27 09:40:31 2025 +0300
+
+    Interact system and markers in progress...
+
+[33mcommit 7cb38da17934a18cffea5655385772d9c175faed[m
+Author: VK88 <126750132+VilleK88@users.noreply.github.com>
+Date:   Tue May 27 08:52:23 2025 +0300
+
+    MouseManager script updated
+    
+    The player no longer reacts when UI objects are clicked.
+
+[33mcommit 7d4c26eb8ee3ec61ab811eab9f88feb1909592c1[m
+Author: VK88 <126750132+VilleK88@users.noreply.github.com>
+Date:   Tue May 27 08:24:30 2025 +0300
+
+    Revert "MouseManager script updated"
+    
+    This reverts commit 57f8465c8b73ba38073c9a19273c988228d15371.
+
+[33mcommit 57f8465c8b73ba38073c9a19273c988228d15371[m
+Author: VK88 <126750132+VilleK88@users.noreply.github.com>
+Date:   Tue May 27 08:22:39 2025 +0300
+
+    MouseManager script updated
+    
+    The player no longer reacts when UI objects are clicked.
+
+[33mcommit f7c00f34d058fe4dce17ffe0f6929ae25f0ff089[m
+Author: VK88 <126750132+VilleK88@users.noreply.github.com>
+Date:   Mon May 26 16:52:07 2025 +0300
+
+    Created FloatAndRotate script for job pointers
+
+[33mcommit 85d7042bd9082bce4d3718e88f52724ada5f0c85[m
+Author: VK88 <126750132+VilleK88@users.noreply.github.com>
+Date:   Mon May 26 16:28:27 2025 +0300
+
+    Created a logic for starting and stopping footstep sound effects
+
+[33mcommit 6e83c6c62871e27dc7c9aa4c0f634a5217e18c6e[m
+Author: VK88 <126750132+VilleK88@users.noreply.github.com>
+Date:   Mon May 26 16:03:42 2025 +0300
+
+    SoundManager created
+
+[33mcommit e020a25c213794de843208aec40c4712deb5df86[m
+Author: VK88 <126750132+VilleK88@users.noreply.github.com>
+Date:   Mon May 26 14:20:20 2025 +0300
+
+    Exits times lowered when exiting from walking animation
+
+[33mcommit 0da3f4c02cb8d220281077129ede6d6881f3c039[m
+Author: VK88 <126750132+VilleK88@users.noreply.github.com>
+Date:   Mon May 26 12:30:32 2025 +0300
+
+    Added logic for returning to the menu without needing to close the game in between
+
+[33mcommit 314c7e84f48c983dac73e89756f262f94d37cf8f[m
+Author: VK88 <126750132+VilleK88@users.noreply.github.com>
+Date:   Mon May 26 11:40:31 2025 +0300
+
+    CharacterMenu created
+    
+    You can now choose your character in the menu. Also menu scene added to the scene list.
+
+[33mcommit b73eb224e42eeb9bca21588ffbef9f59f83518b6[m
+Author: VK88 <126750132+VilleK88@users.noreply.github.com>
+Date:   Mon May 26 08:40:53 2025 +0300
+
+    Claire gameobject created to the city scene
+    
+    Idle and walk animations set to their places. And coded a logic for selecting your character through the GameManager.
+
+[33mcommit 3c7110fdcf73c90ca20d476967d01fff5013fb9b[m
+Author: VK88 <126750132+VilleK88@users.noreply.github.com>
+Date:   Mon May 26 08:06:46 2025 +0300
+
+    Claire t-pose and animations downloaded from Mixamo
+    
+    and free asset soundtrack
+
+[33mcommit 4ae619bbf6216991e19dfc61e3b79b51f80e99ee[m
+Author: VK88 <126750132+VilleK88@users.noreply.github.com>
+Date:   Thu May 22 16:48:08 2025 +0300
+
+    Menu in progress...
+    
+    Audio sliders added and functionalities coded for them.
+
+[33mcommit 8e78091824dc0161ffbdfef781183102876f3bd5[m
+Author: VK88 <126750132+VilleK88@users.noreply.github.com>
+Date:   Thu May 22 15:04:05 2025 +0300
+
+    Menu in progress...
+
+[33mcommit 772901c9569bb35397872489167a36e2b8d48cab[m
+Author: VK88 <126750132+VilleK88@users.noreply.github.com>
+Date:   Thu May 22 13:50:29 2025 +0300
+
+    Helsinki map updated to streets v8
+
+[33mcommit 1b19d332b6bda36ee47a602f2cfaa2dd821ef8d6[m
+Author: VK88 <126750132+VilleK88@users.noreply.github.com>
+Date:   Thu May 22 13:30:56 2025 +0300
+
+    MouseManager-script updated
+
+[33mcommit 632295317215c7a945500fb08b072a04e55412c1[m
+Author: VK88 <126750132+VilleK88@users.noreply.github.com>
+Date:   Thu May 22 10:36:31 2025 +0300
+
+    Dependencies on the Mapbox scripts have been removed from the scripts included in the game's build
+
+[33mcommit 930fae744e5487dd8b426745a3e4b0dd1089a74f[m
+Author: VK88 <126750132+VilleK88@users.noreply.github.com>
+Date:   Thu May 22 07:35:47 2025 +0300
+
+    Deleted unused free assets
+
+[33mcommit beacdf7b60f2c12794ab9ab31e2e43c9c16167fb[m
+Author: VK88 <126750132+VilleK88@users.noreply.github.com>
+Date:   Wed May 21 16:10:38 2025 +0300
+
+    The city button script has been updated
+    
+    Now, when the city button is clicked once, a popup appears showing the city's name. If the city button is double-clicked, it takes the user to the city scene.
+
+[33mcommit 64ac8d43189790e7fe3fddb69a1cb79acc33e912[m
+Author: VK88 <126750132+VilleK88@users.noreply.github.com>
+Date:   Wed May 21 15:42:23 2025 +0300
+
+    The city buttons have been replaced with round buttons without text
+
+[33mcommit b631f238ffd6559e0c0988bca99c33fdb862f64a[m
+Author: VK88 <126750132+VilleK88@users.noreply.github.com>
+Date:   Wed May 21 15:36:24 2025 +0300
+
+    A subtle hover effect added to the buttons so that they slightly enlarge
+
+[33mcommit bc2b80fd912e7b0899a9b3cccd0d9e2d8b978244[m
+Author: VK88 <126750132+VilleK88@users.noreply.github.com>
+Date:   Wed May 21 15:05:31 2025 +0300
+
+    It is now possible to return the map scene from the city scene
+    
+    Free asset buttons have been downloaded and the old ones have been replaced with them.
+
+[33mcommit 7f3c60058861bbdadfeb18eae5d1641171e0e6fc[m
+Author: VK88 <126750132+VilleK88@users.noreply.github.com>
+Date:   Wed May 21 14:18:28 2025 +0300
+
+    Travel to Helsinki and Turku works
+    
+    The city button sends the information to the GameManager, which carries the destination data during the scene transition. The CityManager then checks this data in the 3 - City scene and opens the corresponding map prefab.
+
+[33mcommit 0a2ecba3ae47ad856c09d8f1c6121b35cab5640a[m
+Author: VK88 <126750132+VilleK88@users.noreply.github.com>
+Date:   Wed May 21 11:50:39 2025 +0300
+
+    Map_Turku prefad created
+
+[33mcommit 3cda6539df538dc3d230ff2ed7116af534f2dd86[m
+Author: VK88 <126750132+VilleK88@users.noreply.github.com>
+Date:   Wed May 21 09:03:04 2025 +0300
+
+    Made prefabs from the contents of the location_basedGame scene and placed them into the 3 - City scene
+
+[33mcommit b451c513b237abd9519040b887ca4850e2a96f96[m
+Author: VK88 <126750132+VilleK88@users.noreply.github.com>
+Date:   Tue May 20 16:22:56 2025 +0300
+
+    Helsinki city scene baked. Movement now works also on the offline map.
+
+[33mcommit ec6a335664c648b2a8c4fbe0e4a9011045bbd3cd[m
+Author: VK88 <126750132+VilleK88@users.noreply.github.com>
+Date:   Tue May 20 13:36:00 2025 +0300
+
+    The spawn height of the EventPointers can now be set through the script
+
+[33mcommit 2f825ee80c1dd7f1db8d73b2787b144dd79905b5[m
+Author: VK88 <126750132+VilleK88@users.noreply.github.com>
+Date:   Tue May 20 12:23:27 2025 +0300
+
+    AI navigation step height set to 0.2 to prevent walking over buildinds
+
+[33mcommit f5f1fa7dccafca498510e3db8997a607afd45a59[m
+Author: VK88 <126750132+VilleK88@users.noreply.github.com>
+Date:   Tue May 20 11:38:12 2025 +0300
+
+    The baked map has been removed from the project to save storage space
+
+[33mcommit 111509b332aeeba4163173594f5f14363fc23fe3[m
+Author: VK88 <126750132+VilleK88@users.noreply.github.com>
+Date:   Tue May 20 11:13:42 2025 +0300
+
+    Mapbox maps can now be baked
+
+[33mcommit d24f8f74ab41a608bcf6e0d125e14d2161637fd6[m
+Author: VK88 <126750132+VilleK88@users.noreply.github.com>
+Date:   Tue May 20 07:35:14 2025 +0300
+
+    Root motion turned off so player's rotation won't change because of the animations
+
+[33mcommit c97c0f3d91fde2456f619ae610a54cd1e9e5c5a9[m
+Author: VK88 <126750132+VilleK88@users.noreply.github.com>
+Date:   Mon May 19 16:53:08 2025 +0300
+
+    Timmy character with animations downloaded from Mixamo. Replaced player marker with Timmy. Idle and walking animations have been assigned to Timmy, and logic for transitioning between them has been implemented in code
+
+[33mcommit fc6f57fd316ca0118a8da6463b2dcb0bd72b10b5[m
+Author: VK88 <126750132+VilleK88@users.noreply.github.com>
+Date:   Mon May 19 15:58:04 2025 +0300
+
+    Layer and minimum height set for buildings to prevent the player walking through them
+
+[33mcommit 040babfa875bb78235ed367b737a5e106a3bb364[m
+Author: VK88 <126750132+VilleK88@users.noreply.github.com>
+Date:   Mon May 19 15:35:13 2025 +0300
+
+    The map is baked immediately after it's generated
+
+[33mcommit 0a2aa9abc463438984f5d8b6050ddb90bda02391[m
+Author: VK88 <126750132+VilleK88@users.noreply.github.com>
+Date:   Mon May 19 14:41:36 2025 +0300
+
+    Buildings are now tagged during the map generation
+
+[33mcommit a6f3c053967b3597af3bc3fc5089b1776036ce35[m
+Author: VK88 <126750132+VilleK88@users.noreply.github.com>
+Date:   Mon May 19 12:40:49 2025 +0300
+
+    Player now moves to the clicked position in the map instead of ''teleporting''
+
+[33mcommit 640f5a063b2a6233cb1b3dae48cb2d37e1bfc0d9[m
+Author: VK88 <126750132+VilleK88@users.noreply.github.com>
+Date:   Mon May 19 12:26:28 2025 +0300
+
+    Camera now follows the player
+    
+    with fixed rotation.
+
+[33mcommit 5881b9ed31ae95fcf5dfd01c7c92eae381784de0[m
+Author: VK88 <126750132+VilleK88@users.noreply.github.com>
+Date:   Mon May 19 10:52:40 2025 +0300
+
+    Starting location value changed
+
+[33mcommit 82f8333908893f8b97b9ca067a3aa18f102381a4[m
+Author: VK88 <126750132+VilleK88@users.noreply.github.com>
+Date:   Mon May 19 09:56:09 2025 +0300
+
+    You can no move on the map by clicking on the location you want to go to
+
+[33mcommit 39124f9cb4d70342fb4d273ef28de11a6bfd7ed9[m
+Author: VK88 <126750132+VilleK88@users.noreply.github.com>
+Date:   Thu May 15 07:10:39 2025 +0300
+
+    Clicking the mapbox tiles now works
+
+[33mcommit 17d7666bae90a9564448a805c3f18726c8b75e95[m
+Author: VK88 <126750132+VilleK88@users.noreply.github.com>
+Date:   Wed May 14 18:53:17 2025 +0300
+
+    Mapbox in progress...
+
+[33mcommit 3d59b7f3763fda717381abee0beb167d4224ce63[m
+Author: VK88 <126750132+VilleK88@users.noreply.github.com>
+Date:   Wed May 14 10:55:30 2025 +0300
+
+    Mapbox in progress...
+
+[33mcommit 09e0eb4e050340a56e97bb595c4fa9d39c2661b3[m
+Author: VK88 <126750132+VilleK88@users.noreply.github.com>
+Date:   Wed May 14 10:32:36 2025 +0300
+
+    Mapbox installed and working
+
+[33mcommit 2fcfba8931e7cf999f1206b0df5740d342efa11b[m
+Author: VK88 <126750132+VilleK88@users.noreply.github.com>
+Date:   Tue May 13 17:23:23 2025 +0300
+
+    LevelManager in progress...
+
+[33mcommit 8f2f0a4f9b2246d6952db70aed96e78e19e22c2f[m
+Author: VK88 <126750132+VilleK88@users.noreply.github.com>
+Date:   Tue May 13 16:37:08 2025 +0300
+
+    POLYGON city pack materials converted to URP
+
+[33mcommit 5ba785606a5db7bff7d45f85eb1e5ae42ebd4c00[m
+Author: VK88 <126750132+VilleK88@users.noreply.github.com>
+Date:   Tue May 13 16:35:01 2025 +0300
+
+    Replaced plain with terrain.
+
+[33mcommit 51b4d545f1aa2662100e46c9cdf0529fddf9de45[m
+Author: VK88 <126750132+VilleK88@users.noreply.github.com>
+Date:   Tue May 13 15:24:08 2025 +0300
+
+    polygon city pack downloaded
+
+[33mcommit d55b687903093bb066234ad508f70fa546f97a85[m
+Author: VK88 <126750132+VilleK88@users.noreply.github.com>
+Date:   Tue May 13 12:38:55 2025 +0300
+
+    Fishing mode can no longer be activated while moving.
+
+[33mcommit 2cc926a7cc46cc987ce4076fee236e686e1ce950[m
+Author: VK88 <126750132+VilleK88@users.noreply.github.com>
+Date:   Tue May 13 12:30:18 2025 +0300
+
+    Reeling in the employer now works without issues. The bait attaches to Mixamo's hips using a FixedJoint, while the Employer object becomes a child of the bait.
+
+[33mcommit 59255527444073a9120adef408618e6a0af25ad8[m
+Author: VK88 <126750132+VilleK88@users.noreply.github.com>
+Date:   Tue May 13 12:22:13 2025 +0300
+
+    Reeling in the employer now works partially.
+
+[33mcommit bd11ce3ff25ddb6db1ff6792f547c8ac5587ba3c[m
+Author: VK88 <126750132+VilleK88@users.noreply.github.com>
+Date:   Tue May 13 10:38:22 2025 +0300
+
+    The bait can no longer be thrown until the current one has been reeled back in.
+
+[33mcommit 631537dcdd51d43b80db855d87425dc1685a0962[m
+Author: VK88 <126750132+VilleK88@users.noreply.github.com>
+Date:   Tue May 13 10:14:53 2025 +0300
+
+    The player can now turn while in fishing mode. Turning speed has been reduced in fishing mode.
+
+[33mcommit 1e45a50762b6b6c7ff5b69911308b9f40fa679d7[m
+Author: VK88 <126750132+VilleK88@users.noreply.github.com>
+Date:   Tue May 13 09:47:51 2025 +0300
+
+    Fishing line added.
+
+[33mcommit 8ca242073d7ba8c078623bd5c14f0ffca2a74671[m
+Author: VK88 <126750132+VilleK88@users.noreply.github.com>
+Date:   Tue May 13 09:14:50 2025 +0300
+
+    Ragdoll has been added to the boss character.
+
+[33mcommit 209d25fc5707abb4d07181b109f2c332f9ac0349[m
+Author: VK88 <126750132+VilleK88@users.noreply.github.com>
+Date:   Tue May 13 08:46:10 2025 +0300
+
+    A boss character has been imported from Mixamo and assigned and idle animation.
+
+[33mcommit db9980adf73ee0aee2a4c4009f78b3fe192b675d[m
+Author: VK88 <126750132+VilleK88@users.noreply.github.com>
+Date:   Tue May 13 07:57:30 2025 +0300
+
+    Linear damping was set to 1 and angular damping to 0.5 to prevent baits from sliding across the ground indefinitely.
+
+[33mcommit 1ee84446eb12c4196265dffcb86a069c47038d30[m
+Author: VK88 <126750132+VilleK88@users.noreply.github.com>
+Date:   Tue May 13 07:50:34 2025 +0300
+
+    Reeling now stops if 'r' is not held down.
+
+[33mcommit e7c7eb01034e5e2ec3c740003609dfdd7176aa49[m
+Author: VK88 <126750132+VilleK88@users.noreply.github.com>
+Date:   Mon May 12 17:29:38 2025 +0300
+
+    A UI speedometer has been added for throw power.
+
+[33mcommit a673d2d0ba2679307dbe6d51d3835e5f7de28b35[m
+Author: VK88 <126750132+VilleK88@users.noreply.github.com>
+Date:   Mon May 12 16:21:33 2025 +0300
+
+    Reeling the bait back in now works.
+
+[33mcommit 56d41efff5f42d2a37a96867cc292b0f0e7b8819[m
+Author: VK88 <126750132+VilleK88@users.noreply.github.com>
+Date:   Mon May 12 15:35:38 2025 +0300
+
+    The camera now switches from third-person to first-person when entering fishing mode. Casting baits works. The baits are implemented as ScriptableObcjets that reference prefabs.
+
+[33mcommit 3d563f29f17022f299bea2bb04bfda6a1006c41d[m
+Author: VK88 <126750132+VilleK88@users.noreply.github.com>
+Date:   Mon May 12 14:13:11 2025 +0300
+
+    URP installed and built-in materials converted to URP.
+
+[33mcommit 27e19f4bcb3f9c15022b1e2531f01f8105009925[m
+Author: VK88 <126750132+VilleK88@users.noreply.github.com>
+Date:   Mon May 12 13:18:49 2025 +0300
+
+    The logic for the fishing mode has been written. The game exists the fishing mode through a 1-second coroutine to ensure the fishing animation is not active while the player is, for example, walking.
+
+[33mcommit 494884def5593a8a98997e2abe7840337a85db86[m
+Author: VK88 <126750132+VilleK88@users.noreply.github.com>
+Date:   Mon May 12 12:32:52 2025 +0300
+
+    Corrected fishing rods rotations and position in fishing cast animation
+
+[33mcommit 548ef0766fadfd5693c588dd004e718bf10d5a0c[m
+Author: VK88 <126750132+VilleK88@users.noreply.github.com>
+Date:   Mon May 12 12:21:59 2025 +0300
+
+    Fishing rod position fixed when in fishing idle
+
+[33mcommit d1164dd1a2075bde1260242b7db0021ea7807c08[m
+Author: VK88 <126750132+VilleK88@users.noreply.github.com>
+Date:   Mon May 12 12:10:32 2025 +0300
+
+    Fishing rod rotations corrected
+
+[33mcommit b180614af7246c1e7c22490e01b04aebab99ada1[m
+Author: VK88 <126750132+VilleK88@users.noreply.github.com>
+Date:   Mon May 12 11:52:01 2025 +0300
+
+    I made copies of the fishing idle and fishing cast animations so they are no longer read-only.
+
+[33mcommit f7d6c9d4dcbce6536348104f63ba1edfb94238a0[m
+Author: VK88 <126750132+VilleK88@users.noreply.github.com>
+Date:   Mon May 12 11:38:20 2025 +0300
+
+    Fishing idle and fishing cast animations added to the Player's animator controller. Fishing rod has been added to the player. Logic for entering the fishing mode has been coded.
+
+[33mcommit 04950ce30ab6e9b8dcb34e7c8d34d5dd225f2f83[m
+Author: VK88 <126750132+VilleK88@users.noreply.github.com>
+Date:   Mon May 12 09:43:20 2025 +0300
+
+    Rotation logic coded to the player
+
+[33mcommit a880e79ffc14800d65441548686fad2bb9e9f09e[m
+Author: VK88 <126750132+VilleK88@users.noreply.github.com>
+Date:   Mon May 12 09:29:48 2025 +0300
+
+    Camera that follows the player and backward walking animation have been added to the game.
+
+[33mcommit a38fd43780002a8d3a476269c814d0938c60e164[m
+Author: VK88 <126750132+VilleK88@users.noreply.github.com>
+Date:   Thu May 8 13:46:52 2025 +0300
+
+    Learning to use the new input system
+
+[33mcommit 0938b86cc34080115112fcd7a083d5bd19d674e2[m
+Author: VK88 <126750132+VilleK88@users.noreply.github.com>
+Date:   Thu May 8 12:33:53 2025 +0300
+
+    Scenes, scripts and animation folders made
+    
+    Player and player animator made. Three Mixamo animations were added to the player.
+
+[33mcommit 69b3c3862247fb63305d16a5809d9b5596ff9f77[m
+Author: VK88 <126750132+VilleK88@users.noreply.github.com>
+Date:   Thu May 8 11:48:28 2025 +0300
+
+    Project initialization
+
+[33mcommit b92384573bfec18f9b59a95f2655b603a1486dac[m
+Author: VK88 <126750132+VilleK88@users.noreply.github.com>
+Date:   Thu May 8 11:45:03 2025 +0300
+
+    Revert "Project initialization"
+    
+    This reverts commit 3d5c5e738e4ebd815b536086e62f3402f2d4e5c4.
+
+[33mcommit 3d5c5e738e4ebd815b536086e62f3402f2d4e5c4[m
+Author: VK88 <126750132+VilleK88@users.noreply.github.com>
+Date:   Thu May 8 11:40:32 2025 +0300
+
+    Project initialization
+
+[33mcommit af915431af1603e7bc685e30a9a3c817ea427246[m
+Author: VK88 <126750132+VilleK88@users.noreply.github.com>
+Date:   Thu May 8 11:37:32 2025 +0300
+
+    Initial commit
