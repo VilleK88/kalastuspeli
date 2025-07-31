@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 [ExecuteInEditMode]
@@ -87,8 +88,8 @@ public class MapBuildingMerger : MonoBehaviour
         }
 
         // Final GameObject
-        GameObject merged = new GameObject($"MergedBuilding_{index}");
-        merged.transform.parent = parent;
+        //GameObject merged = new GameObject($"MergedBuilding_{index}");
+        //merged.transform.parent = parent;
 
         Mesh combinedMesh = new Mesh();
         combinedMesh.indexFormat = UnityEngine.Rendering.IndexFormat.UInt32;
@@ -113,7 +114,30 @@ public class MapBuildingMerger : MonoBehaviour
             finalMaterials.Add(kvp.Key);
         }
 
+        //combinedMesh.CombineMeshes(finalCombineList.ToArray(), false, false);
+        //merged.AddComponent<MeshFilter>().sharedMesh = combinedMesh;
+        //merged.AddComponent<MeshRenderer>().sharedMaterials = finalMaterials.ToArray();
+        //merged.AddComponent<MeshCollider>().sharedMesh = combinedMesh;
+
         combinedMesh.CombineMeshes(finalCombineList.ToArray(), false, false);
+
+        // Tallenna yhdistetty mesh assetiksi
+#if UNITY_EDITOR
+        string folderPath = "Assets/MergedMeshes/";
+        if (!AssetDatabase.IsValidFolder(folderPath))
+            AssetDatabase.CreateFolder("Assets", "MergedMeshes");
+
+        string meshPath = $"{folderPath}MergedBuilding_{index}.asset";
+        AssetDatabase.CreateAsset(Object.Instantiate(combinedMesh), meshPath);
+        AssetDatabase.SaveAssets();
+
+        combinedMesh = AssetDatabase.LoadAssetAtPath<Mesh>(meshPath);
+#endif
+
+        // ? Luo GameObject nyt vasta kun mesh on valmis ja tallennettu
+        GameObject merged = new GameObject($"MergedBuilding_{index}");
+        merged.transform.parent = parent;
+
         merged.AddComponent<MeshFilter>().sharedMesh = combinedMesh;
         merged.AddComponent<MeshRenderer>().sharedMaterials = finalMaterials.ToArray();
         merged.AddComponent<MeshCollider>().sharedMesh = combinedMesh;
@@ -121,5 +145,6 @@ public class MapBuildingMerger : MonoBehaviour
         // Cleanup
         foreach (GameObject go in group)
             DestroyImmediate(go);
+
     }
 }

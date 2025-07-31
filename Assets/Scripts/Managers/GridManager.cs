@@ -18,6 +18,7 @@ public class GridManager : MonoBehaviour
 
     [SerializeField] GameObject parentObject;
     [SerializeField] GameObject gridPrefab;
+    [SerializeField] Transform groundParent;
     public List<GameObject> grid = new List<GameObject>();
     int gridAmount = 5;
     int addition = 100;
@@ -59,7 +60,8 @@ public class GridManager : MonoBehaviour
 
     public void InitializeGrid()
     {
-        originPosition = GetCenterOfChildren(CityNavMeshSurfaceBuilder.Instance.transform);
+        //originPosition = GetCenterOfChildren(CityNavMeshSurfaceBuilder.Instance.transform);
+        originPosition = CityNavMeshSurfaceBuilder.Instance.surface.navMeshData.sourceBounds.center;
 
         float halfGridSize = (gridAmount - 1) * addition / 2;
 

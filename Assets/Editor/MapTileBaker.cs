@@ -28,6 +28,8 @@ public class MapTileBaker : MonoBehaviour
 
         // Create a new GameObject to store baked content
         GameObject bakedMap = new GameObject("Map");
+        GameObject buildings = new GameObject("Buildings");
+        buildings.transform.SetParent(bakedMap.transform, false);
         MeshFilter targetMeshFilter = bakedMap.AddComponent<MeshFilter>();
         MeshRenderer targetRenderer = bakedMap.AddComponent<MeshRenderer>();
 
@@ -70,7 +72,7 @@ public class MapTileBaker : MonoBehaviour
                 // Instantiate the building object
                 GameObject buildingCopy = Object.Instantiate(child.gameObject);
                 buildingCopy.name = child.name;
-                buildingCopy.transform.SetParent(bakedMap.transform);
+                buildingCopy.transform.SetParent(buildings.transform);
 
                 // Preserve world position
                 buildingCopy.transform.position = child.position;

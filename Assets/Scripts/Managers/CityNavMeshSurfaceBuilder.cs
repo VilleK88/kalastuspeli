@@ -14,7 +14,7 @@ public class CityNavMeshSurfaceBuilder : MonoBehaviour
     }
     #endregion
 
-    [SerializeField] NavMeshSurface surface;
+    public NavMeshSurface surface;
     [SerializeField] GameObject npcs;
 
     private void Start()
@@ -26,7 +26,7 @@ public class CityNavMeshSurfaceBuilder : MonoBehaviour
 
         if (GridManager.Instance != null)
         {
-            GridManager.Instance.SetGridManagerPosition();
+            //GridManager.Instance.SetGridManagerPosition();
             GridManager.Instance.InitializeGrid();
         }
 
