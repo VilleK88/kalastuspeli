@@ -36,6 +36,9 @@ public class MapTileBaker : MonoBehaviour
         List<Vector2[]> uvsList = new List<Vector2[]>();
         List<Texture2D> textures = new List<Texture2D>();
 
+        Material[] sharedBuildingMaterials = null;
+        bool hasAssignedSharedMaterial = false;
+
         foreach (Transform tile in originalMap.transform)
         {
             // Skip invalid or non-tile objects
@@ -76,7 +79,14 @@ public class MapTileBaker : MonoBehaviour
 
                 // Process its mesh and material into Assets
                 ProcessMeshes(buildingCopy.transform, tile, meshFolder);
-                ProcessMaterials(buildingCopy.transform, tile, materialFolder, textureFolder);
+                //ProcessMaterials(buildingCopy.transform, tile, materialFolder, textureFolder);
+                if (!hasAssignedSharedMaterial)
+                {
+                    sharedBuildingMaterials = ExtractAndSaveFirstMaterials(buildingCopy.transform, tile, materialFolder, textureFolder);
+                    hasAssignedSharedMaterial = true;
+                }
+
+                AssignSharedMaterials(buildingCopy.transform, sharedBuildingMaterials);
 
                 // Remove scripts
                 foreach (var comp in buildingCopy.GetComponents<MonoBehaviour>())
@@ -144,7 +154,6 @@ public class MapTileBaker : MonoBehaviour
         }
 
         Texture2D savedAtlas = AssetDatabase.LoadAssetAtPath<Texture2D>(atlasPath);
-
 
         // Create new material
         Shader shader = Shader.Find("Universal Render Pipeline/Lit");
@@ -429,5 +438,64 @@ public class MapTileBaker : MonoBehaviour
         tileCopy.hideFlags = HideFlags.None;
         tileCopy.transform.SetParent(bakedMap.transform);
         return tileCopy;
+    }
+
+    static Material[] ExtractAndSaveFirstMaterials(Transform child, Transform tile, string materialFolder, string textureFolder)
+    {
+        MeshRenderer meshRenderer = child.GetComponent<MeshRenderer>();
+        if (meshRenderer == null || meshRenderer.sharedMaterials.Length == 0)
+            return null;
+
+        var originalMaterials = meshRenderer.sharedMaterials;
+        Material[] sharedMaterials = new Material[originalMaterials.Length];
+
+        for (int i = 0; i < originalMaterials.Length; i++)
+        {
+            var originalMat = originalMaterials[i];
+            if (originalMat == null)
+                continue;
+
+            string safeName = $"{tile.name}_{child.name}_{i}".Replace("/", "_");
+            string materialPath = AssetDatabase.GenerateUniqueAssetPath($"{materialFolder}/{safeName}_Material.mat");
+
+            Shader shader = Shader.Find("Universal Render Pipeline/Lit");
+            Material matCopy = new Material(shader);
+            matCopy.CopyPropertiesFromMaterial(originalMat);
+
+            if (matCopy.HasProperty("_BaseColor"))
+                matCopy.SetColor("_BaseColor", originalMat.color);
+
+            if (originalMat.mainTexture is Texture2D tex2D)
+            {
+                string texturePath = $"{textureFolder}/{safeName}_MainTex.png";
+
+                byte[] pngData = tex2D.EncodeToPNG();
+                if (pngData != null)
+                {
+                    File.WriteAllBytes(texturePath, pngData);
+                    AssetDatabase.ImportAsset(texturePath);
+
+                    Texture2D importedTex = AssetDatabase.LoadAssetAtPath<Texture2D>(texturePath);
+                    if (importedTex != null && matCopy.HasProperty("_BaseMap"))
+                        matCopy.SetTexture("_BaseMap", importedTex);
+                }
+            }
+
+            AssetDatabase.CreateAsset(matCopy, materialPath);
+            sharedMaterials[i] = matCopy;
+        }
+
+        AssetDatabase.SaveAssets();
+        return sharedMaterials;
+    }
+
+
+    static void AssignSharedMaterials(Transform child, Material[] sharedMaterials)
+    {
+        MeshRenderer meshRenderer = child.GetComponent<MeshRenderer>();
+        if (meshRenderer != null && sharedMaterials != null)
+        {
+            meshRenderer.sharedMaterials = sharedMaterials;
+        }
     }
 }
