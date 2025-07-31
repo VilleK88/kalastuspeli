@@ -489,7 +489,6 @@ public class MapTileBaker : MonoBehaviour
         return sharedMaterials;
     }
 
-
     static void AssignSharedMaterials(Transform child, Material[] sharedMaterials)
     {
         MeshRenderer meshRenderer = child.GetComponent<MeshRenderer>();
