@@ -72,9 +72,15 @@ public class GridManager : MonoBehaviour
                 float offsetX = -halfGridSize + x * addition;
                 float offsetZ = -halfGridSize + z * addition;
 
-                Vector3 currentPosition = new Vector3(originPosition.x + offsetX, parentObject.transform.position.y + gridHeight, originPosition.z + offsetZ);
+                //Vector3 currentPosition = new Vector3(originPosition.x + offsetX, parentObject.transform.position.y + gridHeight, originPosition.z + offsetZ);
 
-                GameObject gridPrefabInstance = Instantiate(gridPrefab, currentPosition, Quaternion.identity);
+                Vector3 rayOrigin = new Vector3(originPosition.x + offsetX, 500f, originPosition.z + offsetZ);
+                Vector3 hitPosition = rayOrigin;
+
+                if (Physics.Raycast(rayOrigin, Vector3.down, out RaycastHit hit, 1000f))
+                    hitPosition = hit.point + Vector3.up * 10f;
+
+                GameObject gridPrefabInstance = Instantiate(gridPrefab, hitPosition, Quaternion.identity);
                 grid.Add(gridPrefabInstance);
                 gridPrefabInstance.transform.parent = parentObject.transform;
             }
