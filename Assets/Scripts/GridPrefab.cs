@@ -52,9 +52,9 @@ public class GridPrefab : MonoBehaviour
         markerCount--;
     }
 
-    private void OnDrawGizmos()
+    /*private void OnDrawGizmos()
     {
         Gizmos.color = Color.green;
         Gizmos.DrawWireCube(transform.position, new Vector3(100f, 0.1f, 100f));
-    }
+    }*/
 }

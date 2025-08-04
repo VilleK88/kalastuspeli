@@ -1,15 +1,27 @@
 using System.Collections.Generic;
+using System.IO;
 using UnityEditor;
 using UnityEngine;
 
 [ExecuteInEditMode]
 public class MapBuildingMerger : MonoBehaviour
 {
+    [SerializeField] string cityName = "City";
+
     [ContextMenu("Merge Connected Buildings")]
     public void MergeConnectedBuildings()
     {
-        Transform parent = this.transform;
+        if(string.IsNullOrEmpty(cityName))
+        {
+            Debug.LogError("City name not set. Please assing a city name");
+            return;
+        }
 
+        string meshFolder = $"Assets/MapPrefabs/{cityName}/Meshes";
+        EnsureMeshFolderExists(meshFolder);
+        DeleteOldMergedBuildingMeshes(meshFolder);
+
+        Transform parent = this.transform;
         List<GameObject> buildings = new List<GameObject>();
         foreach(Transform child in parent)
         {
@@ -45,13 +57,13 @@ public class MapBuildingMerger : MonoBehaviour
             }
 
             if (group.Count > 1)
-                MergeGroup(group, parent, groupIndex++);
+                MergeGroup(group, parent, groupIndex++, meshFolder);
         }
 
-        Debug.Log("Building merging complete.");
+        Debug.Log($"Building merging complete for city: {cityName}");
     }
 
-    private void MergeGroup(List<GameObject> group, Transform parent, int index)
+    private void MergeGroup(List<GameObject> group, Transform parent, int index, string meshFolder)
     {
         Dictionary<Material, List<CombineInstance>> materialToMeshes = new();
 
@@ -64,7 +76,6 @@ public class MapBuildingMerger : MonoBehaviour
 
             Mesh mesh = mf.sharedMesh;
             Matrix4x4 transformMatrix = mf.transform.localToWorldMatrix;
-
             Material[] materials = mr.sharedMaterials;
 
             for (int submeshIndex = 0; submeshIndex < mesh.subMeshCount; submeshIndex++)
@@ -86,10 +97,6 @@ public class MapBuildingMerger : MonoBehaviour
                 materialToMeshes[mat].Add(ci);
             }
         }
-
-        // Final GameObject
-        //GameObject merged = new GameObject($"MergedBuilding_{index}");
-        //merged.transform.parent = parent;
 
         Mesh combinedMesh = new Mesh();
         combinedMesh.indexFormat = UnityEngine.Rendering.IndexFormat.UInt32;
@@ -114,24 +121,14 @@ public class MapBuildingMerger : MonoBehaviour
             finalMaterials.Add(kvp.Key);
         }
 
-        //combinedMesh.CombineMeshes(finalCombineList.ToArray(), false, false);
-        //merged.AddComponent<MeshFilter>().sharedMesh = combinedMesh;
-        //merged.AddComponent<MeshRenderer>().sharedMaterials = finalMaterials.ToArray();
-        //merged.AddComponent<MeshCollider>().sharedMesh = combinedMesh;
-
         combinedMesh.CombineMeshes(finalCombineList.ToArray(), false, false);
 
         // Tallenna yhdistetty mesh assetiksi
 #if UNITY_EDITOR
-        string folderPath = "Assets/MergedMeshes/";
-        if (!AssetDatabase.IsValidFolder(folderPath))
-            AssetDatabase.CreateFolder("Assets", "MergedMeshes");
-
-        string meshPath = $"{folderPath}MergedBuilding_{index}.asset";
+        string meshPath = $"{meshFolder}/MergedBuilding_{index}.asset";
         AssetDatabase.CreateAsset(Object.Instantiate(combinedMesh), meshPath);
         AssetDatabase.SaveAssets();
-
-        combinedMesh = AssetDatabase.LoadAssetAtPath<Mesh>(meshPath);
+        combinedMesh = AssetDatabase.LoadAssetAtPath<Mesh>(meshPath) as Mesh;
 #endif
 
         // ? Luo GameObject nyt vasta kun mesh on valmis ja tallennettu
@@ -146,5 +143,32 @@ public class MapBuildingMerger : MonoBehaviour
         foreach (GameObject go in group)
             DestroyImmediate(go);
 
+    }
+
+    void EnsureMeshFolderExists(string meshFolder)
+    {
+        if(!AssetDatabase.IsValidFolder(meshFolder))
+        {
+            string parent = Path.GetDirectoryName(meshFolder).Replace("\\", "/");
+            string name = Path.GetFileName(meshFolder);
+            AssetDatabase.CreateFolder(parent, name);
+        }
+    }
+
+    void DeleteOldMergedBuildingMeshes(string meshFolder)
+    {
+        if (!AssetDatabase.IsValidFolder(meshFolder))
+            return;
+
+        string[] files = Directory.GetFiles(meshFolder, "MergedBuilding_*.asset", SearchOption.TopDirectoryOnly);
+        foreach(var file in files)
+        {
+            string assetPath = file.Replace("\\", "/");
+            bool deleted = AssetDatabase.DeleteAsset(assetPath);
+            if (!deleted)
+                Debug.LogWarning($"Failed to delete: {assetPath}");
+        }
+
+        AssetDatabase.Refresh();
     }
 }
