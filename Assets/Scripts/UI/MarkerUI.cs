@@ -99,7 +99,7 @@ public class MarkerUI : MonoBehaviour
     {
         yield return new WaitForSeconds(time);
         Marker currentMarker = MarkerManager.Instance.currentMarker;
-        RivalJobApplicant rivalJobApplicant = MouseManager.Instance.rivalJobApplicant;
+        RivalJobApplicant rivalJobApplicant = FindObjectOfType<RivalJobApplicant>();
         if (currentMarker != null)
         {
             if (currentMarker.gameObject != rivalJobApplicant.currentMarkerObject)
@@ -115,6 +115,7 @@ public class MarkerUI : MonoBehaviour
 
     void OpenMarker(Marker currentMarker)
     {
+        AudioManager.Instance.PlaySFX("RewardSound");
         currentMarker.markerOpen = true;
         currentMarker.DecreaseGridPrefabMarkerCount();
         transparentBG.SetActive(true);

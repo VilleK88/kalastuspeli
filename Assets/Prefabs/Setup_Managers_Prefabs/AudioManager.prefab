@@ -572,6 +572,8 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: d5c3778edd6f88244a5eff78db0951cb, type: 3}
   - name: ButtonClick
     clip: {fileID: 8300000, guid: 44a5d716536c11248a09ee1a54d5d168, type: 3}
+  - name: RewardSound
+    clip: {fileID: 8300000, guid: d6945231be24c7240a281458fc849e1f, type: 3}
   musicSource: {fileID: 8398168144521791787}
   sfxSource: {fileID: 5623396163587390839}
   footstepsSource: {fileID: 5617858986300564790}
