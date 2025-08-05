@@ -99,19 +99,30 @@ public class MarkerUI : MonoBehaviour
     {
         yield return new WaitForSeconds(time);
         Marker currentMarker = MarkerManager.Instance.currentMarker;
+        RivalJobApplicant rivalJobApplicant = MouseManager.Instance.rivalJobApplicant;
         if (currentMarker != null)
         {
-            currentMarker.markerOpen = true;
-            currentMarker.DecreaseGridPrefabMarkerCount();
-            transparentBG.SetActive(true);
-            jobInfoObject.SetActive(true);
-            MarkerManager.Instance.collectedJobListings.Add(jobListing);
-            JobApplicationsManager.Instance.IncreasePlayersJobAppCount();
-            PauseManager.Instance.PauseGame();
-            BurnoutMeter.Instance.Heal(10);
+            if (currentMarker.gameObject != rivalJobApplicant.currentMarkerObject)
+                OpenMarker(currentMarker);
+            else if (rivalJobApplicant.catchedTheMarker)
+                OpenMarker(currentMarker);
+            else
+                MouseManager.Instance.StopFishing();
         }
         else
             MouseManager.Instance.StopFishing();
+    }
+
+    void OpenMarker(Marker currentMarker)
+    {
+        currentMarker.markerOpen = true;
+        currentMarker.DecreaseGridPrefabMarkerCount();
+        transparentBG.SetActive(true);
+        jobInfoObject.SetActive(true);
+        MarkerManager.Instance.collectedJobListings.Add(jobListing);
+        JobApplicationsManager.Instance.IncreasePlayersJobAppCount();
+        PauseManager.Instance.PauseGame();
+        BurnoutMeter.Instance.Heal(10);
     }
 
     void OpenJobListingInfo()

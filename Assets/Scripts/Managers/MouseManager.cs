@@ -70,11 +70,14 @@ public class MouseManager : MonoBehaviour
 
     public Vector3 startPosition;
 
+    [HideInInspector] public RivalJobApplicant rivalJobApplicant;
+
     void Start()
     {
         StartCoroutine(DelayedPlayerInitialization(1f));
         layerMask = ~(1 << LayerMask.NameToLayer("Player"));
         lineRenderer = player.GetComponent<LineRenderer>();
+        rivalJobApplicant = FindObjectOfType<RivalJobApplicant>();
     }
 
     void Update()

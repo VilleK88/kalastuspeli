@@ -28,6 +28,7 @@ public class RivalFishingState : IRivalState
                 if (!coroutineRunning)
                 {
                     rival.anim.Play("FishingIdle");
+                    rival.catchedTheMarker = false;
                     ToRivalWalkState();
                 }
             }

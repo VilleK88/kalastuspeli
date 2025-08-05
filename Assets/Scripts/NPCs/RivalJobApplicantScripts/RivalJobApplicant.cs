@@ -1,6 +1,5 @@
 using System.Linq;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -39,8 +38,10 @@ public class RivalJobApplicant : MonoBehaviour
     float launchSpeed = 90;
     float heightSpeedFactor = 2;
     [SerializeField] GameObject projectilePrefab;
+    public bool catchedTheMarker = true;
 
     public Vector3 startPosition;
+
 
     private void Awake()
     {
@@ -128,14 +129,17 @@ public class RivalJobApplicant : MonoBehaviour
             Marker currentMarker = currentMarkerObject.GetComponent<Marker>();
             if (currentMarker != null)
             {
-                if(!currentMarker.markerOpen)
+                if (!currentMarker.markerOpen)
                 {
+                    catchedTheMarker = true;
                     currentMarker.DecreaseGridPrefabMarkerCount();
                     MarkerManager.Instance.currentGridPrefab = currentMarkerObject.GetComponentInParent<GridPrefab>();
                     Destroy(currentMarker.gameObject);
                     MarkerManager.Instance.GenerateNewMarker();
                     JobApplicationsManager.Instance.IncreaseRivalsJobAppCount();
                 }
+                else
+                    catchedTheMarker = false;
             }
             currentMarkerObject = null;
         }
