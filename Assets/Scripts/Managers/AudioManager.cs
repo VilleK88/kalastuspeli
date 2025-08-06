@@ -23,11 +23,6 @@ public class AudioManager : MonoBehaviour
     const string MutePrefKey = "AudioMuted";
     public bool IsMuted { get; private set; } = false;
 
-    private void Start()
-    {
-        //PlayMusic("Theme");
-    }
-
     public void PlayMusic(string name)
     {
         Sound s = Array.Find(musicSounds, x => x.name == name);

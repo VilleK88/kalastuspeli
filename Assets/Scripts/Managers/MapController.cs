@@ -36,62 +36,7 @@ public class MapController : MonoBehaviour, IDragHandler, IBeginDragHandler
 
     void Update()
     {
-        //HandleMouseZoom();
-        //HandleTouchZoom();
         HandleKeyboardMovement();
-    }
-
-    void HandleMouseZoom()
-    {
-        float scroll = Mouse.current.scroll.ReadValue().y * 0.1f;
-        if (Mathf.Abs(scroll) > 0.001f)
-        {
-            Vector2 screenPoint = Input.mousePosition;
-            Zoom(scroll, screenPoint);
-        }
-    }
-
-    void HandleTouchZoom()
-    {
-        if (Touchscreen.current == null || Touchscreen.current.touches.Count < 2)
-            return;
-
-        var touches = Touchscreen.current.touches;
-
-        if (!touches[0].isInProgress || !touches[1].isInProgress)
-            return;
-
-        Vector2 touch0Prev = touches[0].position.ReadValue() - touches[0].delta.ReadValue();
-        Vector2 touch1Prev = touches[1].position.ReadValue() - touches[1].delta.ReadValue();
-
-        Vector2 prevMid = (touch0Prev + touch1Prev) / 2f;
-        Vector2 currMid = (touches[0].position.ReadValue() + touches[1].position.ReadValue() / 2f);
-
-
-        float prevDist = Vector2.Distance(touch0Prev, touch1Prev);
-        float currDist = Vector2.Distance(touches[0].position.ReadValue(), touches[1].position.ReadValue());
-
-        float delta = currDist - prevDist;
-
-        Zoom(delta * zoomSpeed * Time.deltaTime, currMid);
-    }
-
-    void Zoom(float amount, Vector2 screenPoint)
-    {
-        float currentScale = mapRect.localScale.x;
-        float newScale = Mathf.Clamp(currentScale + amount, minScale, maxScale);
-        float scaleDelta = newScale / currentScale;
-
-        Vector2 localPoint;
-        RectTransformUtility.ScreenPointToLocalPointInRectangle(zoomContainer, screenPoint, null, out localPoint);
-
-        Vector2 pivotOffset = mapRect.anchoredPosition - localPoint;
-        Vector2 newPosition = localPoint + pivotOffset * scaleDelta;
-
-        mapRect.localScale = new Vector3(newScale, newScale, 1f);
-        mapRect.anchoredPosition = newPosition;
-
-        //UpdateMapBounds();
     }
 
     public void OnBeginDrag(PointerEventData eventData)

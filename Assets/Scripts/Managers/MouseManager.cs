@@ -70,14 +70,11 @@ public class MouseManager : MonoBehaviour
 
     public Vector3 startPosition;
 
-    //[HideInInspector] public RivalJobApplicant rivalJobApplicant;
-
     void Start()
     {
         StartCoroutine(DelayedPlayerInitialization(1f));
         layerMask = ~(1 << LayerMask.NameToLayer("Player"));
         lineRenderer = player.GetComponent<LineRenderer>();
-        //rivalJobApplicant = FindObjectOfType<RivalJobApplicant>();
     }
 
     void Update()
@@ -328,26 +325,6 @@ public class MouseManager : MonoBehaviour
         Rigidbody projectileRB = projectileInstance.GetComponent<Rigidbody>();
         projectileRB.linearVelocity = direction * adjustedSpeed;
         currentBait = projectileInstance;
-    }
-
-    void DrawTrajectory(Transform markerTransform)
-    {
-        Vector3 launchPosition = activePlayerObject.transform.position + Vector3.up * 10;
-        Transform childObject = markerTransform.GetChild(1);
-        Vector3 direction = (childObject.position - launchPosition).normalized;
-        Vector3 startVelocity = direction * launchSpeed;
-        lineRenderer.positionCount = linePoints;
-        float time = 0;
-        for (int i = 0; i < linePoints; i++)
-        {
-            // s = u*t + 1/2*g*t*t
-            var x = (startVelocity.x * time) + (Physics.gravity.x / 2 * time * time);
-            var y = (startVelocity.y * time) + (Physics.gravity.y / 2 * time * time);
-            var z = (startVelocity.z * time) + (Physics.gravity.z / 2 * time * time);
-            Vector3 point = new Vector3(x, y, z);
-            lineRenderer.SetPosition(i, launchPosition + point);
-            time += timeIntervalinPoints;
-        }
     }
 
     void UpdateFishingLine()

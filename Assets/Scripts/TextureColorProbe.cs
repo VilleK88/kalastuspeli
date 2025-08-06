@@ -16,8 +16,6 @@ public class TextureColorProbe : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.Space))
         {
-            //GetColor();
-
             Ray ray = new Ray(transform.position, transform.forward);
 
             if(Physics.Raycast(ray, out RaycastHit hit, maxDistance))
@@ -68,52 +66,6 @@ public class TextureColorProbe : MonoBehaviour
             }
 
 
-        }
-    }
-
-    void GetColor()
-    {
-        Ray ray = new Ray(transform.position, transform.forward);
-
-        if(Physics.Raycast(ray, out RaycastHit hit, maxDistance))
-        {
-            Debug.Log($"Raycast hit: {hit.collider.name}");
-
-            Renderer renderer = hit.collider.GetComponent<Renderer>();
-            Texture texture = renderer?.material?.mainTexture;
-
-            if(texture == null)
-            {
-                Debug.LogWarning("Material has no mainTexture.");
-                return;
-            }
-
-            Debug.Log($"Texture type: {texture.GetType().Name}, name: {texture.name}");
-
-            if(texture is Texture2D texture2D)
-            {
-                if(!texture2D.isReadable)
-                {
-                    Debug.LogWarning("Texture is not readable!");
-                    return;
-                }
-
-                Vector2 pixelUV = hit.textureCoord;
-                pixelUV.x *= texture2D.width;
-                pixelUV.y *= texture2D.height;
-
-                pickedColor = texture2D.GetPixel((int)pixelUV.x, (int)pixelUV.y);
-                pickedHexCode = ColorUtility.ToHtmlStringRGB(pickedColor);
-
-                Debug.Log($"Picked Color: {pickedColor}, Hex: {pickedHexCode}");
-
-                rayHit = true;
-                hitPoint = hit.point;
-            }
-            else
-            {
-                Debug.LogWarning("Texture is not a Texture2D. It is: " + texture.GetType().Name);
-            }
         }
     }
 

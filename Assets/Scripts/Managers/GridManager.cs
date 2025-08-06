@@ -44,23 +44,8 @@ public class GridManager : MonoBehaviour
         }
     }
 
-    Vector3 GetCenterOfChildren(Transform parent)
-    {
-        Vector3 total = Vector3.zero;
-        int count = 0;
-
-        foreach(Transform child in parent)
-        {
-            total += child.position;
-            count++;
-        }
-
-        return total / count;
-    }
-
     public void InitializeGrid()
     {
-        //originPosition = GetCenterOfChildren(CityNavMeshSurfaceBuilder.Instance.transform);
         originPosition = CityNavMeshSurfaceBuilder.Instance.surface.navMeshData.sourceBounds.center;
 
         float halfGridSize = (gridAmount - 1) * addition / 2;
@@ -71,8 +56,6 @@ public class GridManager : MonoBehaviour
             {
                 float offsetX = -halfGridSize + x * addition;
                 float offsetZ = -halfGridSize + z * addition;
-
-                //Vector3 currentPosition = new Vector3(originPosition.x + offsetX, parentObject.transform.position.y + gridHeight, originPosition.z + offsetZ);
 
                 Vector3 rayOrigin = new Vector3(originPosition.x + offsetX, 500f, originPosition.z + offsetZ);
                 Vector3 hitPosition = rayOrigin;

@@ -42,7 +42,6 @@ public class RivalJobApplicant : MonoBehaviour
 
     public Vector3 startPosition;
 
-
     private void Awake()
     {
         idleState = new RivalIdleState(this);

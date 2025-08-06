@@ -86,9 +86,6 @@ public class GameManager : MonoBehaviour
         if (cityInstance != null)
             cityInstance.SetActive(true);
 
-        //if (loadingUIInstance != null)
-            //LoadingUI.Instance.Hide();
-
         SceneManager.sceneLoaded -= OnSceneLoaded;
 
         if (loadingUIInstance != null)

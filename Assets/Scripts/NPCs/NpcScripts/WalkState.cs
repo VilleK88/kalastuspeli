@@ -28,7 +28,6 @@ public class WalkState : INPCState
                             thisNPC.previousWaypoint = thisNPC.currentWaypoint;
                             thisNPC.currentWaypoint = newWaypoint;
                             ToIdleState();
-                            //SelectRandomIdleState();
                             break;
                         }
                     }
@@ -37,7 +36,6 @@ public class WalkState : INPCState
                 {
                     thisNPC.currentWaypoint = thisNPC.previousWaypoint;
                     ToIdleState();
-                    //SelectRandomIdleState();
                 }
             }
         }
@@ -70,14 +68,5 @@ public class WalkState : INPCState
     {
         int randomIndex = Random.Range(0, waypoints.Length);
         return waypoints[randomIndex];
-    }
-
-    void SelectRandomIdleState()
-    {
-        int randomIndex = Random.Range(0, 2);
-        if (randomIndex == 0)
-            ToIdleState();
-        else if (randomIndex == 1)
-            ToPhoneState();
     }
 }

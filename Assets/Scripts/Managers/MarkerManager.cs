@@ -214,7 +214,6 @@ public class MarkerManager : MonoBehaviour
         else
         {
             string json = request.downloadHandler.text;
-            //Debug.Log("Raw JSON: " + json);
             JobListingResponse response = JsonUtility.FromJson<JobListingResponse>(json);
 
             foreach (var job in response.results)
@@ -224,7 +223,6 @@ public class MarkerManager : MonoBehaviour
                     Debug.LogWarning("Null job found!");
                     continue;
                 }
-                //Debug.Log($"Job: {job.title}, description: {job.description}\n, salary: {job.salary}, summary: {job.summary}");
             }
             cityJobListings = response.results.ToList();
         }
@@ -259,10 +257,7 @@ public class MarkerManager : MonoBehaviour
                 }
 
                 cityCompanies = vastaus.results.ToList();
-
-                //Debug.Log($"🔹 {yritys.nimi ?? "(no name)"} - {yritys.kunta ?? "(no municipality)"}");
             }
-
         }
     }
 }

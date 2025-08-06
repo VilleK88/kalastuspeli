@@ -53,10 +53,4 @@ public class GridCellPrefab : MonoBehaviour
 
         return rDiff < tolerance && gDiff < tolerance && bDiff < tolerance;
     }
-
-    /*private void OnDrawGizmos()
-    {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireCube(transform.position, new Vector3(scaleX, scaleY, scaleZ));
-    }*/
 }

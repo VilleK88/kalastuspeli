@@ -36,7 +36,6 @@ public class LoadingUI : MonoBehaviour
 
     public void Hide()
     {
-        //StartCoroutine(FadeAndDestroy());
         StartCoroutine(DelayedHide(2f));
     }
 
