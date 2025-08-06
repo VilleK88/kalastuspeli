@@ -21,7 +21,7 @@ public class GameTimer : MonoBehaviour
     public float currentGameTimeMin = 0;
     public float currentGameTimeSec = 0;
 
-    public float maxGameTime = 3;
+    public float maxGameTime = 5;
 
     private void Update()
     {
@@ -48,17 +48,6 @@ public class GameTimer : MonoBehaviour
                 JobApplicationsManager.Instance.ShowEndingScreen();
                 PauseManager.Instance.PauseGame();
             }
-        }
-
-        // for testing purposes
-        if(Input.GetKeyDown(KeyCode.T))
-        {
-            for(int i = 0; i < MarkerManager.Instance.cityJobListings.Count; i++)
-            {
-                MarkerManager.Instance.collectedJobListings.Add(MarkerManager.Instance.cityJobListings[i]);
-            }
-            currentGameTimeMin = 3;
-
         }
     }
 

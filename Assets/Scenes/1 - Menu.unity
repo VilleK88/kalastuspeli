@@ -367,7 +367,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 13.929, y: -47.439}
+  m_AnchoredPosition: {x: 8.4588, y: -38}
   m_SizeDelta: {x: 1303.845, y: 622.742}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &121240212
@@ -390,17 +390,17 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "<b>\U0001F5FA\uFE0F Map</b>\r\n- Move around using <b>WASD</b> or by <b>dragging
-    the map with the mouse</b>.\r\n- To travel to a city, <b>double-click the City
-    button</b>.\r\n- A single click on the City button <b>displays the city\u2019s
-    name</b>.\r\n\r\n<b>\U0001F3D9\uFE0F City</b>\r\n- Move by clicking on the ground
-    where you want your character to go.\r\n- You can <b>\"fish\" job markers</b>
-    by clicking them when you\u2019re close enough.\r\n- Watch the <b>Burnout meter</b>
-    in the bottom-right corner - if it reaches zero, you lose the game.\r\n- Gain
-    health by <b>collecting job postings</b>.\r\n\r\n<b>\U0001F4CA Job Posting Stats
-    in the City</b>\r\n- In the upper-right corner of the screen:\r\n  - The <b>top
-    number</b> shows <b>your collected job postings</b>.\r\n  - The <b>bottom number</b>
-    shows the <b>rival applicant\u2019s collected postings</b>."
+  m_text: "\U0001F5FA Map\r\n- Move using WASD or by dragging the map with the mouse.\r\n-
+    To travel to a city, double-click the City button.\r\n- Single-clicking the City
+    button displays the city\u2019s name.\r\n\r\n\U0001F3D9 City\r\n- Move by clicking
+    on the ground where you want your character to go.\r\n- Collect (\"fish\") job
+    markers by clicking them when you\u2019re close enough.\r\n- Keep an eye on the
+    Burnout meter in the bottom-right corner - if it reaches zero, you lose the game.\r\n-
+    Restore health by collecting job listings.\r\n\r\n\U0001F4CA Job Listing Stats
+    in the City\r\n- Try to collect more job listings than the rival job applicant
+    within 5 minutes.\r\n- In the upper-right corner of the screen:\r\n  - The top
+    number shows your collected job postings.\r\n  - The bottom number shows the
+    rival applicant\u2019s collected postings."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 6a316023e778ba245a63ecc9528f21cf, type: 2}
   m_sharedMaterial: {fileID: -7187440827883327355, guid: 6a316023e778ba245a63ecc9528f21cf, type: 2}

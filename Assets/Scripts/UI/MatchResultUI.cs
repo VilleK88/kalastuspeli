@@ -31,6 +31,7 @@ public class MatchResultUI : MonoBehaviour
 
     public void ShowResult(string resultString, GameObject medal)
     {
+        MarkerUI.Instance.CloseMarkerInfoPanel();
         transparentBG.SetActive(true);
         innerBG.SetActive(true);
         showJobsButton.SetActive(true);

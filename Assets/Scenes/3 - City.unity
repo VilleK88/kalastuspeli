@@ -2206,7 +2206,7 @@ MonoBehaviour:
   timerText: {fileID: 541385416}
   currentGameTimeMin: 0
   currentGameTimeSec: 0
-  maxGameTime: 3
+  maxGameTime: 5
 --- !u!114 &541385416
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3949,7 +3949,7 @@ GameObject:
   - component: {fileID: 1230095038}
   - component: {fileID: 1230095039}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: PauseManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6763,7 +6763,6 @@ MonoBehaviour:
   timeIntervalinPoints: 0.01
   inputActions: {fileID: -944628639613478452, guid: 289c1b55c9541489481df5cc06664110, type: 3}
   startPosition: {x: 0, y: 0, z: 0}
-  rivalJobApplicant: {fileID: 0}
 --- !u!20 &4381237741469090673
 Camera:
   m_ObjectHideFlags: 0
