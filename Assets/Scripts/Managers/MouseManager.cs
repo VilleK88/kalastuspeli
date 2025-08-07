@@ -37,7 +37,7 @@ public class MouseManager : MonoBehaviour
     [SerializeField] GameObject[] playerObjects;
     GameObject activePlayerObject;
     [SerializeField] GameObject player;
-    Animator playerAnim;
+    [HideInInspector] public Animator playerAnim;
     NavMeshAgent agent;
     public float moveSpeed = 5f;
     public float rotationSpeed = 10f;
@@ -158,7 +158,7 @@ public class MouseManager : MonoBehaviour
         }
     }
 
-    void StopWalking()
+    public void StopWalking()
     {
         targetPosition = null;
         playerAnim.SetBool("Walk", false);

@@ -31,6 +31,10 @@ public class MatchResultUI : MonoBehaviour
 
     public void ShowResult(string resultString, GameObject medal)
     {
+        MouseManager.Instance.StopWalking();
+        MouseManager.Instance.playerAnim.SetBool("Fishing_Idle", false);
+        MouseManager.Instance.playerAnim.Play("Idle");
+
         MarkerUI.Instance.CloseMarkerInfoPanel();
         transparentBG.SetActive(true);
         innerBG.SetActive(true);
@@ -42,6 +46,10 @@ public class MatchResultUI : MonoBehaviour
 
     public void ShowGameOverScreen()
     {
+        MouseManager.Instance.StopWalking();
+        MouseManager.Instance.playerAnim.SetBool("Fishing_Idle", false);
+        MouseManager.Instance.playerAnim.Play("Idle");
+
         transparentBG.SetActive(true);
         innerBG.SetActive(true);
         playAgainButton.SetActive(true);
@@ -61,6 +69,7 @@ public class MatchResultUI : MonoBehaviour
 
     public void PlayAgain()
     {
+        AudioManager.Instance.PlaySFX("ButtonClick");
         JobApplicationsManager.Instance.playerJobApp.jobApplicationCount = 0;
         JobApplicationsManager.Instance.playerJobApp.countText.text = "0";
         JobApplicationsManager.Instance.rivalJobApp.jobApplicationCount = 0;
@@ -81,6 +90,7 @@ public class MatchResultUI : MonoBehaviour
 
     public void GoToThisScene()
     {
+        AudioManager.Instance.PlaySFX("ButtonClick");
         PauseManager.Instance.ResumeGame();
         SceneManager.LoadScene("2 - Map");
         Debug.Log("Change scene to: " + "2 - Map");
@@ -88,6 +98,7 @@ public class MatchResultUI : MonoBehaviour
 
     public void ShowJobs()
     {
+        AudioManager.Instance.PlaySFX("ButtonClick");
         innerBG.SetActive(false);
         innerBG_JobApplicationsList.SetActive(true);
 

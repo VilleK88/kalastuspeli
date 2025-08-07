@@ -26,6 +26,7 @@ public class JobListingButton : MonoBehaviour, IPointerEnterHandler, IPointerExi
 
     public void ShowJobListing()
     {
+        AudioManager.Instance.PlaySFX("ButtonClick");
         if (jobListing != null)
             MarkerUI.Instance.UpdateJobListingParameters(jobListing);
 

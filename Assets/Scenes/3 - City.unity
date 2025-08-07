@@ -2206,7 +2206,7 @@ MonoBehaviour:
   timerText: {fileID: 541385416}
   currentGameTimeMin: 0
   currentGameTimeSec: 0
-  maxGameTime: 5
+  maxGameTime: 1
 --- !u!114 &541385416
 MonoBehaviour:
   m_ObjectHideFlags: 0

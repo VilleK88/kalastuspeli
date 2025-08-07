@@ -188,12 +188,14 @@ public class MarkerUI : MonoBehaviour
 
     public void OpenDescriptionPopup()
     {
+        AudioManager.Instance.PlaySFX("ButtonClick");
         jobInfoObject.SetActive(false);
         descriptionPopup.SetActive(true);
     }
 
     public void CloseDescriptionPopup()
     {
+        AudioManager.Instance.PlaySFX("ButtonClick");
         descriptionPopup.SetActive(false);
         jobInfoObject.SetActive(true);
     }
