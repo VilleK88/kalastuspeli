@@ -1,5 +1,7 @@
 using UnityEngine;
-using System;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 
 public class AudioManager : MonoBehaviour
 {
@@ -19,13 +21,21 @@ public class AudioManager : MonoBehaviour
     #endregion
 
     public Sound[] musicSounds, sfxSounds;
-    public AudioSource musicSource, sfxSource, footstepsSource;
+    public List<AudioClip> voiceSounds = new List<AudioClip>();
+    public AudioSource musicSource, sfxSource, footstepsSource, voiceSource;
     const string MutePrefKey = "AudioMuted";
     public bool IsMuted { get; private set; } = false;
 
+    private void Start()
+    {
+        Scene currentScene = SceneManager.GetActiveScene();
+        if (currentScene.name == "3 - City")
+            StartCoroutine(RandomVoiceLoop(30f));
+    }
+
     public void PlayMusic(string name)
     {
-        Sound s = Array.Find(musicSounds, x => x.name == name);
+        Sound s = System.Array.Find(musicSounds, x => x.name == name);
 
         if (s == null)
             Debug.Log("Sound not found");
@@ -38,7 +48,7 @@ public class AudioManager : MonoBehaviour
 
     public void PlaySFX(string name)
     {
-        Sound s = Array.Find(sfxSounds, x => x.name == name);
+        Sound s = System.Array.Find(sfxSounds, x => x.name == name);
 
         if (s == null)
             Debug.Log("Sound not found");
@@ -46,9 +56,24 @@ public class AudioManager : MonoBehaviour
             sfxSource.PlayOneShot(s.clip);
     }
 
+    IEnumerator RandomVoiceLoop(float duration)
+    {
+        while(true)
+        {
+            yield return new WaitForSeconds(duration);
+            PlayRandomVoice();
+        }
+    }
+
+    public void PlayRandomVoice()
+    {
+        int randomIndex = Random.Range(0, voiceSounds.Count);
+        voiceSource.PlayOneShot(voiceSounds[randomIndex]);
+    }
+
     public void PlayFootstepsSound()
     {
-        Sound s = Array.Find(sfxSounds, x => x.name == "Footstep");
+        Sound s = System.Array.Find(sfxSounds, x => x.name == "Footstep");
 
         if (s == null)
             Debug.Log("Sound not found");

@@ -167,26 +167,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5407927415142213550, guid: f6654fab8df09e14281d569f1a3040c1, type: 3}
-      propertyPath: sfxSounds.Array.size
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 5407927415142213550, guid: f6654fab8df09e14281d569f1a3040c1, type: 3}
-      propertyPath: musicSounds.Array.size
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5407927415142213550, guid: f6654fab8df09e14281d569f1a3040c1, type: 3}
-      propertyPath: sfxSounds.Array.data[5].name
-      value: Failure
-      objectReference: {fileID: 0}
-    - target: {fileID: 5407927415142213550, guid: f6654fab8df09e14281d569f1a3040c1, type: 3}
-      propertyPath: sfxSounds.Array.data[6].clip
-      value: 
-      objectReference: {fileID: 8300000, guid: 7ccb7f7a9275b264a9d3f5dbd6d3c352, type: 3}
-    - target: {fileID: 5407927415142213550, guid: f6654fab8df09e14281d569f1a3040c1, type: 3}
-      propertyPath: sfxSounds.Array.data[6].name
-      value: Defeat
-      objectReference: {fileID: 0}
     - target: {fileID: 6445747321817606960, guid: f6654fab8df09e14281d569f1a3040c1, type: 3}
       propertyPath: m_Name
       value: AudioManager

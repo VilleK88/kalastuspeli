@@ -11,7 +11,7 @@ public class MenuManager : MonoBehaviour
     [SerializeField] GameObject guideText;
     [Header("Audio")]
     [SerializeField] GameObject audioSettings;
-    public Slider masterVol, musicVol, sfxVol;
+    public Slider masterVol, musicVol, sfxVol, voiceVol;
     public AudioMixer MainAudioMixer;
 
     private void Start()
@@ -19,12 +19,15 @@ public class MenuManager : MonoBehaviour
         masterVol.value = PlayerPrefs.GetFloat("MasterVolume", masterVol.value);
         musicVol.value = PlayerPrefs.GetFloat("MusicVolume", musicVol.value);
         sfxVol.value = PlayerPrefs.GetFloat("SFXVolume", sfxVol.value);
+        voiceVol.value = PlayerPrefs.GetFloat("VoiceVolume", voiceVol.value);
         ChangeMasterVolume();
         ChangeMusicVolume();
         ChangeSFXVolume();
+        ChangeVoiceVolume();
         masterVol.onValueChanged.AddListener(delegate { ChangeMasterVolume(); });
         musicVol.onValueChanged.AddListener(delegate { ChangeMusicVolume(); });
         sfxVol.onValueChanged.AddListener(delegate { ChangeSFXVolume(); });
+        voiceVol.onValueChanged.AddListener(delegate { ChangeVoiceVolume(); });
     }
 
     public void StartGame()
@@ -83,16 +86,25 @@ public class MenuManager : MonoBehaviour
         PlayerPrefs.SetFloat("MasterVolume", masterVol.value);
         PlayerPrefs.Save();
     }
+
     public void ChangeMusicVolume()
     {
         MainAudioMixer.SetFloat("MusicVol", musicVol.value);
         PlayerPrefs.SetFloat("MusicVolume", musicVol.value);
         PlayerPrefs.Save();
     }
+
     public void ChangeSFXVolume()
     {
         MainAudioMixer.SetFloat("SFXVol", sfxVol.value);
         PlayerPrefs.SetFloat("SFXVolume", sfxVol.value);
+        PlayerPrefs.Save();
+    }
+
+    public void ChangeVoiceVolume()
+    {
+        MainAudioMixer.SetFloat("VoiceVol", voiceVol.value);
+        PlayerPrefs.SetFloat("VoiceVolume", voiceVol.value);
         PlayerPrefs.Save();
     }
 }
