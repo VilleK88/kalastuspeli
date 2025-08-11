@@ -29,10 +29,11 @@ public class MatchResultUI : MonoBehaviour
     public GameObject jobListingContent;
     public GameObject jobListingButtonObj;
 
-    public void ShowResult(string resultString, GameObject medal)
+    public void ShowResult(string resultString, GameObject medal, string thisSound)
     {
         StopPlayerAndMarkerUI();
 
+        AudioManager.Instance.PlaySFX(thisSound);
         transparentBG.SetActive(true);
         innerBG.SetActive(true);
         showJobsButton.SetActive(true);
@@ -45,6 +46,7 @@ public class MatchResultUI : MonoBehaviour
     {
         StopPlayerAndMarkerUI();
 
+        AudioManager.Instance.PlaySFX("Defeat");
         transparentBG.SetActive(true);
         innerBG.SetActive(true);
         playAgainButton.SetActive(true);

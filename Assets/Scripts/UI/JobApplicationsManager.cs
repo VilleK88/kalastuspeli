@@ -29,10 +29,10 @@ public class JobApplicationsManager : MonoBehaviour
     public void ShowEndingScreen()
     {
         if (playerJobApp.jobApplicationCount > rivalJobApp.jobApplicationCount)
-            MatchResultUI.Instance.ShowResult("1st place", MatchResultUI.Instance.firstPlace);
+            MatchResultUI.Instance.ShowResult("1st place", MatchResultUI.Instance.firstPlace, "1stPlace");
         else if (playerJobApp.jobApplicationCount < rivalJobApp.jobApplicationCount)
-            MatchResultUI.Instance.ShowResult("2nd place", MatchResultUI.Instance.secondPlace);
+            MatchResultUI.Instance.ShowResult("2nd place", MatchResultUI.Instance.secondPlace, "2ndPlace");
         else if (playerJobApp.jobApplicationCount == rivalJobApp.jobApplicationCount)
-            MatchResultUI.Instance.ShowResult("Draw", MatchResultUI.Instance.secondPlace);
+            MatchResultUI.Instance.ShowResult("Draw", MatchResultUI.Instance.secondPlace, "Failure");
     }
 }

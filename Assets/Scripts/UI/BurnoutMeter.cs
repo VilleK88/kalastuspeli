@@ -18,7 +18,7 @@ public class BurnoutMeter : MonoBehaviour
     public Image fill;
     public float maxHealth = 100;
     float currentHealth;
-    float damage = 0.8f;
+    float damage = 1f;
 
     float maxTime = 1;
     float timer = 0;

@@ -2206,7 +2206,7 @@ MonoBehaviour:
   timerText: {fileID: 541385416}
   currentGameTimeMin: 0
   currentGameTimeSec: 0
-  maxGameTime: 1
+  maxGameTime: 5
 --- !u!114 &541385416
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6745,6 +6745,7 @@ MonoBehaviour:
   - {fileID: 6690477097956688343}
   - {fileID: 919132148085291143}
   player: {fileID: 7782236441140023087}
+  playerAnim: {fileID: 0}
   moveSpeed: 10
   rotationSpeed: 20
   walking: 0
