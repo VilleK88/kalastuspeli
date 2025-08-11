@@ -31,11 +31,8 @@ public class MatchResultUI : MonoBehaviour
 
     public void ShowResult(string resultString, GameObject medal)
     {
-        MouseManager.Instance.StopWalking();
-        MouseManager.Instance.playerAnim.SetBool("Fishing_Idle", false);
-        MouseManager.Instance.playerAnim.Play("Idle");
+        StopPlayerAndMarkerUI();
 
-        MarkerUI.Instance.CloseMarkerInfoPanel();
         transparentBG.SetActive(true);
         innerBG.SetActive(true);
         showJobsButton.SetActive(true);
@@ -46,9 +43,7 @@ public class MatchResultUI : MonoBehaviour
 
     public void ShowGameOverScreen()
     {
-        MouseManager.Instance.StopWalking();
-        MouseManager.Instance.playerAnim.SetBool("Fishing_Idle", false);
-        MouseManager.Instance.playerAnim.Play("Idle");
+        StopPlayerAndMarkerUI();
 
         transparentBG.SetActive(true);
         innerBG.SetActive(true);
@@ -113,5 +108,19 @@ public class MatchResultUI : MonoBehaviour
 
         showJobsButton.SetActive(false);
         playAgainButton.SetActive(true);
+    }
+
+    void StopPlayerAndMarkerUI()
+    {
+        if(MouseManager.Instance.fishing)
+        {
+            MouseManager.Instance.StopAllCoroutines();
+            MarkerUI.Instance.StopAllCoroutines();
+            MarkerUI.Instance.CloseMarkerInfoPanel();
+            MouseManager.Instance.StopFishing();
+        }
+        MouseManager.Instance.StopWalking();
+        MouseManager.Instance.playerAnim.Play("Idle");
+
     }
 }

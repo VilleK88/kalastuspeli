@@ -300,7 +300,7 @@ public class MouseManager : MonoBehaviour
         fishingLine = castPoint.GetComponentInChildren<LineRenderer>();
     }
 
-    IEnumerator DelayedLaunchProjectile(float duration, Transform markerTransform)
+    public IEnumerator DelayedLaunchProjectile(float duration, Transform markerTransform)
     {
         yield return new WaitForSeconds(duration);
         LaunchProjectile(markerTransform);

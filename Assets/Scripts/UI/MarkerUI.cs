@@ -95,7 +95,7 @@ public class MarkerUI : MonoBehaviour
         open = false;
     }
 
-    IEnumerator DelayedInfoPanelOpening(float time)
+    public IEnumerator DelayedInfoPanelOpening(float time)
     {
         yield return new WaitForSeconds(time);
         Marker currentMarker = MarkerManager.Instance.currentMarker;
