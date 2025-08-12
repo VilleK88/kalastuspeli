@@ -56,7 +56,7 @@ public class AudioManager : MonoBehaviour
             sfxSource.PlayOneShot(s.clip);
     }
 
-    IEnumerator RandomVoiceLoop(float duration)
+    public IEnumerator RandomVoiceLoop(float duration)
     {
         while(true)
         {

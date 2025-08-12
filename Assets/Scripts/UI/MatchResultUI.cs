@@ -33,6 +33,7 @@ public class MatchResultUI : MonoBehaviour
     {
         StopPlayerAndMarkerUI();
 
+        AudioManager.Instance.StopAllCoroutines();
         AudioManager.Instance.PlaySFX(thisSound);
         transparentBG.SetActive(true);
         innerBG.SetActive(true);
@@ -46,6 +47,7 @@ public class MatchResultUI : MonoBehaviour
     {
         StopPlayerAndMarkerUI();
 
+        AudioManager.Instance.StopAllCoroutines();
         AudioManager.Instance.PlaySFX("Defeat");
         transparentBG.SetActive(true);
         innerBG.SetActive(true);
@@ -67,6 +69,7 @@ public class MatchResultUI : MonoBehaviour
     public void PlayAgain()
     {
         AudioManager.Instance.PlaySFX("ButtonClick");
+        AudioManager.Instance.StartCoroutine(AudioManager.Instance.RandomVoiceLoop(30f));
         JobApplicationsManager.Instance.playerJobApp.jobApplicationCount = 0;
         JobApplicationsManager.Instance.playerJobApp.countText.text = "0";
         JobApplicationsManager.Instance.rivalJobApp.jobApplicationCount = 0;
